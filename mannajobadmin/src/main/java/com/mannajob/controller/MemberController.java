@@ -21,10 +21,11 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 	private MemberService service;
 	
-	@GetMapping("/login")
-	public void login() {
-		
-	}
+	/*
+	 * @GetMapping("/login") public void login() {
+	 * 
+	 * }
+	 */
 	
 	@PostMapping ("/login")
 	public String login(MemberVO member, HttpServletRequest request, HttpSession session) {

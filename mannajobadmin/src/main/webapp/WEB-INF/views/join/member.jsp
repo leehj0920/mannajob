@@ -14,10 +14,6 @@
 					name="m_id"></input>
 			</div>
 			<div>
-				<label>api</label> <input class="form-control" type="text"
-					name="m_api"></input>
-			</div>
-			<div>
 				<label>passwd</label> <input class="form-control" type="password"
 					name="m_passwd"></input>
 			</div>
@@ -33,7 +29,7 @@
 				<label>이메일</label> <input class="form-control" type="text"
 					name="m_email"></input>
 			</div>
-			<input type="submit" value="글쓰기">
+			<input type="submit" value="가입하기">
 		</form>
 	</div>
 </body>

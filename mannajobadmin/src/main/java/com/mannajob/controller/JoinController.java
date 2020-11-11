@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mannajob.domain.EmplVO;
@@ -45,10 +46,10 @@ public class JoinController {
 		
 	//EmplVO에 가입 정보 INSERT 후 mypage로 redirect
 	@PostMapping("/empl")
-	public String EmplJoin(EmplVO empl, RedirectAttributes rttr) {
+	public String EmplJoin(EmplVO empl, RedirectAttributes rttr, MultipartHttpServletRequest mpRequest) throws Exception {
 		log.info("가입..............................");
-			
-		service.EmplJoin(empl);
+		
+		service.EmplJoin(empl, mpRequest);
 		rttr.addFlashAttribute("result", 1);
 		
 		return "redirect:/mypage/main";
