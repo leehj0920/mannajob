@@ -12,7 +12,6 @@ import java.util.HashMap;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
  
 @Service
@@ -105,14 +104,15 @@ public class KakaoService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
-            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+            String sessionId = element.getAsJsonObject().get("id").toString();
+
+            System.out.println(sessionId);
             
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            String api = "k";
             
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
+            //userInfo에 정보 입력
+            userInfo.put("sessionId", sessionId);
+            userInfo.put("api", api);
             
         } catch (IOException e) {
             e.printStackTrace();

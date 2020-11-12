@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mannajob.mapper.ProfileMapper">
+	<!-- 회원 프로필 조회 -->
+	<select id="getMemProfile" resultType="com.mannajob.domain.MemberVO">
+		SELECT m_id, m_name, m_phone, m_email FROM member
+	</select>
+	
+	<!-- 현직자 지원 정보 -->
+	<select id="getEmplProfile" resultType="com.mannajob.domain.EmplVO">
+		SELECT e_corp, e_dept, e_rank, e_task, e_career, e_intro FROM empl
+	</select>
+
+	<!-- 프로필 이미지 조회 -->
+	<select id="selectImage" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO, ORG_FILE_NAME, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE FROM MP_FILE WHERE E_NUM = #{E_NUM} AND DEL_GB = 'N' AND F_CATEGORY = 'I'
+	</select>
+
+	<!-- 현직자 등록 -->
+	<insert id="EmplJoin" parameterType="com.mannajob.domain.EmplVO">
+		INSERT INTO empl(e_num, m_id,  e_corp, e_dept, e_rank, e_task,  e_career, e_intro, e_ok, e_del) 
+		VALUES (seq_e.nextval, #{m_id}, #{e_corp}, #{e_dept}, #{e_rank}, #{e_task}, #{e_career}, #{e_intro}, 'N', 'N') 
+	</insert>
+	
+	<!-- 파일 업로드 -->
+	<insert id="insertFile" parameterType="hashMap">
+		INSERT INTO mp_file(file_no, e_num, org_file_name, stored_file_name, file_size,f_category) VALUES (seq_mp_file_no.nextval, #{E_NUM}, #{ORG_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE},#{F_CATEGORY})
+	</insert>
+	
+	<!-- 증명서 조회 -->
+	<select id="selectCertif" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO, ORG_FILE_NAME, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE FROM MP_FILE WHERE E_NUM = #{E_NUM} AND DEL_GB = 'N' AND F_CATEGORY = 'C'
+	</select>
+	
+</mapper>

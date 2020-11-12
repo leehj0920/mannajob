@@ -18,15 +18,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.mannajob.domain.NaverLoginBO;
 import com.mannajob.service.KakaoService;
+import com.mannajob.service.LoginService;
 
-/**
- * Handles requests for the application home page.
- */
+import lombok.extern.log4j.Log4j;
+
+
 @Controller
+@Log4j
 public class LoginController {
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
+	
+	@Autowired
+	private LoginService service;
 	
 	@Autowired
     private KakaoService kakao;
@@ -34,6 +39,11 @@ public class LoginController {
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
+	}
+	
+	@RequestMapping("/main")
+	public void main() {
+		
 	}
 
 	//로그인 첫 화면 요청 메소드
@@ -68,40 +78,55 @@ public class LoginController {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
+		
 		//3. 데이터 파싱
 		//Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		//response의 nickname값 파싱
-		String nickname = (String) response_obj.get("nickname");
-		System.out.println(nickname);
-		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId", nickname); // 세션 생성
+		//response의 id, email 파싱
+		String id = (String) response_obj.get("id");
+		String email = (String) response_obj.get("email");
+		
+		//db에 등록 할 api명 설정
+		String api = "n";
+		
+//		System.out.println(check);
+		//id, email 파싱 확인
+		System.out.println("id: " + id + "\nemail: " + email);
+		//4.파싱 값 세션으로 저장
+		session.setAttribute("userId", id); // 세션 생성
+		session.setAttribute("useremail", email);
+		session.setAttribute("userapi", api);
+		
 		model.addAttribute("result", apiResult);
-		return "/join/add";
+		
+		
+		int check = service.MemCheck(id);
+		if(check == 0) {
+			return "/join/join";
+		} else {
+			return "redirect:/main";
+		}
 	}
 	
 	//카카오 로그인 redirect
 	@RequestMapping(value = "/redirect")
-	public String login(@RequestParam("code") String code, HttpSession session) {
+	public String login(@RequestParam("code") String code, HttpSession session, Model model) {
 		String access_Token = kakao.getAccessToken(code);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
 	    System.out.println("login Controller : " + userInfo);
 	    
-	    //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-	    if (userInfo.get("email") != null) {
-	        session.setAttribute("userId", userInfo.get("email"));
-	        session.setAttribute("access_Token", access_Token);
-	    }
+	    session.setAttribute("userId", userInfo.get("sessionId"));
+	    session.setAttribute("userapi", userInfo.get("api"));
+	    session.setAttribute("access_Token", access_Token);
 
-		return "/join/add";
+	    String s_id = userInfo.get("sessionId").toString();
+	    
+	    int check = service.MemCheck(s_id);
+	    // 클라이언트의 이름이 없을 경우 입력 페이지로
+	    if(check == 0){ 
+	    	return "/join/join";
+	    }
+	    return "redirect:/main";
 	} 
 	
-	// 로그아웃
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpSession session) throws IOException {
-		System.out.println("여기는 logout");
-		session.invalidate();
-		return "redirect:main.jsp";
-	}
-
 }
