@@ -8,18 +8,19 @@
 </head>
 <body>
 	<div>
-		<form method="post" action="/profile/modify">
+		<form method="post" action="/profile/update">
+			<input type="hidden" name="m_id" value="${userId}">
 			<div>
 				<label>비밀번호</label> <input class="form-control" type="password"
-					name="m_passwd"></input>
+						name="m_passwd"></input>
 			</div>
 			<div>
 				<label>휴대전화</label> <input class="form-control" type="text"
-					name="m_phone" value="${m_phone }"></input>
+					name="m_phone" value="<%=request.getAttribute("userphone") %>"></input>
 			</div>
 			<div>
 				<label>email</label> <input class="form-control" type="text"
-					name="m_email" value="${m_email }"></input>
+					name="m_email" value="<%=request.getAttribute("useremail")%>"></input>
 			</div>
 			<input type="submit" value="수정하기">
 		</form>

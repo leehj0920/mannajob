@@ -1,6 +1,5 @@
 package com.mannajob.mapper;
 
-import java.util.List;
 import java.util.Map;
 
 import com.mannajob.domain.EmplVO;
@@ -8,9 +7,11 @@ import com.mannajob.domain.MemberVO;
 
 public interface ProfileMapper {
 	
-	public List<MemberVO> getMemProfile();
+	public MemberVO getMemProfile(String m_id);
 	
-	public List<EmplVO> getEmplProfile();
+	public void updateProfile(MemberVO member);
+	
+	public EmplVO getEmplProfile(String m_id);
 
 	public void EmplJoin(EmplVO empl);
 	

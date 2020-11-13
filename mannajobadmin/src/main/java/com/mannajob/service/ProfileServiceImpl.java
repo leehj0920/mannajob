@@ -29,19 +29,24 @@ public class ProfileServiceImpl implements ProfileService {
 	private FileUtils fileUtils;
 	
 	@Override
-	public List<MemberVO> getMemProfile() {
-		return mapper.getMemProfile();
+	public MemberVO getMemProfile(String m_id) {
+		return mapper.getMemProfile(m_id);
 	}
 	
 	@Override
-	public List<EmplVO> getEmplProfile() {
-		return mapper.getEmplProfile();
+	public void updateProfile(MemberVO member) {
+		mapper.updateProfile(member);
+	}
+	
+	@Override
+	public EmplVO getEmplProfile(String m_id) {
+		return mapper.getEmplProfile(m_id);
 	}
 	
 	@Override
 	public void EmplJoin(EmplVO empl, MultipartHttpServletRequest mpRequest) throws Exception {
 		mapper.EmplJoin(empl);
-		
+		empl = mapper.getEmplProfile(empl.getM_id());
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(empl, mpRequest);
 		int size = list.size();
 		for(int i = 0; i < size; i ++) {

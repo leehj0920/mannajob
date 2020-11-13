@@ -57,7 +57,12 @@ public class LoginController {
 		
 		String kakaoAuthUrl = "https://kauth.kakao.com/oauth/authorize?client_id=2ac1c0b75032a241c45fa9363396eaf0&redirect_uri=http://192.168.0.60:8080/redirect&response_type=code";
 		model.addAttribute("kakaourl", kakaoAuthUrl);
-		return "login";
+		
+		if(session.getAttribute("userId") == null) {
+			return "login";
+		}
+		
+		return "main";
 	}
 
 	//네이버 로그인 성공시 callback호출 메소드

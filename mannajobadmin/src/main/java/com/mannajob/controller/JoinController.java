@@ -29,7 +29,6 @@ public class JoinController {
 	@PostMapping("/member")
 	public String insert(MemberVO member, RedirectAttributes rttr) {
 		log.info("∞°¿‘..............................");
-		
 		service.MemJoin(member);
 //		rttr.addFlashAttribute("result", 1);
 		

@@ -28,7 +28,7 @@ public class MemberController {
 		//로그인 성공하면 메인페이지로, 실패하면 로그인 페이지
 		if(service.LoginSelect(member)) {
 			log.info("로그인 오케이");
-			session.setAttribute("m_id", member.getM_id());
+			session.setAttribute("userId", member.getM_id());
 			return "redirect:/main"; 
 		} else {
 			log.info("로그인 실패");
