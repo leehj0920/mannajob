@@ -15,4 +15,8 @@ import lombok.extern.log4j.Log4j;
 public class AdminServiceImpl implements AdminService {
 	@Setter(onMethod_ = @Autowired)
 	private AdminMapper mapper;
+	
+	public void MemSearch(String m_id) {
+		mapper.MemSearch(m_id);
+	}
 }

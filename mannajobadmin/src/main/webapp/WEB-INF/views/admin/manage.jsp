@@ -13,17 +13,19 @@
 	<input type="button" value="회원정보 관리"
 		onclick="location.href='/admin/manage'">
 	<input type="button" value="현직자 승인 관리"
-		onclick="location.href='/admin/check'">
+		onclick="location.href='/admin/'">
 	<div id="memberSearch">
 		<h2>검색조건</h2>
 		<div>
+		<form method="post" action="/admin/manage">
 			<select name="m_category">
 					<option value="All">전체</opption>
 					<option value="Worker">현직자</opption>
 					<option value="Seeker">취준생</opption>
 			</select>
 			<input type="text" placeholder="아이디 입력">
-			<input type="button" value="조회" onclick="location.href='search'">
+			<input type="submit" value="조회">
+		</form>
 		</div>
 	</div>
 	<div id="memberList">
