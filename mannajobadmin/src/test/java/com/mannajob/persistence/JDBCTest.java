@@ -19,7 +19,7 @@ public class JDBCTest {
 	public void testConnection() {
 		try(Connection conn = 
 				DriverManager.getConnection(
-						"jdbc:oracle:thin:@Localhost:1521:orcl",
+						"jdbc:oracle:thin:@192.168.0.60:1521:orcl",
 						"madang",
 						"madang")) {
 			log.info(conn);

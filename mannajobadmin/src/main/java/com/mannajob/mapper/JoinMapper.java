@@ -4,6 +4,8 @@ import com.mannajob.domain.MemberVO;
 
 public interface JoinMapper {
 	
-	public void Join(MemberVO member);
-
+	public void MemJoin(MemberVO member);
+	
+	public void ApiJoin(MemberVO member);
+	
 }

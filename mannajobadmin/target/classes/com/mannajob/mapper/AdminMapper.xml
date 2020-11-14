@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mannajob.mapper.AdminMapper">
+	<!-- API로그인 기존 회원인지 체크 -->	
+	
+	<resultMap type="com.mannajob.domain.MemberVO" id="MemberVO">
+		<id column="m.m_id" property="m_id"/>
+		<result column="m.m_cdate" property="m_cdate"/>
+		<result column="m.m_stop" property="m_stop"/>
+		<result column="m.m_del" property="m_del"/>
+	</resultMap>
+
+	<resultMap type="com.mannajob.domain.EmplVO" id="EmplVO">
+		<id column="e_num" property="e_num"/>
+		<result column="e.m_id" property="m_id"/>
+		<collection property="memberVO" resultMap="MemberVO" />
+	</resultMap>
+	
+	<select id="MemSearch" resultMap="EmplVO">
+		SELECT m.m_id, m.m_cdate, m.m_stop, m.m_del FROM member m, empl e
+		<if test='m_id != null'>
+			WHERE m_id = #{m_id}
+		</if>
+		ORDER BY m.m_stop, m.m_del ASC
+	</select>
+
+</mapper>

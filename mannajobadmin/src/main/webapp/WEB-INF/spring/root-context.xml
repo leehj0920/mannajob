@@ -18,11 +18,11 @@
 		-->
 		
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.60:1521:orcl"></property> 
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.225:1521:orcl"></property> 
 		
-		<property name="username" value="madang"></property>
+		<property name="username" value="mannajob"></property>
 		
-		<property name="password" value="madang"></property>
+		<property name="password" value="ateam"></property>
 	</bean>
 	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -35,4 +35,6 @@
 	
 	<mybatis-spring:scan base-package="com.mannajob.mapper" />
 	<context:component-scan base-package="com.mannajob.service" />
+	<context:component-scan base-package="com.mannajob.util" />
+	
 </beans>
