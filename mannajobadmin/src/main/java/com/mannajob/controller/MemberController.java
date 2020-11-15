@@ -25,18 +25,19 @@ public class MemberController {
 	
 	@PostMapping ("/logincheck")
 	public String login(MemberVO member, HttpServletRequest request, HttpSession session) {
-		//·Î±×ÀÎ ¼º°øÇÏ¸é ¸ÞÀÎÆäÀÌÁö·Î, ½ÇÆÐÇÏ¸é ·Î±×ÀÎ ÆäÀÌÁö
+		//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(service.LoginSelect(member)) {
-			log.info("·Î±×ÀÎ ¿ÀÄÉÀÌ");
+			log.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			session.setAttribute("userId", member.getM_id());
 			return "redirect:/main"; 
 		} else {
-			log.info("·Î±×ÀÎ ½ÇÆÐ");
+			log.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			return "redirect:/login";
 		}
 	}
+
 	
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpServletRequest request) throws IOException {
 		HttpSession session = request.getSession();
