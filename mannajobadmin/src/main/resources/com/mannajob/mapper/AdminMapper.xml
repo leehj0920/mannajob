@@ -3,9 +3,84 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mannajob.mapper.AdminMapper">
-	<!-- API로그인 기존 회원인지 체크 -->	
+	<!-- 회원 리스트 -->
+	<!-- <resultMap type="int" id="EmplVO">
+		<result property="e_num" column="e_num" />
+	</resultMap>
+
+	<resultMap type="com.mannajob.domain.MemberEmplVO" id="MemberVO">
+		<result property="m_id" column="m_id"/>
+		<result property="m_cdate" column="m_cdate"/>
+		<result property="m_stop" column="m_stop" javaType="java.lang.String"/>
+		<result property="m_del" column="m_del" javaType="java.lang.String"/>
+		<collection property="e_num" resultMap="EmplVO" />
+	</resultMap> -->
+	
+	<resultMap type="com.mannajob.domain.EmplVO" id="EmplVO">
+		<result property="e_num" column="e_num" />
+	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.MemberVO" id="MemberVO">
+		<result property="m_id" column="m_id"/>
+		<result property="m_cdate" column="m_cdate" />
+		<result property="m_stop" column="m_stop" />
+		<result property="m_del" column="m_del"/>
+		<collection property="emplVO" resultMap="EmplVO" />
+	</resultMap>
+
+	<select id="getMemListWithPaging" resultMap="MemberVO">
+		<choose>
+			<when test='searchType.equals("All")'>
+				<![CDATA[
+					select rownum, m_id, m_cdate, m_stop, m_del from 
+						(select /*+ index_desc(member m.m_id) */ 
+						rownum rn, e.e_num, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e
+						ON m.m_id = e.m_id where rownum <= #{pageNum} * #{amount}
+				]]> 
+					<if test='keyword != null'>
+						AND m.m_id LIKE '%'||#{keyword}||'%'
+					</if>
+				<![CDATA[
+						) 
+					where rn > (#{pageNum} - 1) * #{amount}
+				]]>
+			</when>
+			<when test='searchType.equals("Worker")'>
+			<![CDATA[
+				select rn, m_id, m_cdate, m_stop, m_del from 
+					(select /*+ index_desc(member m.m_id) */ 
+					rownum rn, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
+					ON m.m_id = e.m_id WHERE e_num IS NOT NULL 
+			]]> 
+				<if test='keyword != null'>
+					AND m.m_id LIKE '%'||#{keyword}||'%'
+				</if>
+			<![CDATA[
+					AND rownum <= #{pageNum} * #{amount}) 
+				where rn > (#{pageNum} - 1) * #{amount}
+			]]>
+			</when>
+			<when test='searchType.equals("Seeker")'>
+			<![CDATA[
+				select rownum, m_id, m_cdate, m_stop, m_del from 
+					(select /*+ index_desc(member m.m_id) */ 
+					rownum rn, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
+					ON m.m_id = e.m_id where e_num IS NULL
+			]]> 
+				<if test='keyword != null'>
+					AND m.m_id LIKE '%'||#{keyword}||'%'
+				</if>
+			<![CDATA[
+					AND rownum <= #{pageNum} * #{amount}) 
+				where rn > (#{pageNum} - 1) * #{amount}
+			]]>
+			</when>
+		</choose>
+	</select>	
+
+	
+	<!--  -->
+	<!-- <resultMap type="com.mannajob.domain.MemberVO" id="MemberVO">
 		<id column="m.m_id" property="m_id"/>
 		<result column="m.m_cdate" property="m_cdate"/>
 		<result column="m.m_stop" property="m_stop"/>
@@ -24,6 +99,10 @@
 			WHERE m_id = #{m_id}
 		</if>
 		ORDER BY m.m_stop, m.m_del ASC
+	</select> -->
+	
+	<select id="getTotalCount" resultType="int">
+		select count(m_id) from member
 	</select>
 
 </mapper>

@@ -1,10 +1,15 @@
 package com.mannajob.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mannajob.domain.Criteria;
+import com.mannajob.domain.PageDTO;
+import com.mannajob.domain.SearchCriteria;
 import com.mannajob.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -23,9 +28,10 @@ public class AdminController {
 	}
 	
 	@PostMapping("/manage")
-	public String manage(String m_id) {
-		service.MemSearch(m_id);
-		return "/manage";
-	}
+	public void manage(SearchCriteria cri, Model model) {
+		int total = service.getTotal();
+		model.addAttribute("memlist", service.getMemList(cri));
+		model.addAttribute("mempageMaker", new PageDTO(cri, total));
+	} 
 
 }
