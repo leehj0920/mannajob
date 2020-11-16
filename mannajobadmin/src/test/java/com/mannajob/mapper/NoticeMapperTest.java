@@ -30,40 +30,40 @@ public class NoticeMapperTest {
 	
 	public void testInsert() {
 		NoticeVO notice = new NoticeVO();
-		notice.setN_subject("°øÁö»çÇ× 12:15");
-		notice.setN_contents("°øÁö»çÇ×");
+		notice.setN_subject("ê³µì§€ì‚¬í•­ 12:15");
+		notice.setN_contents("ê³µì§€ì‚¬í•­");
 		notice.setAd_id("admin");
 		mapper.insert(notice);
-		log.info("°øÁö»çÇ× insert >>> " + notice);
+		log.info("ê³µì§€ì‚¬í•­ insert >>> " + notice);
 	}
 	
 	public void testInsertSel() {
 		NoticeVO notice = new NoticeVO();
-		notice.setN_subject("°øÁö»çÇ× 12:15");
-		notice.setN_contents("°øÁö»çÇ×");
+		notice.setN_subject("ê³µì§€ì‚¬í•­ 12:15");
+		notice.setN_contents("ê³µì§€ì‚¬í•­");
 		notice.setAd_id("admin");
 		mapper.insertSel(notice);
-		log.info("°øÁö»çÇ× insertSel >>> " + notice);  
+		log.info("ê³µì§€ì‚¬í•­ insertSel >>> " + notice);  
 	}
 	
 	public void testRead() {
 		int result = mapper.readUpCount(4);
-		log.info("°øÁö»çÇ× Á¶È¸¼ö >>> " + result);
+		log.info("ê³µì§€ì‚¬í•­ ì¡°íšŒìˆ˜ >>> " + result);
 		NoticeVO notice = mapper.read(4);
-		log.info("°øÁö»çÇ× read >>> " + notice);
+		log.info("ê³µì§€ì‚¬í•­ read >>> " + notice);
 	}
 	
 	public void testDelete() {
 		int result = mapper.delete(4);
-		log.info("°øÁö»çÇ× delete >>> " + result);
+		log.info("ê³µì§€ì‚¬í•­ delete >>> " + result);
 	}
 	//@Test
 	public void testUpdate() {
 		NoticeVO notice = new NoticeVO();
-		notice.setN_subject("°øÁö»çÇ× 12:20");
-		notice.setN_contents("°øÁö»çÇ× update");
+		notice.setN_subject("ê³µì§€ì‚¬í•­ 12:20");
+		notice.setN_contents("ê³µì§€ì‚¬í•­ update");
 		notice.setN_num(4);
 		int result = mapper.update(notice);
-		log.info("°øÁö»çÇ× update >>> " + result);
+		log.info("ê³µì§€ì‚¬í•­ update >>> " + result);
 	}
 }
