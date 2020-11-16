@@ -9,11 +9,17 @@
 </head>
 <body>
 	<h1>메인 페이지 입니다.</h1>
-	<a href="logout">로그아웃</a>
+	<div align="right">
+		<a href="profile/main">마이페이지</a>&nbsp;&nbsp;&nbsp;
+		<c:choose>
+			<c:when test="${userId eq null}">
+				<a href="login">로그인</a>
+			</c:when>
+			<c:otherwise>
+				<a href="logout">로그아웃</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<hr>
-	<br>
-	<a href="login">로그인 하러 가기 </a>
-	<hr>
-	<a href="profile/main">프로필</a>
 </body>
 </html>

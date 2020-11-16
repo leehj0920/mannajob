@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.SearchCriteria;
@@ -46,13 +47,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void emplOk(String m_id) {
-		mapper.emplOk(m_id);
+	public void emplOk(int e_num) {
+		mapper.emplOk(e_num);
 	}
 
 	@Override
 	public int getemplTotal() {
 		return mapper.getemplTotalCount();
+	}
+
+	@Override
+	public List<EmplFileVO> emplApply(int e_num) {
+		return mapper.emplApply(e_num);
+	}
+
+	@Override
+	public String emplImage(int e_num) {
+		return mapper.emplImage(e_num);
 	}
 
 }

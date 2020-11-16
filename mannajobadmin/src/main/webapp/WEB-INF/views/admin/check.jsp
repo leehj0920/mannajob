@@ -32,10 +32,10 @@
 		<h4>
 			검색 구분:
 			<c:choose>
-				<c:when test='${searchType eq null}'>
+				<c:when test='${searchType eq null or searchType eq ""}'>
 				전체
 				</c:when>
-				<c:when test='${searchType eq ""}'>
+				<c:when test='${searchType eq "All"}'>
 				전체
 				</c:when>
 				<c:when test='${searchType eq "Ok"}'>
@@ -64,29 +64,25 @@
 					<th>아이디</th>
 					<th>지원서</th>
 					<th>신청일</th>
-					<th>첨부파일</th>
 					<th>인증여부</th>
-					<th>인증처리</th>
 				</tr>
 			</thead>
 			<c:forEach items="${empllist}" var="empl">
 				<tr>
 					<td><c:out value="${empl.e_num }" /></td>
 					<td><c:out value="${empl.m_id }" /></td>
-					<td>지원서</td>
+					<td>
+						<form method="get" action="/admin/emplapply">
+							<input type="hidden" name="e_num" value="${empl.e_num}">
+							<input type="submit" value="지원서 확인">
+						</form>
+					</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${empl.e_applydate}" /></td>
-					<td>첨부파일</td>
 					<td>
 						<c:choose>
 							<c:when test="${empl.e_ok eq 'Y'}">승인</c:when>
 							<c:otherwise>미승인</c:otherwise>
 						</c:choose>
-					</td>
-					<td style="text-align: center;">
-						<form method="get" action="/admin/emplOk">
-							<input type="hidden" name="m_id" value="${empl.m_id }"> <input
-								type="submit" value="인증">
-						</form>
 					</td>
 				</tr>
 			</c:forEach>

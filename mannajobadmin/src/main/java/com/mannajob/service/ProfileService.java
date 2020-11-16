@@ -18,6 +18,4 @@ public interface ProfileService {
 	public void EmplJoin(EmplVO empl, MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	public void insertFile(Map<String, Object> map) throws Exception;
-	
-//	public List<Map<String, Object>> selectCertif(int e_num) throws Exception;
 }

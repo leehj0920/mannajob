@@ -20,7 +20,7 @@ public interface QnaService {
 	
 	public boolean delete(int q_num);
 	
-	public boolean deleteSub(int qs_num);
+	public boolean deleteSub(QnaVO qna);
 	
 	public boolean update(QnaVO qna);
 	

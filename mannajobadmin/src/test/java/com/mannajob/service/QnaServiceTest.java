@@ -60,7 +60,7 @@ public class QnaServiceTest {
 		QnaVO qna = new QnaVO();
 		qna.setQ_num(2);
 		qna.setAd_id("admin");
-		qna.setQs_contents("�亯�Դϴ� 21:29");
+		qna.setQs_contents("답변입니다 21:29");
 		service.insertSub(qna);
 		log.info("Qna sub insert >>> " + qna);
 	}
@@ -86,7 +86,7 @@ public class QnaServiceTest {
 		log.info("updateSub............");
 		QnaVO qna = new QnaVO();
 		qna.setQs_num(3);
-		qna.setQs_contents("�亯�Դϴ� 21:32");
+		qna.setQs_contents("답변입니다 21:32");
 		boolean result = service.updateSub(qna);
 		log.info("Qna sub update >>> " + result);
 	}
@@ -99,7 +99,8 @@ public class QnaServiceTest {
 	
 	public void testDeleteSub() {
 		log.info("deleteSub............");
-		boolean result = service.deleteSub(4);
+		QnaVO qna = new QnaVO();
+		boolean result = service.deleteSub(qna);
 		log.info("Qna sub delete >>> " + result);
 	}
 }

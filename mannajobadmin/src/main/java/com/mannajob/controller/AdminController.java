@@ -1,10 +1,14 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.SearchCriteria;
 import com.mannajob.service.AdminService;
@@ -20,8 +24,8 @@ public class AdminController {
 	private AdminService service; 
 	
 	@GetMapping("/manage")
-	public String manage(SearchCriteria cri, Model model) {
-		
+	public String manage(EmplVO empl, SearchCriteria cri, Model model, HttpServletRequest request) {
+					
 		int total = service.getTotal();
 		model.addAttribute("memlist", service.getMemList(cri));
 		model.addAttribute("mempageMaker", new PageDTO(cri, total));
@@ -48,8 +52,24 @@ public class AdminController {
 	}
 
 	@GetMapping("/emplOk")
-	public String emplOk(String m_id) {
-		service.emplOk(m_id);
+	public String emplOk(int e_num) {
+		service.emplOk(e_num);
 		return "redirect:/admin/check";
+	}
+	
+	@GetMapping("/emplapply")
+	public void emplapply(int e_num, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("e_num", e_num);
+		
+		session.setAttribute("emplFile", service.emplApply(e_num));
+		System.out.println(session.getAttribute("emplFile"));
+	}
+	
+	@GetMapping("/certif")
+	public void certif(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("e_num"));
+		session.setAttribute("emplCertif", service.emplImage((int)session.getAttribute("e_num")));
 	}
 }

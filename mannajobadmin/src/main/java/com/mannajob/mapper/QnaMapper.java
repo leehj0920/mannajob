@@ -24,7 +24,7 @@ public interface QnaMapper {
 
 	public int delete(int q_num);
 	
-	public int deleteSub(int qs_num);
+	public int deleteSub(QnaVO qna);
 	
 	public int getTotalCount(Criteria cri);
 }

@@ -52,7 +52,7 @@ public class QnaMapperTest {
 		QnaVO qna = new QnaVO();
 		qna.setQ_num(2);
 		qna.setAd_id("admin");
-		qna.setQs_contents("�亯�Դϴ� 20:43");
+		qna.setQs_contents("답변입니다 20:43");
 		mapper.insertSub(qna);
 		log.info("Qna sub insert >>> " + qna);
 	}
@@ -75,7 +75,7 @@ public class QnaMapperTest {
 	public void testUpdateSub() {
 		QnaVO qna = new QnaVO();
 		qna.setQs_num(3);
-		qna.setQs_contents("�亯�Դϴ� 20:50");
+		qna.setQs_contents("답변입니다 20:50");
 		int result = mapper.updateSub(qna);
 		log.info("Qna sub update >>> " + result);
 	}
@@ -86,7 +86,8 @@ public class QnaMapperTest {
 	}
 	
 	public void testDeleteSub() {
-		int result = mapper.deleteSub(3);
+		QnaVO qna = new QnaVO();
+		int result = mapper.deleteSub(qna);
 		log.info("Qna sub delete >>> " + result);
 	}
 }

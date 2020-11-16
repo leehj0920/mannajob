@@ -112,4 +112,9 @@ public class ProfileController {
 	public void calendar() {
 		
 	}
+	
+	@GetMapping("/emplprofile")
+	public void emplprofile() {
+		
+	}
 }

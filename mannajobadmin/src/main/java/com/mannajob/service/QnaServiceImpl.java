@@ -63,9 +63,9 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public boolean deleteSub(int qs_num) {
+	public boolean deleteSub(QnaVO qna) {
 		log.info("deleteSub..................");
-		return mapper.deleteSub(qs_num) == 1;
+		return mapper.deleteSub(qna) == 1;
 	}
 
 	@Override

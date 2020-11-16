@@ -18,4 +18,6 @@ public class EmplVO {
 	private Date e_applydate;
 	private Date e_okdate;
 	private String e_del;	
+	
+	private FileVO fileVO;
 }
