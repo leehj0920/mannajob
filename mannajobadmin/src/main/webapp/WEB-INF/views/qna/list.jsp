@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
 	<h3>QnA Board</h3>
 	<c:if test="${sessionScope.userId != null}">
