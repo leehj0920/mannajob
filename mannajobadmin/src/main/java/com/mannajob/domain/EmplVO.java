@@ -20,4 +20,5 @@ public class EmplVO {
 	private String e_del;	
 	
 	private FileVO fileVO;
+	private MemberVO memberVO;
 }

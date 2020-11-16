@@ -10,7 +10,10 @@
 <body>
 	<h1>메인 페이지 입니다.</h1>
 	<div>
-		<input type="text" name="searchBar" placeholder="키워드를 입력해주세요.">
+	<form method="get" action="/search">
+		<input type="text" name="searchBar" placeholder="기업명을 입력해 주세요.">
+		<input type="submit" value="조회">
+	</form>
 		<div align="right">
 			<a href="profile/main">마이페이지</a>&nbsp;&nbsp;&nbsp;
 			<c:choose>
