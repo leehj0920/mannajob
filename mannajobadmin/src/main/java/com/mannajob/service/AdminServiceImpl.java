@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mannajob.domain.Criteria;
+import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
+import com.mannajob.domain.SearchCriteria;
 import com.mannajob.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -25,8 +26,7 @@ public class AdminServiceImpl implements AdminService {
 	 */
 
 	@Override
-	public List<MemberVO> getMemList(Criteria cri) {
-		// TODO Auto-generated method stub
+	public List<MemberVO> getMemList(SearchCriteria cri) {
 		return mapper.getMemListWithPaging(cri);
 	}
 
@@ -34,4 +34,25 @@ public class AdminServiceImpl implements AdminService {
 	public int getTotal() {
 		return mapper.getTotalCount();
 	}
+
+	@Override
+	public void resetPasswd(String m_id) {
+		mapper.resetPasswd(m_id);
+	}
+
+	@Override
+	public List<EmplVO> getEmplList(SearchCriteria cri) {
+		return mapper.getEmplListWithPaging(cri);
+	}
+
+	@Override
+	public void emplOk(String m_id) {
+		mapper.emplOk(m_id);
+	}
+
+	@Override
+	public int getemplTotal() {
+		return mapper.getemplTotalCount();
+	}
+
 }
