@@ -46,10 +46,10 @@ public class LoginController {
 		
 	}
 
-	//·Î±×ÀÎ Ã¹ È­¸é ¿äÃ» ¸Ş¼Òµå
+	//
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
-		// ³×ÀÌ¹ö¾ÆÀÌµğ·Î ÀÎÁõ URLÀ» »ı¼ºÇÏ±â À§ÇÏ¿© naverLoginBOÅ¬·¡½ºÀÇ getAuthorizationUrl¸Ş¼Òµå È£Ãâ
+		// 
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
@@ -65,40 +65,40 @@ public class LoginController {
 		return "main";
 	}
 
-	//³×ÀÌ¹ö ·Î±×ÀÎ ¼º°ø½Ã callbackÈ£Ãâ ¸Ş¼Òµå
+	//ë„¤ì´ë²„ ë¡œê·¸ì¸ ì½œë°±
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException, ParseException {
-		System.out.println("callback È£Ãâ");
+		System.out.println("callback È£ï¿½ï¿½");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		//1. ·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸¸¦ ÀĞ¾î¿Â´Ù.
-		apiResult = naverLoginBO.getUserProfile(oauthToken); // StringÇü½ÄÀÇ jsonµ¥ÀÌÅÍ
+		//1. 
+		apiResult = naverLoginBO.getUserProfile(oauthToken); // 
 		/**
-		 * apiResult json ±¸Á¶ {"resultcode":"00", "message":"success",
+		 * apiResult json {"resultcode":"00", "message":"success",
 		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
 		 **/
-		//2. StringÇü½ÄÀÎ apiResult¸¦ jsonÇüÅÂ·Î ¹Ù²Ş
+		//2.
 		System.out.println(apiResult);
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
 		
-		//3. µ¥ÀÌÅÍ ÆÄ½Ì
-		//Top·¹º§ ´Ü°è _response ÆÄ½Ì
+		//3. 
+		//
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		//responseÀÇ id, email ÆÄ½Ì
+		//
 		String id = (String) response_obj.get("id");
 		String email = (String) response_obj.get("email");
 		
-		//db¿¡ µî·Ï ÇÒ api¸í ¼³Á¤
+		//
 		String api = "n";
 		
 //		System.out.println(check);
-		//id, email ÆÄ½Ì È®ÀÎ
+		//id, email
 		System.out.println("id: " + id + "\nemail: " + email);
-		//4.ÆÄ½Ì °ª ¼¼¼ÇÀ¸·Î ÀúÀå
-		session.setAttribute("userId", id); // ¼¼¼Ç »ı¼º
+		//4.
+		session.setAttribute("userId", id); //
 		session.setAttribute("useremail", email);
 		session.setAttribute("userapi", api);
 		
@@ -113,7 +113,7 @@ public class LoginController {
 		}
 	}
 	
-	//Ä«Ä«¿À ·Î±×ÀÎ redirect
+	//ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ ì½œë°±
 	@RequestMapping(value = "/redirect")
 	public String login(@RequestParam("code") String code, HttpSession session, Model model) {
 		String access_Token = kakao.getAccessToken(code);
@@ -127,7 +127,7 @@ public class LoginController {
 	    String s_id = userInfo.get("sessionId").toString();
 	    
 	    int check = service.MemCheck(s_id);
-	    // Å¬¶óÀÌ¾ğÆ®ÀÇ ÀÌ¸§ÀÌ ¾øÀ» °æ¿ì ÀÔ·Â ÆäÀÌÁö·Î
+	    // Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    if(check == 0){ 
 	    	return "/join/join";
 	    }

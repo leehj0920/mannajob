@@ -27,7 +27,7 @@ public class ProfileController {
 	private MemberVO member;
 	private EmplVO empl;
 	
-	//메인페이지
+	//
 	@GetMapping("/main")
 	public String main(Model model, HttpServletRequest request) {
 		
@@ -60,17 +60,17 @@ public class ProfileController {
 		return "profile/main";
 	}
 	
-	//경력자 등록 페이지로 empl.jsp
+	// empl.jsp
 	@GetMapping("/empl")
 	public void EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
 		model.addAttribute("userId", session.getAttribute("userId"));
 	}
 			
-	//EmplVO에 가입 정보 INSERT 후 mypage로 redirect
+	//EmplVO INSERT 
 	@PostMapping("/empl")
 	public String EmplJoin(EmplVO empl, RedirectAttributes rttr, MultipartHttpServletRequest mpRequest) throws Exception {
-		log.info("가입..............................");
+		log.info("占쏙옙占쏙옙..............................");
 		
 		service.EmplJoin(empl, mpRequest);
 //		rttr.addFlashAttribute("result", 1);
