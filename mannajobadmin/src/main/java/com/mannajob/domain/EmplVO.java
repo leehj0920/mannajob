@@ -1,5 +1,7 @@
 package com.mannajob.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,10 @@ public class EmplVO {
 	private String e_career;
 	private String e_intro;
 	private String e_ok;
-	private String e_applydate;
-	private String e_okdate;
+	private Date e_applydate;
+	private Date e_okdate;
 	private String e_del;	
+	
+	private FileVO fileVO;
+	private MemberVO memberVO;
 }

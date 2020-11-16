@@ -1,16 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
-	<a href="/notice/insert">[Insert]</a> 
-	<table>
+	<h3>Notice Board</h3>
+	<c:if test="${sessionScope.userId != null}">
+		<p>${sessionScope.userId}
+		<a href="/logout">logout</a></p>
+		<a href="/notice/insert">[Insert]</a> 
+	</c:if>
+	<c:if test="${sessionScope.userId == null}">
+		<p><a href="/login">login</a></p>
+	</c:if>
+	<table border="1">
 		<thead>
 			<tr>
 				<th>번호</th>

@@ -4,19 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mannajob.mapper.AdminMapper">
 	<!-- 회원 리스트 -->
-	<!-- <resultMap type="int" id="EmplVO">
-		<result property="e_num" column="e_num" />
-	</resultMap>
-
-	<resultMap type="com.mannajob.domain.MemberEmplVO" id="MemberVO">
-		<result property="m_id" column="m_id"/>
-		<result property="m_cdate" column="m_cdate"/>
-		<result property="m_stop" column="m_stop" javaType="java.lang.String"/>
-		<result property="m_del" column="m_del" javaType="java.lang.String"/>
-		<collection property="e_num" resultMap="EmplVO" />
-	</resultMap> -->
-	
-	<resultMap type="com.mannajob.domain.EmplVO" id="EmplVO">
+	<resultMap type="com.mannajob.domain.EmplVO" id="memEmplVO">
 		<result property="e_num" column="e_num" />
 	</resultMap>
 	
@@ -25,84 +13,118 @@
 		<result property="m_cdate" column="m_cdate" />
 		<result property="m_stop" column="m_stop" />
 		<result property="m_del" column="m_del"/>
-		<collection property="emplVO" resultMap="EmplVO" />
+		<collection property="emplVO" resultMap="memEmplVO" />
 	</resultMap>
 
 	<select id="getMemListWithPaging" resultMap="MemberVO">
+		select rownum, m_id, m_cdate, m_stop, m_del from 
+		(select /*+ index_desc(member m.m_id) */
+		rownum rn, e.e_num, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
+		ON m.m_id = e.m_id WHERE
 		<choose>
-			<when test='searchType.equals("All")'>
-				<![CDATA[
-					select rownum, m_id, m_cdate, m_stop, m_del from 
-						(select /*+ index_desc(member m.m_id) */ 
-						rownum rn, e.e_num, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e
-						ON m.m_id = e.m_id where rownum <= #{pageNum} * #{amount}
-				]]> 
-					<if test='keyword != null'>
-						AND m.m_id LIKE '%'||#{keyword}||'%'
-					</if>
-				<![CDATA[
-						) 
-					where rn > (#{pageNum} - 1) * #{amount}
-				]]>
+			<when test='"All".equals(searchType)'>
 			</when>
-			<when test='searchType.equals("Worker")'>
-			<![CDATA[
-				select rn, m_id, m_cdate, m_stop, m_del from 
-					(select /*+ index_desc(member m.m_id) */ 
-					rownum rn, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
-					ON m.m_id = e.m_id WHERE e_num IS NOT NULL 
-			]]> 
-				<if test='keyword != null'>
-					AND m.m_id LIKE '%'||#{keyword}||'%'
-				</if>
-			<![CDATA[
-					AND rownum <= #{pageNum} * #{amount}) 
-				where rn > (#{pageNum} - 1) * #{amount}
-			]]>
+			<when test='"Worker".equals(searchType)'>
+				e_num IS NOT NULL AND
 			</when>
-			<when test='searchType.equals("Seeker")'>
-			<![CDATA[
-				select rownum, m_id, m_cdate, m_stop, m_del from 
-					(select /*+ index_desc(member m.m_id) */ 
-					rownum rn, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
-					ON m.m_id = e.m_id where e_num IS NULL
-			]]> 
-				<if test='keyword != null'>
-					AND m.m_id LIKE '%'||#{keyword}||'%'
-				</if>
-			<![CDATA[
-					AND rownum <= #{pageNum} * #{amount}) 
-				where rn > (#{pageNum} - 1) * #{amount}
-			]]>
+			<when test='"Seeker".equals(searchType)'>
+				e_num IS NULL AND
 			</when>
 		</choose>
+		<![CDATA[
+		rownum <= #{pageNum} * #{amount}
+		]]>
+		<if test='keyword != null'>
+			AND m.m_id LIKE '%'||#{keyword}||'%'
+		</if>
+			)
+		<![CDATA[
+			where rn > (#{pageNum} - 1) * #{amount}
+		]]>
 	</select>	
 
-	
-	<!--  -->
-	<!-- <resultMap type="com.mannajob.domain.MemberVO" id="MemberVO">
-		<id column="m.m_id" property="m_id"/>
-		<result column="m.m_cdate" property="m_cdate"/>
-		<result column="m.m_stop" property="m_stop"/>
-		<result column="m.m_del" property="m_del"/>
-	</resultMap>
-
-	<resultMap type="com.mannajob.domain.EmplVO" id="EmplVO">
-		<id column="e_num" property="e_num"/>
-		<result column="e.m_id" property="m_id"/>
-		<collection property="memberVO" resultMap="MemberVO" />
-	</resultMap>
-	
-	<select id="MemSearch" resultMap="EmplVO">
-		SELECT m.m_id, m.m_cdate, m.m_stop, m.m_del FROM member m, empl e
-		<if test='m_id != null'>
-			WHERE m_id = #{m_id}
-		</if>
-		ORDER BY m.m_stop, m.m_del ASC
-	</select> -->
-	
 	<select id="getTotalCount" resultType="int">
 		select count(m_id) from member
+	</select>
+	
+	<update id="resetPasswd">
+		UPDATE member SET m_passwd = '1234' WHERE m_id = #{m_id}
+	</update>
+	
+	<update id="emplOk">
+		UPDATE empl SET e_ok = 'Y', e_okdate = sysdate WHERE e_num = #{e_num}
+	</update>
+
+	<resultMap type="com.mannajob.domain.EmplVO" id="EmplVO">
+		<result property="e_num" column="e_num" />
+		<result property="m_id" column="m_id"/>
+		<result property="e_applydate" column="e_applydate"/>
+		<result property="e_ok" column="e_ok"/>
+	</resultMap>
+
+	<select id="getEmplListWithPaging" resultMap="EmplVO">
+		select e_num, m_id, e_applydate, e_ok from 
+		(select /*+ index_desc(empl e_num) */
+		rownum rn, e_num, m_id, e_applydate, e_ok from empl 
+		WHERE
+		<choose>
+			<when test='"All".equals(searchType)'>
+			</when>
+			<when test='"Ok".equals(searchType)'>
+				e_ok = 'Y' AND
+			</when>
+			<when test='"Not".equals(searchType)'>
+				e_ok = 'N' AND
+			</when>
+		</choose>
+		<![CDATA[
+		rownum <= #{pageNum} * #{amount}
+		]]>
+		<if test='keyword != null'>
+			AND m_id LIKE '%'||#{keyword}||'%'
+		</if>
+			)
+		<![CDATA[
+			where rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>	
+	
+	<select id="getemplTotalCount" resultType="int">
+		select count(m_id) from empl
+	</select>
+	
+	<resultMap type="com.mannajob.domain.FileVO" id="fileVO">
+		<result property="e_num" column="e_num" />
+		<result property="stored_file_name" column="stored_file_name" />
+		<result property="f_category" column="f_category" />
+	</resultMap>
+	
+	<resultMap type="com.mannajob.domain.EmplVO" id="EmplfileVO">
+		<result property="e_num" column="e_num"/>
+		<result property="m_id" column="m_id"/>
+		<result property="e_corp" column="e_corp" />
+		<result property="e_dept" column="e_dept" />
+		<result property="e_rank" column="e_rank"/>
+		<result property="e_task" column="e_task"/>
+		<result property="e_career" column="e_career"/>
+		<result property="e_intro" column="e_intro"/>
+		<collection property="fileVO" resultMap="fileVO" />
+	</resultMap>
+	
+	<select id="emplApply" resultMap="EmplfileVO">
+		SELECT e.e_num, e.m_id, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name, f.f_category
+		FROM empl e, m_file f
+		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'C'
+	</select>
+
+	<select id="emplImage" resultType="String">
+		SELECT f.stored_file_name
+		FROM empl e, m_file f
+		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'I'
+	</select>
+	
+	<select id="getEnum" resultType="int">
+		SELECT e_num FROM empl WHERE m_id = #{m_id}
 	</select>
 
 </mapper>

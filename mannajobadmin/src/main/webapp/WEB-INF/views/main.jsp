@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,11 +9,23 @@
 </head>
 <body>
 	<h1>메인 페이지 입니다.</h1>
-	<a href="logout">로그아웃</a>
+	<div>
+	<form method="get" action="/search">
+		<input type="text" name="searchBar" placeholder="기업명을 입력해 주세요.">
+		<input type="submit" value="조회">
+	</form>
+		<div align="right">
+			<a href="profile/main">마이페이지</a>&nbsp;&nbsp;&nbsp;
+			<c:choose>
+				<c:when test="${userId eq null}">
+					<a href="login">로그인</a>
+				</c:when>
+				<c:otherwise>
+					<a href="logout">로그아웃</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
 	<hr>
-	<br>
-	<a href="login">로그인 하러 가기 </a>
-	<hr>
-	<a href="profile/main">프로필</a>
 </body>
 </html>
