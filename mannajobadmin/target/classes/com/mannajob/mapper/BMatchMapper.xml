@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mannajob.mapper.BMatchMapper">
+	<select id="getList" resultType="com.mannajob.domain.BMatchVO">
+		select * from b_match where b_category like '%'||#{b_category}||'%' and b_del = 'N' order by b_num desc
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.mannajob.domain.BMatchVO">
+		<![CDATA[
+		select b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+		from (
+			select /*+ index_desc(BMatch pk_b) */
+			rownum rn, b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+			from b_match
+			where rownum <= #{cri.pageNum} * #{cri.amount} and b_del = 'N' and b_category like '%'||#{b_category}||'%')
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<insert id="insert">
+		insert into b_match (b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_subject, b_contents) 
+				values (seq_b.nextval, #{b_category}, #{m_id}, #{b_corp}, #{b_task},#{b_price},#{b_location},#{b_stdate},#{b_endate},#{b_period},#{b_subject},#{b_contents})
+	</insert>
+	
+	<select id="read" resultType="com.mannajob.domain.BMatchVO">
+		select * from b_match where b_num = #{b_num}
+	</select>
+		
+	<update id="delete">
+		update b_match set b_del = 'Y' where b_num = #{b_num}
+	</update>
+	
+	<update id="update">
+		update b_match set b_corp = #{b_corp}, b_task= #{b_task}, b_price =#{b_price}, b_location=#{b_location}, b_stdate=#{b_stdate}, b_endate=#{b_endate}, b_period=#{b_period},b_subject =#{b_subject},b_contents=#{b_contents} where b_num = #{b_num}
+	</update>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(b_num) from b_match where b_category like '%'||#{b_category}||'%' and b_del = 'N'
+	</select>
+	
+	<update id="stateFinish">
+		update b_match set b_state = 'B' where b_num = #{b_num}
+	</update>
+	<update id="stateCancel">
+		update b_match set b_state = 'C' where b_num = #{b_num}
+	</update>
+	<select id="search" resultType="com.mannajob.domain.BMatchVO">
+		select * from b_match
+		 where b_del = 'N' and 
+		 (b_location like '%'||#{b_location}||'%' 
+		 and b_corp like '%'||#{b_corp}||'%' 
+		 and b_task like'%'||#{b_task}||'%'
+		 and b_category like '%'||#{b_task}||'%') 
+		 order by b_num desc
+	</select>
+	
+	<select id="searchWithPaging" resultType="com.mannajob.domain.BMatchVO">
+		<![CDATA[
+		select b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+		from (
+			select /*+ index_desc(BMatch pk_b) */
+			rownum rn, b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+			from b_match
+			where (b_location like '%'||#{bMatchVO.b_location}||'%' and b_corp like '%'||#{bMatchVO.b_corp}||'%' and b_task like'%'||#{bMatchVO.b_task}||'%'and b_category like '%'||#{bMatchVO.b_category}||'%')and rownum <= #{cri.pageNum} * #{cri.amount} and b_del = 'N')
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
+	</select>
+</mapper>
