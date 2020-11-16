@@ -35,8 +35,8 @@ public class NoticeServiceTest {
 	public void testInsert() {
 		log.info("insert............");
 		NoticeVO notice = new NoticeVO();
-		notice.setN_subject("°øÁö»çÇ× 14:00");
-		notice.setN_contents("°øÁö»çÇ×");
+		notice.setN_subject("ê³µì§€ì‚¬í•­ 14:00");
+		notice.setN_contents("ê³µì§€ì‚¬í•­");
 		notice.setAd_id("admin");
 		service.insert(notice);
 		log.info(notice);
@@ -53,8 +53,8 @@ public class NoticeServiceTest {
 	public void testUpdate() {
 		log.info("update............");
 		NoticeVO notice = new NoticeVO();
-		notice.setN_subject("°øÁö»çÇ× 14:03");
-		notice.setN_contents("°øÁö»çÇ×2");
+		notice.setN_subject("ê³µì§€ì‚¬í•­ 14:03");
+		notice.setN_contents("ê³µì§€ì‚¬í•­2");
 		notice.setN_num(4);
 		boolean result = service.update(notice);
 		log.info("result >>> " + result);
