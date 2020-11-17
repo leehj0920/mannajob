@@ -37,7 +37,7 @@
 		<c:forEach var="bmatch" items="${list}">
 			<tr>
 				<td><c:out value="${bmatch.b_num}" /></td>
-				<td><a href="/bmatch/view?b_num=${bmatch.b_num}&pageNum=${page.cri.pageNum}">${bmatch.b_subject}</a></td>
+				<td><a href="/bmatch/view?b_num=${bmatch.b_num}&pageNum=${page.cri.pageNum}&b_category=${bmatch.b_category}&m_id=${bmatch.m_id}">${bmatch.b_subject}</a></td>
 				<td>
 					<c:out value="${bmatch.b_stdate}" />
 					<span>~</span>

@@ -77,6 +77,12 @@ public class BMatchServiceImpl implements BMatchService{
 
 	@Override
 	public void update(BMatchVO bMatchVO) {
+		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
+			bMatchVO.setB_corp("");
+		}
+		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
+			bMatchVO.setB_task("");
+		}
 		mapper.update(bMatchVO);
 	}
 
