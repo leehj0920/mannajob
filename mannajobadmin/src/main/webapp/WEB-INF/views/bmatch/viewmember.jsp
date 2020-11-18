@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,22 +10,53 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/notice/list?pageNum=${cri.pageNum}">[List]</a>
-   	<a href="/notice/update?n_num=${notice.n_num}&pageNum=${cri.pageNum}">[Update]</a>
-   	<a href="/notice/delete?n_num=${notice.n_num}&pageNum=${cri.pageNum}">[Delete]</a>
-	<p>번호</p>
-	<p><c:out value="${notice.n_num}" /></p>
-	<p>제목</p>
-	<p><c:out value="${notice.n_subject}" /></p>
-	<p>작성자</p>
-	<p><c:out value="${notice.ad_id}" /></p>
-	<p>조회수</p>
-	<p><c:out value="${notice.n_cnt}" /></p>
-	<p>작성일</p>
-	<p><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${notice.n_wdate}" /></p>
-	<p>수정일</p>
-	<p><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${notice.n_udate}" /></p>
-	<p>내용</p>
-	<p><c:out value="${notice.n_contents}" escapeXml="false" /></p>
+<%pageContext.setAttribute("line", "\n"); %>
+	<a href="/bmatch/list?pagseNum=${cri.pageNum}&b_category=${bMatch.b_category}">[List]</a>
+   	<a href="/bmatch/update?b_num=${bMatch.b_num}&pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&m_id=${bMatch.m_id}">[Update]</a>
+   	<a href="/bmatch/delete?b_num=${bMatch.b_num}&pageNum=${cri.pageNum}&b_category=${bMatch.b_category}">[Delete]</a>
+	
+	<p></p>
+	<span>아이디</span>
+	<span><c:out value="${bMatch.m_id}" /></span><br>
+	<span>관심기업</span>
+	<span><c:out value="${bMatch.b_corp}" /></span><br>
+	<span>관심직무</span>
+	<span><c:out value="${bMatch.b_task}" /></span><br>
+	<span>내용</span>
+	<span>${fn:replace(bMatch.b_contents,line,"<br/>")}</span><br>
+	<span>지역</span>
+	<span><c:out value="${bMatch.b_location}" /></span><br>
+	<span>기간</span>
+	<span><c:out value="${bMatch.b_stdate}" /></span>
+	<span>~</span>
+	<span><c:out value="${bMatch.b_endate}" /></span><br>
+	<span>시간</span>
+	<span><c:out value="${bMatch.b_period}" /></span><br>
+	<span>가격</span>
+	<span><c:out value="${bMatch.b_price}" /></span><br>
+	
+	<form action="comm/insert" method="post">
+	<input type="hidden" name="b_num" value="${bMatch.b_num}"/>
+	<textarea rows="5" cols="100"></textarea>
+	<input type="submit" name="submit" value="작성">
+	</form>
+	
+	
+	
+	<p>댓글</p>
+	<p>작성일<c:out value=""/> /작성자<c:out value=""/>
+	<p>작성내용<c:out value=""/></p>
+	<p><a href="#">답변</a>
+	<a href="#">수정</a>
+	<a href="#">삭제</a></p>
+	
+	<p>대댓글</p>
+	<p>작성일<c:out value=""/> /작성자<c:out value=""/></p>
+	<p>작성내용<c:out value=""/></p>
+	<p><a href="#">답변</a>
+	<a href="#"/>수정</a>
+	<a href="#">삭제</a></p>
+	
+	
 </body>
 </html>

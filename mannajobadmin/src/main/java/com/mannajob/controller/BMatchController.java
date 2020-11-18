@@ -1,16 +1,26 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+<<<<<<< HEAD
 import com.mannajob.domain.CriteriaProfile;
+=======
+import com.mannajob.domain.EmplVO;
+>>>>>>> branch 'develope' of https://github.com/showtsa/mannajob.git
 import com.mannajob.domain.PageDTO;
+import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
+import com.mannajob.service.ProfileService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,6 +31,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BMatchController {
 	private BMatchService bMatchService;
+	private ProfileService profileService;
+	private AdminService adminService;
 	
 	@GetMapping("/list")
 	public String list(Model model, Criteria cri, BMatchVO bMatchVO) {
@@ -36,11 +48,15 @@ public class BMatchController {
 	}
 	
 	// 댓글,대댓글 추가 필요, 현직자의 경우 현직자 정보 추가 필요.
+	// 사진 출력 추가 필요
 	@GetMapping("/view")
 	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
-		if(bMatchVO.getB_category().equals("A")) {
-			return "redirect:/bmatch/viewempl";	
+		if(bMatchVO.getB_category().equals("A")){
+			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
+			model.addAttribute("empl", emplVO);
+			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
+			return "/bmatch/viewempl";	
 		}
 		return "/bmatch/viewmember";
 	}
@@ -62,4 +78,34 @@ public class BMatchController {
 		return "/bmatch/searchlist";
 	}
 	
+<<<<<<< HEAD
+=======
+	@GetMapping("/update")
+	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
+		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
+		if(bMatchVO.getB_category().equals("A")){
+			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
+			model.addAttribute("empl", emplVO);
+			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
+			return "/bmatch/updateempl";	
+		}
+		return "/bmatch/updatemember";
+	}
+	@PostMapping("/update")
+	public String updateOk(BMatchVO bMatchVO, Model model, Criteria cri) {
+		bMatchService.update(bMatchVO);
+		return "redirect:/bmatch/view?b_category="+bMatchVO.getB_category()+"&b_num="+bMatchVO.getB_num()+"&m_id="+bMatchVO.getM_id()+"&pageNum="+cri.getPageNum();
+	}
+	@GetMapping("/delete")
+	public String delete(BMatchVO bMatchVO, Criteria cri, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}else {
+			bMatchService.delete(bMatchVO.getB_num());
+		}
+		return "redirect:/bmatch/list?b_category="+bMatchVO.getB_category();
+	}
+	
+>>>>>>> branch 'develope' of https://github.com/showtsa/mannajob.git
 }

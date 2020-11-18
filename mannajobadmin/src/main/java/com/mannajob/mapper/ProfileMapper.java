@@ -18,4 +18,5 @@ public interface ProfileMapper {
 	public void insertFile(Map<String, Object> map) throws Exception;
 
 	public void EmplJoin(String string, Map<String, Object> map);
+	
 }
