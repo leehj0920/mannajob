@@ -12,6 +12,7 @@
 		<form method="post" action="/join/join">
 		<input type="hidden" name="m_id" value="${userId}">
 		<input type="hidden" name="m_api" value="${userapi}">
+		<input type="hidden" name="code" value="${code}">
 			<div>
 				<label>이름</label> <input class="form-control" type="text"
 					name="m_name"></input>

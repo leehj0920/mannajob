@@ -19,16 +19,16 @@ import lombok.extern.log4j.Log4j;
 public class JoinController {
 	private JoinService service;
 	
-	//È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î member.jsp
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ member.jsp
 	@GetMapping("/member")
 	public void insert() {
 		
 	}
 	
-	//MemberVO¿¡ °¡ÀÔ Á¤º¸ INSERT ÈÄ login.jsp·Î redirect
+	//MemberVOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ INSERT ï¿½ï¿½ login.jspï¿½ï¿½ redirect
 	@PostMapping("/member")
 	public String insert(MemberVO member, RedirectAttributes rttr) {
-		log.info("°¡ÀÔ..............................");
+		log.info("ï¿½ï¿½ï¿½ï¿½..............................");
 		service.MemJoin(member);
 //		rttr.addFlashAttribute("result", 1);
 		

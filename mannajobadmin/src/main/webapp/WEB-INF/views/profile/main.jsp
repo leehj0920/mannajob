@@ -46,36 +46,7 @@
 		<div>
 			<c:choose>
 			<c:when test="${null ne empl}">
-			<table>
-				<tr>
-					<td>회사명</td>
-					<td><%=request.getAttribute("emplcorp") %></td>
-				</tr>
-				<tr>
-					<td>부서</td>
-					<td><%=request.getAttribute("empldept") %></td>
-				</tr>
-				<tr>
-					<td>직급</td>
-					<td><%=request.getAttribute("emplrank") %></td>
-				</tr>
-				<tr>
-					<td>직무</td>
-					<td><%=request.getAttribute("empltask") %></td>
-				</tr>
-				<tr>
-					<td>주요 경력</td>
-					<td><%=request.getAttribute("emplcareer") %></td>
-				</tr>
-				<tr>
-					<td>소개글</td>
-					<td><%=request.getAttribute("emplintro") %></td>
-				</tr>
-				<tr>
-					<td>승인여부</td>
-					<td><%=request.getAttribute("emplok") %></td>
-				</tr>
-			</table>
+				<input type="button" onclick="location.href='/profile/emplprofile'" value="현직자 프로필 보기">
 			</c:when>
 			<c:otherwise>
 				지원 정보가 없습니다.<br>

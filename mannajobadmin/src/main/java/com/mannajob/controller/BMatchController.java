@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
-<<<<<<< HEAD
 import com.mannajob.domain.CriteriaProfile;
-=======
 import com.mannajob.domain.EmplVO;
->>>>>>> branch 'develope' of https://github.com/showtsa/mannajob.git
 import com.mannajob.domain.PageDTO;
 import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
@@ -78,8 +75,6 @@ public class BMatchController {
 		return "/bmatch/searchlist";
 	}
 	
-<<<<<<< HEAD
-=======
 	@GetMapping("/update")
 	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
@@ -107,5 +102,4 @@ public class BMatchController {
 		return "redirect:/bmatch/list?b_category="+bMatchVO.getB_category();
 	}
 	
->>>>>>> branch 'develope' of https://github.com/showtsa/mannajob.git
 }

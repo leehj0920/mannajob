@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mannajob.mapper.ReviewMapper">
+	<insert id="insertR">
+		INSERT INTO review VALUES (seq_r.nextval, #{mat_num}, #{good}, #{contents}, sysdate, 'N', #{b_id}, #{w_id})
+	</insert>
+</mapper>

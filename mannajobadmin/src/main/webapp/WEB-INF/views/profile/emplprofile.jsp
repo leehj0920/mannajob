@@ -19,87 +19,79 @@
 		<div>
 			<table>
 				<tr>
-					<td rowspan="7"><img src="/resources/member_img/sample.jpg" width="200" height="260"></td>
-					<td>아이디</td>
-					<td><%=request.getAttribute("userId") %></td>
+					<td rowspan="6"><img src="../resources/certifi/<%=request.getAttribute("imageFile") %>" width="200" height="260"></td>
+					<td colspan="2">아이디</td>
+					<td colspan="2"><%=request.getAttribute("userId") %></td>
 				</tr>
 				<tr>
 					<td>기업명</td>
-					<td><%=request.getAttribute("") %></td>
-				</tr>
-				<tr>
+					<td><%=request.getAttribute("emplcorp") %></td>
 					<td>부서</td>
-					<td><%=request.getAttribute("") %></td>
+					<td><%=request.getAttribute("empldept") %></td>
 				</tr>
 				<tr>
 					<td>직무</td>
-					<td><%=request.getAttribute("") %></td>
+					<td><%=request.getAttribute("empltask") %></td>
+					<td>직급</td>
+					<td><%=request.getAttribute("emplrank") %></td>
 				</tr>
 				<tr>
-					<td>직급</td>
-					<td><%=request.getAttribute("") %></td>
+					<td colspan="2">주요경력</td>
+					<td colspan="2"><%=request.getAttribute("emplcareer") %></td>
 				</tr>
 				<tr>
 					<td>멘토링건수</td>
 					<td><%=request.getAttribute("") %></td>
-				</tr>
-				<tr>
 					<td>추천수</td>
 					<td><%=request.getAttribute("") %></td>
 				</tr>
 				<tr>
-					<td>주요경력</td>
-					<td><%=request.getAttribute("") %></td>
-				</tr>
-				<tr>
-					<td>소개</td>
-					<td><%=request.getAttribute("") %></td>
+					<td colspan="2">소개</td>
+					<td colspan="2"><%=request.getAttribute("emplintro") %></td>
 				</tr>
 			</table>
 		</div>
 	</div>
 	<div id="review">
 		<h2>리뷰</h2>
-		<%-- <div>
-			<c:choose>
-			<c:when test="${null ne empl}">
+		<div>
+		<!-- 리스트로 -->
 			<table>
 				<tr>
-					<td>회사명</td>
-					<td><%=request.getAttribute("emplcorp") %></td>
+					<th>추천/비추천</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
+				<%-- <c:forEach var="re" items="">
 				<tr>
-					<td>부서</td>
-					<td><%=request.getAttribute("empldept") %></td>
+					<td>
+					<c:choose>
+						<c:when test="#{ eq 'G'}">추천</c:when>
+						<c:otherwise>비추천</c:otherwise>
+					</c:choose>
+					</td>
+					<td>${re.contents}</td>
+					<td>${re.r_w_m_id}</td>
+					<td>${re.r_wdate}</td>
+					<td>
+					<form mehtod="get" action="/review/update">
+						<input type="hidden" name="r_num">
+						<input type="submit" value="수정">
+					</form>
+					</td>
+					<td>
+					<form method="get" action="/review/delete>
+						<input type="hidden" name="r_num">
+						<input type="submit" value="삭제">
+					</form>
+					</td>
 				</tr>
-				<tr>
-					<td>직급</td>
-					<td><%=request.getAttribute("emplrank") %></td>
-				</tr>
-				<tr>
-					<td>직무</td>
-					<td><%=request.getAttribute("empltask") %></td>
-				</tr>
-				<tr>
-					<td>주요 경력</td>
-					<td><%=request.getAttribute("emplcareer") %></td>
-				</tr>
-				<tr>
-					<td>소개글</td>
-					<td><%=request.getAttribute("emplintro") %></td>
-				</tr>
-				<tr>
-					<td>승인여부</td>
-					<td><%=request.getAttribute("emplok") %></td>
-				</tr>
+				</c:forEach> --%>
 			</table>
-			</c:when>
-			<c:otherwise>
-				지원 정보가 없습니다.<br>
-				<input type="button" onclick="location.href='/profile/empl'" value="현직자 지원하기">
-			</c:otherwise>
-			</c:choose>
-		</div> --%>
+		</div>
 	</div>
 </body>
 </html>
