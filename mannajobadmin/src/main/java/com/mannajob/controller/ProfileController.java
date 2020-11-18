@@ -43,7 +43,7 @@ public class ProfileController {
 		model.addAttribute("userphone", member.getM_phone());
 		model.addAttribute("useremail", member.getM_email());
 		
-		empl = service.getEmplProfile(session.getAttribute("userId").toString());
+		session.setAttribute("empl", service.getEmplProfile(session.getAttribute("userId").toString()));
 		
 		session.setAttribute("empl", empl);
 		
@@ -56,6 +56,7 @@ public class ProfileController {
 			model.addAttribute("emplintro", empl.getE_intro());
 			model.addAttribute("emplok", empl.getE_ok());
 		}
+
 		
 		return "profile/main";
 	}
@@ -103,9 +104,37 @@ public class ProfileController {
 		return "profile/main";
 	}
 	
-	@GetMapping("/matlist")
-	public void matlist() {
+	@GetMapping("/emplprofile")
+	public void emplprofile(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		
+		empl = service.getEmplProfile(session.getAttribute("userId").toString());
+		
+		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("imageFile", empl.getFileVO().getStored_file_name());
+		model.addAttribute("emplcorp", empl.getE_corp());
+		model.addAttribute("empldept", empl.getE_dept());
+		model.addAttribute("emplrank", empl.getE_rank());
+		model.addAttribute("empltask", empl.getE_task());
+		model.addAttribute("emplcareer", empl.getE_career());
+		model.addAttribute("emplintro", empl.getE_intro());
+	}
+
+	@GetMapping("/matlist")
+	public void matlist(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
+		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
+		
+		System.out.println(model.getAttribute("bmatlist"));
+	}
+	
+	@GetMapping("/match")
+	public void match(Model model, int b_num) {
+		model.addAttribute("matchlist", service.searchBmatMat(b_num));
+		
+		System.out.println(b_num);
 	}
 	
 	@GetMapping("/calendar")
@@ -113,8 +142,4 @@ public class ProfileController {
 		
 	}
 	
-	@GetMapping("/emplprofile")
-	public void emplprofile() {
-		
-	}
 }

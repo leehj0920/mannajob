@@ -121,6 +121,7 @@ public class LoginController {
 	    session.setAttribute("sessionId", userInfo.get("sessionId"));
 	    session.setAttribute("userapi", userInfo.get("api"));
 	    session.setAttribute("access_Token", access_Token);
+	    session.setAttribute("code", code);
 
 	    String s_id = userInfo.get("sessionId").toString();
 	    

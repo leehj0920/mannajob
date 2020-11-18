@@ -77,8 +77,6 @@ public class BMatchController {
 		return "/bmatch/searchlist";
 	}
 	
-
-
 	@GetMapping("/update")
 	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
