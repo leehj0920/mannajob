@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mannajob.mapper.BMatchMapper">
 	<select id="getList" resultType="com.mannajob.domain.BMatchVO">
-		select * from b_match where b_category like '%'||#{b_category}||'%' and b_del = 'N' order by b_num desc
+		select * from b_match where  b_category like '%'||#{b_category}||'%' and b_del = 'N' order by b_num desc
 	</select>
 	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.BMatchVO">
@@ -35,7 +35,7 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(b_num) from b_match where b_category like '%'||#{b_category}||'%' and b_del = 'N'
+		select count(b_num) from b_match where (b_location like '%'||#{bMatchVO.b_location}||'%' and b_corp like '%'||#{bMatchVO.b_corp}||'%' and b_task like'%'||#{bMatchVO.b_task}||'%'and b_category like '%'||#{bMatchVO.b_category}||'%') and b_del = 'N'
 	</select>
 	
 	<update id="stateFinish">

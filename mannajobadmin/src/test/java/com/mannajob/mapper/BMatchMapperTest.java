@@ -1,5 +1,6 @@
 package com.mannajob.mapper;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -66,10 +67,21 @@ public class BMatchMapperTest {
 		mapper.update(bMatchVO);
 	};
 	
-//	@Test
+	@Test
 	public void getTotalCountTest() {
 		Criteria cri = new Criteria(1,1);
-		log.info(mapper.getTotalCount(cri,""));
+		BMatchVO bMatchVO = new BMatchVO();
+		bMatchVO.setB_corp("");
+		bMatchVO.setB_task("");
+		bMatchVO.setB_price(10000);
+		bMatchVO.setB_location("");
+		bMatchVO.setB_stdate("");
+		bMatchVO.setB_endate("2020-11-30");
+		bMatchVO.setB_period("2");
+		bMatchVO.setB_subject("삼성전자 멘토 구합니다.");
+		bMatchVO.setB_contents("안녕하세요 혹시 삼성전자에 일하시는 분 계신가요?");
+		bMatchVO.setB_category("A");
+		log.info(mapper.getTotalCount(cri,bMatchVO));
 	};
 //	@Test
 	public void stateFinishTest() {
@@ -97,7 +109,7 @@ public class BMatchMapperTest {
 		bMatchVO.setB_task("");
 		bMatchVO.setB_location("");
 		bMatchVO.setB_category("");
-		mapper.searchWithPaging(bMatchVO, new Criteria(1, 1));
+		mapper.searchWithPaging(bMatchVO, new Criteria(1, 10));
 	}
 
 }

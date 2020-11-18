@@ -11,7 +11,7 @@ import com.mannajob.domain.EmplVO;
 
 public interface BMatchMapper {
 //	전체검색
-	public List<BMatchVO> getList(@Param("b_category")String b_category);
+	public List<BMatchVO> getList(String b_category);
 	
 	public List<BMatchVO> getListWithPaging(@Param("cri") Criteria cri, @Param("b_category")String b_category);
 	
@@ -23,7 +23,7 @@ public interface BMatchMapper {
 	
 	public void update(BMatchVO bMatchVO);
 	
-	public int getTotalCount(@Param("cri") Criteria cri, @Param("b_category")String b_category);
+	public int getTotalCount(@Param("cri") Criteria cri, @Param("bMatchVO")BMatchVO bMatchVO);
 //	완료처리
 	public void stateFinish(int b_num);
 //	취소처리

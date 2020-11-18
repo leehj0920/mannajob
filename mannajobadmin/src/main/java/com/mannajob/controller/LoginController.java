@@ -41,10 +41,7 @@ public class LoginController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	@RequestMapping("/main")
-	public void main() {
-		
-	}
+
 
 	//
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
@@ -55,7 +52,7 @@ public class LoginController {
 		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
 		model.addAttribute("naverurl", naverAuthUrl);
 		
-		String kakaoAuthUrl = "https://kauth.kakao.com/oauth/authorize?client_id=2ac1c0b75032a241c45fa9363396eaf0&redirect_uri=http://192.168.0.60:8080/redirect&response_type=code";
+		String kakaoAuthUrl = "https://kauth.kakao.com/oauth/authorize?client_id=2ac1c0b75032a241c45fa9363396eaf0&redirect_uri=http://192.168.0.225:8080/redirect&response_type=code";
 		model.addAttribute("kakaourl", kakaoAuthUrl);
 		
 		if(session.getAttribute("userId") == null) {
@@ -98,7 +95,7 @@ public class LoginController {
 		//id, email
 		System.out.println("id: " + id + "\nemail: " + email);
 		//4.
-		session.setAttribute("userId", id); //
+		session.setAttribute("sessionId", id); //
 		session.setAttribute("useremail", email);
 		session.setAttribute("userapi", api);
 		
@@ -109,6 +106,7 @@ public class LoginController {
 		if(check == 0) {
 			return "/join/join";
 		} else {
+			session.setAttribute("uesrId", id); //
 			return "redirect:/main";
 		}
 	}
@@ -120,7 +118,7 @@ public class LoginController {
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
 	    System.out.println("login Controller : " + userInfo);
 	    
-	    session.setAttribute("userId", userInfo.get("sessionId"));
+	    session.setAttribute("sessionId", userInfo.get("sessionId"));
 	    session.setAttribute("userapi", userInfo.get("api"));
 	    session.setAttribute("access_Token", access_Token);
 
@@ -131,6 +129,7 @@ public class LoginController {
 	    if(check == 0){ 
 	    	return "/join/join";
 	    }
+	    session.setAttribute("userId", userInfo.get("sessionId"));
 	    return "redirect:/main";
 	} 
 	

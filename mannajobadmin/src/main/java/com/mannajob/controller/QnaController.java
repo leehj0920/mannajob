@@ -79,9 +79,9 @@ public class QnaController {
 		log.info("view.....................");
 		QnaVO qna = service.read(q_num);
 		qna.setQ_contents(qna.getQ_contents().replace("\r\n", "<br>"));
-		qna.setQs_contents(qna.getQs_contents().replace("\r\n", "<br>"));
 		//model.addAttribute("qna", service.read(q_num));
 		model.addAttribute("qna", qna);
+		model.addAttribute("reply_chk",service.chkQnaSub(q_num));
 		return "/qna/view";
 	}
 	

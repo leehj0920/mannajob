@@ -23,4 +23,6 @@ public interface NoticeService {
 	public boolean update(NoticeVO notice);
 	
 	public int getTotal(Criteria cri);
+	
+
 }
