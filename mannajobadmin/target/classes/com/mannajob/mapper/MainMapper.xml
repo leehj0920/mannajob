@@ -35,7 +35,7 @@
 	<select id="searchEmplMat" resultMap="bmatchVO">
 		SELECT b_num, b_subject, b_stdate, b_endate, b_price, b_task, b_corp, b_location
 		FROM b_match
-		WHERE b_category = 'A' AND b_subject = '%'#{b_subject}'%' AND b_task = '%'#{b_task}'%' AND b_corp = '%'#{b_corp}'%' AND b_location = '%'#{b_location}'%' 
+		WHERE b_category = 'A' AND b_subject = '%'||#{b_subject}||'%' AND b_task = '%'||#{b_task}||'%' AND b_corp = '%'||#{b_corp}||'%' AND b_location = '%'||#{b_location}||'%' 
 	</select>
 	
 	<!-- 현직자 검색 -->

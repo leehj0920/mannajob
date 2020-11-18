@@ -16,15 +16,11 @@ import com.mannajob.domain.EmplVO;
 
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "C:\\Users\\USER\\git\\repository\\mannajobadmin\\src\\main\\webapp\\resources\\certifi\\"; // ÆÄÀÏÀÌ ÀúÀåµÉ À§Ä¡
+	private static final String filePath = "C:\\Users\\USER\\git\\mannajob\\mannajobadmin\\src\\main\\webapp\\resources\\certifi\\"; //ì„œë²„ ì ˆëŒ€ê²½ë¡œë¡œ ë°”ê¾¸ê¸°
 	
 	public List<Map<String, Object>> parseInsertFileInfo(EmplVO empl, 
 			MultipartHttpServletRequest mpRequest) throws Exception{
-		/*
-			IteratorÀº µ¥ÀÌÅÍµéÀÇ ÁıÇÕÃ¼? ¿¡¼­ ÄÃ·º¼ÇÀ¸·ÎºÎÅÍ Á¤º¸¸¦ ¾ò¾î¿Ã ¼ö ÀÖ´Â ÀÎÅÍÆäÀÌ½ºÀÔ´Ï´Ù.
-			List³ª ¹è¿­Àº ¼øÂ÷ÀûÀ¸·Î µ¥ÀÌÅÍÀÇ Á¢±ÙÀÌ °¡´ÉÇÏÁö¸¸, MapµîÀÇ Å¬·¡½ºµéÀº ¼øÂ÷ÀûÀ¸·Î Á¢±ÙÇÒ ¼ö°¡ ¾ø½À´Ï´Ù.
-			IteratorÀ» ÀÌ¿ëÇÏ¿© Map¿¡ ÀÖ´Â µ¥ÀÌÅÍµéÀ» while¹®À» ÀÌ¿ëÇÏ¿© ¼øÂ÷ÀûÀ¸·Î Á¢±ÙÇÕ´Ï´Ù.
-		*/
+		
 		Iterator<String> iterator = mpRequest.getFileNames();
 		
 		MultipartFile multipartFile = null;

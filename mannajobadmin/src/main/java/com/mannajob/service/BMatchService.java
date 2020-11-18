@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
+import com.mannajob.domain.EmplVO;
 
 public interface BMatchService {
 
@@ -26,4 +28,10 @@ public interface BMatchService {
 	public void insert(BMatchVO bMatchVO);
 	
 	public boolean StateChange(int b_num, int state);
+	
+	public List<EmplVO> searchEmpl(BMatchVO bMatchVO);
+	
+	public int getEmplCount(BMatchVO bMatchVO);
+	
+	public List<EmplVO> searchEmplPaging(CriteriaProfile cri, BMatchVO bMatchVO);
 }

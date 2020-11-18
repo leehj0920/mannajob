@@ -2,6 +2,9 @@ package com.mannajob.domain;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class BMatchCommVO {
 	private int cm_num;
 	private int b_num;

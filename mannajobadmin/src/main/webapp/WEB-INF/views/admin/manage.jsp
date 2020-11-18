@@ -56,8 +56,6 @@
 		<table>
 			<thead>
 				<tr>
-					<!-- <th>번호</th> -->
-					<!-- <th>회원유형</th> -->
 					<th>아이디</th>
 					<th>가입일</th>
 					<th>정지 일자</th>
@@ -67,13 +65,6 @@
 			</thead>
 			<c:forEach items="${memlist}" var="mem">
 				<tr>
-					<%-- <td><c:out value="${rownum}" /></td> --%>
-					<%-- <td>
-					<c:choose>
-						<c:when test="${mem.e_num ne null }">현직자</c:when>
-						<c:otherwise>취준생</c:otherwise>
-					</c:choose>
-					</td> --%>
 					<td><c:out value="${mem.m_id }" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mem.m_cdate}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mem.m_stop}" /></td>

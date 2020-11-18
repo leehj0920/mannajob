@@ -1,6 +1,5 @@
 package com.mannajob.mapper;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -67,7 +66,7 @@ public class BMatchMapperTest {
 		mapper.update(bMatchVO);
 	};
 	
-	@Test
+//	@Test
 	public void getTotalCountTest() {
 		Criteria cri = new Criteria(1,1);
 		log.info(mapper.getTotalCount(cri,""));

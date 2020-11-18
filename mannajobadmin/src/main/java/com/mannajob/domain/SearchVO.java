@@ -3,7 +3,7 @@ package com.mannajob.domain;
 import lombok.Data;
 
 @Data
-public class SearchCriteria extends Criteria {
+public class SearchVO {
 	private String searchType;
 	private String keyword;
 }

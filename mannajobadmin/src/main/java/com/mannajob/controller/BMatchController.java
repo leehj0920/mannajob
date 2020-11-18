@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.PageDTO;
 import com.mannajob.service.BMatchService;
 
@@ -29,6 +30,8 @@ public class BMatchController {
 		int total = bMatchService.getTotalCount(cri,bMatchVO);
 		model.addAttribute("list", bMatchService.getListWithPaging(cri,bMatchVO));
 		model.addAttribute("page", new PageDTO(cri, total));
+		System.out.println(cri);
+		System.out.println(bMatchService.getListWithPaging(cri, bMatchVO));
 		return "/bmatch/list";
 	}
 	
@@ -43,12 +46,20 @@ public class BMatchController {
 	}
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")
-	public String search(BMatchVO bMatchVO, Model model, Criteria cri) {
+	public String search(@ModelAttribute("bMatch")BMatchVO bMatchVO, Model model, Criteria cri, CriteriaProfile scri) {
+		cri.setAmount(5);
 		int total = bMatchService.getTotalCount(cri,bMatchVO);
 		model.addAttribute("list", bMatchService.searchWithPaging(bMatchVO, cri));
 		model.addAttribute("page", new PageDTO(cri, total));
+		//프로필 검색
+		
+		scri.setAmountP(5);
+		int empltotal = bMatchService.getEmplCount(bMatchVO);
+		model.addAttribute("empllist", bMatchService.searchEmplPaging(scri, bMatchVO));
+		model.addAttribute("emplpage", new PageDTO(scri, empltotal));
+		System.out.println("list:" + model.getAttribute("list") + "\npage: " + model.getAttribute("page"));
+		System.out.println("empllist:" + model.getAttribute("empllist") + "\nemplpage: " + model.getAttribute("emplpage"));
 		return "/bmatch/searchlist";
 	}
-	
 	
 }

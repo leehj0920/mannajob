@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
+import com.mannajob.domain.EmplVO;
 
 public interface BMatchMapper {
 //	전체검색
@@ -31,5 +33,10 @@ public interface BMatchMapper {
 	
 	public List<BMatchVO> searchWithPaging(@Param("bMatchVO")BMatchVO bMatchVO,@Param("cri")Criteria cri);
 
+	public List<EmplVO> searchEmpl(BMatchVO bMatchVO);
+	
+	public int getemplTotalCount(@Param("bMatchVO")BMatchVO bMatchVO);
+	
+	public List<EmplVO> searchEmplPaging(@Param("bMatchVO")BMatchVO bMatchVO,@Param("cri")CriteriaProfile cri);
 	
 }

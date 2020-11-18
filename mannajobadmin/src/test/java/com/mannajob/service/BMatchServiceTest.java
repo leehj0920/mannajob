@@ -1,6 +1,5 @@
 package com.mannajob.service;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,7 +33,7 @@ public class BMatchServiceTest {
 		bMatchVO.setB_corp("전자");
 		service.search(bMatchVO).forEach(list -> log.info(list));
 	};
-	@Test
+//	@Test
 	public void searchWithPagingTest(){
 		BMatchVO bMatchVO = new BMatchVO();
 		

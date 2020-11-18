@@ -22,6 +22,45 @@
 	<input type="radio" name = "b_category" value="B">취업준비생
 	<input type="submit" name = "submit" value="제출">
 </form>
+	<c:if test="${bMatch.b_category eq 'A'}">
+	<table>
+		<tr>
+			<c:forEach var="empl" items="${empllist}">
+				<td>
+					<table style="border:solid; border-width: 1px; border-color: black;">
+						<tr>
+							<td colspan="2"><img src="../resources/certifi/${empl.fileVO.stored_file_name}" width="200" height="300"></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="font-size: 20px">${empl.memberVO.m_name}&nbsp;멘토</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="font-size: 15px">${empl.e_corp}</td>
+						</tr>
+						<tr>
+							<td>${empl.e_career}</td>
+							<td>${empl.e_task}</td>
+						</tr>
+					</table>
+				</td>
+			</c:forEach>
+		</tr>
+	</table>
+	<c:if test="${emplpage.prev}">
+    	<a href="/bmatch/search?pageNumP=${emplpage.startPage-1}&amountP=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">[이전4개]</a>
+    </c:if>
+    <c:forEach var="emplnum" begin="${emplpage.startPage}" end="${emplpage.endPage}">
+    	<c:if test="${emplpage.cri.pageNumP == emplnum}">
+    		${emplnum}
+    	</c:if>
+    	<c:if test="${emplpage.cri.pageNumP != emplnum}">
+    		[<a href="/bmatch/search?pageNumP=${emplnum}&amountP=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">${emplnum}</a>]	
+    	</c:if>
+    </c:forEach>
+    <c:if test="${emplpage.next}">
+    	<a href="/bmatch/search?pageNumP=${emplpage.endPage+1}&amountP=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">[다음4개]</a>
+    </c:if>
+    </c:if>
 	<table>
 		<thead>
 			<tr>
@@ -51,18 +90,18 @@
 		</c:forEach>
 	</table>
 	<c:if test="${page.prev}">
-    	<a href="/bmatch/list?pageNum=${page.startPage-1}&amount=10">[이전10개]</a>
+    	<a href="/bmatch/search?pageNum=${page.startPage-1}&amount=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">[이전10개]</a>
     </c:if>
     <c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
     	<c:if test="${page.cri.pageNum == num}">
     		${num}	
     	</c:if>
     	<c:if test="${page.cri.pageNum != num}">
-    		[<a href="/bmatch/list?pageNum=${num}&amount=10">${num}</a>]	
+    		[<a href="/bmatch/search?pageNum=${num}&amount=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">${num}</a>]	
     	</c:if>
     </c:forEach>
     <c:if test="${page.next}">
-    	<a href="/bmatch/list?pageNum=${page.endPage+1}&amount=10">[다음10개]</a>
+    	<a href="/bmatch/search?pageNum=${page.endPage+1}&amount=5&b_task=${bMatch.b_task}&b_category=${bMatch.b_category}&b_corp=${bMatch.b_corp}&b_location=${bMatch.b_location}">[다음10개]</a>
     </c:if>
 </body>
 </html>

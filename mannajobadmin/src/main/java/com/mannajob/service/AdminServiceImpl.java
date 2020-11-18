@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mannajob.domain.Criteria;
 import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
-import com.mannajob.domain.SearchCriteria;
+import com.mannajob.domain.SearchVO;
 import com.mannajob.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -22,18 +23,21 @@ public class AdminServiceImpl implements AdminService {
 	@Setter(onMethod_ = @Autowired)
 	private AdminMapper mapper;
 	
-	/*
-	 * public void MemSearch(String m_id) { mapper.MemSearch(m_id); }
-	 */
-
 	@Override
-	public List<MemberVO> getMemList(SearchCriteria cri) {
-		return mapper.getMemListWithPaging(cri);
+	public List<MemberVO> getMemListWithPaging(Criteria cri, SearchVO search) {
+		if(search.getSearchType()==null||"".equals(search.getSearchType())){
+			search.setSearchType("All");
+			
+		}
+		if(search.getKeyword()==null||"".equals(search.getKeyword())){
+			search.setKeyword("");
+		}
+		return mapper.getMemListWithPaging(cri, search);
 	}
 
 	@Override
-	public int getTotal() {
-		return mapper.getTotalCount();
+	public int getTotal(Criteria cri, SearchVO search) {
+		return mapper.getTotalCount(cri, search);
 	}
 
 	@Override
@@ -42,8 +46,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<EmplVO> getEmplList(SearchCriteria cri) {
-		return mapper.getEmplListWithPaging(cri);
+	public List<EmplVO> getEmplListWithPaging(Criteria cri, SearchVO search) {
+		if(search.getSearchType()==null||"".equals(search.getSearchType())){
+			search.setSearchType("All");
+		}
+		if(search.getKeyword()==null||"".equals(search.getKeyword())){
+			search.setKeyword("");
+		}
+		return mapper.getEmplListWithPaging(cri, search);
 	}
 
 	@Override
@@ -52,8 +62,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int getemplTotal() {
-		return mapper.getemplTotalCount();
+	public int getemplTotal(SearchVO search) {
+		return mapper.getemplTotalCount(search);
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
+import com.mannajob.domain.EmplVO;
 import com.mannajob.mapper.BMatchMapper;
 
 import lombok.AllArgsConstructor;
@@ -106,6 +108,41 @@ public class BMatchServiceImpl implements BMatchService{
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<EmplVO> searchEmpl(BMatchVO bMatchVO) {
+		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
+			bMatchVO.setB_corp("");
+		}
+		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
+			bMatchVO.setB_task("");
+		}
+		return mapper.searchEmpl(bMatchVO);
+	}
+
+	@Override
+	public int getEmplCount(BMatchVO bMatchVO) {
+		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
+			bMatchVO.setB_corp("");
+		}
+		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
+			bMatchVO.setB_task("");
+		}
+		return mapper.getemplTotalCount(bMatchVO);
+	}
+
+	@Override
+	public List<EmplVO> searchEmplPaging(CriteriaProfile cri, BMatchVO bMatchVO) {
+		
+		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
+			bMatchVO.setB_corp("");
+		}
+		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
+			bMatchVO.setB_task("");
+		}
+		
+		return mapper.searchEmplPaging(bMatchVO,cri);
 	}
 
 }
