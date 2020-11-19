@@ -95,11 +95,31 @@
                             <span><input type="text" name="b_corp"  value="${bMatch.b_corp}" /></span>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           
                             <select name="b_task"  >
-                                <option value="IT/인터넷">IT/인터넷</option>
-                                <option value="경영/사무">경영/사무</option>
-                                <option value="디자인">디자인</option>
-                                <option value="생산/제조">생산/제조</option>
-                            </select>
+							 <option value="사업관리">사업관리</option>
+							<option value="경영·회계·사무">경영·회계·사무</option>
+							<option value="금융·보험">금융·보험</option>
+							<option value="교육·자연·사회과학">교육·자연·사회과학</option>
+							<option value="법률·경찰·소방·교도·국방">법률·경찰·소방·교도·국방</option>
+							<option value="보건·의료">보건·의료</option>
+							<option value="사회복지·종교">사회복지·종교</option>
+							<option value="문화·예술·디자인·방송">문화·예술·디자인·방송</option>
+							<option value="운전·운송">운전·운송</option>
+							<option value="영업판매">영업판매</option>
+							<option value="경비·청소">경비·청소</option>
+							<option value="이용·숙박·여행·오락·스포츠">이용·숙박·여행·오락·스포츠</option>
+							<option value="음식서비스">음식서비스</option>
+							<option value="건설">건설</option>
+							<option value="기계">기계</option>
+							<option value="재료">재료</option>
+							<option value="화학">화학</option>
+							<option value="섬유·의복">섬유·의복</option>
+							<option value="전기·전자">전기·전자</option>
+							<option value="정보통신">정보통신</option>
+							<option value="식품가공">식품가공</option>
+							<option value="인쇄·목재·가구·공예">인쇄·목재·가구·공예</option>
+							<option value="환경·에너지·안전">환경·에너지·안전</option>
+							<option value="농림어업">농림어업</option>
+                          </select>
                           </td>
                         </tr> 
                        

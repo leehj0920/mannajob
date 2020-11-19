@@ -63,7 +63,8 @@ public class ProfileController {
 	@GetMapping("/empl")
 	public void EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
-		model.addAttribute("userId", session.getAttribute("userId"));
+		EmplVO emplVO = service.getEmplProfile2(session.getAttribute("userId").toString());
+		model.addAttribute("userId", emplVO);
 	}
 			
 	//EmplVO INSERT 
@@ -72,7 +73,7 @@ public class ProfileController {
 		
 		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
 	
 	@GetMapping("/update")
@@ -97,7 +98,7 @@ public class ProfileController {
 		model.addAttribute("userphone", member.getM_phone());
 		model.addAttribute("useremail", member.getM_email());
 		
-		return "profile/main";
+		return "redirect:/profile/main";
 	}
 	
 	@PostMapping("/deleteMem")
@@ -124,9 +125,19 @@ public class ProfileController {
 		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
 	}
 	
+	@GetMapping("/showempl")
+	public String showempl(Model model, EmplVO emplVO) {
+		model.addAttribute("m_id",emplVO.getM_id());
+		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
+		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
+		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
+		return "/profile/showempl";
+	}
+	
 	@GetMapping("/updateEmpl")
-	public void emplupdate(HttpServletRequest request) {
-
+	public void emplupdate(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		model.addAttribute("empl", service.getEmplProfile2(session.getAttribute("userId").toString()));
 	}
 	
 	@PostMapping("/updateEmpl")
@@ -142,7 +153,7 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
 	
 
@@ -171,7 +182,7 @@ public class ProfileController {
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
 
 }
