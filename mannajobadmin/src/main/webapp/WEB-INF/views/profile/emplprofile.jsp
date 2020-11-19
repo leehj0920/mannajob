@@ -1,99 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>프로필 관리</h1>
-	<input type="button" value="로그아웃" onclick="location.href='/logout'">
-	<hr>
-	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
-	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
-	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
-	<div id="emplprofile">
-		<h2>현직자 프로필</h2>
-		<div>
-			<table>
-				<tr>
-					<td rowspan="6"><img src="../resources/certifi/<%=request.getAttribute("imageFile") %>" width="200" height="260"></td>
-					<td colspan="2">아이디</td>
-					<td colspan="2"><%=request.getAttribute("userId") %></td>
-				</tr>
-				<tr>
-					<td>기업명</td>
-					<td><%=request.getAttribute("emplcorp") %></td>
-					<td>부서</td>
-					<td><%=request.getAttribute("empldept") %></td>
-				</tr>
-				<tr>
-					<td>직무</td>
-					<td><%=request.getAttribute("empltask") %></td>
-					<td>직급</td>
-					<td><%=request.getAttribute("emplrank") %></td>
-				</tr>
-				<tr>
-					<td colspan="2">주요경력</td>
-					<td colspan="2"><%=request.getAttribute("emplcareer") %></td>
-				</tr>
-				<tr>
-					<td>멘토링건수</td>
-					<td><%=request.getAttribute("") %></td>
-					<td>추천수</td>
-					<td><%=request.getAttribute("") %></td>
-				</tr>
-				<tr>
-					<td colspan="2">소개</td>
-					<td colspan="2"><%=request.getAttribute("emplintro") %></td>
-				</tr>
-			</table>
-		</div>
-		<input type="button" onclick="location='/profile/updateEmpl'" value="현직자 프로필 수정">
-	</div>
-	<div id="review">
-		<h2>리뷰</h2>
-		<div>
-		<!-- 리스트로 -->
-			<table>
-				<tr>
-					<th>추천/비추천</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
-				<c:forEach var="re" items="${emplreview}">
-				<tr>
-					<td>
-					<c:choose>
-						<c:when test="${re.r_good eq 'G'}">추천</c:when>
-						<c:otherwise>비추천</c:otherwise>
-					</c:choose>
-					</td>
-					<td>${re.r_contents}</td>
-					<td>${re.r_mat_m_id}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${re.r_wdate}" /></td>
-					<td>
-					<form mehtod="get" action="/review/update">
-						<input type="hidden" name="r_num">
-						<input type="submit" value="수정">
-					</form>
-					</td>
-					<td>
-					<%-- <form method="get" action="/review/delete>
-						<input type="hidden" name="r_num">
-						<input type="submit" value="삭제">
-					</form> --%>
-					</td>
-				</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
-</body>
-</html>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../includes/header.jsp" %>
+
+
+<section id="inner-headline">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">마이페이지</a><i class="icon-angle-right"></i></li>
+              <li class="active">현직자 프로필 관리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="">
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <aside class="left-sidebar">
+              <div class="widget">
+              </div>
+              <div class="widget">
+                <h5 class="widgetheading height_40">마이페이지</h5>
+
+                <ul class="cat">
+                  <li><i class="icon-angle-right"></i><a href="/match/matlist">매칭내역관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+          <div class="span8">
+            <article>
+
+                <div class="row">
+                  <div class="post-heading">
+                    <p class="line_9"></p>
+                    <p class="line_9"></p>
+                    <!-- <h3><a href="#">&nbsp&nbsp&nbsp프로필 관리하기</a></h3> -->
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong>현직자</strong> 프로필 관리</h3>
+                    <p class="line_9"></p>
+                  </div>
+                  <div class="row">
+                    <div class="span4">
+                      <div class="box aligncenter">
+                        <div class="post-image">
+                          <img src="/resources/certifi/${imageFile}" alt="" width="240px" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="span4">
+                      <div class="box aligncenter">
+                        <input type="text" class="span4"  value="${emplcorp}" disabled><br>
+                        <input type="text" class="span4"  value="${empldept}" disabled /><br>
+                        <input type="text" class="span4" value="${emplrank}" disabled /><br>
+                        <input type="text" class="span4" value="${empltask}" disabled />
+                      </div>
+                    </div>
+
+                    <div class="span4"> 
+                        <!-- 사진이미지 등록 되었을 경우, 안되었을 경우-->
+                        <p class="right">사진이미지 등록됨 </p>  
+                        <!-- <p class="right">사진이미지를 등록해 주세요.. </p>   -->
+                        <!-- 재직(경력)증명서 등록 되었을 경우, 안되었을 경우 -->
+                        <p class="right">재직(경력) 증명서 등록됨</p> 
+                        <!-- <p class="right">재직(경력) 증명서를 등록해 주세요..</p>  -->
+                    </div>
+                      
+                     
+                  </div>
+
+                  <div class="row">
+                    <div class="span8">
+                      
+                      <div class="box aligncenter">
+                        <h5 class="left">▶ 주요경력</h5>  
+                        <% pageContext.setAttribute("line", "\n");%>
+                        <textarea rows="4" class="input-block-level"  
+                          style="margin-left: 30px; " disabled>${emplcareer}
+                        </textarea> 
+
+                        <h5 class="left">▶ 소   개</h5>  
+                        <textarea rows="6" class="input-block-level" 
+                          style="margin-left: 30px;" disabled>${emplintro}
+                        </textarea>
+                        
+                        <div class="span8">
+                          <div class="box aligncenter">
+                            <p class="center">
+                                <a href="/profile/updateEmpl" class="btn btn-theme margintop10 a_btn2" type="submit">수정하기</a>
+                                <a href="/file/deleteEmpl" class="btn btn-inverse margintop10 a_btn2" type="submit">삭제하기</a>
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+ 
+            </article>
+            <!-- author info -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<%@ include file="../includes/footer.jsp" %>

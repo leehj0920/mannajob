@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.EmplVO;
-import com.mannajob.domain.MatchVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.ReviewVO;
 import com.mannajob.mapper.ProfileMapper;
@@ -76,20 +74,7 @@ public class ProfileServiceImpl implements ProfileService {
 		mapper.EmplJoin("EmplMapper.insertFile", map);
 	}
 
-	@Override
-	public List<BMatchVO> searchBMat(String m_id) {
-		return mapper.searchBMat(m_id);
-	}
 
-	@Override
-	public List<MatchVO> searchBmatMat(int b_num) {
-		return mapper.searchBmatMat(b_num);
-	}
-
-	@Override
-	public List<BMatchVO> searchMat(String m_id) {
-		return mapper.searchMat(m_id);
-	}
 
 	@Override
 	public List<ReviewVO> searchReview(String m_id) {

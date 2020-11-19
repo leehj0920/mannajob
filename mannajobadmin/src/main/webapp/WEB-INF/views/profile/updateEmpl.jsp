@@ -33,9 +33,9 @@
                 <ul class="cat">
                   <li><i class="icon-angle-right"></i><a href="/profile/matlist">매칭내역관리</a></li>
                   <li><i class="icon-angle-right"></i><a href="/profile/calendar">일정관리</a></li>
-                  <li><i class="icon-angle-right"></i><a href="#">회원정보관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
                   <li><i class="icon-angle-right"></i><a href="/profile/main">현직자 프로필관리</a></li>
-                  <li><i class="icon-angle-right"></i><a href="#">현직자 지원</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
                 </ul>
               </div>
             </aside>
@@ -56,15 +56,15 @@
                     <div class="span4">
                       <div class="box aligncenter">
                         <div class="post-image">
-                          <img src="/resources/certifi/${profile}" alt="" width="240px" />
+                          <img src="/resources/certifi/${profile}" alt="" height="240px" />
                         </div>
                       </div>
                     </div>
                     <div class="span4">
                       <div class="box aligncenter">
-                        <input type="text" name="e_corp" class="span4"  value="${e_corp}" ><br>
-                         <input type="text" name="e_dept" value="" class="span4"  value="${e_dept}"  /><br>
-                        <input type="text" name="e_rank" value="" class="span4" value="${e_rank}"  /><br>
+                        <input type="text" name="e_corp" class="span4"  value="${empl.e_corp}" ><br>
+                         <input type="text" name="e_dept"  class="span4"  value="${empl.e_dept}" /><br>
+                        <input type="text" name="e_rank"  class="span4" value="${empl.e_rank}"  /><br>
                         <select name="e_task" style="width: 100%" >
 		                      <option value="사업관리">사업관리</option>
 		                     <option value="경영·회계·사무">경영·회계·사무</option>
@@ -114,15 +114,11 @@
                       <div class="box aligncenter">
                         <h5 class="left">▶ 주요경력</h5>  
                         <textarea rows="4" name="e_career" class="input-block-level"  
-                          style="margin-left: 30px; "> 
-
-                        </textarea> 
+                          style="margin-left: 30px; ">${empl.e_career}</textarea> 
 
                         <h5 class="left">▶ 소   개</h5>  
                         <textarea rows="6" name="e_intro" class="input-block-level" 
-                          style="margin-left: 30px;">
-                      		
-                        </textarea>
+                          style="margin-left: 30px;">${empl.e_intro}</textarea>
                         
                         <div class="span8">
                           <div class="box aligncenter">

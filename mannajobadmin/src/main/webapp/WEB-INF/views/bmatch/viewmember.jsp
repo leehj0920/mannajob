@@ -219,7 +219,7 @@
       <!-- 매칭요청 팝업 -->
     <script language="javascript">
       function openPopup() {
-        window.open("popup_maching.html","매칭요청 팝업","width=800,height=300");
+        window.open("/match/match?b_num=${bMatch.b_num}","매칭요청 팝업","width=800,height=350");
       }
     </script>
 

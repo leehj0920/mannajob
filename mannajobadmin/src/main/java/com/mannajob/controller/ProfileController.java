@@ -63,8 +63,7 @@ public class ProfileController {
 	@GetMapping("/empl")
 	public void EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
-		EmplVO emplVO = service.getEmplProfile2(session.getAttribute("userId").toString());
-		model.addAttribute("userId", emplVO);
+		model.addAttribute("userId", session.getAttribute("userId").toString());
 	}
 			
 	//EmplVO INSERT 
@@ -107,6 +106,7 @@ public class ProfileController {
 		return "redirect:/login";
 	}
 	
+// 마이페이지의 자신의 현직자 프로필 확인 화면
 	@GetMapping("/emplprofile")
 	public void emplprofile(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -124,7 +124,7 @@ public class ProfileController {
 		
 		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
 	}
-	
+//	다른사람들의  프로필 접근 화면 화면(리스트)
 	@GetMapping("/showempl")
 	public String showempl(Model model, EmplVO emplVO) {
 		model.addAttribute("m_id",emplVO.getM_id());
@@ -133,11 +133,15 @@ public class ProfileController {
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
 		return "/profile/showempl";
 	}
-	
+
+
+//	마이페이지 자신의 현직자 프로필 변경 화면
 	@GetMapping("/updateEmpl")
 	public void emplupdate(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		model.addAttribute("empl", service.getEmplProfile2(session.getAttribute("userId").toString()));
+		EmplVO emplVO = service.getEmplProfile2(session.getAttribute("userId").toString());
+		model.addAttribute("empl", emplVO);
+		model.addAttribute("profile", emplVO.getFileVO().getStored_file_name());
 	}
 	
 	@PostMapping("/updateEmpl")
@@ -153,30 +157,7 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		return "redirect:/profile/main";
-	}
-	
-
-	@GetMapping("/matlist")
-	public void matlist(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		
-		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
-		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
-		
-//		System.out.println(model.getAttribute("bmatlist"));
-	}
-	
-	@GetMapping("/match")
-	public void match(Model model, int b_num) {
-		model.addAttribute("matchlist", service.searchBmatMat(b_num));
-		
-		System.out.println(b_num);
-	}
-	
-	@GetMapping("/calendar")
-	public void calendar() {
-		
+		return "redirect:/profile/emplprofile";
 	}
 	
 	@PostMapping("/deleteEmpl")
