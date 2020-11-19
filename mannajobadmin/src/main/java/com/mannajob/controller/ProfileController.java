@@ -80,6 +80,8 @@ public class ProfileController {
 		HttpSession session = request.getSession();
 		member = service.getMemProfile(session.getAttribute("userId").toString());
 		
+//		model.addAttribute("userId", member.getM_id());
+//		model.addAttribute("username", member.getM_name());
 		model.addAttribute("userphone", member.getM_phone());
 		model.addAttribute("useremail", member.getM_email());
 	}
@@ -158,7 +160,11 @@ public class ProfileController {
 		model.addAttribute("emplintro", empl.getE_intro());
 		
 		return "redirect:/profile/emplprofile";
+
 	}
+	
+
+
 	
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {

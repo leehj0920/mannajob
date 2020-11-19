@@ -21,10 +21,11 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	private ReviewService service;
 	
-	@GetMapping("/insert")
-	public void insert() {
-		
-	}
+	/*
+	 * @GetMapping("/insert") public void insert() {
+	 * 
+	 * }
+	 */
 	
 	@PostMapping("/insert")
 	public void insert(Model model, HttpServletRequest request, int mat_num, String r_w_m_id, String r_mat_m_id) {
@@ -42,8 +43,12 @@ public class ReviewController {
 		return "redirect:/profile/matlist";
 	}
 	
-	@GetMapping("/update")
-	public void update() {
+	@PostMapping("/update")
+	public void update(Model model, int mat_num, String r_w_m_id, String r_mat_m_id, String r_contents) {
+		model.addAttribute("mat_num", mat_num);
+		model.addAttribute("r_w_m_id", r_w_m_id);
+		model.addAttribute("r_mat_m_id", r_mat_m_id);
+		model.addAttribute("r_contents", r_contents);
 		
 	}
 	

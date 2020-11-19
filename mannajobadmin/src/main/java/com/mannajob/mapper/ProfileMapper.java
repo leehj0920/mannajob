@@ -28,8 +28,6 @@ public interface ProfileMapper {
 	
 	public List<ReviewVO> searchReview(String m_id);
 	
-//	public List<BMatchVO> searchCont(String m_id);
-	
 	public void updateEmpl(EmplVO empl);
 	
 	public void updateEmpl(String string, Map<String, Object> map);

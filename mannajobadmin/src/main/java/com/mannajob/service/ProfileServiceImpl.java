@@ -81,12 +81,6 @@ public class ProfileServiceImpl implements ProfileService {
 		return mapper.searchReview(m_id);
 	}
 
-	
-	/*
-	 * @Override public List<BMatchVO> searchCont(String m_id) { return
-	 * mapper.searchCont(m_id); }
-	 */
-	 
 	@Override
 	public void updateEmpl(EmplVO empl, MultipartHttpServletRequest mpRequest) throws Exception {
 		mapper.updateEmpl(empl);
