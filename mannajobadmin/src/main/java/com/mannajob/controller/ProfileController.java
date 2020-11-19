@@ -164,7 +164,7 @@ public class ProfileController {
 		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
-		System.out.println(model.getAttribute("bmatlist"));
+//		System.out.println(model.getAttribute("bmatlist"));
 	}
 	
 	@GetMapping("/match")

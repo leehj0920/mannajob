@@ -87,6 +87,9 @@
 		<result property="mat_okdate" column="mat_okdate"/>
 		<result property="mat_state" column="mat_state"/>
 	</resultMap>
+	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
+		<result property="r_contents" column="r_contents"/>
+	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.BMatchVO" id="BMatch">
 		<result property="b_num" column="b_num"/>
@@ -105,6 +108,7 @@
 		<result property="b_wdate" column="b_wdate"/>
 		<result property="b_contents" column="b_contents"/>
 		<collection property="matchVO" resultMap="Match"/>
+		<collection property="reviewVO" resultMap="Review"/>
 	</resultMap>
 	
 	<!-- 매칭 작성 내역 조회 -->
@@ -119,13 +123,18 @@
 	
 	<!-- 매칭 신청 내역 조회-->
 	<select id="searchMat" resultMap="BMatch">
-		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, m.m_id FROM match m, b_match b WHERE m.b_num = b.b_num AND m.m_id = #{m_id} 
+		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, m.m_id, r.r_contents FROM b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num WHERE b.b_num = m.b_num AND m.m_id = #{m_id} 
 	</select>
 	
 	<!-- 현직자 프로필에서 리뷰 확인 -->
 	<select id="searchReview" resultType="com.mannajob.domain.ReviewVO">
 		SELECT r_num, r_good, r_contents, r_mat_m_id, r_wdate FROM review WHERE r_w_m_id = #{m_id}
 	</select>
+	
+	<!-- 리뷰 수정하기 위해 r_contents 유무 확인 -->
+	<!-- <select id="searchCont" resultMap="BMatch">
+		SELECT m.mat_num, r.r_contents FROM match m, b_match b, review r WHERE m.mat_num = r.mat_num AND m.b_num = b.b_num AND m.m_id = #{m_id}
+	</select> -->
 	
 	<!-- 현직자 프로필 수정 -->
 	<select id="updateEmpl">
@@ -142,7 +151,9 @@
 	
 	<!-- 사진 수정 -->
 	<update id="updateFile">
-		UPDATE m_file SET org_file_name = #{ORG_FILE_NAME}, stored_file_name = #{STORED_FILE_NAME}, file_size = #{FILE_SIZE} WHERE e_num = #{E_NUM} AND f_category = #{F_CATEGORY}
+		<if test="#{ORG_FILE_NAME} != null || #{ORG_FILE_NAME} != ''">
+			UPDATE m_file SET org_file_name = #{ORG_FILE_NAME}, stored_file_name = #{STORED_FILE_NAME}, file_size = #{FILE_SIZE} WHERE e_num = #{E_NUM} AND f_category = #{F_CATEGORY}
+		</if>
 	</update>
 	
 	<!-- 현직자 삭제 -->
