@@ -39,6 +39,17 @@ public class ReviewController {
 	@PostMapping("/insertok")
 	public String insertok(int mat_num, String good, String contents, String b_id, String w_id) {
 		service.insertR(mat_num, good, contents, b_id, w_id);
-		return "profile/matlist";
+		return "redirect:/profile/matlist";
+	}
+	
+	@GetMapping("/update")
+	public void update() {
+		
+	}
+	
+	@PostMapping("/updateok")
+	public String updateok(int mat_num, String r_good, String r_contents) {
+		service.updateR(mat_num, r_good, r_contents);
+		return "redirect:/profile/matlist";
 	}
 }

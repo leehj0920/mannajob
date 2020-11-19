@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,7 @@
 				</tr>
 			</table>
 		</div>
+		<input type="button" onclick="location='/profile/updateEmpl'" value="현직자 프로필 수정">
 	</div>
 	<div id="review">
 		<h2>리뷰</h2>
@@ -65,17 +67,17 @@
 					<th>수정</th>
 					<th>삭제</th>
 				</tr>
-				<%-- <c:forEach var="re" items="">
+				<c:forEach var="re" items="${emplreview}">
 				<tr>
 					<td>
 					<c:choose>
-						<c:when test="#{ eq 'G'}">추천</c:when>
+						<c:when test="${re.r_good eq 'G'}">추천</c:when>
 						<c:otherwise>비추천</c:otherwise>
 					</c:choose>
 					</td>
-					<td>${re.contents}</td>
-					<td>${re.r_w_m_id}</td>
-					<td>${re.r_wdate}</td>
+					<td>${re.r_contents}</td>
+					<td>${re.r_mat_m_id}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${re.r_wdate}" /></td>
 					<td>
 					<form mehtod="get" action="/review/update">
 						<input type="hidden" name="r_num">
@@ -83,13 +85,13 @@
 					</form>
 					</td>
 					<td>
-					<form method="get" action="/review/delete>
+					<%-- <form method="get" action="/review/delete>
 						<input type="hidden" name="r_num">
 						<input type="submit" value="삭제">
-					</form>
+					</form> --%>
 					</td>
 				</tr>
-				</c:forEach> --%>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

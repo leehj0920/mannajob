@@ -11,7 +11,7 @@
 	<h1>리뷰 등록</h1>
 	<hr>
 	<div>
-		<h3>현직자 정보</h3>
+		<h3>글쓴이 정보</h3>
 		<div>
 			<table>
 				<tr>
@@ -36,7 +36,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><input type="text" name="contents"></td>
+						<td><textarea cols="30" rows="5" name="contents"></textarea></td>
 					</tr>
 				</table>
 				<input type="submit" value="등록">
