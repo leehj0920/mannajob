@@ -122,6 +122,7 @@ input.i_btn2{
 }
 /* input 버튼 4~5개 */
 input.i_btn4{
+height: 40px;
   width: 80px; 
 }
 /* ===================================
@@ -2818,5 +2819,32 @@ article img.pull-right, article .align-right {
   text-align: center;
   outline: 0;
 }
-
+        #location1, #location2, #locaiton3{
+            width: 300px;
+        }
+        .location1, .location2, .location3{
+            width: 80px;
+            display: none;
+            
+            
+        }
+        .label1, .label2, .label3{
+            background: #303030;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            color: white;
+            text-align: center;
+            font-size: small;
+            font-weight: bold;
+            padding: 1px 3px;
+            
+            display: inline-block;
+            height: 20px;
+            
+            margin: 3px;
+            border-radius: 3px;
+            font-size : 4pt;
+        }
 /* Theme Styler :: End */
