@@ -25,13 +25,12 @@ public class MemberController {
 	
 	@PostMapping ("/logincheck")
 	public String login(MemberVO member, HttpServletRequest request, HttpSession session) {
-		//�α��� �����ϸ� ������������, �����ϸ� �α��� ������
 		if(service.LoginSelect(member)) {
-			log.info("�α��� ������");
+			log.info("로그인 성공 여부 확인");
 			session.setAttribute("userId", member.getM_id());
 			return "redirect:/main"; 
 		} else {
-			log.info("�α��� ����");
+			log.info("로그인");
 			return "redirect:/login";
 		}
 	}

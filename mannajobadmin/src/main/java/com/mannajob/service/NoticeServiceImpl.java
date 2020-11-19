@@ -73,5 +73,4 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("getTotal..................");
 		return mapper.getTotalCount(cri);
 	}
-
 }

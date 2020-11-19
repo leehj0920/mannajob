@@ -2,19 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mannajob.mapper.QnaMapper">
 	<select id="getList" resultType="com.mannajob.domain.QnaVO">
-		select q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
-				,(select count(q_num) from qna_sub) as reply_chk from qna where q_del = 'N'
+		select q.q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
+				,(select count(qs.q_num) from qna_sub qs where q.q_num = qs.q_num and qs.qs_del = 'N') as reply_chk from qna q where q_del = 'N' order by q.q_num desc
 	</select>
 	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.QnaVO">
 		<![CDATA[
-		select q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
-				,(select count(q_num) from qna_sub) as re_cnt
+		select q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject, reply_chk
 		from (
-			select /*+ index_desc(qna pk_q) */
-					rownum rn, q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
-					,(select count(q_num) from qna_sub) as re_cnt
-			from qna
+			select /*+ index_desc(q pk_q) */
+					rownum rn, q.q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
+					,(select count(qs.q_num) from qna_sub qs where q.q_num = qs.q_num and qs.qs_del = 'N') as reply_chk
+			from qna q
 			where rownum <= #{pageNum} * #{amount} and q_del = 'N')
 		where rn > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -39,9 +38,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.mannajob.domain.QnaVO">
-		select q.q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
-				, qs_num, ad_id, qs_contents, qs_wdate, qs_udate, qs_del
-		from qna q, qna_sub qs where q.q_num = qs.q_num(+) and q_del = 'N' and q.q_num = #{q_num}
+		select * from qna q,(select * from qna_sub where q_num = #{q_num} and qs_del = 'N')qs where q.q_num = qs.q_num(+) and q.q_num=#{q_num}
 	</select>
 	
 	<update id="delete">
@@ -49,7 +46,7 @@
 	</update>
 	
 	<update id="deleteSub">
-		update qna_sub set qs_del = 'Y' where qs_num = #{qs_num}
+		update qna_sub set qs_del = 'Y', qs_udate = sysdate where qs_num = #{qs_num}
 	</update>
 	
 	<update id="update">
@@ -62,5 +59,9 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(q_num) from qna where q_del = 'N'
+	</select>
+	
+	<select id="chkQnaSub" resultType="int">
+		select count(q_num) from qna_sub where q_num = ${q_num} and qs_del = 'N'
 	</select>
 </mapper>

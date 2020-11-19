@@ -1,5 +1,8 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,15 +41,25 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/insert")
-	public void insert() {
+	public String insert(HttpServletRequest request) {
 		log.info("insert...............");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
+		return "/notice/insert";
 	}
 	
 	@PostMapping("/insert")
-	public String insert(NoticeVO notice) {
+	public String insert(NoticeVO notice, HttpServletRequest request) {
 		log.info("insert >>> " + notice);
-		service.insert(notice);
-		return "redirect:/notice/list";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		} else {
+			service.insert(notice);
+			return "redirect:/notice/list";
+		}
 	}
 	
 	@GetMapping("/view")
@@ -61,22 +74,38 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/update")
-	public void update(@RequestParam("n_num") int n_num, @ModelAttribute("cri") Criteria cri, Model model) {
+	public String update(@RequestParam("n_num") int n_num, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request) {
 		log.info("update.....................");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
 		model.addAttribute("notice", service.read(n_num));
+		return "/notice/update";
 	}
 	
 	@PostMapping("/update")
-	public String update(NoticeVO notice, @ModelAttribute("cri") Criteria cri, Model model) {
+	public String update(NoticeVO notice, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request) {
 		log.info("update >>> " + notice);
-		service.update(notice);
-		return "redirect:/notice/view?n_num=" + notice.getN_num() + "&pageNum=" + cri.getPageNum();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		} else {
+			service.update(notice);
+			return "redirect:/notice/view?n_num=" + notice.getN_num() + "&pageNum=" + cri.getPageNum();
+		}
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam("n_num") int n_num) {
+	public String delete(@RequestParam("n_num") int n_num, HttpServletRequest request) {
 		log.info("delete............................");
-		service.delete(n_num);
-		return "redirect:/notice/list";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		} else {
+			service.delete(n_num);
+			return "redirect:/notice/list";
+		}
+		
 	}
 }

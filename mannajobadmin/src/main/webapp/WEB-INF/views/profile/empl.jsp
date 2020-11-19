@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="table-responsive">
-		<form method="post" action="/profile/empl" enctype="multipart/form-data">
+		<form method="get" action="/profile/empl" enctype="multipart/form-data">
 			<div>
 				<label>아이디</label> <input class="form-control" type="text"
 					name="m_id" value="<%= request.getAttribute("userId")%>" readonly></input>
@@ -39,8 +39,10 @@
 					name="e_intro"></input>
 			</div>
 			<div>
-				<input type="file" name="e_image" value="프로필 사진">
-				<input type="file" name="e_certifi" value="증명확인서">
+				프로필 사진<input type="file" name="e_image" value="프로필 사진">
+			</div>
+			<div>
+				증명서&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="e_certifi" value="증명확인서">
 			</div>
 			<input type="submit" value="승인 신청">
 		</form>

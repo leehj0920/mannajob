@@ -38,8 +38,11 @@
 	</bean>
 	<tx:annotation-driven/>
 	
+	<!-- scan -->
 	<mybatis-spring:scan base-package="com.mannajob.mapper" />
+	<context:component-scan base-package="com.mannajob.domain" />
 	<context:component-scan base-package="com.mannajob.service" />
 	<context:component-scan base-package="com.mannajob.util" />
+	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

@@ -1,5 +1,7 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,16 +21,16 @@ import lombok.extern.log4j.Log4j;
 public class JoinController {
 	private JoinService service;
 	
-	//È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î member.jsp
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ member.jsp
 	@GetMapping("/member")
 	public void insert() {
 		
 	}
 	
-	//MemberVO¿¡ °¡ÀÔ Á¤º¸ INSERT ÈÄ login.jsp·Î redirect
+	//MemberVOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ INSERT ï¿½ï¿½ login.jspï¿½ï¿½ redirect
 	@PostMapping("/member")
 	public String insert(MemberVO member, RedirectAttributes rttr) {
-		log.info("°¡ÀÔ..............................");
+		log.info("ï¿½ï¿½ï¿½ï¿½..............................");
 		service.MemJoin(member);
 //		rttr.addFlashAttribute("result", 1);
 		
@@ -41,10 +43,12 @@ public class JoinController {
 	}
 	
 	@PostMapping("/join")
-	public String insertapi(MemberVO member, RedirectAttributes rttr) {
-		
+	public String insertapi(MemberVO member, RedirectAttributes rttr, HttpSession session) {
+		member.setM_id(session.getAttribute("sessionId").toString());
+		member.setM_api(session.getAttribute("userapi").toString());
 		service.ApiJoin(member);
 //		rttr.addFlashAttribute("result", 1);
+		session.setAttribute("userId", session.getAttribute("sessionId"));
 		return "redirect:/main";
 	}
 	

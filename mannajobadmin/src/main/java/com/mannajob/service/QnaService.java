@@ -20,11 +20,13 @@ public interface QnaService {
 	
 	public boolean delete(int q_num);
 	
-	public boolean deleteSub(int qs_num);
+	public boolean deleteSub(QnaVO qna);
 	
 	public boolean update(QnaVO qna);
 	
 	public boolean updateSub(QnaVO qna);
 	
 	public int getTotal(Criteria cri);
+	
+	public int chkQnaSub(int q_num);
 }

@@ -21,4 +21,5 @@ public class QnaVO {
 	private Date qs_wdate;
 	private Date qs_udate;
 	private String qs_del;
+	
 }
