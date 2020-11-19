@@ -86,4 +86,9 @@ public class QnaServiceImpl implements QnaService {
 		return mapper.getTotalCount(cri);
 	}
 
+	@Override
+	public int chkQnaSub(int q_num) {
+		
+		return mapper.chkQnaSub(q_num);
+	}
 }

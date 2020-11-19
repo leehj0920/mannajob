@@ -14,6 +14,15 @@
 	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
 	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
 	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
+	<c:choose>
+	<c:when test="${null ne empl}">
+		<input type="button" onclick="location.href='/profile/emplprofile'" value="현직자 프로필 보기">
+	</c:when>
+	<c:otherwise>
+		지원 정보가 없습니다.<br>
+		<input type="button" onclick="location.href='/profile/empl'" value="현직자 지원하기">
+	</c:otherwise>
+	</c:choose>
 	<div id="profile">
 		<h2>회원정보</h2>
 		<div>
@@ -41,19 +50,6 @@
 			</table>
 		</div>
 	</div>
-	<div id="profile">
-		<h2>현직자 지원 정보</h2>
-		<div>
-			<c:choose>
-			<c:when test="${null ne empl}">
-				<input type="button" onclick="location.href='/profile/emplprofile'" value="현직자 프로필 보기">
-			</c:when>
-			<c:otherwise>
-				지원 정보가 없습니다.<br>
-				<input type="button" onclick="location.href='/profile/empl'" value="현직자 지원하기">
-			</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+	
 </body>
 </html>

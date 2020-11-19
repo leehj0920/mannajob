@@ -92,10 +92,22 @@ public class BMatchServiceImpl implements BMatchService{
 	public void delete(int b_num) {
 		mapper.delete(b_num);
 	}
-
+	// 토탈갯수 세는 부분 다시 확인
 	@Override
 	public int getTotalCount(Criteria cri,BMatchVO bMatchVO) {
-		return mapper.getTotalCount(cri,bMatchVO.getB_category());
+		if(bMatchVO.getB_location()==null||"".equals(bMatchVO.getB_location())){
+			bMatchVO.setB_location("");
+		}
+		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
+			bMatchVO.setB_corp("");
+		}
+		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
+			bMatchVO.setB_task("");
+		}
+		if(bMatchVO.getB_category()==null||"".equals(bMatchVO.getB_category())){
+			bMatchVO.setB_category("");
+		}
+		return mapper.getTotalCount(cri,bMatchVO);
 	}
 
 	@Override
@@ -126,7 +138,7 @@ public class BMatchServiceImpl implements BMatchService{
 		}
 		return mapper.searchEmpl(bMatchVO);
 	}
-
+	// 토탈갯수 세는 부분 다시 확인
 	@Override
 	public int getEmplCount(BMatchVO bMatchVO) {
 		if(bMatchVO.getB_corp()==null||"".equals(bMatchVO.getB_corp())){
@@ -134,6 +146,9 @@ public class BMatchServiceImpl implements BMatchService{
 		}
 		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
 			bMatchVO.setB_task("");
+		}
+		if(bMatchVO.getB_category()==null||"".equals(bMatchVO.getB_category())){
+			bMatchVO.setB_category("A");
 		}
 		return mapper.getemplTotalCount(bMatchVO);
 	}
@@ -146,6 +161,9 @@ public class BMatchServiceImpl implements BMatchService{
 		}
 		if(bMatchVO.getB_task()==null||"".equals(bMatchVO.getB_task())){
 			bMatchVO.setB_task("");
+		}
+		if(bMatchVO.getB_category()==null||"".equals(bMatchVO.getB_category())){
+			bMatchVO.setB_category("A");
 		}
 		
 		return mapper.searchEmplPaging(bMatchVO,cri);

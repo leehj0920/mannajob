@@ -1,5 +1,7 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,10 +43,12 @@ public class JoinController {
 	}
 	
 	@PostMapping("/join")
-	public String insertapi(MemberVO member, RedirectAttributes rttr) {
-		
+	public String insertapi(MemberVO member, RedirectAttributes rttr, HttpSession session) {
+		member.setM_id(session.getAttribute("sessionId").toString());
+		member.setM_api(session.getAttribute("userapi").toString());
 		service.ApiJoin(member);
 //		rttr.addFlashAttribute("result", 1);
+		session.setAttribute("userId", session.getAttribute("sessionId"));
 		return "redirect:/main";
 	}
 	

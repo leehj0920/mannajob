@@ -38,9 +38,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.mannajob.domain.QnaVO">
-		select q.q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject
-				, qs_num, ad_id, qs_contents, qs_wdate, qs_udate, qs_del
-		from qna q, qna_sub qs where q.q_num = qs.q_num(+) and q_del = 'N' and q.q_num = #{q_num}
+		select * from qna q,(select * from qna_sub where q_num = #{q_num} and qs_del = 'N')qs where q.q_num = qs.q_num(+) and q.q_num=#{q_num}
 	</select>
 	
 	<update id="delete">
@@ -61,5 +59,9 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(q_num) from qna where q_del = 'N'
+	</select>
+	
+	<select id="chkQnaSub" resultType="int">
+		select count(q_num) from qna_sub where q_num = ${q_num} and qs_del = 'N'
 	</select>
 </mapper>

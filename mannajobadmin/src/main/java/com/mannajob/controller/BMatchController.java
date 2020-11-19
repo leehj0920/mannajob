@@ -41,7 +41,10 @@ public class BMatchController {
 		model.addAttribute("page", new PageDTO(cri, total));
 		System.out.println(cri);
 		System.out.println(bMatchService.getListWithPaging(cri, bMatchVO));
-		return "/bmatch/list";
+		if(bMatchVO.getB_category().equals("A")) {
+			return "/bmatch/listempl";
+		}
+		return "/bmatch/listmember";
 	}
 	
 	// 댓글,대댓글 추가 필요, 현직자의 경우 현직자 정보 추가 필요.
@@ -60,12 +63,11 @@ public class BMatchController {
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")
 	public String search(@ModelAttribute("bMatch")BMatchVO bMatchVO, Model model, Criteria cri, CriteriaProfile scri) {
-		cri.setAmount(5);
+		cri.setAmount(10);
 		int total = bMatchService.getTotalCount(cri,bMatchVO);
 		model.addAttribute("list", bMatchService.searchWithPaging(bMatchVO, cri));
 		model.addAttribute("page", new PageDTO(cri, total));
 		//프로필 검색
-		
 		scri.setAmountP(5);
 		int empltotal = bMatchService.getEmplCount(bMatchVO);
 		model.addAttribute("empllist", bMatchService.searchEmplPaging(scri, bMatchVO));

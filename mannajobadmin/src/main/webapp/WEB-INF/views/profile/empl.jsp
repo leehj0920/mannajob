@@ -39,8 +39,10 @@
 					name="e_intro"></input>
 			</div>
 			<div>
-				<input type="file" name="e_image" value="프로필 사진">
-				<input type="file" name="e_certifi" value="증명확인서">
+				프로필 사진<input type="file" name="e_image" value="프로필 사진">
+			</div>
+			<div>
+				증명서&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="e_certifi" value="증명확인서">
 			</div>
 			<input type="submit" value="승인 신청">
 		</form>

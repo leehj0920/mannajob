@@ -42,8 +42,18 @@ public class ProfileController {
 		model.addAttribute("username", member.getM_name());
 		model.addAttribute("userphone", member.getM_phone());
 		model.addAttribute("useremail", member.getM_email());
-		
+
 		session.setAttribute("empl", service.getEmplProfile(session.getAttribute("userId").toString()));
+		
+		if(empl != null) {
+			model.addAttribute("emplcorp", empl.getE_corp());
+			model.addAttribute("empldept", empl.getE_dept());
+			model.addAttribute("emplrank", empl.getE_rank());
+			model.addAttribute("empltask", empl.getE_task());
+			model.addAttribute("emplcareer", empl.getE_career());
+			model.addAttribute("emplintro", empl.getE_intro());
+			model.addAttribute("emplok", empl.getE_ok());
+		}
 
 		
 		return "profile/main";
@@ -59,12 +69,10 @@ public class ProfileController {
 	//EmplVO INSERT 
 	@PostMapping("/empl")
 	public String EmplJoin(EmplVO empl, RedirectAttributes rttr, MultipartHttpServletRequest mpRequest) throws Exception {
-		log.info("����..............................");
 		
+		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-//		rttr.addFlashAttribute("result", 1);
-			
-		return "redirect:/profile/main";
+		return "/profile/main";
 	}
 	
 	@GetMapping("/update")
@@ -92,11 +100,17 @@ public class ProfileController {
 		return "profile/main";
 	}
 	
+	@PostMapping("/deleteMem")
+	public String deleteMem(String m_id) {
+		service.deleteMem(m_id);
+		return "redirect:/login";
+	}
+	
 	@GetMapping("/emplprofile")
 	public void emplprofile(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
-		empl = service.getEmplProfile(session.getAttribute("userId").toString());
+		empl = service.getEmplProfile2(session.getAttribute("userId").toString());
 		
 		model.addAttribute("userId", session.getAttribute("userId").toString());
 		model.addAttribute("imageFile", empl.getFileVO().getStored_file_name());
@@ -106,7 +120,31 @@ public class ProfileController {
 		model.addAttribute("empltask", empl.getE_task());
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
+		
+		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
 	}
+	
+	@GetMapping("/updateEmpl")
+	public void emplupdate(HttpServletRequest request) {
+
+	}
+	
+	@PostMapping("/updateEmpl")
+	public String emplupdate(EmplVO empl, Model model, MultipartHttpServletRequest mpRequest) throws Exception {
+		service.updateEmpl(empl, mpRequest);
+		
+		model.addAttribute("userId", empl.getM_id());
+		model.addAttribute("imageFile", service.getEmplProfile2(model.getAttribute("userId").toString()).getFileVO().getStored_file_name());
+		model.addAttribute("emplcorp", empl.getE_corp());
+		model.addAttribute("empldept", empl.getE_dept());
+		model.addAttribute("emplrank", empl.getE_rank());
+		model.addAttribute("empltask", empl.getE_task());
+		model.addAttribute("emplcareer", empl.getE_career());
+		model.addAttribute("emplintro", empl.getE_intro());
+		
+		return "/profile/main";
+	}
+	
 
 	@GetMapping("/matlist")
 	public void matlist(Model model, HttpServletRequest request) {
@@ -130,4 +168,10 @@ public class ProfileController {
 		
 	}
 	
+	@PostMapping("/deleteEmpl")
+	public String deleteEmpl(String m_id) {
+		service.deleteEmpl(m_id);
+		return "/profile/main";
+	}
+
 }

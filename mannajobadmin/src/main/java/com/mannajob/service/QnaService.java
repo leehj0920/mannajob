@@ -27,4 +27,6 @@ public interface QnaService {
 	public boolean updateSub(QnaVO qna);
 	
 	public int getTotal(Criteria cri);
+	
+	public int chkQnaSub(int q_num);
 }

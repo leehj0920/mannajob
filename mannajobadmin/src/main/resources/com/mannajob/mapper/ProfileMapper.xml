@@ -14,6 +14,11 @@
 		UPDATE member SET m_passwd = #{m_passwd}, m_phone = #{m_phone}, m_email = #{m_email} WHERE m_id = #{m_id}
 	</update>
 	
+	<!-- 회원 삭제 -->
+	<delete id="deleteMem">
+		UPDATE member SET m_del = 'Y' WHERE m_id = #{m_id}
+	</delete>
+	
 	<!-- 현직자 정보 조회 -->
 	<resultMap type="com.mannajob.domain.FileVO" id="fileVO">
 		<result property="e_num" column="e_num" />
@@ -33,8 +38,13 @@
 		<collection property="fileVO" resultMap="fileVO" />
 	</resultMap>
 	
-	<!-- 현직자 지원 정보 -->
+	<!-- 현직자 정보 -->
 	<select id="getEmplProfile" resultMap="EmplfileVO">
+		SELECT e_num, e_corp, e_dept, e_rank, e_task, e_career, e_intro FROM empl WHERE m_id = #{m_id}
+	</select>
+	
+	<!-- 현직자 정보 불러오기(이미지 포함) -->
+	<select id="getEmplProfile2" resultMap="EmplfileVO">
 		SELECT e.e_num, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name FROM empl e, m_file f WHERE e.e_num = f.e_num AND m_id = #{m_id} AND f.f_category = 'I'
 	</select>
 
@@ -111,5 +121,36 @@
 	<select id="searchMat" resultMap="BMatch">
 		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, m.m_id FROM match m, b_match b WHERE m.b_num = b.b_num AND m.m_id = #{m_id} 
 	</select>
+	
+	<!-- 현직자 프로필에서 리뷰 확인 -->
+	<select id="searchReview" resultType="com.mannajob.domain.ReviewVO">
+		SELECT r_num, r_good, r_contents, r_mat_m_id, r_wdate FROM review WHERE r_w_m_id = #{m_id}
+	</select>
+	
+	<!-- 현직자 프로필 수정 -->
+	<select id="updateEmpl">
+		UPDATE empl SET e_corp = #{e_corp}, 
+		<if test="#{e_dept} != null || #{e_dept} != ''">
+		e_dept = #{e_dept}, 
+		</if>
+		<if test="#{e_rank} != null || #{e_rank} != ''">
+		e_rank = #{e_rank}, 
+		</if>		
+		e_task = #{e_task}, e_career = #{e_career}, e_intro = #{e_intro}, e_ok = 'N', e_okdate = null
+		WHERE m_id = #{m_id} 
+	</select>
+	
+	<!-- 사진 수정 -->
+	<update id="updateFile">
+		UPDATE m_file SET org_file_name = #{ORG_FILE_NAME}, stored_file_name = #{STORED_FILE_NAME}, file_size = #{FILE_SIZE} WHERE e_num = #{E_NUM} AND f_category = #{F_CATEGORY}
+	</update>
+	
+	<!-- 현직자 삭제 -->
+	<delete id="deleteEmpl">
+		<!-- e_del을 'Y'로 -->
+		UPDATE empl SET e_del = 'Y' WHERE m_id = #{m_id}
+		<!-- empl테이블에서 삭제 -->
+		<!-- DELETE empl WHERE m_id = #{m_id} -->
+	</delete>
 	
 </mapper>

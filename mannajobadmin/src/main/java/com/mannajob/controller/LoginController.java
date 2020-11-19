@@ -41,10 +41,7 @@ public class LoginController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	@RequestMapping("/main")
-	public void main() {
-		
-	}
+
 
 	//
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
@@ -98,7 +95,7 @@ public class LoginController {
 		//id, email
 		System.out.println("id: " + id + "\nemail: " + email);
 		//4.
-		session.setAttribute("userId", id); //
+		session.setAttribute("sessionId", id); //
 		session.setAttribute("useremail", email);
 		session.setAttribute("userapi", api);
 		
@@ -109,6 +106,7 @@ public class LoginController {
 		if(check == 0) {
 			return "/join/join";
 		} else {
+			session.setAttribute("uesrId", id); //
 			return "redirect:/main";
 		}
 	}
@@ -120,7 +118,7 @@ public class LoginController {
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
 	    System.out.println("login Controller : " + userInfo);
 	    
-	    session.setAttribute("userId", userInfo.get("sessionId"));
+	    session.setAttribute("sessionId", userInfo.get("sessionId"));
 	    session.setAttribute("userapi", userInfo.get("api"));
 	    session.setAttribute("access_Token", access_Token);
 	    session.setAttribute("code", code);
@@ -132,6 +130,7 @@ public class LoginController {
 	    if(check == 0){ 
 	    	return "/join/join";
 	    }
+	    session.setAttribute("userId", userInfo.get("sessionId"));
 	    return "redirect:/main";
 	} 
 	
