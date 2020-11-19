@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="table-responsive">
-		<form method="post" action="/profile/empl" enctype="multipart/form-data">
+		<form method="get" action="/profile/empl" enctype="multipart/form-data">
 			<div>
 				<label>아이디</label> <input class="form-control" type="text"
 					name="m_id" value="<%= request.getAttribute("userId")%>" readonly></input>

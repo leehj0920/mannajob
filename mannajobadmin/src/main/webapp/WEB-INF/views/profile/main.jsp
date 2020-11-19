@@ -15,11 +15,10 @@
 	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
 	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
 	<c:choose>
-	<c:when test="${null ne empl}">
+	<c:when test="${empl ne null}">
 		<input type="button" onclick="location.href='/profile/emplprofile'" value="현직자 프로필 보기">
 	</c:when>
 	<c:otherwise>
-		지원 정보가 없습니다.<br>
 		<input type="button" onclick="location.href='/profile/empl'" value="현직자 지원하기">
 	</c:otherwise>
 	</c:choose>
@@ -30,19 +29,19 @@
 				<tr>
 					<td rowspan="4"><img src="/resources/member_img/sample.jpg" width="200"></td>
 					<td>id</td>
-					<td><%=request.getAttribute("userId") %></td>
+					<td><c:out value="${userId}"/></td>
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><%=request.getAttribute("username") %></td>
+					<td><c:out value="${username}"/></td>
 				</tr>
 				<tr>
 					<td>휴대전화</td>
-					<td><%=request.getAttribute("userphone") %></td>
+					<td><c:out value="${userphone}"/></td>
 				</tr>
 				<tr>
 					<td>email</td>
-					<td><%=request.getAttribute("useremail") %></td>
+					<td><c:out value="${useremail}"/></td>
 				</tr>
 				<tr>
 					<td><input type="button" onclick="location='/profile/update'" value="프로필 수정"></td>

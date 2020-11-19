@@ -23,4 +23,5 @@ public class BMatchVO {
 	private String b_contents;
 	
 	private MatchVO matchVO;
+	private ReviewVO reviewVO;
 }

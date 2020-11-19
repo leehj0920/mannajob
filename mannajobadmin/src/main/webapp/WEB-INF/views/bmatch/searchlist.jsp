@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function empl() {
+		document.goEmpl.action = '/profile/emplprofile';
+		document.goEmpl.submit();
+	}
+</script>
 </head>
 <body>
 <a href="/bmatch/insert">[Insert]</a> 
@@ -29,7 +35,12 @@
 				<td>
 					<table style="border:solid; border-width: 1px; border-color: black;">
 						<tr>
-							<td colspan="2"><img src="../resources/certifi/${empl.fileVO.stored_file_name}" width="200" height="300"></td>
+							<td colspan="2">
+							<form method="get" name="goEmpl">
+							<input type="hidden" value="${empl.e_num}" name="e_num">							
+							<img src="../resources/certifi/${empl.fileVO.stored_file_name}" width="200" height="300" onclick="empl()">
+							</form>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2" style="font-size: 20px">${empl.memberVO.m_name}&nbsp;멘토</td>

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
@@ -68,13 +67,13 @@ public class ProfileController {
 			
 	//EmplVO INSERT 
 	@PostMapping("/empl")
-	public String EmplJoin(EmplVO empl, RedirectAttributes rttr, MultipartHttpServletRequest mpRequest) throws Exception {
+	public String EmplJoin(EmplVO empl, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
-	
+
 	@GetMapping("/update")
 	public void update(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -97,7 +96,7 @@ public class ProfileController {
 		model.addAttribute("userphone", member.getM_phone());
 		model.addAttribute("useremail", member.getM_email());
 		
-		return "profile/main";
+		return "redirect:/profile/main";
 	}
 	
 	@PostMapping("/deleteMem")
@@ -126,7 +125,7 @@ public class ProfileController {
 	
 	@GetMapping("/updateEmpl")
 	public void emplupdate(HttpServletRequest request) {
-
+		
 	}
 	
 	@PostMapping("/updateEmpl")
@@ -142,7 +141,7 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
 	
 
@@ -152,8 +151,9 @@ public class ProfileController {
 		
 		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
-		
-		System.out.println(model.getAttribute("bmatlist"));
+//		model.addAttribute("review", service.searchCont(session.getAttribute("userId").toString()));
+				
+//		System.out.println(model.getAttribute("review"));
 	}
 	
 	@GetMapping("/match")
@@ -171,7 +171,7 @@ public class ProfileController {
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "/profile/main";
+		return "redirect:/profile/main";
 	}
 
 }
