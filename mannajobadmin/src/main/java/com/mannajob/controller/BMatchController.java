@@ -15,6 +15,7 @@ import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.PageDTO;
+import com.mannajob.domain.locationDTO;
 import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
 import com.mannajob.service.ProfileService;
@@ -62,7 +63,18 @@ public class BMatchController {
 	}
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")
-	public String search(@ModelAttribute("bMatch")BMatchVO bMatchVO, Model model, Criteria cri, CriteriaProfile scri) {
+	public String search(@ModelAttribute("bMatch")BMatchVO bMatchVO, Model model, Criteria cri, CriteriaProfile scri,locationDTO location) {
+		String lo = "";
+		if(location.getLocation1()!=null) {
+			lo+=location.getLocation1();
+		}
+		if(location.getLocation2()!=null) {
+			lo+=" "+location.getLocation2();
+		}
+		if(location.getLocation3()!=null) {
+			lo+=" "+location.getLocation3();
+		}
+		bMatchVO.setB_location(lo);
 		cri.setAmount(10);
 		int total = bMatchService.getTotalCount(cri,bMatchVO);
 		model.addAttribute("list", bMatchService.searchWithPaging(bMatchVO, cri));
@@ -79,6 +91,7 @@ public class BMatchController {
 	
 	@GetMapping("/update")
 	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
+		
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
@@ -89,7 +102,19 @@ public class BMatchController {
 		return "/bmatch/updatemember";
 	}
 	@PostMapping("/update")
-	public String updateOk(BMatchVO bMatchVO, Model model, Criteria cri) {
+	public String updateOk(BMatchVO bMatchVO, Model model, Criteria cri,locationDTO location) {
+		log.info(location.toString());
+		String lo = "";
+		if(location.getLocation1()!=null) {
+			lo+=location.getLocation1();
+		}
+		if(location.getLocation2()!=null) {
+			lo+=" "+location.getLocation2();
+		}
+		if(location.getLocation3()!=null) {
+			lo+=" "+location.getLocation3();
+		}
+		bMatchVO.setB_location(lo);
 		bMatchService.update(bMatchVO);
 		return "redirect:/bmatch/view?b_category="+bMatchVO.getB_category()+"&b_num="+bMatchVO.getB_num()+"&m_id="+bMatchVO.getM_id()+"&pageNum="+cri.getPageNum();
 	}
