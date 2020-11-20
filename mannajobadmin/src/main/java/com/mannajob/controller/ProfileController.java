@@ -63,7 +63,7 @@ public class ProfileController {
 	@GetMapping("/empl")
 	public void EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
-		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("userId", session.getAttribute("userId"));
 	}
 			
 	//EmplVO INSERT 
@@ -72,50 +72,40 @@ public class ProfileController {
 		
 		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-		return "redirect:/profile/main";
+		return "/profile/main";
 	}
 	
 	@GetMapping("/update")
 	public void update(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		member = service.getMemProfile(session.getAttribute("userId").toString());
+		model.addAttribute("member", member);
 		
-//		model.addAttribute("userId", member.getM_id());
-//		model.addAttribute("username", member.getM_name());
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
 	}
 	
 	@PostMapping("/update")
 	public String update(MemberVO member, HttpServletRequest request, Model model) {
+		log.info(member.toString());
 		service.updateProfile(member);
-
-		HttpSession session = request.getSession();
-		
-		member = service.getMemProfile(session.getAttribute("userId").toString());
-		  
-		model.addAttribute("userId", member.getM_id());
-		model.addAttribute("username", member.getM_name());
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
 		
 		return "redirect:/profile/main";
 	}
 	
-	@PostMapping("/deleteMem")
+	@GetMapping("/deleteMem")
 	public String deleteMem(String m_id) {
 		service.deleteMem(m_id);
 		return "redirect:/login";
 	}
 	
-// 마이페이지의 자신의 현직자 프로필 확인 화면
 	@GetMapping("/emplprofile")
-	public void emplprofile(Model model, HttpServletRequest request) {
+	public String emplprofile(Model model, HttpServletRequest request, RedirectAttributes rttr) {
 		HttpSession session = request.getSession();
 		
-		empl = service.getEmplProfile2(session.getAttribute("userId").toString());
+		String m_id = session.getAttribute("userId").toString();
+		if(service.cheakEmpl(m_id)) {
+		empl = service.getEmplProfile2(m_id);
 		
-		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("userId", m_id);
 		model.addAttribute("imageFile", empl.getFileVO().getStored_file_name());
 		model.addAttribute("emplcorp", empl.getE_corp());
 		model.addAttribute("empldept", empl.getE_dept());
@@ -124,7 +114,12 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
+		model.addAttribute("emplreview", service.searchReview(m_id));
+		return "/profile/emplpofile";
+		}else {
+			rttr.addFlashAttribute("error", 1);
+			return "redirect:/profile/empl";
+		}
 	}
 //	다른사람들의  프로필 접근 화면 화면(리스트)
 	@GetMapping("/showempl")
@@ -175,7 +170,7 @@ public class ProfileController {
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "redirect:/profile/main";
+		return "redirect/profile/main";
 	}
 
 }

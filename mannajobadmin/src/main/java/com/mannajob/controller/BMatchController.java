@@ -129,4 +129,15 @@ public class BMatchController {
 		return "redirect:/bmatch/list?b_category="+bMatchVO.getB_category();
 	}
 	
+	@GetMapping("/cancel")
+	public String cancel(BMatchVO bMatchVO, Criteria cri, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}else {
+			bMatchService.cancel(bMatchVO.getB_num());
+		}
+		return "redirect:/match/matlist";
+	}
+	
 }

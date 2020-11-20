@@ -169,4 +169,12 @@ public class BMatchServiceImpl implements BMatchService{
 		return mapper.searchEmplPaging(bMatchVO,cri);
 	}
 
+	@Override
+	public void cancel(int b_num) {
+		mapper.cancel(b_num);
+		
+	}
+	
+	
+
 }

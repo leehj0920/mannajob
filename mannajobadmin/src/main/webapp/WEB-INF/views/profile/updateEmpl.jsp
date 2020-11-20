@@ -62,10 +62,10 @@
                     </div>
                     <div class="span4">
                       <div class="box aligncenter">
-                        <input type="text" name="e_corp" class="span4"  value="${empl.e_corp}" ><br>
-                         <input type="text" name="e_dept"  class="span4"  value="${empl.e_dept}" /><br>
-                        <input type="text" name="e_rank"  class="span4" value="${empl.e_rank}"  /><br>
-                        <select name="e_task" style="width: 100%" >
+                        <label style="text-align: left;">회사명<input type="text" name="e_corp" class="span4"  value="${empl.e_corp}" ><br>
+                         <label style="text-align: left;">부서명<input type="text" name="e_dept"  class="span4"  value="${empl.e_dept}" /><br>
+                        <label style="text-align: left;">직급<input type="text" name="e_rank"  class="span4" value="${empl.e_rank}"  /><br>
+                        <label style="text-align: left;">직무<select name="e_task" style="width: 100%" >
 		                      <option value="사업관리">사업관리</option>
 		                     <option value="경영·회계·사무">경영·회계·사무</option>
 		                     <option value="금융·보험">금융·보험</option>
@@ -90,7 +90,7 @@
 		                     <option value="인쇄·목재·가구·공예">인쇄·목재·가구·공예</option>
 		                     <option value="환경·에너지·안전">환경·에너지·안전</option>
 		                     <option value="농림어업">농림어업</option>
-                          </select>
+                          </select></label>
                       </div>
                     </div>
 

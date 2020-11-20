@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.service.MatchService;
 
 import lombok.AllArgsConstructor;
@@ -26,8 +28,9 @@ public class MatchController {
 	
 	
 	@GetMapping("/matlist")
-	public void matlist(Model model, HttpServletRequest request) {
+	public void matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {
 		HttpSession session = request.getSession();
+		
 		
 		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
@@ -36,11 +39,14 @@ public class MatchController {
 		System.out.println(model.getAttribute("matlist"));
 	}
 	
+	@GetMapping("/bmatlist")
+	public void bmatlist(Model model, int b_num) {
+		model.addAttribute("matchlist", service.searchBmatMat(b_num));
+		System.out.println(b_num);
+	}
+	
 	@GetMapping("/match")
 	public String match(Model model, int b_num) {
-		model.addAttribute("matchlist", service.searchBmatMat(b_num));
-		
-		System.out.println(b_num);
 		return"/match/matchrequest";
 	}
 }

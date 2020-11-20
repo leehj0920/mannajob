@@ -102,5 +102,11 @@ public class ProfileServiceImpl implements ProfileService {
 		mapper.deleteEmpl(m_id);
 	}
 
+	@Override
+	public boolean cheakEmpl(String m_id) {
+		return mapper.checkEmpl(m_id)==1;
+	}
+
+	
 
 }
