@@ -6,17 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	function popclose(form) {
-		form.target = opener.name;
-		form.submit();
-		
-		if(opener != null) {
-			opener.insert = null;
-			self.close();
-		}
-	}
-</script>
 </head>
 <body>
 	<h3>리뷰 수정</h3>
@@ -39,7 +28,8 @@
 					<td><textarea cols="30" rows="5" name="r_contents"></textarea></td>
 				</tr>
 			</table>
-			<input type="submit" value="수정">
+			<input type="submit" value="수정" onClick="window.close()">
+			<input type="button" value="취소" onClick="window.close()">
 		</form>
 	</div>
 </body>

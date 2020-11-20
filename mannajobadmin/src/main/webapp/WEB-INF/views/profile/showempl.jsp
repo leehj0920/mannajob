@@ -6,13 +6,13 @@
 <%@ include file="../includes/header.jsp" %>
 
 <script>
-	function reviewU() {
+	function reviewUU() {
 		window.name = 'showempl';
-		var update = document.ReviewU;
+		var updatee = document.ReviewUU;
 		window.open('', 'Update', 'width=500, height=430');
-		update.action='/review/updatee';
-		update.target='Update';
-		update.submit();
+		updatee.action='/review/updatee';
+		updatee.target='Update';
+		updatee.submit();
 	}
 </script>
 
@@ -221,10 +221,7 @@
                           <td>
                             <!-- 수정버튼 (세션 아이디와 동일할 경우 활성화) -->
 	                        <c:if test="${userId eq re.r_mat_m_id }">
-	                        <form name='ReviewU' action='' method='get'>
-								<input type="hidden" name="r_num" value="${re.r_num}">
-							<p class="center"><input type="button" value="수정" onClick='reviewU()' class="btn btn-mini btn-theme"></p>
-                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}" class="btn btn-mini btn-theme">수정</a></p>
+                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
 							</form>
 	                        </c:if>
                           </td>

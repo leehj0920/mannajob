@@ -189,7 +189,7 @@
 	</resultMap>
 	
 	<!-- 현직자 신청 리스트 -->
-	<select id="emplApply" resultMap="EmplfileVO">
+	<select id="emplApply" resultType="EmplfileVO">
 		SELECT e.e_num, e.m_id, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name, f.f_category
 		FROM empl e, m_file f
 		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'C'
