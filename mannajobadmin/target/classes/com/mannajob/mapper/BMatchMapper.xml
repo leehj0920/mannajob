@@ -30,6 +30,10 @@
 		update b_match set b_del = 'Y' where b_num = #{b_num}
 	</update>
 	
+	<update id="cancel">
+		update b_match set b_state = 'C' where b_num = #{b_num}
+	</update>
+	
 	<update id="update">
 		update b_match set b_corp = #{b_corp}, b_task= #{b_task}, b_price =#{b_price}, b_location=#{b_location}, b_stdate=#{b_stdate}, b_endate=#{b_endate}, b_period=#{b_period},b_subject =#{b_subject},b_contents=#{b_contents} where b_num = #{b_num}
 	</update>
