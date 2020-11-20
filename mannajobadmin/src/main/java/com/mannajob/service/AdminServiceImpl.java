@@ -67,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<EmplFileVO> emplApply(int e_num) {
+	public EmplFileVO emplApply(int e_num) {
 		return mapper.emplApply(e_num);
 	}
 

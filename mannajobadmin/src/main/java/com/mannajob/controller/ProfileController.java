@@ -61,9 +61,10 @@ public class ProfileController {
 	
 	// empl.jsp
 	@GetMapping("/empl")
-	public void EmplJoin(Model model, HttpSession session) {
+	public String EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
 		model.addAttribute("userId", session.getAttribute("userId"));
+		return "/profile/empl";
 	}
 			
 	//EmplVO INSERT 

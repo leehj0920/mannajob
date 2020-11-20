@@ -1,111 +1,167 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>현직자 지원 신청 검토</h1>
-	<input type="button" value="로그아웃" onclick="location.href='/logout'">
-	<hr>
-	<input type="button" value="회원정보 관리" onclick="location.href='/admin/manage'">
-	<input type="button" value="현직자 승인 관리" onclick="location.href='/admin/check'">
-	<div id="memberSearch">
-		<h2>검색조건</h2>
-		<div>
-			<form method="get" action="/admin/check">
-				<select name="searchType">
-					<option value="All">전체</option>
-					<option value="Ok">인증</option>
-					<option value="Not">미인증</option>
-				</select> <input type="text" name="keyword" placeholder="아이디 입력"> <input
-					type="submit" value="조회">
-			</form>
-		</div>
-	</div>
-	<div id="emplList">
-		<h2>지원 신청 검토</h2>
-		<h4>
-			검색 구분:
-			<c:choose>
-				<c:when test='${searchType eq null or searchType eq ""}'>
-				전체
-				</c:when>
-				<c:when test='${searchType eq "All"}'>
-				전체
-				</c:when>
-				<c:when test='${searchType eq "Ok"}'>
-				인증
-				</c:when>
-				<c:when test='${searchType eq "Not"}'>
-				미인증
-				</c:when>
-			</c:choose>
-		</h4>
-		<h4>
-			아이디(포함):
-			<c:choose>
-				<c:when test='${keyword eq null or keyword eq ""}'>
-				전체
-			</c:when>
-				<c:otherwise>
-				'<%=request.getAttribute("keyword")%>'
-			</c:otherwise>
-			</c:choose>
-		</h4>
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>아이디</th>
-					<th>지원서</th>
-					<th>신청일</th>
-					<th>인증여부</th>
-				</tr>
-			</thead>
-			<c:forEach items="${empllist}" var="empl">
-				<tr>
-					<td><c:out value="${empl.e_num }" /></td>
-					<td><c:out value="${empl.m_id }" /></td>
-					<td>
-						<form method="get" action="/admin/emplapply">
-							<input type="hidden" name="e_num" value="${empl.e_num}">
-							<input type="submit" value="지원서 확인">
-						</form>
-					</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${empl.e_applydate}" /></td>
-					<td>
-						<c:choose>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../includes/header.jsp" %>
+
+
+ <section id="inner-headline">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">관리자</a><i class="icon-angle-right"></i></li>
+              <li><a href="#">현직자 지원신청 검토</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="">
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <aside class="left-sidebar">
+              <div class="widget">
+              </div>
+              <div class="widget">
+                <h5 class="widgetheading height_40">관&nbsp&nbsp리&nbsp&nbsp자</h5>
+
+                <ul class="cat">
+                  <li><i class="icon-angle-right"></i><a href="/admin/manage">회원정보 관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/compl/manage">악성회원 신고관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/admin/check">현직자 신청 승인관리</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+          <div class="span8">
+            <article>
+              <form id="commentform" action="#" method="post" name="comment-form">
+
+                <div class="row">
+                  <div class="post-heading">
+                    <p class="line_9"></p>
+                    <p class="line_9"></p>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 현직자<strong></strong> 지원신청 검토</h3>
+                    <p class="line_9"></p>
+                  </div>
+
+                  <div class="span9">
+                    <div class="">
+                      <h5>▶ 검색조건</h5>
+                      <form method="get" action="/admin/check">
+                        <div class="media-body">
+                        <p>
+                          <span>
+                            <select name="searchType">
+                              	<option value="All">전체</option>
+								<option value="Ok">인증</option>
+								<option value="Not">미인증</option>
+                            </select>
+                          </span>
+                          <span><input type="text" name="keyword" style="width: 200px; min-height: 30px;" placeholder="아이디 입력" /></span>
+                          <!-- 버튼영역 -->
+                          <span style="vertical-align: top;"><input	type="submit" class="btn btn-theme" value="조회"></span>
+                        </p>
+                        </div>
+               		</form>
+                    </div>
+                    <br>
+                  </div> 
+                  <div class="span9">                   
+                    <h5>▶ 지원신청 검토</h5>
+                    <div class="">
+                      <table class="table table-bordered">
+                        <colgroup>
+                          <col style="width: 10%">
+                          <col style="width: 20%">
+                          <col style="width: 20%">
+                          <col style="width: 20%">
+                          <col style="width: 20%">
+                        </colgroup>
+                        
+                        <tr>
+                          <td>
+                            <p class="center" >번호</p>    
+                          </td>
+                          <td>
+                            <p class="center" >아이디</p>    
+                          </td>
+                          <td>
+                            <p class="center">지원서</p>    
+                          </td>
+                          <td>
+                            <p class="center">신청일</p>    
+                          </td>
+                          <td>
+                            <p class="center">인증여부</p>    
+                          </td>
+                        </tr> 
+                        <c:forEach items="${empllist}" var="empl">
+                        <tr>
+                          <td>
+                            <!-- 번호 -->
+                            <p class="center"><c:out value="${empl.e_num }" /></p>
+                          </td>
+                          <td style="width: 400px;">
+                            <!-- 아이디 -->
+                            <p class="center"><c:out value="${empl.m_id }" /></p>
+                          </td>
+                          <td>
+                            <!-- 지원서 -->
+                            <form method="get" action="/admin/emplapply" style="height: 10px; margin:0 auto;">
+								<input type="hidden" name="e_num" value="${empl.e_num}">
+								<p class="center"><input type="submit" class="btn btn-mini btn-theme" value="지원서 확인"></p>
+							</form>
+							
+                          </td>
+                          <td>
+                            <!-- 신청일 -->
+                            <p class="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${empl.e_applydate}" /></p>
+                          </td>
+                          <td>
+                            <!-- 인증여부-->
+                            <p class="center">
+                            <c:choose>
 							<c:when test="${empl.e_ok eq 'Y'}">승인</c:when>
 							<c:otherwise>미승인</c:otherwise>
-						</c:choose>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<c:if test="${emplpageMaker.prev}">
-			<a
-				href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${emplpageMaker.startPage - 1}&amount=10">[이전]</a>
-		</c:if>
-		<c:forEach var="num" begin="${emplpageMaker.startPage}"
-			end="${emplpageMaker.endPage}">
-			<c:if test="${emplpageMaker.cri.pageNum == num}">
-    		${num}	
-    		</c:if>
-			<c:if test="${emplpageMaker.cri.pageNum != num}">
-    			[<a
-					href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${num}&amount=10">${num}</a>]	
-    		</c:if>
+							</c:choose>
+							</p>
+                          </td>
+                        </tr>  
+                        </c:forEach>
+                                       
+                      </table>
+                    </div>
+                    <!-- 페이징 -->
+                    <div class = "span8 center">
+                      <c:if test="${emplpageMaker.prev}">
+						<a href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${emplpageMaker.startPage - 1}&amount=10">◀</a>
+					  </c:if>
+					  <c:forEach var="num" begin="${emplpageMaker.startPage}" end="${emplpageMaker.endPage}">
+					  <c:if test="${emplpageMaker.cri.pageNum == num}">
+    					${num}	
+    				  </c:if>
+					  <c:if test="${emplpageMaker.cri.pageNum != num}">
+    				  	<a href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${num}&amount=10">${num}</a>	
+    				  </c:if>
+					  </c:forEach>
+					  <c:if test="${emplpageMaker.next}">
+						<a href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${emplpageMaker.endPage + 1}&amount=10">▶</a>
+					  </c:if>
+                    </div>
+                  </div>
+                </div>               
+              </form>             
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		</c:forEach>
-		<c:if test="${emplpageMaker.next}">
-			<a
-				href="/admin/check?searchType=<%=request.getAttribute("searchType") %>&keyword=<%= request.getAttribute("keyword") %>&pageNum=${emplpageMaker.endPage + 1}&amount=10">[다음]</a>
-		</c:if>
-	</div>
-</body>
-</html>
+<%@ include file="../includes/footer.jsp" %>

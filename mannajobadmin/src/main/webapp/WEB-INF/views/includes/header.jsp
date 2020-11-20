@@ -31,7 +31,18 @@
   <link rel="shortcut icon" href="/resources/ico/MJfavi.png" />
 
 </head>
+  <style>
+    body,
+    h1,
+    h5 {
+      font-family: 'Sunflower', sans-serif;
+    }
 
+    .height_40 {
+      padding-top: 30px;
+    }
+
+  </style>
 
 <body>
   <div id="wrapper">
@@ -116,7 +127,7 @@
                       <a href="/match/matlist">마이페이지</a>
                     </li>
                     <li>
-                      <a href="#">관리자</a> 
+                      <a href="/admin/manage">관리자</a> 
                     </li> 
                   </ul>
                 </nav>

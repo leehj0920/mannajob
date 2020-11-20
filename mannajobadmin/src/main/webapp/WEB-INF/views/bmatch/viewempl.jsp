@@ -212,7 +212,7 @@
                             <a href="/bmatch/list?&pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&m_id=${bMatch.m_id}" class="btn btn-inverse margintop10 a_btn4" type="button">리스트</a>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
                             <a href="#" class="btn btn-theme margintop10 a_btn4" type="button" onclick="openPopup();">매칭요청</a>
-                            <a href="#" class="btn btn-inverse margintop10 a_btn4" type="button">신고</a>  
+                            <a href="#" onclick="window.open('/compl/insert?b_num=${bMatch.b_num}&b_category=A&m_id=${bMatch.m_id}','게시글 신고','width=500,height=700'); return false;" class="btn btn-inverse margintop10 a_btn4" type="button">신고</a>  
                           </p>
                         </div>
                       </div>
@@ -227,7 +227,7 @@
                             <span class="align-right">
                               <!-- 비밀글 작성시 checkbox  check/non_check  -->
                               <input type="checkbox">
-                                비밀글
+                               	 비밀글
                                 &nbsp&nbsp &nbsp&nbsp
                               <input type="button" class="btn btn-mini " value="질문등록">
                             </span>
@@ -294,8 +294,19 @@
       function openPopup() {
         window.open("/match/match?b_num=${bMatch.b_num}","매칭요청 팝업","width=800,height=350");
       }
+
     </script>
 
 
 <%@ include file="../includes/footer.jsp" %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	 var result = "${result}";
+	 if(result == 1){
+		 
+		 window.close();
+	 }
+});
+</script>
 

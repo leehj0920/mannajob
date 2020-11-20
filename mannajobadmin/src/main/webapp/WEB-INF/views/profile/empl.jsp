@@ -142,7 +142,7 @@
 <script>
 	$('document').ready(function(){
 		var error = "${error}"
-		if(error=1){
+		if(error==1){
 			alert("현직자 지원이 필요합니다.");
 		}
 	});

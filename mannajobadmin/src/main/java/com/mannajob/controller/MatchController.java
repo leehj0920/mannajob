@@ -28,15 +28,17 @@ public class MatchController {
 	
 	
 	@GetMapping("/matlist")
-	public void matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {
+	public String matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {
 		HttpSession session = request.getSession();
-		
-		
+		if(session.getAttribute("userId")==null) {
+			return "/main";
+		}
 		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
 		System.out.println(model.getAttribute("bmatlist"));
 		System.out.println(model.getAttribute("matlist"));
+		return "match/matlist";
 	}
 	
 	@GetMapping("/bmatlist")

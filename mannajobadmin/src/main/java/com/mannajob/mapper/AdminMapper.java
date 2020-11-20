@@ -24,7 +24,7 @@ public interface AdminMapper {
 
 	public int getemplTotalCount(@Param("search") SearchVO search);
 	
-	public List<EmplFileVO> emplApply(int e_num);
+	public EmplFileVO emplApply(int e_num);
 
 	public String emplImage(int e_num);
 }

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.SearchVO;
 import com.mannajob.service.AdminService;
@@ -57,18 +59,17 @@ public class AdminController {
 	}
 	
 	@GetMapping("/emplapply")
-	public void emplapply(int e_num, HttpServletRequest request) {
+	public void emplapply(int e_num, HttpServletRequest request,Model model) {
 		HttpSession session = request.getSession();
-		session.setAttribute("e_num", e_num);
 		
-		session.setAttribute("emplFile", service.emplApply(e_num));
-		System.out.println(session.getAttribute("emplFile"));
+		EmplFileVO emplfileVO = service.emplApply(e_num);
+		model.addAttribute("emplFile", emplfileVO);
+		model.addAttribute("profile",emplfileVO.getStored_file_name());
+		System.out.println(emplfileVO.toString());
 	}
 	
 	@GetMapping("/certif")
-	public void certif(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("e_num"));
-		session.setAttribute("emplCertif", service.emplImage((int)session.getAttribute("e_num")));
+	public void certif(HttpServletRequest request, @RequestParam("e_num") int e_num, Model model) {
+		model.addAttribute("emplCertif",  service.emplImage(e_num));
 	}
 }

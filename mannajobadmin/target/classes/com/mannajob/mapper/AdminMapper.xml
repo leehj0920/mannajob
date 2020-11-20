@@ -170,7 +170,7 @@
 	</select>
 	
 	<!-- 현직자 승인 관리 resultMap -->
-	<resultMap type="com.mannajob.domain.FileVO" id="fileVO">
+<!-- 	<resultMap type="com.mannajob.domain.FileVO" id="fileVO">
 		<result property="e_num" column="e_num" />
 		<result property="stored_file_name" column="stored_file_name" />
 		<result property="f_category" column="f_category" />
@@ -186,20 +186,20 @@
 		<result property="e_career" column="e_career"/>
 		<result property="e_intro" column="e_intro"/>
 		<collection property="fileVO" resultMap="fileVO" />
-	</resultMap>
-	
+	</resultMap> -->
+	<!-- 왜 현직자 신청서 세부내용에 들어가는 프로필 이미지인데 I인가 확인 -->
 	<!-- 현직자 신청 리스트 -->
-	<select id="emplApply" resultMap="EmplfileVO">
-		SELECT e.e_num, e.m_id, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name, f.f_category
+	<select id="emplApply" resultType="com.mannajob.domain.EmplFileVO">
+		SELECT e.e_num, e.m_id, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, e_ok,e_applydate,e_okdate, f.stored_file_name, f.f_category
 		FROM empl e, m_file f
-		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'C'
+		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'I'
 	</select>
 	
-	<!-- 현직자 이미지 이름 조회 -->
+	<!-- 현직자 증명서 이름 조회 -->
 	<select id="emplImage" resultType="String">
 		SELECT f.stored_file_name
 		FROM empl e, m_file f
-		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'I'
+		WHERE e.e_num = f.e_num AND e.e_num = #{e_num} AND f.f_category = 'C'
 	</select>
 	
 	<!-- 현직자 e_num 조회 -->
