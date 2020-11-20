@@ -39,4 +39,6 @@ public interface BMatchMapper {
 	
 	public List<EmplVO> searchEmplPaging(@Param("bMatchVO")BMatchVO bMatchVO,@Param("cri")CriteriaProfile cri);
 	
+	public void cancel(int b_num);
+	
 }

@@ -5,6 +5,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp" %>
 
+<script>
+	function reviewU() {
+		window.name = 'showempl';
+		var update = document.ReviewU;
+		window.open('', 'Update', 'width=500, height=430');
+		update.action='/review/updatee';
+		update.target='Update';
+		update.submit();
+	}
+</script>
+
 <section id="inner-headline">
       <div class="container">
         <div class="row">
@@ -209,12 +220,19 @@
                           </td>
                           <td>
                             <!-- 수정버튼 (세션 아이디와 동일할 경우 활성화) -->
-                            
-                            <p class="center"><a href="/review/update?r_num=${re.r_num}" class="btn btn-mini btn-theme">수정</a></p>
+	                        <c:if test="${userId eq re.r_mat_m_id }">
+	                        <form name='ReviewU' action='' method='get'>
+								<input type="hidden" name="r_num" value="${re.r_num}">
+							<p class="center"><input type="button" value="수정" onClick='reviewU()' class="btn btn-mini btn-theme"></p>
+                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}" class="btn btn-mini btn-theme">수정</a></p>
+							</form>
+	                        </c:if>
                           </td>
                           <td>
                             <!-- 삭제버튼 (세션 아이디와 동일할 경우 활성화)-->
-                            <p class="center"><a href="/review/delete?r_num=${re.r_num}" class="btn btn-mini btn-inverse">삭제</a></p>
+                            <c:if test="${userId eq re.r_mat_m_id }">
+                            <p class="center"><a href="/review/deletee?r_num=${re.r_num}" class="btn btn-mini btn-inverse">삭제</a></p>
+                            </c:if>
                           </td>
                         </tr>  
                         </c:forEach>

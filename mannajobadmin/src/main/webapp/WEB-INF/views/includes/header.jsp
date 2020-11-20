@@ -113,7 +113,7 @@
                       <a href="/chart/chart_cnt">통&nbsp&nbsp계</a>
                     </li>
                     <li>
-                      <a href="/profile/main">마이페이지</a>
+                      <a href="/match/matlist">마이페이지</a>
                     </li>
                     <li>
                       <a href="#">관리자</a> 

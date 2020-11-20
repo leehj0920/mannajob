@@ -13,8 +13,8 @@
 	<input type="button" value="로그아웃" onclick="location.href='/logout'">
 	<hr>
 	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
-	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
-	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
+	<input type="button" value="매칭 내역 관리" onclick="location.href='/match/matlist'">
+	<input type="button" value="일정 관리" onclick="location.href='/mypage/calendar'">
 	<div id="b_match">
 		<h2>매칭 작성 내역</h2>
 		<table>
@@ -74,7 +74,7 @@
 					<c:if test="${mlist.matchVO.mat_state eq 'C' }">
 						<c:choose>
 							<c:when test="${mlist.reviewVO.r_contents ne null}">
-								<form method="post" action="/review/update">
+								<form method="get" action="/review/update">
 									<input type="hidden" name="r_contents" value="${mlist.reviewVO.r_contents}">
 									<input type="hidden" name="mat_num" value="${mlist.matchVO.mat_num}">
 									<input type="hidden" name="r_w_m_id" value="${mlist.m_id}">

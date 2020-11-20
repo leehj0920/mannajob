@@ -112,6 +112,10 @@
 	</resultMap>
 
 
+	<select id ="checkEmpl" resultType="int">
+		SELECT count(e_num) FROM empl where m_id=#{m_id} and e_del='N'
+	</select>
+    
 
 	<!-- 현직자 프로필에서 리뷰 확인 -->
 	<select id="searchReview" resultType="com.mannajob.domain.ReviewVO">

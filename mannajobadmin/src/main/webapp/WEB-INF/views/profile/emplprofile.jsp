@@ -62,10 +62,10 @@
                     </div>
                     <div class="span4">
                       <div class="box aligncenter">
-                        <input type="text" class="span4"  value="${emplcorp}" disabled><br>
-                        <input type="text" class="span4"  value="${empldept}" disabled /><br>
-                        <input type="text" class="span4" value="${emplrank}" disabled /><br>
-                        <input type="text" class="span4" value="${empltask}" disabled />
+                        <label style="text-align: left;">회사명<input type="text" class="span4"  value="${emplcorp}" disabled><br></label>
+                        <label style="text-align: left;">부서명<input type="text" class="span4"  value="${empldept}" disabled /><br></label>
+                        <label style="text-align: left;">직급<input type="text" class="span4" value="${emplrank}" disabled /><br></label>
+                        <label style="text-align: left;">직무<input type="text" class="span4" value="${empltask}" disabled /></label>
                       </div>
                     </div>
 

@@ -98,12 +98,14 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/emplprofile")
-	public void emplprofile(Model model, HttpServletRequest request) {
+	public String emplprofile(Model model, HttpServletRequest request, RedirectAttributes rttr) {
 		HttpSession session = request.getSession();
 		
-		empl = service.getEmplProfile2(session.getAttribute("userId").toString());
+		String m_id = session.getAttribute("userId").toString();
+		if(service.cheakEmpl(m_id)) {
+		empl = service.getEmplProfile2(m_id);
 		
-		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("userId", m_id);
 		model.addAttribute("imageFile", empl.getFileVO().getStored_file_name());
 		model.addAttribute("emplcorp", empl.getE_corp());
 		model.addAttribute("empldept", empl.getE_dept());
@@ -112,15 +114,26 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
+		model.addAttribute("emplreview", service.searchReview(m_id));
+		return "/profile/emplprofile";
+		}else {
+			rttr.addFlashAttribute("error", 1);
+			return "redirect:/profile/empl";
+		}
 	}
 //	다른사람들의  프로필 접근 화면 화면(리스트)
 	@GetMapping("/showempl")
-	public String showempl(Model model, EmplVO emplVO) {
+	public String showempl(Model model, EmplVO emplVO, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
 		model.addAttribute("m_id",emplVO.getM_id());
 		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
 		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
+		
+		log.info(".................model....................." + model.getAttribute("m_id"));
+		log.info("...................session..................." + session.getAttribute("userId"));
+		
 		return "/profile/showempl";
 	}
 

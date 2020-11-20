@@ -25,6 +25,8 @@ public interface ProfileMapper {
 
 	public void insertFile(Map<String, Object> map) throws Exception;
 
+	public int checkEmpl(String m_id);
+	
 	
 	public List<ReviewVO> searchReview(String m_id);
 	
