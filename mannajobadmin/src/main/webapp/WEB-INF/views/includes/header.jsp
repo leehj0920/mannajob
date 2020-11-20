@@ -63,7 +63,7 @@
                 <li>
                		<c:choose>
 						<c:when test="${userId eq null}">
-							<a href="/join/member">회원가입</a>
+							<a href="/join/member_agree">회원가입</a>
 						</c:when>
 					<c:otherwise>
 							<a href="/logout">로그아웃</a>
@@ -110,7 +110,7 @@
                       <a href="/qna/list">게시판</a>
                     </li>
                     <li>
-                      <a href="#">통&nbsp&nbsp계</a>
+                      <a href="/chart/chart_cnt">통&nbsp&nbsp계</a>
                     </li>
                     <li>
                       <a href="/profile/main">마이페이지</a>
