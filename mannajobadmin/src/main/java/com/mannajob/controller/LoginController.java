@@ -104,7 +104,8 @@ public class LoginController {
 		
 		int check = service.MemCheck(id);
 		if(check == 0) {
-			return "/join/join";
+			model.addAttribute("userapi", api);
+			return "/join/member_agree";
 		} else {
 			session.setAttribute("uesrId", id); //
 			return "redirect:/main";
@@ -127,8 +128,10 @@ public class LoginController {
 	    
 	    int check = service.MemCheck(s_id);
 	    // Ŭ���̾�Ʈ�� �̸��� ���� ��� �Է� ��������
-	    if(check == 0){ 
-	    	return "/join/join";
+	    log.info(check);
+	    if(check == 0){
+	    	model.addAttribute("userapi", userInfo.get("api"));
+	    	return "redirect:/join/member_agree";
 	    }
 	    session.setAttribute("userId", userInfo.get("sessionId"));
 	    return "redirect:/main";

@@ -53,7 +53,7 @@
             <div class="">
               <input type="submit" class="btn" style="width: 100px; height: 45px;" value="로그인" name="sumbit">
               <span>&nbsp&nbsp&nbsp&nbsp</span>
-              <input type="button" value="회원가입" onclick="location.href='/join/member'"class="btn" style="width: 100px;height: 45px;">
+              <input type="button" value="회원가입" onclick="location.href='/join/member_agree'"class="btn" style="width: 100px;height: 45px;">
               <p class="line_9"></p> 
               <p class="line_9"></p> 
                       
