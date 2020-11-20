@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mannajob.mapper.MatchMapper">
+	<!-- 매칭 작성 내역 조회 -->
+	<select id="searchBMat" resultType="com.mannajob.domain.BMatchVO">
+		SELECT b_num, b_subject, b_state FROM b_match WHERE m_id = #{m_id}
+	</select>
+	
+	<!-- 매칭 신청 현황 -->
+	<select id="searchBmatMat" resultType="com.mannajob.domain.MatchVO">
+		SELECT mat_num, mat_stdate, mat_hour, m_id FROM match WHERE b_num = #{b_num}
+	</select>
+	
+		<!-- 매칭 신청 내역 조회-->
+	<select id="searchMat" resultType="com.mannajob.domain.BMatchVO">
+		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, m.m_id, r.r_contents FROM b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num WHERE b.b_num = m.b_num AND m.m_id = #{m_id} 
+	</select>
+	
+
+</mapper>

@@ -114,10 +114,24 @@ public class ProfileController {
 		
 		model.addAttribute("emplreview", service.searchReview(session.getAttribute("userId").toString()));
 	}
-	
-	@GetMapping("/updateEmpl")
-	public void emplupdate(HttpServletRequest request) {
+//	다른사람들의  프로필 접근 화면 화면(리스트)
+	@GetMapping("/showempl")
+	public String showempl(Model model, EmplVO emplVO) {
+		model.addAttribute("m_id",emplVO.getM_id());
+		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
+		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
+		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
+		return "/profile/showempl";
+	}
 
+
+//	마이페이지 자신의 현직자 프로필 변경 화면
+	@GetMapping("/updateEmpl")
+	public void emplupdate(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		EmplVO emplVO = service.getEmplProfile2(session.getAttribute("userId").toString());
+		model.addAttribute("empl", emplVO);
+		model.addAttribute("profile", emplVO.getFileVO().getStored_file_name());
 	}
 	
 	@PostMapping("/updateEmpl")
@@ -133,36 +147,17 @@ public class ProfileController {
 		model.addAttribute("emplcareer", empl.getE_career());
 		model.addAttribute("emplintro", empl.getE_intro());
 		
-		return "/profile/main";
+		return "redirect:/profile/emplprofile";
+
 	}
 	
 
-	@GetMapping("/matlist")
-	public void matlist(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		
-		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
-		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
-		
-		System.out.println(model.getAttribute("bmatlist"));
-	}
-	
-	@GetMapping("/match")
-	public void match(Model model, int b_num) {
-		model.addAttribute("matchlist", service.searchBmatMat(b_num));
-		
-		System.out.println(b_num);
-	}
-	
-	@GetMapping("/calendar")
-	public void calendar() {
-		
-	}
+
 	
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "/profile/main";
+		return "redirect/profile/main";
 	}
 
 }

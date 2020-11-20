@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,23 +11,23 @@
 	<h3>리뷰 수정</h3>
 	<div>
 		<form method="post" action="/review/updateok">
-			<input type="hidden" name="b_id"
-				value="<%=request.getAttribute("b.m_id")%>"> <input
-				type="hidden" name="w_id"
-				value="<%=request.getAttribute("userId")%>"> <input
+			<input type="hidden" name="r_w_m_id"
+				value="<%=request.getAttribute("r_w_m_id")%>"> <input
+				type="hidden" name="r_mat_m_id"
+				value="<%=request.getAttribute("r_mat_m_id")%>"> <input
 				type="hidden" name="mat_num"
 				value="<%=request.getAttribute("mat_num")%>">
 			<table>
 				<tr>
 					<td>추천/비추천</td>
 					<td>
-					<input type="radio" name="good" value="G" checked="checked">추천
-					<input type="radio" name="good" value="B">비추천
+					<input type="radio" name="r_good" value="G" checked="checked">추천
+					<input type="radio" name="r_good" value="B">비추천
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><textarea cols="30" rows="5" name="contents" value=""></textarea></td>
+					<td><textarea cols="30" rows="5" name="r_contents"></textarea></td>
 				</tr>
 			</table>
 			<input type="submit" value="수정">

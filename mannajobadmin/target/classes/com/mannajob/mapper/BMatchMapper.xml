@@ -92,9 +92,9 @@
 	
 	<!-- 현직자 프로필 페이징 -->
 	<select id="searchEmplPaging" resultMap="emplVO">
-		select stored_file_name, m_name, e_corp, e_career, e_task, e_num from 
+		select stored_file_name, m_id, m_name, e_corp, e_career, e_task, e_num from 
 		(select /*+ index_desc(empl seq_e) */
-		rownum rn, f.stored_file_name, m.m_name, e.e_corp, e.e_career, e.e_task, e.e_num from m_file f, member m, empl e
+		rownum rn, f.stored_file_name,e.m_id, m.m_name, e.e_corp, e.e_career, e.e_task, e.e_num from m_file f, member m, empl e
 		WHERE f.e_num = e.e_num AND m.m_id = e.m_id AND f.f_category = 'I' and
 		<![CDATA[
 		rownum <= #{cri.pageNumP} * #{cri.amountP}
