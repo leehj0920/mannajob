@@ -63,7 +63,7 @@
                 <li>
                		<c:choose>
 						<c:when test="${userId eq null}">
-							<a href="/join/member">회원가입</a>
+							<a href="/join/member_agree">회원가입</a>
 						</c:when>
 					<c:otherwise>
 							<a href="/logout">로그아웃</a>

@@ -115,7 +115,7 @@ public class ProfileController {
 		model.addAttribute("emplintro", empl.getE_intro());
 		
 		model.addAttribute("emplreview", service.searchReview(m_id));
-		return "/profile/emplpofile";
+		return "/profile/emplprofile";
 		}else {
 			rttr.addFlashAttribute("error", 1);
 			return "redirect:/profile/empl";

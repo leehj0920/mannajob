@@ -26,6 +26,11 @@ public class JoinController {
 	public void insert() {
 		
 	}
+//	약관동의 화면
+	@GetMapping("/member_agree")
+	public void member_agree() {
+		//return "redirect:/join/member";	
+	}
 	
 	//MemberVO�� ���� ���� INSERT �� login.jsp�� redirect
 	@PostMapping("/member")
