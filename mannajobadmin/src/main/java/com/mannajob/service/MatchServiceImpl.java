@@ -39,7 +39,5 @@ public class MatchServiceImpl implements MatchService{
 	public List<BMatchVO> searchWMat(String m_id) {
 		return mapper.searchWMat(m_id);
 	}
-
-
 	
 }

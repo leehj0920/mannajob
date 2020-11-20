@@ -38,11 +38,6 @@ public class JoinController {
 	}
 	
 	
-	//MemberVO�� ���� ���� INSERT �� login.jsp�� redirect
-	@GetMapping("/member_agree")
-	public void member_agree() {
-		//return "redirect:/join/member";	
-	}
 		
 	@PostMapping("/member")
 	public String insert(MemberVO member, RedirectAttributes rttr) {
