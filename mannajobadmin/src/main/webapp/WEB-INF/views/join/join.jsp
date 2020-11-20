@@ -33,38 +33,48 @@
           </div>
           <!-- end divider --> 
   
-  
-          <form action="/join/join" method="post" class="form-horizontal span12">
-            <div class="control-group  center">               
+   
+          <form action="/join/join" method="post" class="form-horizontal span12"
+          		name="registerForm" onsubmit="return registerValidate_join();">
+            <div class="control-group  center">  
+	          <p class="line_9"></p>
+	          <p class="line_9"></p>
+	          <p class="line_9"></p>
+	          <p class="line_9"></p>
+	          <p class="line_9"></p>	              
+	                           
               <div class="">
                 <input class="form-control" type="password"
-					name="m_passwd" id="inputPassword" placeholder="2차 패스워드를 입력하세요">
+					name="m_passwd" id="inputPassword" placeholder="비밀번호 (영문자 + 숫자) 8자 이상">
               </div>
             </div>
             <div class="control-group  center">               
                 <div class="">
+	                
                   <input class="form-control" type="text"
-					name="m_name" id="inputName" placeholder="이름을 입력하세요">
+					name="m_name" id="inputName" placeholder="이름 (한글  또는 영문자)">
                 </div>
             </div>
             <div class="control-group  center">               
                 <div class="">
                   <input class="form-control" type="text"
-					name="m_phone" id="inputPhone" placeholder="연락처를 입력하세요">
+					name="m_phone" id="inputPhone" placeholder="연락처 (010-XXXX-XXXX)">
                 </div>
             </div>
             <div class="control-group  center">               
                 <div class="">
-                  <input class="form-control" type="text" name="m_email" value="${useremail}" id="inputEmail" placeholder="e-mail을 입력하세요">
+                  <input class="form-control" type="text" name="m_email" value="${useremail}" id="inputEmail" placeholder="e-mail">
                 </div>
             </div>
             <div class="control-group  center">
               <div class="">
-                <input class="btn btn-theme margintop10" style="width: 220px; height: 45px;" type="submit" value="회원가입"><br>
-                <!-- <button type="submit" class="btn-theme" style="width: 220px; height: 45px;">회원가입</button>                -->
-                <p class="line_9"></p>             
+                <input class="btn btn-theme margintop10" style="width: 220px; height: 45px;" name="submit" type="submit" value="회원가입"><br>
+                <p class="line_9"></p> 
+              </div>            
             </div>
             
+            <p class="line_9"></p>
+            <p class="line_9"></p>
             <p class="line_9"></p>
             <p class="line_9"></p>
             <p class="line_9"></p>
@@ -75,4 +85,8 @@
       </section>
 
 
+<<<<<<< HEAD
 <%@ include file="../includes/footer.jsp" %>
+=======
+<%@ include file="../includes/footer.jsp" %>
+>>>>>>> refs/remotes/origin/develope

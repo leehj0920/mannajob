@@ -10,7 +10,7 @@
 <body>
 	<h3>리뷰 수정</h3>
 	<div>
-		<form method="post" action="/review/updateokk">
+		<form method="post" name="updateform" target="showempl" action="/review/updateokk">
 			<input type="hidden" name="r_w_m_id" value="${r_w_m_id }"> 
 			<input type="hidden" name="r_mat_m_id" value="${r_mat_m_id}"> 
 			<input type="hidden" name="r_num" value="${r_num}">
@@ -28,7 +28,8 @@
 					<td><textarea cols="30" rows="5" name="r_contents"></textarea></td>
 				</tr>
 			</table>
-			<input type="submit" value="수정">
+			<input type="submit" value="수정" onClick="window.close()">
+			<input type="button" value="취소" onClick="window.close()">
 		</form>
 	</div>
 </body>

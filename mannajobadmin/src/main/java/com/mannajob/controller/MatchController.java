@@ -44,6 +44,7 @@ public class MatchController {
 	@GetMapping("/bmatlist")
 	public void bmatlist(Model model, int b_num) {
 		model.addAttribute("matchlist", service.searchBmatMat(b_num));
+		
 		System.out.println(b_num);
 	}
 	

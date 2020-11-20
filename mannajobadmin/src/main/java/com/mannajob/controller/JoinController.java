@@ -22,6 +22,11 @@ public class JoinController {
 	private JoinService service;
 	
 	//ȸ������ �������� member.jsp
+//	@GetMapping("/member_agree")
+//	public void insert_agree() {
+//		
+//	}
+	
 	@GetMapping("/member")
 	public void insert() {
 		
@@ -32,7 +37,13 @@ public class JoinController {
 		//return "redirect:/join/member";	
 	}
 	
+	
 	//MemberVO�� ���� ���� INSERT �� login.jsp�� redirect
+	@GetMapping("/member_agree")
+	public void member_agree() {
+		//return "redirect:/join/member";	
+	}
+		
 	@PostMapping("/member")
 	public String insert(MemberVO member, RedirectAttributes rttr) {
 		log.info("����..............................");

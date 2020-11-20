@@ -121,7 +121,7 @@
                       <a href="/qna/list">게시판</a>
                     </li>
                     <li>
-                      <a href="#">통&nbsp&nbsp계</a>
+                      <a href="/chart/chart_cnt">통&nbsp&nbsp계</a>
                     </li>
                     <li>
                       <a href="/match/matlist">마이페이지</a>
