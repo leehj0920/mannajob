@@ -1,54 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>프로필 관리</h1>
-	<input type="button" value="로그아웃" onclick="location.href='/logout'">
-	<hr>
-	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
-	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
-	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
-	<c:choose>
-	<c:when test="${empl ne null}">
-		<input type="button" onclick="location.href='/profile/emplprofile'" value="현직자 프로필 보기">
-	</c:when>
-	<c:otherwise>
-		<input type="button" onclick="location.href='/profile/empl'" value="현직자 지원하기">
-	</c:otherwise>
-	</c:choose>
-	<div id="profile">
-		<h2>회원정보</h2>
-		<div>
-			<table>
-				<tr>
-					<td rowspan="4"><img src="/resources/member_img/sample.jpg" width="200"></td>
-					<td>id</td>
-					<td><c:out value="${userId}"/></td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td><c:out value="${username}"/></td>
-				</tr>
-				<tr>
-					<td>휴대전화</td>
-					<td><c:out value="${userphone}"/></td>
-				</tr>
-				<tr>
-					<td>email</td>
-					<td><c:out value="${useremail}"/></td>
-				</tr>
-				<tr>
-					<td><input type="button" onclick="location='/profile/update'" value="프로필 수정"></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	
-</body>
-</html>
+
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ include file="../includes/header.jsp" %>
+
+    <!-- 상단 black bar breadcrumb -->
+    <section id="inner-headline">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">마이페이지</a><i class="icon-angle-right"></i></li>
+              <li class="active">회원정보관리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <section id=""> 
+        <div class="container">
+          <div class="row">
+
+			<!-- 왼쪽 menu -->
+            <div class="span3">
+              <aside class="left-sidebar">
+                <div class="widget">
+                </div>
+                <div class="widget">
+                  <h5 class="widgetheading height_40">마이페이지</h5>
+  
+                  <ul class="cat">
+                    <li><i class="icon-angle-right"></i><a href="#">매칭내역관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="#">일정관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="#">회원정보관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="#">현직자 프로필관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="#">현직자 지원</a></li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+  
+	        <form class="form-horizontal span9">
+	            <div class="post-heading center">
+                  <p class="line_9"></p>
+                  <p class="line_9"></p>
+                  <h4>Change an <strong>account</strong></h4>
+                </div>
+                
+	            <div class="control-group center">              
+	              <div class="">
+	                 
+	                <p class="line_9"></p>
+	                
+	                <p style="margin-left: -180px;" >아이디</p>
+	                <input type="text" id="inputId" placeholder="아이디를 입력하세요" value="<%=request.getAttribute("userId") %>" disabled>
+	              </div>
+	            </div>                       
+	            <div class="control-group  center">               
+	                <div class="">
+	                  <p style="margin-left: -180px;" >이 &ensp; 름</p>
+	                  <input type="text" id="inputName" placeholder="이름을 입력하세요" value="<%=request.getAttribute("username") %>" disabled>
+	                </div>
+	            </div>
+	            <div class="control-group  center">               
+	                <div class="">
+	                  <p style="margin-left: -180px;" >연락처</p>
+	                  <input type="text" id="inputPhone" placeholder="연락처를 입력하세요" value="<%=request.getAttribute("userphone") %>" disabled>
+	                </div>
+	            </div>
+	            <div class="control-group  center">               
+	                <div class="">
+	                  <p style="margin-left: -180px;" >E-mail</p>
+	                  <input type="text" id="inputEmail" placeholder="e-mail을 입력하세요" value="<%=request.getAttribute("useremail") %>" disabled>
+	                </div>
+	            </div>
+	            <div class="control-group  center">
+	              <div class="">
+	                <p class="line_9"></p>
+	                <input type="button" 
+	                       onclick="location.href='/profile/update'" 
+	                   	   class="btn btn-theme margintop10"
+	                       style="width: 98px; height: 36px; font-size: 14px;"
+	                       value="수정하기">
+	                <span>&emsp13;&emsp13;</span>
+	                <input type="button" 
+	                       onClick="location.href='/profile/deleteMem?m_id=<%=request.getAttribute("userId") %>'"
+	                   	   class="btn btn-inverse margintop10"
+	                       style="width: 98px; height: 36px; font-size: 14px;"
+	                       value="회원탈퇴"> 
+	                <p class="line_9"></p>             
+	              </div>
+	            </div>
+	            <p class="line_9"></p>
+	            <p class="line_9"></p>
+	        
+            </form>
+          
+  		  </div>
+        </div>
+      </section>
+
+
+<%@ include file="../includes/footer.jsp" %>

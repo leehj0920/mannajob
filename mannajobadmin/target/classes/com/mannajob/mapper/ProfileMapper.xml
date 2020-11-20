@@ -11,7 +11,7 @@
 	
 	<!-- 프로필 수정 -->
 	<update id="updateProfile">
-		UPDATE member SET m_passwd = #{m_passwd}, m_phone = #{m_phone}, m_email = #{m_email} WHERE m_id = #{m_id}
+		UPDATE member SET m_name=#{m_name}, m_phone = #{m_phone}, m_email = #{m_email} WHERE m_id = #{m_id}
 	</update>
 	
 	<!-- 회원 삭제 -->

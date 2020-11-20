@@ -63,7 +63,7 @@ public class ProfileController {
 	@GetMapping("/empl")
 	public void EmplJoin(Model model, HttpSession session) {
 		System.out.println(session.getAttribute("userId"));
-		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("userId", session.getAttribute("userId"));
 	}
 			
 	//EmplVO INSERT 
@@ -72,43 +72,31 @@ public class ProfileController {
 		
 		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-		return "redirect:/profile/main";
+		return "/profile/main";
 	}
 	
 	@GetMapping("/update")
 	public void update(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		member = service.getMemProfile(session.getAttribute("userId").toString());
+		model.addAttribute("member", member);
 		
-//		model.addAttribute("userId", member.getM_id());
-//		model.addAttribute("username", member.getM_name());
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
 	}
 	
 	@PostMapping("/update")
 	public String update(MemberVO member, HttpServletRequest request, Model model) {
+		log.info(member.toString());
 		service.updateProfile(member);
-
-		HttpSession session = request.getSession();
-		
-		member = service.getMemProfile(session.getAttribute("userId").toString());
-		  
-		model.addAttribute("userId", member.getM_id());
-		model.addAttribute("username", member.getM_name());
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
 		
 		return "redirect:/profile/main";
 	}
 	
-	@PostMapping("/deleteMem")
+	@GetMapping("/deleteMem")
 	public String deleteMem(String m_id) {
 		service.deleteMem(m_id);
 		return "redirect:/login";
 	}
 	
-// 마이페이지의 자신의 현직자 프로필 확인 화면
 	@GetMapping("/emplprofile")
 	public void emplprofile(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -169,7 +157,7 @@ public class ProfileController {
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "redirect:/profile/main";
+		return "redirect/profile/main";
 	}
 
 }
