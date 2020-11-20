@@ -23,8 +23,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void updateR(int mat_num, @Param("r_good") String r_good, @Param("r_contents") String r_contents) {
-		mapper.updateR(mat_num, r_good, r_contents);
+	public void updateR(int r_num, @Param("r_good") String r_good, @Param("r_contents") String r_contents) {
+		mapper.updateR(r_num, r_good, r_contents);
 	}
 
+	@Override
+	public void deleteR(int r_num) {
+		mapper.deleteR(r_num);
+	}
 }

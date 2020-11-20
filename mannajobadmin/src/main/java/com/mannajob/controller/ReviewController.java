@@ -40,21 +40,34 @@ public class ReviewController {
 	@PostMapping("/insertok")
 	public String insertok(int mat_num, String good, String contents, String b_id, String w_id) {
 		service.insertR(mat_num, good, contents, b_id, w_id);
-		return "redirect:/profile/matlist";
+		return "redirect:/match/matlist";
 	}
 	
-	@PostMapping("/update")
-	public void update(Model model, int mat_num, String r_w_m_id, String r_mat_m_id, String r_contents) {
-		model.addAttribute("mat_num", mat_num);
+	@GetMapping("/update")
+	public void update(Model model, int r_num, String r_w_m_id, String r_mat_m_id, String r_contents ) {
+		model.addAttribute("r_num", r_num);
 		model.addAttribute("r_w_m_id", r_w_m_id);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
 		model.addAttribute("r_contents", r_contents);
-		
 	}
 	
 	@PostMapping("/updateok")
-	public String updateok(int mat_num, String r_good, String r_contents) {
-		service.updateR(mat_num, r_good, r_contents);
-		return "redirect:/profile/matlist";
+	public String updateok(int r_num, String r_good, String r_contents) {
+		service.updateR(r_num, r_good, r_contents);
+		return "redirect:/match/matlist";
+		
+	}
+
+	@PostMapping("/updateokk")
+	public String updateokk(int r_num, String r_good, String r_contents, String r_w_m_id) {
+		service.updateR(r_num, r_good, r_contents);
+		return "redirect:/profile/showempl?m_id="+r_w_m_id;
+		
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int r_num) {
+		service.deleteR(r_num);
+		return "redirect:/match/matlist";
 	}
 }

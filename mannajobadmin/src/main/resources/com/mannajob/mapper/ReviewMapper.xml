@@ -6,6 +6,10 @@
 	</insert>
 	
 	<update id="updateR">
-		UPDATE review SET r_good = #{r_good}, r_contents = #{r_contents} WHERE mat_num = #{mat_num}
+		UPDATE review SET r_good = #{r_good}, r_contents = #{r_contents} WHERE r_num = #{r_num}
 	</update>
+	
+	<delete id="deleteR">
+		DELETE review WHERE r_num = #{r_num}
+	</delete>
 </mapper>

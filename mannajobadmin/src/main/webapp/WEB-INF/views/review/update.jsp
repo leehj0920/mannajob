@@ -12,11 +12,11 @@
 	<div>
 		<form method="post" action="/review/updateok">
 			<input type="hidden" name="r_w_m_id"
-				value="<%=request.getAttribute("r_w_m_id")%>"> <input
+				value="${r_w_m_id }"> <input
 				type="hidden" name="r_mat_m_id"
-				value="<%=request.getAttribute("r_mat_m_id")%>"> <input
-				type="hidden" name="mat_num"
-				value="<%=request.getAttribute("mat_num")%>">
+				value="${r_mat_m_id}"> <input
+				type="hidden" name="r_num"
+				value="${r_num}">
 			<table>
 				<tr>
 					<td>추천/비추천</td>
