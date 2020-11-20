@@ -128,11 +128,17 @@ public class ProfileController {
 	}
 //	다른사람들의  프로필 접근 화면 화면(리스트)
 	@GetMapping("/showempl")
-	public String showempl(Model model, EmplVO emplVO) {
+	public String showempl(Model model, EmplVO emplVO, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
 		model.addAttribute("m_id",emplVO.getM_id());
 		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
 		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
+		
+		log.info(".................model....................." + model.getAttribute("m_id"));
+		log.info("...................session..................." + session.getAttribute("userId"));
+		
 		return "/profile/showempl";
 	}
 

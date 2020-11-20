@@ -209,12 +209,15 @@
                           </td>
                           <td>
                             <!-- 수정버튼 (세션 아이디와 동일할 경우 활성화) -->
-                            
-                            <p class="center"><a href="/review/update?r_num=${re.r_num}" class="btn btn-mini btn-theme">수정</a></p>
+	                        <c:if test="${userId eq re.r_mat_m_id }">
+                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}" class="btn btn-mini btn-theme">수정</a></p>
+	                        </c:if>
                           </td>
                           <td>
                             <!-- 삭제버튼 (세션 아이디와 동일할 경우 활성화)-->
-                            <p class="center"><a href="/review/delete?r_num=${re.r_num}" class="btn btn-mini btn-inverse">삭제</a></p>
+                            <c:if test="${userId eq re.r_mat_m_id }">
+                            <p class="center"><a href="/review/deletee?r_num=${re.r_num}" class="btn btn-mini btn-inverse">삭제</a></p>
+                            </c:if>
                           </td>
                         </tr>  
                         </c:forEach>

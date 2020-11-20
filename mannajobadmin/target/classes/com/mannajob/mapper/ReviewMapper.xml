@@ -6,10 +6,18 @@
 	</insert>
 	
 	<update id="updateR">
+		UPDATE review SET r_good = #{r_good}, r_contents = #{r_contents} WHERE mat_num = #{mat_num}
+	</update>
+
+	<update id="updateRR">
 		UPDATE review SET r_good = #{r_good}, r_contents = #{r_contents} WHERE r_num = #{r_num}
 	</update>
 	
-	<delete id="deleteR">
-		DELETE review WHERE r_num = #{r_num}
-	</delete>
+	<update id="deleteR">
+		UPDATE review SET r_del = 'Y' WHERE r_num = #{r_num}
+	</update>
+	
+	<select id="searchEmplId" resultType="String">
+		SELECT r_w_m_id FROM review WHERE r_num = #{r_num}
+	</select>
 </mapper>

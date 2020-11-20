@@ -10,10 +10,10 @@
 <body>
 	<h3>리뷰 수정</h3>
 	<div>
-		<form method="post" action="/review/updateok">
+		<form method="post" action="/review/updateokk">
 			<input type="hidden" name="r_w_m_id" value="${r_w_m_id }"> 
 			<input type="hidden" name="r_mat_m_id" value="${r_mat_m_id}"> 
-			<input type="hidden" name="mat_num" value="${mat_num}">
+			<input type="hidden" name="r_num" value="${r_num}">
 			
 			<table>
 				<tr>

@@ -13,5 +13,4 @@ public interface MatchService {
 	
 	public List<BMatchVO> searchBMat(String m_id);
 	
-
 }

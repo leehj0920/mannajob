@@ -16,6 +16,7 @@
 	
 	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
 		<result property="r_contents" column="r_contents"/>
+		<result property="r_num" column="r_num"/>
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.BMatchVO" id="BMatch">
