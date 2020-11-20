@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function popclose(form) {
+		form.target = opener.name;
+		form.submit();
+		
+		if(opener != null) {
+			opener.insert = null;
+			self.close();
+		}
+	}
+</script>
 </head>
 <body>
 	<h1>리뷰 등록</h1>
@@ -24,22 +35,23 @@
 	<div>
 		<h3>리뷰 등록</h3>
 		<div>
-			<form method="post" action="/review/insertok">
-			<input type="hidden" name="b_id" value="<%= request.getAttribute("b.m_id") %>">
-			<input type="hidden" name="w_id" value="<%= request.getAttribute("userId") %>">
-			<input type="hidden" name="mat_num" value="<%= request.getAttribute("mat_num") %>">
+			<form method="post" name="insertform" target="matlist" action="/review/insertok">
+			<input type="hidden" name="r_w_m_id" value="${r_w_m_id}">
+			<input type="hidden" name="r_mat_m_id" value="${r_mat_m_id}">
+			<input type="hidden" name="mat_num" value="${mat_num}">
 				<table>
 					<tr>
 						<td>추천/비추천</td>
-						<td><input type="radio" name="good" value="G" checked="checked">추천 
-						<input type="radio" name="good" value="B">비추천</td>
+						<td><input type="radio" name="r_good" value="G" checked="checked">추천 
+						<input type="radio" name="r_good" value="B">비추천</td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea cols="30" rows="5" name="contents"></textarea></td>
+						<td><textarea cols="30" rows="5" name="r_contents"></textarea></td>
 					</tr>
 				</table>
-				<input type="submit" value="등록">
+				<input type="submit" value="등록" onClick="window.close()">
+				<input type="button" value="닫기" onClick="window.close()">
 			</form>
 		</div>
 	</div>

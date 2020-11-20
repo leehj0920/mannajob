@@ -4,7 +4,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp" %>
-
+<script>
+	function reviewI() {
+		window.name = 'matlist';
+		var insert = document.ReviewI;
+		window.open('', 'Insert', 'width=500, height=430');
+		insert.action='/review/insert';
+		insert.target='Insert';
+		insert.submit();
+	}
+	
+	function reviewU() {
+		var update = document.ReviewU;
+		window.open('', 'Update', 'width=500, height=430');
+		update.action='/review/update';
+		update.target='Update';
+		update.submit();
+		opener.document.getElementById('r_w_m_id').value = $('#r_w_m_id').val();
+	}
+</script>
   <section id="inner-headline">
       <div class="container">
         <div class="row">
@@ -80,44 +98,70 @@
                           <td>
                             <p class="center">취소</p>    
                           </td>
+                          <td>
+                            <p class="center">리뷰</p>    
+                          </td>
                         </tr> 
-                      	<c:forEach items="${bmatlist}" var="blist">
+                      	<c:forEach items="${wmatlist}" var="wlist">
                         <tr>
                           <td>
                             <!-- 번호 -->
-                            <p class="center">${blist.b_num}</p>
+                            <p class="center">${wlist.b_num}</p>
                           </td>
                           <td style="width: 400px;">
                             <!-- 제목 -->
-                            <p><c:out value="${blist.b_subject}" /></p>
+                            <p><c:out value="${wlist.b_subject}" /></p>
                           </td>
                           <td>
                             <!-- 진행상태 -->
                             <c:choose>
-                            <c:when test="${blist.b_state eq 'A'}"><p class="center">대기</p></c:when>
-                            <c:when test="${blist.b_state eq 'B'}"><p class="center">완료</p></c:when>
+                            <c:when test="${wlist.b_state eq 'A'}"><p class="center">대기</p></c:when>
+                            <c:when test="${wlist.b_state eq 'B'}"><p class="center">완료</p></c:when>
                             <c:otherwise ><p class="center">취소</p></c:otherwise>                           
                             </c:choose>
                           </td>
                           
                           <td>
-                          	<c:if test="${blist.b_state eq 'A'}">
+                          	<c:if test="${wlist.b_state eq 'A'}">
                             <!-- 신청현황-->
                             
-                            <p class="center"><button class="btn btn-mini btn-theme" onclick="window.open('/match/bmatlist?b_num=${blist.b_num}', '신청 현황', 'width=600, height=500, location=no, status=no, scrollbars=yes');">신청 현황</button></p>
+                            <p class="center"><button class="btn btn-mini btn-theme" onclick="window.open('/match/bmatlist?b_num=${wlist.b_num}', '신청 현황', 'width=600, height=500, location=no, status=no, scrollbars=yes');">신청 현황</button></p>
                             
                             </c:if>
-                            <c:if test="${blist.b_state eq 'B'}" >
+                            <c:if test="${wlist.b_state eq 'B'}" >
                             <p class="center">매칭완료</p>
                             </c:if>
-                            <c:if test="${blist.b_state eq 'C'}" >
+                            <c:if test="${wlist.b_state eq 'C'}" >
                             <p class="center">취소됨</p>
                             </c:if>
                           </td>
                           <td>
-                          	<c:if test="${blist.b_state ne 'C'}">
+                          	<c:if test="${wlist.b_state ne 'C'}">
                             <!-- 취소-->
-                            <p class="center"><a href="/bmatch/cancel?b_num=${blist.b_num}" class="btn btn-mini btn-theme">취소</a></p>
+                            <p class="center"><a href="/bmatch/cancel?b_num=${wlist.b_num}" class="btn btn-mini btn-theme">취소</a></p>
+                          	</c:if>
+                          </td>
+                          <td>
+                          	<c:if test="${wlist.b_state eq 'B'}">
+                          		<c:choose>
+									<c:when test="${wlist.reviewVO.r_num ne null}">
+										<form method="get" action="window.open('/review/update', '리뷰 수정', 'width=430, height=500')">
+											<input type="hidden" name="r_contents" value="${wlist.reviewVO.r_contents}">
+											<input type="hidden" name="mat_num" value="${wlist.matchVO.mat_num}">
+											<input type="hidden" name="r_w_m_id" value="${wlist.m_id}">
+											<input type="hidden" name="r_mat_m_id" value="${wlist.matchVO.m_id}">
+											<p class="center"><input type="submit" value="수정" class="btn btn-mini btn-theme"></p>
+										</form>
+									</c:when>
+									<c:otherwise>
+										<form method="get" action="window.open('/review/insert, '리뷰  작성', 'width=430, height=500')">
+											<input type="hidden" name="mat_num" value="${wlist.matchVO.mat_num}">
+											<input type="hidden" name="r_w_m_id" value="${wlist.m_id}">
+											<input type="hidden" name="r_mat_m_id" value="${wlist.matchVO.m_id}">
+											<p class="center"><input type="submit" value="작성" class="btn btn-mini btn-theme"></p>
+										</form>
+									</c:otherwise>
+								</c:choose>
                           	</c:if>
                           </td>
                         </tr>  
@@ -186,39 +230,41 @@
                              <c:choose>
                             <c:when test="${mlist.matchVO.mat_state eq 'A'}"><p class="center">요청</p></c:when>
                             <c:when test="${mlist.matchVO.mat_state eq 'B'}"><p class="center">거절</p></c:when>
-                            <c:when test="${mlist.matchVO.mat_state eq 'c'}"><p class="center">완료</p></c:when>
+                            <c:when test="${mlist.matchVO.mat_state eq 'C'}"><p class="center">완료</p></c:when>
                             <c:otherwise ><p class="center">취소</p></c:otherwise>                           
                             </c:choose>                    
                           </td>
                           <td>
                             <!-- 취소-->
+                            <c:choose>
+                            <c:when test="${mlist.matchVO.mat_state eq 'A'}">
                             <p class="center"><a href="#" class="btn btn-mini btn-theme">취소</a></p>
+                            </c:when>
+                            <c:otherwise>
+                            </c:otherwise>
+                            </c:choose>
                           </td>
                           <td>
                           <c:if test="${mlist.matchVO.mat_state eq 'C' }">
 								<c:choose>
-									<c:when test="${mlist.reviewVO.r_contents ne null}">
-										<form method="post" action="window.open('/review/update', '리뷰 수정', 'width=430, height=500')">
-											<input type="hidden" name="r_contents" value="${mlist.reviewVO.r_contents}">
+									<c:when test="${mlist.reviewVO.r_contents eq null}">
+										<form name='ReviewI' action='' method='get'>
 											<input type="hidden" name="mat_num" value="${mlist.matchVO.mat_num}">
 											<input type="hidden" name="r_w_m_id" value="${mlist.m_id}">
-											<input type="hidden" name="r_mat_m_id" value="${mlist.matchVO.m_id}">
-											<input type="submit" value="리뷰 수정">
+										<p class="center"><input type="button" value="작성" onClick='reviewI()' class="btn btn-mini btn-theme"></p>
 										</form>
 									</c:when>
 									<c:otherwise>
-										<form method="post" action="window.open('/review/insert, '리뷰 수정', 'width=430, height=500')">
+										<form name='ReviewU' action='' method='get'>
+											<input type="hidden" name="r_contents" value="${mlist.reviewVO.r_contents}">
+											<input type="hidden" name="r_num" value="${mlist.reviewVO.r_num}">
 											<input type="hidden" name="mat_num" value="${mlist.matchVO.mat_num}">
 											<input type="hidden" name="r_w_m_id" value="${mlist.m_id}">
-											<input type="hidden" name="r_mat_m_id" value="${mlist.matchVO.m_id}">
-											<input type="submit" value="리뷰 작성">
+										<p class="center"><input type="button" value="수정" onClick='reviewU()' class="btn btn-mini btn-theme"></p>
 										</form>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
-                          
-                            <!-- 리뷰-->
-                            <!-- <p class="center"><a href="#" class="btn btn-mini btn-theme">리뷰작성</a></p> -->
                           </td>
                         </tr>  
                         </c:forEach>

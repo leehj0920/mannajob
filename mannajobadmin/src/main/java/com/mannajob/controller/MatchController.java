@@ -30,12 +30,13 @@ public class MatchController {
 	@GetMapping("/matlist")
 	public void matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {
 		HttpSession session = request.getSession();
+		session.setAttribute("mat_num", service.searchMat(session.getAttribute("userId").toString()));
 		
 		
-		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
+		model.addAttribute("wmatlist", service.searchWMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
-		System.out.println(model.getAttribute("bmatlist"));
+		System.out.println(model.getAttribute("wmatlist"));
 		System.out.println(model.getAttribute("matlist"));
 	}
 	

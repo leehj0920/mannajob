@@ -25,8 +25,10 @@ public interface MatchMapper {
 //	
 	public List<MatchVO> searchBmatMat(int b_num);
 	
-	public List<BMatchVO> searchMat(String m_id);
+	public List<BMatchVO> searchMat(@Param("m_id") String m_id);
 	
-	public List<BMatchVO> searchBMat(String m_id);
+//	public List<BMatchVO> searchBMat(String m_id);
+	
+	public List<BMatchVO> searchWMat(String m_id);
 	
 }

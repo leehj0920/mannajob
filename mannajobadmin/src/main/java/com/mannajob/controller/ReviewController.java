@@ -27,20 +27,20 @@ public class ReviewController {
 	 * }
 	 */
 	
-	@PostMapping("/insert")
+	@GetMapping("/insert")
 	public void insert(Model model, HttpServletRequest request, int mat_num, String r_w_m_id, String r_mat_m_id) {
 		HttpSession session = request.getSession();
-		
+		log.info("................................................."+mat_num);
 		model.addAttribute("mat_num", mat_num);
-		model.addAttribute("b.m_id", r_w_m_id);
+		model.addAttribute("r_w_m_id", r_w_m_id);
+		model.addAttribute("r_mat_m_id", r_mat_m_id);
 		model.addAttribute("userId", session.getAttribute("userId"));
-		
 	}
 	
 	@PostMapping("/insertok")
-	public String insertok(int mat_num, String good, String contents, String b_id, HttpServletRequest request) {
-		String w_id = request.getSession().getAttribute("userId").toString();
-		service.insertR(mat_num, good, contents, b_id, w_id);
+	public String insertok(int mat_num, String r_good, String r_contents, String r_w_m_id, HttpServletRequest request) {
+		String r_mat_m_id = request.getSession().getAttribute("userId").toString();
+		service.insertR(mat_num, r_good, r_contents, r_w_m_id, r_mat_m_id);
 		return "redirect:/match/matlist";
 	}
 	
@@ -59,8 +59,10 @@ public class ReviewController {
 		
 	}
 
+	//현직자 프로필에서 수정
 	@GetMapping("/updatee")
 	public void updatee(Model model, int r_num, String r_w_m_id, String r_mat_m_id, String r_contents ) {
+		log.info(".........................................................." + r_w_m_id);
 		model.addAttribute("r_num", r_num);
 		model.addAttribute("r_w_m_id", r_w_m_id);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
@@ -80,7 +82,8 @@ public class ReviewController {
 		service.deleteR(r_num);
 		return "redirect:/match/matlist";
 	}
-
+	
+	//현직자 프로필에서 삭제
 	@GetMapping("/deletee")
 	public String deletee(int r_num) {
 		service.deleteR(r_num);
