@@ -13,8 +13,8 @@
 <hr>
 	
 	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
-	<input type="button" value="매칭 내역 관리" onclick="location.href='/profile/matlist'">
-	<input type="button" value="일정 관리" onclick="location.href='/profile/calendar'">
+	<input type="button" value="매칭 내역 관리" onclick="location.href='/match/matlist'">
+	<input type="button" value="일정 관리" onclick="location.href='/mypage/calendar'">
 </div>
 </body>
 </html>

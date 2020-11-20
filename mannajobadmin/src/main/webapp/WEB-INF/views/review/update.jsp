@@ -11,12 +11,10 @@
 	<h3>리뷰 수정</h3>
 	<div>
 		<form method="post" action="/review/updateok">
-			<input type="hidden" name="r_w_m_id"
-				value="<%=request.getAttribute("r_w_m_id")%>"> <input
-				type="hidden" name="r_mat_m_id"
-				value="<%=request.getAttribute("r_mat_m_id")%>"> <input
-				type="hidden" name="mat_num"
-				value="<%=request.getAttribute("mat_num")%>">
+			<input type="hidden" name="r_w_m_id" value="${r_w_m_id }"> 
+			<input type="hidden" name="r_mat_m_id" value="${r_mat_m_id}"> 
+			<input type="hidden" name="mat_num" value="${mat_num}">
+			
 			<table>
 				<tr>
 					<td>추천/비추천</td>

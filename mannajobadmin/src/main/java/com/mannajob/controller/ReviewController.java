@@ -38,13 +38,14 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/insertok")
-	public String insertok(int mat_num, String good, String contents, String b_id, String w_id) {
+	public String insertok(int mat_num, String good, String contents, String b_id, HttpServletRequest request) {
+		String w_id = request.getSession().getAttribute("userId").toString();
 		service.insertR(mat_num, good, contents, b_id, w_id);
-		return "redirect:/profile/matlist";
+		return "redirect:/match/matlist";
 	}
 	
-	@PostMapping("/update")
-	public void update(Model model, int mat_num, String r_w_m_id, String r_mat_m_id, String r_contents) {
+	@GetMapping("/update")
+	public void update(Model model, int mat_num, String r_w_m_id, String r_mat_m_id, String r_contents ) {
 		model.addAttribute("mat_num", mat_num);
 		model.addAttribute("r_w_m_id", r_w_m_id);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
@@ -55,6 +56,36 @@ public class ReviewController {
 	@PostMapping("/updateok")
 	public String updateok(int mat_num, String r_good, String r_contents) {
 		service.updateR(mat_num, r_good, r_contents);
-		return "redirect:/profile/matlist";
+		return "redirect:/match/matlist";
+		
+	}
+
+	@GetMapping("/updatee")
+	public void updatee(Model model, int r_num, String r_w_m_id, String r_mat_m_id, String r_contents ) {
+		model.addAttribute("r_num", r_num);
+		model.addAttribute("r_w_m_id", r_w_m_id);
+		model.addAttribute("r_mat_m_id", r_mat_m_id);
+		model.addAttribute("r_contents", r_contents);
+	}
+	
+	@PostMapping("/updateokk")
+	public String updateokk(int r_num, String r_good, String r_contents) {
+		service.updateRR(r_num, r_good, r_contents);
+		String emplId = service.searchEmplId(r_num);
+		return "redirect:/profile/showempl?m_id=" + emplId;
+		
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int r_num) {
+		service.deleteR(r_num);
+		return "redirect:/match/matlist";
+	}
+
+	@GetMapping("/deletee")
+	public String deletee(int r_num) {
+		service.deleteR(r_num);
+		String emplId = service.searchEmplId(r_num);
+		return "redirect:/profile/showempl?m_id=" + emplId;
 	}
 }
