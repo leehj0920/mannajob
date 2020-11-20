@@ -35,6 +35,7 @@ public class ReviewController {
 		model.addAttribute("r_w_m_id", r_w_m_id);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
 		model.addAttribute("userId", session.getAttribute("userId"));
+		
 	}
 	
 	@PostMapping("/insertok")
@@ -50,6 +51,7 @@ public class ReviewController {
 		model.addAttribute("r_w_m_id", r_w_m_id);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
 		model.addAttribute("r_contents", r_contents);
+		
 	}
 	
 	@PostMapping("/updateok")

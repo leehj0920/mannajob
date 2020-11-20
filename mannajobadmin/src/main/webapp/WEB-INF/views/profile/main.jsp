@@ -34,11 +34,19 @@
                   <h5 class="widgetheading height_40">마이페이지</h5>
   
                   <ul class="cat">
+<<<<<<< HEAD
+                    <li><i class="icon-angle-right"></i><a href="#">매칭내역관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
+                    <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
+=======
 	                   <li><i class="icon-angle-right"></i><a href="/match/matlist">매칭내역관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
+>>>>>>> refs/remotes/origin/develope
                   </ul>
                 </div>
               </aside>
@@ -92,10 +100,10 @@
 	                   	   class="btn btn-inverse margintop10"
 	                       style="width: 98px; height: 36px; font-size: 14px;"
 	                       value="회원탈퇴"> 
-	                <p class="line_9"></p>             
+	                         
 	              </div>
 	            </div>
-	            <p class="line_9"></p>
+	             
 	            <p class="line_9"></p>
 	        
             </form>
