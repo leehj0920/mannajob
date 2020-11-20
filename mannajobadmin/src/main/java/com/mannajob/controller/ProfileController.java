@@ -79,28 +79,19 @@ public class ProfileController {
 	public void update(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		member = service.getMemProfile(session.getAttribute("userId").toString());
+		model.addAttribute("member", member);
 		
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
 	}
 	
 	@PostMapping("/update")
 	public String update(MemberVO member, HttpServletRequest request, Model model) {
+		log.info(member.toString());
 		service.updateProfile(member);
-
-		HttpSession session = request.getSession();
 		
-		member = service.getMemProfile(session.getAttribute("userId").toString());
-		  
-		model.addAttribute("userId", member.getM_id());
-		model.addAttribute("username", member.getM_name());
-		model.addAttribute("userphone", member.getM_phone());
-		model.addAttribute("useremail", member.getM_email());
-		
-		return "profile/main";
+		return "redirect:/profile/main";
 	}
 	
-	@PostMapping("/deleteMem")
+	@GetMapping("/deleteMem")
 	public String deleteMem(String m_id) {
 		service.deleteMem(m_id);
 		return "redirect:/login";
