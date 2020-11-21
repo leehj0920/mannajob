@@ -126,21 +126,11 @@
                           <td>
                           	<c:if test="${wlist.b_state eq 'B'}">
                           		<c:choose>
-									<c:when test="${wlist.reviewVO.r_num ne null}">
-										<form method="get" action="" name="wReviewU">
-											<input type="hidden" name="r_contents" value="${wlist.reviewVO.r_contents}">
-											<input type="hidden" name="r_num" value="${wlist.reviewVO.r_num}">
-											<input type="hidden" name="mat_num" value="${wlist.matchVO.mat_num}">
-											<input type="hidden" name="r_mat_m_id" value="${wlist.matchVO.m_id}">
-											<p class="center"><input type="submit" value="수정" onClick="wreviewU" class="btn btn-mini btn-theme"></p>
-										</form>
+									<c:when test="${wlist.reviewVO.r_num eq null || wlist.reviewVO.r_w_m_id ne userId }">
+										<p class="center"><a href="/review/insertB?mat_num=${wlist.matchVO.mat_num}&r_mat_m_id=${wlist.matchVO.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
 									</c:when>
 									<c:otherwise>
-										<form method="get" action="" name="wReviewI">
-											<input type="hidden" name="mat_num" value="${wlist.matchVO.mat_num}">
-											<input type="hidden" name="r_mat_m_id" value="${wlist.matchVO.m_id}">
-											<p class="center"><input type="submit" value="작성" onClick="wreviewI" class="btn btn-mini btn-theme"></p>
-										</form>
+										<p class="center"><a href="/review/update?r_num=${wlist.reviewVO.r_num}&r_contents=${wlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
 									</c:otherwise>
 								</c:choose>
                           	</c:if>
@@ -227,24 +217,14 @@
                           </td>
                           <td>
                           <c:if test="${mlist.matchVO.mat_state eq 'C' }">
-								<c:choose>
-									<c:when test="${mlist.reviewVO.r_contents eq null}">
-										<form name='mReviewI' action='' method='get'>
-											<input type="hidden" name="mat_num" value="${mlist.matchVO.mat_num}">
-											<input type="hidden" name="r_w_m_id" value="${mlist.m_id}">
-										<p class="center"><input type="button" value="작성" onClick='mreviewI()' class="btn btn-mini btn-theme"></p>
-										</form>
-									</c:when>
-									<c:otherwise>
-										<form name='mReviewU' action='' method='get'>
-											<input type="hidden" name="r_contents" value="${mlist.reviewVO.r_contents}">
-											<input type="hidden" name="r_num" value="${mlist.reviewVO.r_num}">
-											<input type="hidden" name="mat_num" value="${mlist.matchVO.mat_num}">
-											<input type="hidden" name="r_w_m_id" value="${mlist.m_id}">
-										<p class="center"><input type="button" value="수정" onClick='mreviewU()' class="btn btn-mini btn-theme"></p>
-										</form>
-									</c:otherwise>
-								</c:choose>
+                          	<c:choose>
+                          		<c:when test="${mlist.reviewVO.r_num eq null && mlist.reviewVO.r_w_m_id ne userId}">
+									<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
+                          		</c:when>
+                          		<c:otherwise>
+									<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+                          		</c:otherwise>
+                          	</c:choose>
 							</c:if>
                           </td>
                         </tr>  
@@ -278,45 +258,3 @@
 
 
 <%@ include file="../includes/footer.jsp" %>
-
-<script>
-	function mreviewU() {
-		window.name = 'showempl';
-		var mupdate = document.mReviewU;
-		window.open('', 'mUpdate', 'width=500, height=430');
-		mupdate.action='/review/update';
-		mupdate.target='mUpdate';
-		mupdate.submit();
-	}
-
- 	function mreviewI() {
-		window.name = 'showempl';
-		var minsert = document.mReviewI;
-		window.open('', 'mInsert', 'width=500, height=430');
-		minsert.action='/review/insert';
-		minsert.target='mInsert';
-		minsert.submit();
-	}
-
-
-	
-
-	
- 	function wreviewU() {
-		window.name = 'showempl';
-		var wupdate = document.wReviewU;
-		window.open('', 'wUpdate', 'width=500, height=430');
-		wupdate.action='/review/update';
-		wupdate.target='wUpdate';
-		wupdate.submit();
-	}
-	//수정중..................................................................
-	function wreviewI() {
-		window.name = 'showempl';
-		var winsert = document.wReviewI;
-		window.open('', 'wInsert', 'width=500, height=430');
-		winsert.action='/review/insert';
-		winsert.target='wInsert';
-		winsert.submit();
-	} 
-</script>

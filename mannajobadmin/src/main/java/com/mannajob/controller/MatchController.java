@@ -33,11 +33,13 @@ public class MatchController {
 		if(session.getAttribute("userId")==null) {
 			return "/main";
 		}
-		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
+		
+		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("wmatlist", service.searchWMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
-		System.out.println(model.getAttribute("bmatlist"));
-		System.out.println(model.getAttribute("matlist"));
+		System.out.println("wmatlist" + model.getAttribute("wmatlist"));
+		System.out.println("matlist" + model.getAttribute("matlist"));
 		return "match/matlist";
 	}
 	
