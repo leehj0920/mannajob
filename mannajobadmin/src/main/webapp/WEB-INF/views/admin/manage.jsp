@@ -82,19 +82,15 @@
                       <table class="table table-bordered">
                         <colgroup>
                           <col style="width: 10%">
-                          <col style="width: 12%">
-                          <col style="width: 16">
+                          <col style="width: 16%">
                           <col style="width: 10%">
-                          <col style="width: 16%">
-                          <col style="width: 16%">
+                          <col style="width: 22%">
+                          <col style="width: 22%">
                           <col style="width: 14%">
                         </colgroup>
                         <tr>
                           <td>
                             <p class="center" >번호</p>    
-                          </td>
-                          <td>
-                            <p class="center"> 회원유형</p>    
                           </td>
                           <td>
                             <p class="center">아이디</p>    
@@ -117,19 +113,18 @@
                         <tr>
                           <td>
                             <!-- 번호 -->
-                            <p class="center">2</p>
+                            <p class="center">
+                          		${mem.rn}  
+                            </p>
                           </td>
-                          <td style="width: 400px;">
-                            <!-- 회원유형 -->
-                            <p class="center">현직자</a></p>
-                          </td>
+                          
                           <td>
                             <!-- 아이디 -->
                             <p class="center"><a href="#"><c:out value="${mem.m_id }" /></a></p>
                           </td>
                           <td>
                             <!-- 상태 -->
-                            <p class="center">
+                            <p class="center" >
                             <c:choose>
 								<c:when test="${mem.m_del eq 'Y'}">탈퇴</c:when>
 								<c:otherwise>정상</c:otherwise>
@@ -146,12 +141,11 @@
                           </td>
                           <td>
                             <!-- 비밀번호 초기화-->
-                            <p class="center">
-                            <form method="get" action="/admin/reset">
-								<input type="hidden" name="m_id" value="${mem.m_id }">
-								<input type="submit" class="btn btn-mini btn-theme" value="초기화">
+                            <form method="get" action="/admin/reset" style="margin:0 auto;">
+								<input type="hidden" name="m_id" value="${mem.m_id}">
+								<p class="center" style="height: 10px;"><input type="submit" class="btn btn-mini btn-theme" value="초기화"></p>
 							</form>
-                            </p>
+                            
                           </td>
                         </tr>  
                         </c:forEach>                 

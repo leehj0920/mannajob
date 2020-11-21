@@ -16,10 +16,10 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 @AllArgsConstructor
-public class MatchServiceImpl implements MatchService{
+public class MatchServiceImpl implements MatchService {
 	@Setter(onMethod_ = @Autowired)
 	private MatchMapper mapper;
-	
+
 	@Override
 	public List<MatchVO> searchBmatMat(int b_num) {
 		return mapper.searchBmatMat(b_num);
@@ -31,13 +31,13 @@ public class MatchServiceImpl implements MatchService{
 	}
 
 	@Override
-	public List<BMatchVO> searchBMat(String m_id) {
-		return mapper.searchBMat(m_id);
-	} 
-
-	@Override
 	public List<BMatchVO> searchWMat(String m_id) {
 		return mapper.searchWMat(m_id);
 	}
-	
+
+	@Override
+	public List<BMatchVO> searchBMat(String m_id) {
+		return mapper.searchBMat(m_id);
+	}
+
 }

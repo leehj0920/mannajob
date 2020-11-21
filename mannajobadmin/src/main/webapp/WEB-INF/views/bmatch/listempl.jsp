@@ -140,7 +140,8 @@
                   <div class="span8">
                     <div class="box aligncenter">
                       <p class="center">
-                        <a href="#" class="btn btn-theme margintop10 a_btn1" type="button">매칭글쓰기</a>
+                        <a href="/bmatch/insert?b_category=A&pageNum=${page.cri.pageNum}" class="btn btn-theme margintop10 a_btn1" type="button">매칭글쓰기</a>
+                        
                       </p>
                     </div>
                   </div>

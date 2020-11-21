@@ -5,17 +5,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp" %>
 
-  <section id="inner-headline">
+    <section id="inner-headline">
       <div class="container">
         <div class="row">
                 <div class="span12">
-                    <ul class="breadcrumb">
-                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-                        <li><a href="#">매칭</a><i class="icon-angle-right"></i></li>
-                        <li class="active">취업준비생 매칭 리스트> <i class="icon-angle-right"></i></li>
-                        <li class="active">상세내용 <i class="icon-angle-right"></i></li>
-                        <li class="active">수정하기 </li>
-                      </ul>
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">매칭</a><i class="icon-angle-right"></i></li>
+              <li class="active">현직자 매칭 리스트><i class="icon-angle-right"></i></li>
+              <li class="active">매칭글쓰기</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -29,107 +28,154 @@
               </div>
               <div class="widget">
                 <h5 class="widgetheading height_40">매&nbsp&nbsp&nbsp&nbsp칭</h5>
-
                 <ul class="cat">
                     <li><i class="icon-angle-right"></i><a href="/bmatch/list?b_category=A">현직자 매칭 리스트</a></li>
-                  <li><i class="icon-angle-right"></i><a href="/bmatch/list?b_category=B">쥐업준비생 매칭 리스트</a></li>
+                 	<li><i class="icon-angle-right"></i><a href="/bmatch/list?b_category=B">쥐업준비생 매칭 리스트</a></li>
                 </ul>
               </div>
             </aside>
           </div>
           <div class="span8">
             <article>
-              <form id="commentform" action="#" method="post" name="comment-form">
-              <input type="hidden" name="pageNum" value="${cri.pageNum}">
-				<input type="hidden" name="b_num" value="${bMatch.b_num}">
-				<input type="hidden" name="b_subject" value="${bMatch.b_subject}">
-				<input type="hidden" name="b_category" value="${bMatch.b_category}">
-                <div class="row">
+              <div class="row">
                   <div class="post-heading">
                     <p class="line_9"></p>
                     <p class="line_9"></p>
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong>취업준비생 </strong>매칭 상세내용 수정</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong>현직자 </strong>매칭 등록</h3>
                     <p class="line_9"></p>
+                    
                   </div>
 
                   <!-- <div class="row"> -->
                     <div class="span9">
+                      <h5>▶ 기본정보</h5>
+                      <table class="table table-bordered">
+                        <colgroup>
+                          <col style="width:20%"/>
+                          <col style="width:30%"/>
+                          <col style="width:20%"/>
+                          <col style="width:30%"/>
+                        </colgroup>
+                        
+                        <tr>
+                          <td>
+                            <p class="center">아 &nbsp&nbsp 이 &nbsp&nbsp 디</p>
+                          </td>
+                          <td>
+                            <!-- 아이디 -->
+                            ${m_id}
+                          </td>
+                        </tr>
+                        <tr> 
+                          <td>
+                            <p class="center">기 &nbsp&nbsp 업 &nbsp&nbsp 명</p>
+                          </td>
+                          <td>
+                            <!-- 기업명 -->
+                            ${empl.e_corp}
+                          </td>
+                          <td>
+                            <p class="center">부 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 서</p>
+                          </td>
+                          <td>
+                            <!-- 부서 -->
+                            ${empl.e_dept}
+                          </td>
+                        </tr>
+                        <tr> 
+                          <td>
+                            <p class="center">직 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 무</p>
+                             
+                          <td>
+                            <!-- 직무 -->
+                            ${empl.e_task}
+                          </td>
+                          <td>
+                            <p class="center">직 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 급</p>
+                          </td>
+                          <td>
+                            <!-- 직급 -->
+                            ${empl.e_rank}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p class="center">소&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp개</p>
+                          </td>
+                          <td colspan="3">
+                            <!-- 소개 -->
+                            <% pageContext.setAttribute("line", "\n");%>
+							${fn: replace(empl.e_intro, line,"<br/>")}
+                            
+                          </td>
+                        </tr>     
+                      </table>
+                      <div></div>
+                      <p class="line_9"></p>
+                      <p class="line_9"></p> 
+                      
+                                     
                       <h5>▶ 모집정보</h5>
+                      
+           			<form id="commentform" action="/bmatch/insert" method="post" name="comment-form">
+					<input type="hidden" name="b_category" value="${bmatch.b_category}">
+					<input type="hidden" name="b_corp" value="${empl.e_corp}">
+					<input type="hidden" name="b_task" value="${empl.e_task}">
+                      
                       <table class="table table-bordered">
                         <colgroup>
                           <col style="width:20%"/>
                           <col style="width:80%"/>
                         </colgroup>
                         <tr>
-                          <td  >
-                            <p class="center">아&nbsp&nbsp이&nbsp&nbsp디</p>
-                          </td>
                           <td>
-                            <input type="text" name=m_id value="${bMatch.m_id}" readonly="readonly">
+                            <p class="center">제&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp목</p>
                           </td>
+                          <!-- <td colspan="3">                              -->
+                            <td colspan="3">
+                              <!-- 제목 -->
+							<input type="text" name="b_subject" >
+                            </td>
                         </tr>
-                        
                         <tr>
                           <td>
                             <p class="center">지&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp역</p>
                           </td>
                           <!-- <td colspan="3">                              -->
-                          <td>
+                            <td colspan="3">
+                              <!-- 지역 -->
                               <select id="location1" name="location1" class="location">
-                                
 				                </select>
 				                <select id="location2" name="location2" class="location">
-				                  
 				                </select>
 				                <select id="location3" name="location3" class="location">
-				                                               
-				                </select>                                                       
-                          </td>
+				                </select>
+                            </td>
                         </tr>
-                        <tr> 
+                        <!-- <tr> 
                           <td>
                             <p class="center">관심기업 및 직무</p>
                           </td>
                           <td>
-                            <!-- 관심기업, 관심직무 -->
-                            <span><input type="text" name="b_corp" style="width:200px;"  value="${bMatch.b_corp}" /></span>
+                         
+                            <input type="text" style="width:200px" value="삼성SDS  &nbsp &nbsp">
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           
-                            <select name="b_task"  >
-							 <option value="사업관리">사업관리</option>
-							<option value="경영·회계·사무">경영·회계·사무</option>
-							<option value="금융·보험">금융·보험</option>
-							<option value="교육·자연·사회과학">교육·자연·사회과학</option>
-							<option value="법률·경찰·소방·교도·국방">법률·경찰·소방·교도·국방</option>
-							<option value="보건·의료">보건·의료</option>
-							<option value="사회복지·종교">사회복지·종교</option>
-							<option value="문화·예술·디자인·방송">문화·예술·디자인·방송</option>
-							<option value="운전·운송">운전·운송</option>
-							<option value="영업판매">영업판매</option>
-							<option value="경비·청소">경비·청소</option>
-							<option value="이용·숙박·여행·오락·스포츠">이용·숙박·여행·오락·스포츠</option>
-							<option value="음식서비스">음식서비스</option>
-							<option value="건설">건설</option>
-							<option value="기계">기계</option>
-							<option value="재료">재료</option>
-							<option value="화학">화학</option>
-							<option value="섬유·의복">섬유·의복</option>
-							<option value="전기·전자">전기·전자</option>
-							<option value="정보통신">정보통신</option>
-							<option value="식품가공">식품가공</option>
-							<option value="인쇄·목재·가구·공예">인쇄·목재·가구·공예</option>
-							<option value="환경·에너지·안전">환경·에너지·안전</option>
-							<option value="농림어업">농림어업</option>
-                          </select>
+                            <select name="1" class="location" >
+                                <option value="1">IT/인터넷</option>
+                                <option value="1">경영/사무</option>
+                                <option value="1">디자인</option>
+                                <option value="1">생산/제조</option>
+                            </select>
                           </td>
-                        </tr> 
-                       
+                        </tr>  -->
+
                         <tr>
                           <td>
                             <p class="center">기 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 간</p>
                           </td>
                           <td>
                             <!-- 모집정보 기간 fromm ~ to  -->
-                            <input type="date" name="b_stdate"  value="${bMatch.b_stdate}" /> 
+                            <input type="date" name="b_stdate"  value="${bMatch.b_stdate}" />
                             <span>&nbsp 부터 &nbsp</span> 
                             <input type="date" name="b_endate"  value="${bMatch.b_endate}" />
                             <span>&nbsp 까지 &nbsp</span>                           
@@ -142,7 +188,7 @@
                           </td>
                           <td> 
                               <!-- 모집정보 시간 -->
-                             <input type="text" name="b_period"  value="${bMatch.b_period}" style="width:50px"> 
+                              <input type="text" name="b_period"  value="${bMatch.b_period}" style="width:50px" > 
                               <span>&nbsp&nbsp</span> 
                               <span>시간</span>
                           </td>
@@ -173,9 +219,10 @@
                       <div class="span9">
                         <div class="box aligncenter">
                           <p class="center">
-                             
-                            <input class="btn btn-theme margintop10 i_btn2" type="submit" value="수정하기">
-                          <input class="btn btn-inverse margintop10 i_btn2" type="button" onclick="location.href='/bmatch/view?pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&b_num=${bMatch.b_num}&m_id=${bMatch.m_id}'"  value="취소하기">
+                          <input class="btn btn-theme margintop10 i_btn2" type="submit" value="작성하기">
+                          <input class="btn btn-inverse margintop10 i_btn2" type="button" onclick="location.href='/bmatch/list?pageNum=${cri.pageNum}&b_category=${bmatch.b_category}'"  value="취소하기">
+                            
+                            
                         </p>
                         </div>
                       </div>   
@@ -190,6 +237,7 @@
         </div>
       </div>
     </section>
+    
 
 
 <%@ include file="../includes/footer.jsp" %>
@@ -286,7 +334,5 @@
         });
     };
 
-
-    
     
 </script>
