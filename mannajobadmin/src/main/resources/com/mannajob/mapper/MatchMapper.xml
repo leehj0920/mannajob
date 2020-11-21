@@ -40,9 +40,9 @@
 	</resultMap>
 
 	<!-- 매칭 작성 내역 조회 -->
-	<!-- <select id="searchBMat" resultType="com.mannajob.domain.BMatchVO">
+	<select id="searchBMat" resultType="com.mannajob.domain.BMatchVO">
 		SELECT b_num, b_subject, b_state FROM b_match WHERE m_id = #{m_id}
-	</select> -->
+	</select>
 	
 	<!-- 매칭 신청 현황 -->
 	<select id="searchBmatMat" resultType="com.mannajob.domain.MatchVO">
