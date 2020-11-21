@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -97,26 +96,6 @@
       </div>
     </section>
 
-
+<script src="/resources/js/calendar.js"></script>
 <%@ include file="../includes/footer.jsp" %>
-=======
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div>
-<h1>일정 관리</h1>
-<input type="button" value="로그아웃" onclick="location.href='/logout'">
-<hr>
-	
-	<input type="button" value="프로필 관리" onclick="location.href='/profile/main'">
-	<input type="button" value="매칭 내역 관리" onclick="location.href='/match/matlist'">
-	<input type="button" value="일정 관리" onclick="location.href='/mypage/calendar'">
-</div>
-</body>
-</html>
->>>>>>> refs/remotes/origin/develope
+

@@ -23,13 +23,15 @@
   <link href="/resources/css/style.css" rel="stylesheet" />
   <!-- Theme skin -->
   <link href="/resources/skins/default.css" rel="stylesheet" />
+  <!-- Chart -->
+  <link href="/resources/css/chart.css" rel="stylesheet">
   <!-- Fav and touch icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/resources/ico/apple-touch-icon-144-precomposed.png" />
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/resources/ico/apple-touch-icon-114-precomposed.png" />
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/resources/ico/apple-touch-icon-72-precomposed.png" />
   <link rel="apple-touch-icon-precomposed" href="/resources/ico/apple-touch-icon-57-precomposed.png" />
   <link rel="shortcut icon" href="/resources/ico/MJfavi.png" />
-
+  
 </head>
   <style>
     body,
