@@ -2847,4 +2847,12 @@ article img.pull-right, article .align-right {
             border-radius: 3px;
             font-size : 4pt;
         }
+   /* ----------start Calendar  Style*-----------------*/   
+      .scriptCalendar { text-align:center; }
+      .scriptCalendar > thead > tr > td { width:70px; }
+      .scriptCalendar > thead > tr:first-child > td { font-weight:bold; }
+      .scriptCalendar > tbody > tr > td { width:100px;height:100px; }
+  /* -----------end Calendar  Style*-----------------*/  
+      
 /* Theme Styler :: End */
+

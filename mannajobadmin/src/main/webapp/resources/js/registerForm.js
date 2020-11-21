@@ -72,6 +72,31 @@ function registerValidate_join(){
     return true;	
 }
 
+function registerValidate_update(){
+         
+    let name = document.registerForm.m_name;
+    let phone = document.registerForm.m_phone;
+    let email = document.registerForm.m_email;
+ 
+    if(KoreanNameCheck(name)){
+        alert("이름은 한글 또는 영문자로 입력해 주세요.");
+        console.log("name");
+        return false;
+    }
+    if(PhoneCheck(phone)){
+        alert("전화번호를 다시 입력해 주세요(010-XXXX-XXXX).");
+        console.log("phone");
+        return false;
+    }
+    if(EmailCheck(email)){
+        alert("이메일 주소를 다시 입력해 주세요.");
+        console.log("email");
+        return false;
+    }
+    alert("수정완료 되었습니다.");
+    return true;	
+}
+
 
 //아이디
 function EngAndNum(inputObject){

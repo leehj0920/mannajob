@@ -34,6 +34,10 @@
                   <h5 class="widgetheading height_40">마이페이지</h5>
   
                   <ul class="cat">
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/develope
 	                   <li><i class="icon-angle-right"></i><a href="/match/matlist">매칭내역관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
 	                  <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
