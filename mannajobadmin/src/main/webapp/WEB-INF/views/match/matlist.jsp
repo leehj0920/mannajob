@@ -127,10 +127,12 @@
                           	<c:if test="${wlist.b_state eq 'B'}">
                           		<c:choose>
 									<c:when test="${wlist.reviewVO.r_num eq null || wlist.reviewVO.r_w_m_id ne userId }">
-										<p class="center"><a href="/review/insertB?mat_num=${wlist.matchVO.mat_num}&r_mat_m_id=${wlist.matchVO.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
+										<p class="center"><a href="/review/insertB?b_num=${wlist.b_num}"
+										 class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
 									</c:when>
 									<c:otherwise>
-										<p class="center"><a href="/review/update?r_num=${wlist.reviewVO.r_num}&r_contents=${wlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+										<p class="center"><a href="/review/update?r_num=${wlist.reviewVO.r_num}&r_contents=${wlist.reviewVO.r_contents}"
+										 class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
 									</c:otherwise>
 								</c:choose>
                           	</c:if>

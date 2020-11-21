@@ -26,6 +26,9 @@ public class MatchController {
 	@Setter(onMethod_ = @Autowired)
 	private MatchService service;
 	@GetMapping("/insert")
+	public String insert() {
+		return "/match/insert";
+	}
 	
 	@GetMapping("/matlist")
 	public String matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {

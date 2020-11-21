@@ -97,6 +97,9 @@
     <select id="checkWrite" resultType="int">
     	select count(mat_num) from match where b_num = #{b_num} and m_id = #{m_id}
     </select>
+    <select id="findfinalMat" resultType="com.mannajob.domain.MatchVO">
+    	select mat_num, b_num, m_id, mat_hour, mat_stdate,mat_wdate,mat_okdate,mat_state from match where b_num=#{b_num} and mat_state='C'
+    </select>
     
     <!--  특정한 매칭 넘버 찾기 (매칭신청한 아이디, 게시판 번호로 조회) -->
     <select id="checkmat_num" resultType="int">

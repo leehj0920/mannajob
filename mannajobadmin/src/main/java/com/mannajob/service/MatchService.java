@@ -30,6 +30,8 @@ public interface MatchService {
 	
 	public int checkWrite(MatchVO matchVO);
 	
+	public MatchVO findfinalMat(int b_num);
+	
 	public List<MatchVO> getbMatchMatlist(int b_num);
 	
 	public List<MatchVO> getMatlistPaging(int b_num, Criteria cri);

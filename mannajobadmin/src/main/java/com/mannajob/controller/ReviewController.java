@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mannajob.domain.MatchVO;
+import com.mannajob.service.MatchService;
 import com.mannajob.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ReviewController {
 	private ReviewService service;
+	private MatchService matchservice;
 	
 	/*
 	 * @GetMapping("/insert") public void insert() {
@@ -28,11 +31,13 @@ public class ReviewController {
 	 */
 	//글 작성 내역에서 리뷰 작성
 	@GetMapping("/insertB")
-	public void insertB(Model model, HttpServletRequest request, int mat_num, String r_mat_m_id) {
+	public void insertB(Model model, HttpServletRequest request, int b_num) {
 		HttpSession session = request.getSession();
-		model.addAttribute("mat_num", mat_num);
+		MatchVO matchVO = matchservice.findfinalMat(b_num);
+		model.addAttribute("mat_num", matchVO.getMat_num());
 		model.addAttribute("r_w_m_id", session.getAttribute("userId"));
-		model.addAttribute("r_mat_m_id", r_mat_m_id);
+		
+		model.addAttribute("r_mat_m_id",matchVO.getM_id());
 	}
 	
 	//매칭 신청 내역에서 리뷰 작성

@@ -76,6 +76,7 @@ public class MatchServiceImpl implements MatchService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 
 	@Override
 	public List<MatchVO> getbMatchMatlist(int b_num) {
@@ -100,6 +101,10 @@ public class MatchServiceImpl implements MatchService {
 	public List<BMatchVO> searchWMat(String m_id) {
 		return mapper.searchWMat(m_id);
 	}
-	
+
+	@Override
+	public MatchVO findfinalMat(int b_num) {
+		return mapper.findfinalMat(b_num);
+	}
 	
 }
