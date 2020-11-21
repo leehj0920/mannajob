@@ -9,6 +9,7 @@
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.MemberVO" id="MemberVO">
+		<result property="rn" column="rn"/>
 		<result property="m_id" column="m_id"/>
 		<result property="m_cdate" column="m_cdate" />
 		<result property="m_stop" column="m_stop" />
@@ -18,7 +19,7 @@
 
 	<!-- 회원 검색&페이징 -->
 	<select id="getMemListWithPaging" resultMap="MemberVO">
-		select m_id, m_cdate, m_stop, m_del from 
+		select rn, m_id, m_cdate, m_stop, m_del from 
 		(select /*+ index_desc(empl pk_e) */
 		rownum rn, m.m_id, m.m_cdate, m.m_stop, m.m_del from member m LEFT JOIN empl e 
 		ON m.m_id = e.m_id WHERE

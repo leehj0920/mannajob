@@ -4,43 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp" %>
-<script>
-	function mreviewU() {
-		window.name = 'showempl';
-		var mupdate = document.mReviewU;
-		window.open('', 'mUpdate', 'width=500, height=430');
-		mupdate.action='/review/update';
-		mupdate.target='mUpdate';
-		mupdate.submit();
-	}
-	
-	function mreviewI() {
-		window.name = 'showempl';
-		var minsert = document.mReviewI;
-		window.open('', 'mInsert', 'width=500, height=430');
-		minsert.action='/review/insert';
-		minsert.target='mInsert';
-		minsert.submit();
-	}
-	
-	function wreviewU() {
-		window.name = 'showempl';
-		var wupdate = document.wReviewU;
-		window.open('', 'wUpdate', 'width=500, height=430');
-		wupdate.action='/review/update';
-		wupdate.target='wUpdate';
-		wupdate.submit();
-	}
-	//수정중..................................................................
-	function wreviewI() {
-		window.name = 'showempl';
-		var winsert = document.wReviewI;
-		window.open('', 'wInsert', 'width=500, height=430');
-		winsert.action='/review/insert';
-		winsert.target='wInsert';
-		winsert.submit();
-	}
-</script>
+
   <section id="inner-headline">
       <div class="container">
         <div class="row">
@@ -314,3 +278,45 @@
 
 
 <%@ include file="../includes/footer.jsp" %>
+
+<script>
+	function mreviewU() {
+		window.name = 'showempl';
+		var mupdate = document.mReviewU;
+		window.open('', 'mUpdate', 'width=500, height=430');
+		mupdate.action='/review/update';
+		mupdate.target='mUpdate';
+		mupdate.submit();
+	}
+
+ 	function mreviewI() {
+		window.name = 'showempl';
+		var minsert = document.mReviewI;
+		window.open('', 'mInsert', 'width=500, height=430');
+		minsert.action='/review/insert';
+		minsert.target='mInsert';
+		minsert.submit();
+	}
+
+
+	
+
+	
+ 	function wreviewU() {
+		window.name = 'showempl';
+		var wupdate = document.wReviewU;
+		window.open('', 'wUpdate', 'width=500, height=430');
+		wupdate.action='/review/update';
+		wupdate.target='wUpdate';
+		wupdate.submit();
+	}
+	//수정중..................................................................
+	function wreviewI() {
+		window.name = 'showempl';
+		var winsert = document.wReviewI;
+		window.open('', 'wInsert', 'width=500, height=430');
+		winsert.action='/review/insert';
+		winsert.target='wInsert';
+		winsert.submit();
+	} 
+</script>
