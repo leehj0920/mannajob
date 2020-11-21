@@ -164,13 +164,25 @@ public class ProfileController {
 
 	}
 	
-
-
-	
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "redirect/profile/main";
+		return "redirect:/profile/main";
 	}
-
+	
+	@GetMapping("/showmem")
+	public String showmem(Model model, String m_id, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		log.info(".............................................." + session.getAttribute("userId").toString());
+		
+//		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("MReview", service.searchMReview(m_id));
+		return "/profile/showmem";
+	}
+	
+	@GetMapping("/suggest")
+	public void suggest(Model model, String m_id) {
+		
+	}
 }

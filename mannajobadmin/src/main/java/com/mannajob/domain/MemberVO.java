@@ -19,4 +19,5 @@ public class MemberVO {
     
     private EmplVO emplVO;
     private int e_num;
+    private ReviewVO reviewVO;
 }

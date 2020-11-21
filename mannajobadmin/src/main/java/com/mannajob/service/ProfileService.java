@@ -15,6 +15,8 @@ public interface ProfileService {
 	
 	public void updateProfile(MemberVO member);
 	
+	public List<MemberVO> searchMReview(String m_id);
+	
 	public void deleteMem(String m_id);
 	
 	public EmplVO getEmplProfile(String m_id);

@@ -61,7 +61,7 @@
                         </td>
                         <!-- 모집정보 아이디 -->
                         <td>
-                         <c:out value="${bMatch.m_id}" />
+                        	<a href="/profile/showmem?m_id=${bMatch.m_id}" onClick="window.open(this.href, '리뷰 수정', 'width=800, height=600'); return false">${bMatch.m_id}</a>
                         </td>
                       </tr>
                       

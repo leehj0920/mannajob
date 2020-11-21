@@ -20,6 +20,18 @@
 </head>
 <body>
 	<h3>리뷰 수정</h3>
+	<hr>
+	<div>
+		<h3>매칭 상대 정보</h3>
+		<div>
+			<table>
+				<tr>
+					<td>아이디</td>
+					<td>${r_mat_m_id}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	<div>
 		<form method="post" name="updateform" target="matlist" action="/review/updateok">
 			<input type="hidden" name="r_num" value="${r_num}">

@@ -4,7 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp" %>
-
+<script>
+	window.name = 'matlist'; 
+</script>
   <section id="inner-headline">
       <div class="container">
         <div class="row">
@@ -131,7 +133,7 @@
 										 class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
 									</c:when>
 									<c:otherwise>
-										<p class="center"><a href="/review/update?r_num=${wlist.reviewVO.r_num}&r_contents=${wlist.reviewVO.r_contents}"
+										<p class="center"><a href="/review/update?r_num=${wlist.reviewVO.r_num}&r_mat_m_id=${wlist.reviewVO.r_mat_m_id}&r_contents=${wlist.reviewVO.r_contents}"
 										 class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
 									</c:otherwise>
 								</c:choose>
@@ -224,7 +226,7 @@
 									<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
                           		</c:when>
                           		<c:otherwise>
-									<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+									<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_mat_m_id=${mlist.reviewVO.r_mat_m_id}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
                           		</c:otherwise>
                           	</c:choose>
 							</c:if>

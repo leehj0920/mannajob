@@ -57,9 +57,10 @@ public class ReviewController {
 	
 	//매칭 내역 관리에서 리뷰 수정
 	@GetMapping("/update")
-	public void update(Model model, int r_num, String r_contents ) {
+	public void update(Model model, int r_num, String r_contents, String r_mat_m_id) {
 		model.addAttribute("r_num", r_num);
 		model.addAttribute("r_contents", r_contents);
+		model.addAttribute("r_mat_m_id", r_mat_m_id);
 	}
 	
 	@PostMapping("/updateok")

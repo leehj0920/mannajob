@@ -39,6 +39,10 @@ public class ProfileServiceImpl implements ProfileService {
 	public void updateProfile(MemberVO member) {
 		mapper.updateProfile(member);
 	}
+	
+	public List<MemberVO> searchMReview(String m_id) {
+		return mapper.searchMReview(m_id);
+	}
 
 	@Override
 	public void deleteMem(String m_id) {

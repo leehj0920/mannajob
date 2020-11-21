@@ -6,14 +6,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 <script>
-	function reviewUU() {
 		window.name = 'showempl';
-		var updatee = document.ReviewUU;
-		window.open('', 'Update', 'width=500, height=430');
-		updatee.action='/review/updatee';
-		updatee.target='Update';
-		updatee.submit();
-	}
 </script>
 
 <section id="inner-headline">
@@ -222,7 +215,6 @@
                             <!-- 수정버튼 (세션 아이디와 동일할 경우 활성화) -->
 	                        <c:if test="${userId eq re.r_w_m_id }">
                             <p class="center"><a href="/review/updatee?r_num=${re.r_num}&r_contents=${re.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
-							</form>
 	                        </c:if>
                           </td>
                           <td>
