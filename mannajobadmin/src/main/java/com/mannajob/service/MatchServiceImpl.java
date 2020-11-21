@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.MatchVO;
+import com.mannajob.mapper.BMatchMapper;
 import com.mannajob.mapper.MatchMapper;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,8 @@ import lombok.extern.log4j.Log4j;
 public class MatchServiceImpl implements MatchService {
 	@Setter(onMethod_ = @Autowired)
 	private MatchMapper mapper;
+	@Setter(onMethod_ = @Autowired)
+	private BMatchMapper bmatchmapper;
 
 	@Override
 	public List<MatchVO> searchBmatMat(int b_num) {
@@ -36,64 +40,67 @@ public class MatchServiceImpl implements MatchService {
 		return mapper.searchBMat(m_id); }
 
 	@Override
-	public void insert(MatchVO matchVO) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(MatchVO matchVO) {
+		BMatchVO bmatchVO = bmatchmapper.read(matchVO.getB_num());
+		if(bmatchVO.getB_state().equals("A")) {
+			mapper.insert(matchVO);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
 	public void updateTime(MatchVO matchVO) {
-		// TODO Auto-generated method stub
+		mapper.updateTime(matchVO);
 		
 	}
 
 	@Override
 	public void reject(MatchVO matchVO) {
-		// TODO Auto-generated method stub
+		mapper.reject(matchVO.getMat_num());
 		
 	}
-
+	@Transactional
 	@Override
 	public void finish(MatchVO matchVO) {
-		// TODO Auto-generated method stub
+		mapper.finish(matchVO.getMat_num());
+		mapper.rejectother(matchVO.getB_num(),matchVO.getM_id());
 		
 	}
 
 	@Override
 	public void cancel(MatchVO matchVO) {
-		// TODO Auto-generated method stub
+		mapper.cancel(matchVO.getMat_num());
 		
 	}
 
 	@Override
 	public int checkMatNum(MatchVO matchVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.checkmat_num(matchVO.getB_num(),matchVO.getM_id());
 	}
 
 	@Override
 	public int checkWrite(MatchVO matchVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.checkWrite(matchVO.getB_num(),matchVO.getM_id());
 	}
 	
 
 	@Override
 	public List<MatchVO> getbMatchMatlist(int b_num) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mapper.getbMatchMatlist(b_num);
 	}
 
 	@Override
 	public List<MatchVO> getMatlistPaging(int b_num, Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return mapper.getMatlistPaging(b_num, cri);
 	}
 
 	@Override
 	public int getCount(int b_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getCount(b_num);
 	}
 	
 	

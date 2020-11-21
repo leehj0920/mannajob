@@ -16,7 +16,7 @@ public interface MatchService {
 	
 	public List<BMatchVO> searchWMat(String m_id);
 	
-	public void insert(MatchVO matchVO);
+	public boolean insert(MatchVO matchVO);
 	
 	public void updateTime(MatchVO matchVO);
 	

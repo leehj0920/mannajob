@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class MatchMapperTest {
 	@Setter(onMethod_=@Autowired)
 	private MatchMapper mapper;
-//	@Test
+	@Test
 	public void insert() {
 		MatchVO matchVO = new MatchVO();
 		matchVO.setB_num(35);
@@ -70,7 +70,7 @@ public class MatchMapperTest {
 	public void getMatlistPaging() {
 		mapper.getMatlistPaging(35, new Criteria(1, 5)).forEach(list -> log.info(list));
 	}
-	@Test	
+//	@Test	
 	public void getTotalCountItem() {
 		log.info(mapper.getTotalCountItem(35));
 	}
