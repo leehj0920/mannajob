@@ -17,6 +17,8 @@
 	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
 		<result property="r_contents" column="r_contents"/>
 		<result property="r_num" column="r_num"/>
+		<result property="r_w_m_id" column="r_w_m_id"/>
+		<result property="r_mat_m_id" column="r_mat_m_id"/>
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.BMatchVO" id="BMatch">
@@ -49,14 +51,14 @@
 		SELECT mat_num, mat_stdate, mat_hour, m_id FROM match WHERE b_num = #{b_num}
 	</select>
 	
-	<!-- 매칭 신청 내역 조회-->
-	<select id="searchMat" resultMap="BMatch">
-		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, m.m_id, r.r_num, r.r_contents FROM b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num WHERE b.b_num = m.b_num AND m.m_id = #{m_id} ORDER BY m.mat_num DESC 
-	</select>
-	
 	<!-- 매칭글 작성 내역 조회  -->
 	<select id="searchWMat" resultMap="BMatch">
-		SELECT b.b_num, b.b_subject, b.b_state, b.m_id, re.m_id, re.r_num FROM b_match b left join (SELECT m.b_num, r.r_num, m.m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b_num DESC
+		SELECT b.b_num, b.b_subject, b.b_state, re.m_id, re.r_num, re.r_w_m_id, re.r_mat_m_id FROM b_match b left join (SELECT m.b_num, r.r_num, m.m_id, r.r_w_m_id, r.r_mat_m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b_num DESC
+	</select>
+	
+	<!-- 매칭 신청 내역 조회-->
+	<select id="searchMat" resultMap="BMatch">
+		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, r.r_num, r.r_contents, r.r_w_m_id FROM b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num AND r_w_m_id = #{m_id} AND r.r_del = 'N' WHERE b.b_num = m.b_num AND m.m_id = #{m_id} ORDER BY m.mat_num DESC 
 	</select>
 
 </mapper>

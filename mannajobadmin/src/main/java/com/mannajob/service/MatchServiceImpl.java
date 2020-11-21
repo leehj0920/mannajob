@@ -30,10 +30,10 @@ public class MatchServiceImpl implements MatchService{
 		return mapper.searchMat(m_id);
 	}
 
-	/*
-	 * @Override public List<BMatchVO> searchBMat(String m_id) { return
-	 * mapper.searchBMat(m_id); }
-	 */
+	@Override
+	public List<BMatchVO> searchBMat(String m_id) {
+		return mapper.searchBMat(m_id);
+	} 
 
 	@Override
 	public List<BMatchVO> searchWMat(String m_id) {

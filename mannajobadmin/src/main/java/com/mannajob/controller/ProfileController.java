@@ -132,8 +132,7 @@ public class ProfileController {
 		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
 		
-		log.info(".................model....................." + model.getAttribute("m_id"));
-		log.info("...................session..................." + session.getAttribute("userId"));
+		log.info("......................................" + model.getAttribute("review"));
 		
 		return "/profile/showempl";
 	}
