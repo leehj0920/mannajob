@@ -58,5 +58,64 @@
 	<select id="searchWMat" resultMap="BMatch">
 		SELECT b.b_num, b.b_subject, b.b_state, b.m_id, re.m_id, re.r_num FROM b_match b left join (SELECT m.b_num, r.r_num, m.m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b_num DESC
 	</select>
-
+	
+	
+	<!-- 매칭글 작성  -->
+    <insert id="insert">
+    	insert into match(mat_num,b_num, m_id, mat_hour, mat_stdate) values(seq_mat.nextval,#{b_num},#{m_id},#{mat_hour},#{mat_stdate})
+    </insert>
+    <!-- 매칭글 시간 변경  -->
+    <update id= "updateTime">
+    	update match set
+    		mat_stdate = #{mat_stdate}, mat_hour = #{mat_hour}
+    		where b_num = #{b_num} and m_id = #{m_id}
+    </update>
+    <!-- 매칭 거절 -->
+    <update id = "reject">
+    	update match set
+    	 mat_state = 'B'
+    	 where mat_num = #{mat_num}
+    </update>
+    <!-- 내칭 완료시  나머지 내용 거절을 위한 매퍼  -->
+    <update id = "rejectother">
+    	update match set
+    	mat_state = 'B'
+    	where b_num = #{b_num} and m_id != #{m_id} and mat_state = 'A'
+    </update>
+    <!-- 매칭글 작성 내역 조회  -->
+    <update id = "finish">
+    	update match set mat_state = 'C' where mat_num = #{mat_num} and mat_state='A'
+    </update>
+    <!-- 매칭글 작성 내역 조회  -->
+    <update id = "cancel">
+    	update match set
+    	 mat_state = 'D'
+    	 where mat_num = #{mat_num}
+    </update>
+    <select id="checkWrite" resultType="int">
+    	select count(mat_num) from match where b_num = #{b_num} and m_id = #{m_id}
+    </select>
+    
+    <!--  특정한 매칭 넘버 찾기 (매칭신청한 아이디, 게시판 번호로 조회) -->
+    <select id="checkmat_num" resultType="int">
+    	select mat_num from match where b_num = #{b_num} and m_id = #{m_id} and rownum = 1 order by m_wdate;
+    </select>
+    <!-- 한 게시글에 대한 매칭 글 전체 검색(취소는 제외) -->
+    <select id = "getbMatchMatlist" resultType="com.mannajob.domain.MatchVO">
+    	select mat_num, b_num, m_id, mat_hour, mat_stdate,mat_wdate,mat_okdate,mat_state from match where b_num = #{b_num}
+    </select> 
+    	<select id="getMatlistPaging" resultType="com.mannajob.domain.MatchVO">
+		<![CDATA[
+		select mat_num, b_num, m_id, mat_hour, mat_stdate, mat_wdate, mat_okdate, mat_state 
+		from (
+			select /*+ index_desc(match pk_mat) */
+			rownum rn, mat_num, b_num, m_id, mat_hour, mat_stdate, mat_wdate, mat_okdate, mat_state 
+			from match
+			where rownum <= #{cri.pageNum} * #{cri.amount} and (mat_state = 'A' or mat_state='B') and b_num=#{b_num})
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
+	</select>
+    <select id = "getTotalCountItem" resultType="int">
+     	select count(mat_num) from match where  b_num = #{b_num}
+    </select>
 </mapper>

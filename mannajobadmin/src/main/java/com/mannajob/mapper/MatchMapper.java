@@ -30,6 +30,27 @@ public interface MatchMapper {
 
 	
 	public List<BMatchVO> searchBMat(String m_id);
-
+	
+	public void insert(MatchVO matchVO);
+	
+	public void updateTime(MatchVO matchVO);
+	
+	public void reject(int mat_num);
+	
+	public void rejectother(@Param("b_num") int b_num, @Param("m_id") String m_id);
+	
+	public void finish(int mat_num);
+	
+	public void cancel(int mat_num);
+	
+	public int checkmat_num(@Param("b_num") int b_num, @Param("m_id") String m_id);
+	
+	public int checkWrite(@Param("b_num") int b_num, @Param("m_id") String m_id);
+	
+	public List<MatchVO> getbMatchMatlist(int b_num);
+	
+	public List<MatchVO> getMatlistPaging(@Param("b_num") int b_num, @Param("cri") Criteria cri);
+	
+	public int getTotalCountItem(int b_num);
 	
 }

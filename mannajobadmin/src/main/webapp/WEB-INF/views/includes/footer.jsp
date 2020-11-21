@@ -41,23 +41,23 @@
   <script src="/resources/js/animate.js"></script>
   <script src="/resources/js/registerForm.js"></script> 
   <script src="/resources/js/calendar.js"></script>
-  <script src="/resources/js/chart/chart-bar.js"></script>
-  <script src="/resources/js/chart/Chart.min.js"></script>
-  <script src="/resources/js/chart/chart-bar2.js"></script>
+
+
+
   <!-- Template Custom JavaScript File -->
   <script src="/resources/js/custom.js"></script>
-<<<<<<< HEAD
+
   
-=======
-   <!-- Chart  : Page level plugins -->
+
+
   <script src="/resources/js/chart/Chart.min.js"></script>
 
-  <!-- Chart  : Page level custom scripts -->
+
   <script src="/resources/js/chart/chart-bar.js"></script>
   
-  <!-- Chart  : Page level custom scripts -->
+
   <script src="/resources/js/chart/chart-bar2.js"></script>
->>>>>>> refs/remotes/origin/develope
+
 
 </body>
 </html>

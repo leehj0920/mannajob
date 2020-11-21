@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 public class MatchController {
 	@Setter(onMethod_ = @Autowired)
 	private MatchService service;
-	
+	@GetMapping("/insert")
 	
 	@GetMapping("/matlist")
 	public String matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {

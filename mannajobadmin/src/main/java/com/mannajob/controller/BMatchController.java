@@ -91,8 +91,10 @@ public class BMatchController {
 	}
 	
 	@GetMapping("/update")
-	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
-		
+	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri,HttpSession session) {
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/login";
+		}
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
