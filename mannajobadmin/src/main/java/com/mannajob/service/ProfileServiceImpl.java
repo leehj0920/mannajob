@@ -111,6 +111,4 @@ public class ProfileServiceImpl implements ProfileService {
 		return mapper.checkEmpl(m_id)==1;
 	}
 
-	
-
 }

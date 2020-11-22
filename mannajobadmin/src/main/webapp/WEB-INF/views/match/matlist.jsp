@@ -222,11 +222,18 @@
                           <td>
                           <c:if test="${mlist.matchVO.mat_state eq 'C' }">
                           	<c:choose>
-                          		<c:when test="${mlist.reviewVO.r_num eq null && mlist.reviewVO.r_w_m_id ne userId}">
-									<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
+                          		<c:when test="${mlist.reviewVO.r_num ne null}">
+									<c:choose>
+										<c:when test="${mlist.reviewVO.r_w_m_id eq userId }">
+											<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_mat_m_id=${mlist.reviewVO.r_mat_m_id}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+										</c:when>
+										<c:otherwise>
+											<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
+										</c:otherwise>
+									</c:choose>
                           		</c:when>
                           		<c:otherwise>
-									<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_mat_m_id=${mlist.reviewVO.r_mat_m_id}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+									<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
                           		</c:otherwise>
                           	</c:choose>
 							</c:if>

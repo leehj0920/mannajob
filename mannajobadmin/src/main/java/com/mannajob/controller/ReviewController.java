@@ -24,11 +24,6 @@ public class ReviewController {
 	private ReviewService service;
 	private MatchService matchservice;
 	
-	/*
-	 * @GetMapping("/insert") public void insert() {
-	 * 
-	 * }
-	 */
 	//글 작성 내역에서 리뷰 작성
 	@GetMapping("/insertB")
 	public void insertB(Model model, HttpServletRequest request, int b_num) {

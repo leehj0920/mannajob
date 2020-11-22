@@ -118,7 +118,7 @@
                             <p class="center">멘토링건수</p>                            
                           <td>
                             <!-- 멘토링건수 -->
-                            <span style="color:orangered"><strong>350</strong></span>
+                            <span style="color:orangered"><strong>${MG.countM}</strong></span>
                             <span style="color:orangered">&nbsp 건</span>
                           </td>
                           <td>
@@ -126,7 +126,7 @@
                           </td>
                           <td>
                             <!-- 추천수 -->
-                            <span style="color:orangered"><strong>300</strong></span>
+                            <span style="color:orangered"><strong>${MG.countG}</strong></span>
                             <span style="color:orangered">&nbsp 건</span>
                           </td>
                         </tr>

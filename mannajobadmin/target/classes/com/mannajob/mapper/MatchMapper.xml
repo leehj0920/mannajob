@@ -7,36 +7,23 @@
 		<result property="mat_num" column="mat_num"/>
 		<result property="b_num" column="b_num"/>
 		<result property="m_id" column="m_id"/>
-		<result property="mat_hour" column="mat_hour"/>
-		<result property="mat_stdate" column="mat_stdate"/>
-		<result property="mat_wdate" column="mat_wdate"/>
-		<result property="mat_okdate" column="mat_okdate"/>
 		<result property="mat_state" column="mat_state"/>
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
 		<result property="r_contents" column="r_contents"/>
+		<result property="mat_num" column="mat_num"/>
 		<result property="r_num" column="r_num"/>
 		<result property="r_w_m_id" column="r_w_m_id"/>
 		<result property="r_mat_m_id" column="r_mat_m_id"/>
+		<result property="r_del" column="r_del"/>
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.BMatchVO" id="BMatch">
 		<result property="b_num" column="b_num"/>
-		<result property="b_category" column="b_category"/>
 		<result property="m_id" column="m_id"/>
-		<result property="b_corp" column="b_corp"/>
-		<result property="b_task" column="b_task"/>
-		<result property="b_price" column="b_price"/>
-		<result property="b_location" column="b_location"/>
-		<result property="b_stdate" column="b_stdate"/>
-		<result property="b_endate" column="b_endate"/>
-		<result property="b_period" column="b_period"/>
-		<result property="b_del" column="b_del"/>
 		<result property="b_state" column="b_state"/>
 		<result property="b_subject" column="b_subject"/>
-		<result property="b_wdate" column="b_wdate"/>
-		<result property="b_contents" column="b_contents"/>
 		<collection property="matchVO" resultMap="Match"/>
 		<collection property="reviewVO" resultMap="Review"/>
 	</resultMap>

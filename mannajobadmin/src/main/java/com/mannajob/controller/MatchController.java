@@ -59,6 +59,7 @@ public class MatchController {
 		model.addAttribute("wmatlist", service.searchWMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
+		System.out.println("userId" + model.getAttribute("userId"));
 		System.out.println("wmatlist" + model.getAttribute("wmatlist"));
 		System.out.println("matlist" + model.getAttribute("matlist"));
 		return "match/matlist";

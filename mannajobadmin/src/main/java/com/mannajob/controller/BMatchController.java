@@ -52,7 +52,8 @@ public class BMatchController {
 	// 댓글,대댓글 추가 필요, 현직자의 경우 현직자 정보 추가 필요.
 	// 사진 출력 추가 필요
 	@GetMapping("/view")
-	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
+	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri, HttpSession session) {
+		System.out.println("..........................................." + session.getAttribute("userId"));
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
