@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="../resources/certifi/${emplCertif}">
+<img src="../resources/certifi/${emplCertif}" width="600px" height="1000px">
 </body>
 </html>

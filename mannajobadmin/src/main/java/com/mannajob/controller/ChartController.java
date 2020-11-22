@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/chart/*")
 @AllArgsConstructor
-public class ChartColtroller {
+public class ChartController {
 	
 	@GetMapping("/chart_cnt")
 	public void chart_cnt() {

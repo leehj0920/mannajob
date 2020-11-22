@@ -82,13 +82,13 @@
                           </td>
                           <!-- <td colspan="3">                              -->
                           <td>
-                              <select id="location1" name="location1" class="location">
+                              <select id="location1" name="location1" class="location" style="width: 150px">
                                 
 				                </select>
-				                <select id="location2" name="location2" class="location">
+				                <select id="location2" name="location2" class="location" style="width: 150px">
 				                  
 				                </select>
-				                <select id="location3" name="location3" class="location">
+				                <select id="location3" name="location3" class="location" style="width: 150px">
 				                                               
 				                </select>                                                       
                           </td>
@@ -182,7 +182,7 @@
                           <p class="center">
                              
                             <input class="btn btn-theme margintop10 i_btn2" type="submit" value="작성하기">
-                          <input class="btn btn-inverse margintop10 i_btn2" type="button" onclick="location.href='/bmatch/view?pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&b_num=${bMatch.b_num}&m_id=${bMatch.m_id}'"  value="취소하기">
+                          <input class="btn btn-inverse margintop10 i_btn2" type="button" onclick="location.href='/bmatch/list?pageNum=${cri.pageNum}&b_category=B'"  value="취소하기">
                         </p>
                         </div>
                       </div>   

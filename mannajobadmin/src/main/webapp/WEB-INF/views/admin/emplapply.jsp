@@ -212,7 +212,7 @@
                           </td>
                           <td>
                             <!-- 다운로드 버튼-->
-                            <p class="center"><button onclick="window.open('/admin/certif?e_num=${emplFile.e_num}', '증명서 확인', 'width=430, height=500, location=no, status=no, scrollbars=yes');"class="btn btn-mini btn-theme" >확 인</button></p>
+                            <p class="center"><button onclick="window.open('/admin/certif?e_num=${emplFile.e_num}', '증명서 확인', 'width=600, height=1000, location=no, status=no, scrollbars=yes');"class="btn btn-mini btn-theme" >확 인</button></p>
                           </td>
                         </tr>          
                       </table>

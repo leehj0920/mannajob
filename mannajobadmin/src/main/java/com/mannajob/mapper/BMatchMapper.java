@@ -41,4 +41,6 @@ public interface BMatchMapper {
 	
 	public void cancel(int b_num);
 	
+	public int getPersonTotalCount(String m_id);
+	
 }

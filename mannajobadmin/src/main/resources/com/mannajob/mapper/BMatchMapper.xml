@@ -7,13 +7,15 @@
 	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.BMatchVO">
 		<![CDATA[
-		select b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+		select * from (
+		select rownum rn, b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
 		from (
 			select /*+ index_desc(BMatch pk_b) */
-			rownum rn, b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
+			 b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
 			from b_match
-			where rownum <= #{cri.pageNum} * #{cri.amount} and b_del = 'N' and b_category like '%'||#{b_category}||'%')
-		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+			where b_del = 'N' and b_category like '%'||#{b_category}||'%' order by b_num desc)
+		where rownum <= #{cri.pageNum} * #{cri.amount}
+		)where  rn > (#{cri.pageNum} - 1) * #{cri.amount}
 		]]>
 	</select>
 	
@@ -117,6 +119,10 @@
 	
 	<select id="getemplTotalCount" resultType="int">
 		select count(e.e_num) from m_file f, member m, empl e WHERE f.e_num = e.e_num AND m.m_id = e.m_id AND e.e_corp LIKE '%'||#{bMatchVO.b_corp}||'%' AND e.e_task LIKE '%'||#{bMatchVO.b_task}||'%' AND e.e_ok = 'Y' AND m.m_del = 'N' AND e.e_del = 'N' AND f.f_category = 'I'
+	</select>
+	
+	<select id="getPersonTotalCount" resultType="int">
+		select count(b_num) from b_match where m_id = #{m_id} 
 	</select>
 	
 </mapper>

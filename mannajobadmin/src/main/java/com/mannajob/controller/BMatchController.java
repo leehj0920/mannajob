@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +16,12 @@ import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
+import com.mannajob.domain.MatchVO;
 import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.locationDTO;
 import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
+import com.mannajob.service.MatchService;
 import com.mannajob.service.ProfileService;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +35,7 @@ public class BMatchController {
 	private BMatchService bMatchService;
 	private ProfileService profileService;
 	private AdminService adminService;
+	private MatchService matchservice;
 	
 	@GetMapping("/list")
 	public String list(Model model, Criteria cri, BMatchVO bMatchVO) {
@@ -131,13 +135,17 @@ public class BMatchController {
 		}
 		return "redirect:/bmatch/list?b_category="+bMatchVO.getB_category();
 	}
-	
+	@Transactional
 	@GetMapping("/cancel")
 	public String cancel(BMatchVO bMatchVO, Criteria cri, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId") == null) {
 			return "redirect:/login";
 		}else {
+			if(matchservice.matchfinalCount(bMatchVO.getB_num())) {
+				MatchVO matchVO = matchservice.findfinalMat(bMatchVO.getB_num());
+				matchservice.reject(matchVO);
+			}
 			bMatchService.cancel(bMatchVO.getB_num());
 		}
 		return "redirect:/match/matlist";

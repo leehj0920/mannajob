@@ -123,7 +123,7 @@
                 <div class="span2" style="margin-left: 10px;">
                   <!-- <div class="span3"  style="padding-left: 34px;"> -->
                   <div class="box aligncenter">
-                    <a href="/profile/showempl?m_id=${empl.m_id}"><img src="../resources/certifi/${empl.fileVO.stored_file_name}" width="120px" height="120px"></a>
+                    <a href="/profile/showempl?m_id=${empl.m_id}"><img src="../resources/certifi/${empl.fileVO.stored_file_name}" style="width: 120px; height: 120px;" ></a>
                     <div class="text" >
                       <p>${empl.memberVO.m_name}님</p>
                       <p class="txt_small_black line_9">${empl.e_corp}</p>

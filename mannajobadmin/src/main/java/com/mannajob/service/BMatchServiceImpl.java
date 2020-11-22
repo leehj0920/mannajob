@@ -174,6 +174,13 @@ public class BMatchServiceImpl implements BMatchService{
 		mapper.cancel(b_num);
 		
 	}
+
+	@Override
+	public int getPersonTotalCount(String m_id) {
+		return mapper.getPersonTotalCount(m_id);
+	}
+
+	
 	
 	
 

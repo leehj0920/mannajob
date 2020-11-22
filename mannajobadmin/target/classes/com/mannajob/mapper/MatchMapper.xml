@@ -15,8 +15,8 @@
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
-		<result property="r_contents" column="r_contents"/>
 		<result property="r_num" column="r_num"/>
+		<result property="r_contents" column="r_contents"/>
 		<result property="r_w_m_id" column="r_w_m_id"/>
 		<result property="r_mat_m_id" column="r_mat_m_id"/>
 	</resultMap>
@@ -48,17 +48,39 @@
 	
 	<!-- 매칭 신청 현황 -->
 	<select id="searchBmatMat" resultType="com.mannajob.domain.MatchVO">
-		SELECT mat_num, mat_stdate, mat_hour, m_id FROM match WHERE b_num = #{b_num}
+		SELECT mat_num, mat_stdate, mat_hour, m_id FROM match WHERE b_num = #{b_num} and mat_state='A' order by mat_num
 	</select>
 	
 	<!-- 매칭글 작성 내역 조회  -->
 	<select id="searchWMat" resultMap="BMatch">
-		SELECT b.b_num, b.b_subject, b.b_state, re.m_id, re.r_num, re.r_contents, re.r_w_m_id, re.r_mat_m_id FROM b_match b left join (SELECT m.b_num, r.r_num, r.r_contents, m.m_id, r.r_w_m_id, r.r_mat_m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b_num DESC
+	<![CDATA[
+		select * from
+		(
+		select rownum rn,  b_num,b_subject, b_state, m_id, r_num, r_contents, r_w_m_id, r_mat_m_id 
+		from (
+			select /*+ index_desc(match pk_mat) */
+			b.b_num, b.b_subject, b.b_state, re.m_id, re.r_num, re.r_contents, re.r_w_m_id, re.r_mat_m_id 
+			from b_match b left join (SELECT m.b_num, r.r_num, r.r_contents, m.m_id, r.r_w_m_id, r.r_mat_m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N' order by m.b_num desc) re on b.b_num = re.b_num
+			where  b.m_id = #{m_id} ORDER BY b_num DESC)
+		where  rownum <= #{cri.pageNum} * #{cri.amount}) 
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
 	</select>
 	
 	<!-- 매칭 신청 내역 조회-->
-	<select id="searchMat" resultMap="BMatch">
-		SELECT m.mat_num, b.b_subject, m.mat_state, b.m_id, r.r_num, r.r_contents, r.r_w_m_id, r.r_mat_m_id FROM b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num AND r_w_m_id = #{m_id} AND r.r_del = 'N' WHERE b.b_num = m.b_num AND m.m_id = #{m_id} ORDER BY m.mat_num DESC 
+	<select id="searchMat" resultType="com.mannajob.domain.BMatchReviewVO">
+	<![CDATA[
+		select * from
+		(
+		select rownum rn, mat_num, b_subject, mat_state, m_id, r_num, r_contents, r_w_m_id, r_mat_m_id 
+		from (
+			select /*+ index_desc(match pk_mat) */
+			m.mat_num, b.b_subject, m.mat_state, b.m_id, r.r_num, r.r_contents, r.r_w_m_id, r.r_mat_m_id  
+			from b_match b, match m LEFT JOIN review r ON m.mat_num = r.mat_num AND r_w_m_id = #{m_id} AND r.r_del = 'N' 
+			where b.b_num = m.b_num AND m.m_id = #{m_id} ORDER BY m.mat_num DESC)
+		where rownum <= #{scri.pageNumP} * #{scri.amountP} )
+		where rn > (#{scri.pageNumP} - 1) * #{scri.amountP}
+		]]>
 	</select>
 	
 	
@@ -86,7 +108,7 @@
     </update>
     <!-- 매칭글 작성 내역 조회  -->
     <update id = "finish">
-    	update match set mat_state = 'C' where mat_num = #{mat_num} and mat_state='A'
+    	update match set mat_state = 'C',mat_okdate = sysdate where mat_num = #{mat_num} and mat_state='A'
     </update>
     <!-- 매칭글 작성 내역 조회  -->
     <update id = "cancel">
@@ -122,5 +144,21 @@
 	</select>
     <select id = "getTotalCountItem" resultType="int">
      	select count(mat_num) from match where  b_num = #{b_num}
+    </select>
+    <select id = "matchfinalCount" resultType="int">
+    	select count(mat_num) from match where  b_num = #{b_num} and mat_state='C'
+    </select>
+    <select id="getPersionTotalCount" resultType="int">
+    	select count(mat_num) from match where  m_id = #{m_id}
+    </select>
+    <select id="getListBMatch" resultType="com.mannajob.domain.MyScheduleVO">
+    	select b.b_num, m.mat_num, m.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
+    		from b_match b, match m
+    		 where b.b_num = m.b_num and b.m_id=#{m_id} and m.mat_state='C' and b.m_id != m.m_id and mat_stdate like #{yearmonth}||'%' order by mat_stdate,mat_hour
+    </select>
+    <select id="getListMatch" resultType="com.mannajob.domain.MyScheduleVO">
+    	select b.b_num, m.mat_num, b.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
+    		from b_match b, match m
+    		where b.b_num = m.b_num and m.m_id=#{m_id} and m.mat_state='C' and b.m_id != m.m_id and mat_stdate like #{yearmonth}||'%' order by mat_stdate,mat_hour
     </select>
 </mapper>

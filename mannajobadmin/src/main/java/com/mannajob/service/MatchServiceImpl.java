@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mannajob.domain.BMatchReviewVO;
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.MatchVO;
+import com.mannajob.domain.MyScheduleVO;
 import com.mannajob.mapper.BMatchMapper;
 import com.mannajob.mapper.MatchMapper;
 
@@ -31,8 +34,8 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<BMatchVO> searchMat(String m_id) {
-		return mapper.searchMat(m_id);
+	public List<BMatchReviewVO> searchMat(String m_id,CriteriaProfile scri) {
+		return mapper.searchMat(m_id, scri);
 	}
 
 	
@@ -105,13 +108,39 @@ public class MatchServiceImpl implements MatchService {
 	
 	
 	@Override
-	public List<BMatchVO> searchWMat(String m_id) {
-		return mapper.searchWMat(m_id);
+	public List<BMatchVO> searchWMat(String m_id, Criteria cri) {
+		return mapper.searchWMat(m_id, cri);
 	}
 
 	@Override
 	public MatchVO findfinalMat(int b_num) {
 		return mapper.findfinalMat(b_num);
 	}
+
+	@Override
+	public boolean matchfinalCount(int b_num) {
+		return mapper.matchfinalCount(b_num)==1;
+	}
+
+	@Override
+	public int getPersionTotalCount(String m_id) {
+		
+		return mapper.getPersionTotalCount(m_id);
+	}
+
+	@Override
+	public List<MyScheduleVO> getListBMatch(String m_id,String yearmonth) {
+		
+		return mapper.getListBMatch(m_id,yearmonth);
+	}
+
+	@Override
+	public List<MyScheduleVO> getListMatch(String m_id,String yearmonth) {
+		
+		return mapper.getListMatch(m_id,yearmonth);
+	}
+	
+	
+	
 	
 }

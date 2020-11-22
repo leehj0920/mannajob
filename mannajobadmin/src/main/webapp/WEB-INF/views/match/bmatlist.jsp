@@ -50,6 +50,16 @@
     .height_40 {
       padding-top: 30px;
     }
+    
+   	function popclose(form) {
+		form.target = opener.name;
+		form.submit();
+		
+		if(opener != null) {
+			opener.insert = null;
+			self.close();
+		}
+	}
 
   </style>
   
@@ -81,7 +91,8 @@
                   <div class="span9">                   
                     <h5>▶ 매칭 요청현황</h5>
                     <div class="">
-                      <form class="form-horizontal span12" action="#" method="post">
+                      <form class="form-horizontal span12" action="/match/matchok" target="matlist" method="post">
+                      <input type="hidden" name="b_num" value="${b_num}">
                         <div class="control-group center">            
                           <div class="">
                               <table class="table table-bordered">
@@ -100,7 +111,7 @@
                                   	<td><p class="center">신청ID</p></td>
                                   </thead>
                                   <c:forEach var="list" items="${matchlist}">
-                                  <tr> mat_num, mat_stdate, mat_hour, m_id
+                                  <tr>
                                     <td>
                                     	<p class="center"><input type="radio" name="mat_num" value="${list.mat_num}"></p>
                                     </td>
@@ -109,22 +120,23 @@
                                     </td>
                                     <td>
                                       <!-- 일자 -->
-                                      <p class="center">${list.mat_stdate}</p>
+                                      <p class="center"><input type="hidden" name="mat_stdate" value="${list.mat_stdate}">${list.mat_stdate}</p>
                                     </td>
                                     <td>
-                                      <p class="center">${list.mat_hour}</p>
+                                      <p class="center"><input type="hidden" name="mat_hour" value="${list.mat_hour}">${list.mat_hour}</p>
                                     </td>
                                     <td>
                                       <!-- 시작시간 -->
-                                      <p class="center">${list.m_id}</p>
+                                      <p class="center"><input type="hidden" name="m_id" value="${list.m_id}">${list.m_id}</p>
                                     </td>
                                   </tr>
                                   </select>
                                   </c:forEach>
+                                  <tr>
                               </table>
                               <!-- 버튼영역 -->
                               <p class="center">
-                                <input class="btn btn-theme margintop10 i_btn4" type="submit" value="매칭요청">
+                                <input class="btn btn-theme margintop10 i_btn4" type="submit" value="매칭요청" onclick="window.close();">
                                 <input class="btn btn-inverse margintop10 i_btn4" type="button" value="닫기" onclick="window.close();">
                               </p>
                             </div>

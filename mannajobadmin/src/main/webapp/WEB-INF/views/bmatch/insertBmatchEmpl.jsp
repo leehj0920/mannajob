@@ -144,11 +144,11 @@
                           <!-- <td colspan="3">                              -->
                             <td colspan="3">
                               <!-- 지역 -->
-                              <select id="location1" name="location1" class="location">
+                              <select id="location1" name="location1" class="location" style="width: 150px">
 				                </select>
-				                <select id="location2" name="location2" class="location">
+				                <select id="location2" name="location2" class="location" style="width: 150px">
 				                </select>
-				                <select id="location3" name="location3" class="location">
+				                <select id="location3" name="location3" class="location" style="width: 150px">
 				                </select>
                             </td>
                         </tr>

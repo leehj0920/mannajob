@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.mannajob.domain.BMatchReviewVO;
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.MatchVO;
+import com.mannajob.domain.MyScheduleVO;
 
 public interface MatchMapper {
 	
@@ -21,13 +24,13 @@ public interface MatchMapper {
 //		
 	public void update(@Param("b_num")int b_num, @Param("matchVO") MatchVO matchVO);
 //	
-	public int getTotal(BMatchVO bmatchVO);
+//	public int getTotal(BMatchVO bmatchVO);
 //	
 	public List<MatchVO> searchBmatMat(int b_num);
 	
-	public List<BMatchVO> searchMat(@Param("m_id") String m_id);
+	public List<BMatchReviewVO> searchMat(@Param("m_id") String m_id, @Param("scri")CriteriaProfile scri);
 	
-	public List<BMatchVO> searchWMat(String m_id);
+	public List<BMatchVO> searchWMat(@Param("m_id")String m_id,  @Param("cri")Criteria cri);
 	
 	public List<BMatchVO> searchBMat(String m_id);
 	
@@ -54,5 +57,13 @@ public interface MatchMapper {
 	public List<MatchVO> getMatlistPaging(@Param("b_num") int b_num, @Param("cri") Criteria cri);
 	
 	public int getTotalCountItem(int b_num);
+	
+	public int matchfinalCount(int b_num);
+	
+	public int getPersionTotalCount(String m_id);
+	
+	// 일정관리
+	public List<MyScheduleVO> getListBMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
+	public List<MyScheduleVO> getListMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
 	
 }

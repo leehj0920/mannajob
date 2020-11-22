@@ -34,7 +34,9 @@
                                                                                             
                 <ul class="cat">
                   <li><i class="icon-angle-right"></i><a href="/match/matlist">매칭내역관리</a></li>
-                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
+                  <c:set var="now" value="<%=new java.util.Date()%>" />
+				  <c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yyyy-MM" /></c:set> 
+                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar?yearmonth=${sysYear}">일정관리</a></li>
                   <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
                   <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
                   <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
@@ -145,19 +147,24 @@
                       </table>
                     </div>
                     <!-- 페이징 -->
-                    <%-- 
+                     
                     <div class="span8 center">
-                      		<c:if test="${pageMaker.prev}">
-								<a href="/profile/matlist?pageNum=${pageMaker.startPage - 1}&amount=10">◀</a>
+                      		<c:if test="${pageWmat.prev}">
+								<a href="/match/matlist?pageNum=${pageWmat.startPage - 1}&amount=5&pageNumP=${pageMat.scri.pageNumP}&amountP=${pageMat.scri.amountP}">◀</a>
 							</c:if>
-							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                				<a href="/profile/matlist?pageNum=${num}&amount=10">${num}</a>
+							<c:forEach var="num" begin="${pageWmat.startPage}" end="${pageWmat.endPage}">
+							<c:if test="${pageWmat.cri.pageNum == num}">
+								${num}
+							</c:if>
+							<c:if test="${pageWmat.cri.pageNum != num}">
+                				<a href="/match/matlist?pageNum=${num}&amount=5&pageNumP=${pageMat.scri.pageNumP}&amountP=${pageMat.scri.amountP}">${num}</a>
+                			</c:if>
                 			</c:forEach>
-							<c:if test="${pageMaker.next}">
-								<a href="/profile/matlist?pageNum=${pageMaker.endPage + 1}&amount=10">▶</a>
+							<c:if test="${pageWmat.next}">
+								<a href="/match/matlist?pageNum=${pageWmat.endPage + 1}&amount=5&pageNumP=${pageMat.scri.pageNumP}&amountP=${pageMat.scri.amountP}">▶</a>
 							</c:if>
                     </div>
-                     --%>
+                     
                   </div>
 
 
@@ -194,7 +201,7 @@
                         <tr>
                           <td>
                             <!-- 번호 -->
-                            <p class="center">${mlist.matchVO.mat_num}</p>
+                            <p class="center">${mlist.mat_num}</p>
                           </td>
                           <td style="width: 400px;">
                             <!-- 제목 -->
@@ -203,30 +210,30 @@
                           <td>
                             <!-- 진행상태 -->
                              <c:choose>
-                            <c:when test="${mlist.matchVO.mat_state eq 'A'}"><p class="center">요청</p></c:when>
-                            <c:when test="${mlist.matchVO.mat_state eq 'B'}"><p class="center">거절</p></c:when>
-                            <c:when test="${mlist.matchVO.mat_state eq 'C'}"><p class="center">완료</p></c:when>
+                            <c:when test="${mlist.mat_state eq 'A'}"><p class="center">요청</p></c:when>
+                            <c:when test="${mlist.mat_state eq 'B'}"><p class="center">거절</p></c:when>
+                            <c:when test="${mlist.mat_state eq 'C'}"><p class="center">완료</p></c:when>
                             <c:otherwise ><p class="center">취소</p></c:otherwise>                           
                             </c:choose>                    
                           </td>
                           <td>
                             <!-- 취소-->
                             <c:choose>
-                            <c:when test="${mlist.matchVO.mat_state eq 'A'}">
-                            <p class="center"><a href="#" class="btn btn-mini btn-theme">취소</a></p>
+                            <c:when test="${mlist.mat_state eq 'A'}">
+                            <p class="center"><a href="/match/cancel?mat_num=${mlist.mat_num}" onClick="window.open(this.href, '매칭 취소', 'width=400, height=200'); return false" class="btn btn-mini btn-theme">취소</a></p>
                             </c:when>
                             <c:otherwise>
                             </c:otherwise>
                             </c:choose>
                           </td>
                           <td>
-                          <c:if test="${mlist.matchVO.mat_state eq 'C' }">
+                          <c:if test="${mlist.mat_state eq 'C' }">
                           	<c:choose>
-                          		<c:when test="${mlist.reviewVO.r_num eq null && mlist.reviewVO.r_w_m_id ne userId}">
-									<p class="center"><a href="/review/insertM?mat_num=${mlist.matchVO.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
+                          		<c:when test="${mlist.r_num eq null && mlist.r_w_m_id ne userId}">
+									<p class="center"><a href="/review/insertM?mat_num=${mlist.mat_num}&r_mat_m_id=${mlist.m_id}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 작성', 'width=500, height=400'); return false">작성</a></p>
                           		</c:when>
                           		<c:otherwise>
-									<p class="center"><a href="/review/update?r_num=${mlist.reviewVO.r_num}&r_mat_m_id=${mlist.reviewVO.r_mat_m_id}&r_contents=${mlist.reviewVO.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
+									<p class="center"><a href="/review/update?r_num=${mlist.r_num}&r_mat_m_id=${mlist.r_mat_m_id}&r_contents=${mlist.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
                           		</c:otherwise>
                           	</c:choose>
 							</c:if>
@@ -236,18 +243,24 @@
                       </table>
                     </div>
                     <!-- 페이징 -->
-                    <%-- 
+                     
                     <div class="span8 center">
-                      <c:if test="${pageMaker.prev}">
-						<a href="/profile/matlist?pageNum=${pageMaker.startPage - 1}&amount=10">◀</a>
+                      <c:if test="${pageMat.prev}">
+						<a href="/match/matlist?pageNumP=${pageMat.startPage - 1}&amountP=10&pageNum=${pageWmat.cri.pageNum}&amount=${pageWmat.cri.amount}">◀</a>
 					  </c:if>
-					  <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                	  	<a href="/profile/matlist?pageNum=${num}&amount=10">${num}</a>
+					  
+					  <c:forEach var="num" begin="${pageMat.startPage}" end="${pageMat.endPage}">
+					  <c:if test="${pageMat.scri.pageNumP == num}">
+					  	${num}
+					  </c:if>
+					  <c:if test="${pageMat.scri.pageNumP != num}">
+                	  	<a href="/match/matlist?pageNumP=${num}&amountP=10&pageNum=${pageWmat.cri.pageNum}&amount=${pageWmat.cri.amount}">${num}</a>
+                      </c:if>
                       </c:forEach>
-				  	  <c:if test="${pageMaker.next}">
-			          	<a href="/profile/matlist?pageNum=${pageMaker.endPage + 1}&amount=10">▶</a>
+				  	  <c:if test="${pageMat.next}">
+			          	<a href="/match/matlist?pageNumP=${pageMat.endPage + 1}&amountP=10&pageNum=${pageWmat.cri.pageNum}&amount=${pageWmat.cri.amount}">▶</a>
 		 			  </c:if>
-                    </div> --%>
+                    </div>
                   
                   </div>
 

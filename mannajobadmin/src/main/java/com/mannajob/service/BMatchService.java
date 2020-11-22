@@ -36,4 +36,8 @@ public interface BMatchService {
 	public List<EmplVO> searchEmplPaging(CriteriaProfile cri, BMatchVO bMatchVO);
 	
 	public void cancel(int b_num);
+	
+	public int getPersonTotalCount(String m_id);
+	
+
 }

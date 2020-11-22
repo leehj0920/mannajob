@@ -41,7 +41,7 @@
           </div>
           <div class="span8">
             <article>
-              <form id="commentform" action="#" method="post" name="comment-form">
+              
 
                 <div class="row">
                   <div class="post-heading">
@@ -157,7 +157,7 @@
                     </div>
                   </div>
                 </div>               
-              </form>             
+                    
             </article>
           </div>
         </div>
