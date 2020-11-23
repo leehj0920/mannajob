@@ -61,11 +61,11 @@ public class BMatchController {
 	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri, HttpSession session) {
 		System.out.println("..........................................." + session.getAttribute("userId"));
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
+		model.addAttribute("commMain", commService.getList(bMatchVO.getB_num())); // 2020.11.23 매칭글 하위 질의응답(취준생) : 박세희
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
 			model.addAttribute("empl", emplVO);
 			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
-			model.addAttribute("commMain", commService.getList(bMatchVO.getB_num())); // 2020.11.21 매칭글 하위 질의응답 : 박세희
 			return "/bmatch/viewempl";
 		}
 		return "/bmatch/viewmember";
