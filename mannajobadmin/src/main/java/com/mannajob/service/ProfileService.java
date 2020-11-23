@@ -36,5 +36,9 @@ public interface ProfileService {
 	public void updateFile(Map<String, Object> map) throws Exception;
 	
 	public void deleteEmpl(String m_id);
+	
+	public int countG(String m_id);
+	
+	public int totalMat(String m_id);
 
 }

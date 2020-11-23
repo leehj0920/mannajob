@@ -28,7 +28,7 @@ public class MainController {
 	@RequestMapping("/main")
 	public void main(Model model, BMatchVO bMatchVO, EmplVO empVO, Criteria cri) {
 		cri.setAmount(3);
-		//현직자 랭킹 수정중...
+		model.addAttribute("good", mainService.bestMento());
 		model.addAttribute("notice",noticeService.getList(cri));
 		bMatchVO.setB_category("A");
 		model.addAttribute("empl_bmatch",bMatchService.getListWithPaging(cri, bMatchVO));

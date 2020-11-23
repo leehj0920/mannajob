@@ -83,6 +83,8 @@
 		<result property="e_corp" column="e_corp"/>
 		<result property="e_career" column="e_career" />
 		<result property="e_task" column="e_task"/>
+		<result property="countM" column="countM"/>
+		<result property="countG" column="countG"/>
 		<association property="memberVO" resultMap="memVO"></association>
 		<association property="fileVO" resultMap="fileVO"></association>
 	</resultMap>
@@ -117,6 +119,18 @@
 	
 	<select id="getemplTotalCount" resultType="int">
 		select count(e.e_num) from m_file f, member m, empl e WHERE f.e_num = e.e_num AND m.m_id = e.m_id AND e.e_corp LIKE '%'||#{bMatchVO.b_corp}||'%' AND e.e_task LIKE '%'||#{bMatchVO.b_task}||'%' AND e.e_ok = 'Y' AND m.m_del = 'N' AND e.e_del = 'N' AND f.f_category = 'I'
+	</select>
+	
+	<!-- 총 매칭 건수 -->
+	<select id="totalMat" resultType="int">
+		SELECT count(b.b_num) as countM
+		FROM b_match b, match m
+		WHERE b.b_num = m.b_num AND (b.m_id = #{m_id} or m.m_id = #{m_id}) AND (b.b_state = 'B' AND m.mat_state = 'C') AND b.m_id != m.m_id
+	</select>
+	
+	<!-- 좋아요 수 -->
+	<select id="countG" resultType="int">
+		SELECT count(r_good) FROM review WHERE r_mat_m_id = #{m_id} and r_good = 'G'
 	</select>
 	
 </mapper>

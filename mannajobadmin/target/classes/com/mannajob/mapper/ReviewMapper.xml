@@ -13,7 +13,7 @@
 		UPDATE review SET r_del = 'Y' WHERE r_num = #{r_num}
 	</update>
 	
-	<select id="searchEmplId" resultType="String">
+	<select id="searchId" resultType="String">
 		SELECT r_mat_m_id FROM review WHERE r_num = #{r_num}
 	</select>
 </mapper>

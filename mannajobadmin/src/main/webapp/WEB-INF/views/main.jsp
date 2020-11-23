@@ -35,9 +35,9 @@
                    <a href="/profile/showempl?m_id=${g.m_id}"><img src="/resources/certifi/${g.stored_file_name}" style="width:200px; height:200px"></a>
                    <!-- <a href="#"><img src="img/works/thumbs/image-01.jpg" width="200px"></a> -->
                   <div class="text" >
-                    <p><strong>${status.count}. ${g.m_name }</strong></p>
+                    <p><strong>${status.count}. ${g.m_name}</strong></p>
                     <p class="txt_small_black line_9">${g.e_corp}</p>
-                    <p class="line_9">${g.e_task }</p>
+                    <p class="line_9">${g.e_task}</p>
                     <p class="line_9">추천&nbsp${g.countG}&nbsp|&nbsp멘토링&nbsp${g.countM}</p>
                   </div>
                 </div>

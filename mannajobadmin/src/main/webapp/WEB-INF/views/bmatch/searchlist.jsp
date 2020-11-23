@@ -131,10 +131,10 @@
                       <p class="line_9">
 <!-- 추가 필요 -->
                         <span style="background-color: orangered; color:bisque; padding:4px; border-radius: 5px;">추천</span>
-                        <span style="color:orangered">350</span></span350>
+                        <span style="color:orangered">${empl.countG}</span></span350>
                         <span>&nbsp | &nbsp</span>
                         <span>멘토링</span>
-                        <span>500</span> 
+                        <span>${empl.countM}</span> 
                       </p>
                     </div>
                   </div>

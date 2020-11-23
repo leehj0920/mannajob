@@ -3,6 +3,8 @@ package com.mannajob.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.ReviewVO;
@@ -39,4 +41,8 @@ public interface ProfileMapper {
 	public void updateFile(Map<String, Object> map) throws Exception;
 	
 	public void deleteEmpl(String m_id);
+	
+	public int countG(@Param("m_id") String m_id);
+	
+	public int totalMat(@Param("m_id") String m_id);
 }

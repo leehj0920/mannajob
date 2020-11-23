@@ -63,6 +63,11 @@ public class BMatchController {
 		}
 		return "/bmatch/viewmember";
 	}
+	
+	@GetMapping("/viewmember")
+	public void viewmember() {
+		
+	}
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")
 	public String search(@ModelAttribute("bMatch")BMatchVO bMatchVO, Model model, Criteria cri, CriteriaProfile scri,locationDTO location) {
@@ -86,7 +91,6 @@ public class BMatchController {
 		int empltotal = bMatchService.getEmplCount(bMatchVO);
 		model.addAttribute("empllist", bMatchService.searchEmplPaging(scri, bMatchVO));
 		model.addAttribute("emplpage", new PageDTO(scri, empltotal));
-		System.out.println("list:" + model.getAttribute("list") + "\npage: " + model.getAttribute("page"));
 		System.out.println("empllist:" + model.getAttribute("empllist") + "\nemplpage: " + model.getAttribute("emplpage"));
 		return "/bmatch/searchlist";
 	}
