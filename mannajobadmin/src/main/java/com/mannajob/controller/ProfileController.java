@@ -73,7 +73,7 @@ public class ProfileController {
 		
 		log.info("empl: " + empl);
 		service.EmplJoin(empl, mpRequest);
-		return "/profile/main";
+		return "redirect:/match/matlist";
 	}
 	
 	@GetMapping("/update")

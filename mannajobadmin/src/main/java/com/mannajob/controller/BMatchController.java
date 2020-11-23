@@ -17,6 +17,7 @@ import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MatchVO;
+import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.locationDTO;
 import com.mannajob.service.AdminService;
@@ -199,5 +200,35 @@ public class BMatchController {
 		bMatchService.insert(bmatch);
 		return "redirect:/bmatch/list?b_category="+bmatch.getB_category();
 	}
-	
+	@PostMapping("sendEmail")
+	public String sendEmail(Model model, String m_id, HttpSession session) {
+		if(session.getAttribute("userId")==null) {
+			model.addAttribute("result", 3);
+			return"/bmatch/sendemail";
+		}
+		String send_id = session.getAttribute("userId").toString();
+		if(profileService.cheakEmpl(send_id)==false) {
+			model.addAttribute("result", 2);
+			return"/bmatch/sendemail";
+		}
+		MemberVO sendmember = profileService.getMemProfile(send_id);
+		EmplVO sendEmpl = profileService.getEmplProfile(send_id);
+		model.addAttribute("result", 1);
+		MemberVO responmember = profileService.getMemProfile(m_id);
+		model.addAttribute("tomail", responmember.getM_email());
+		model.addAttribute("title", "[만나잡] "+ sendEmpl.getE_corp()+"에서 입사 제의가 들어왔습니다.");
+		String content = responmember.getM_name() + "님 \n";
+    	content += sendEmpl.getE_corp()+"의 "+sendEmpl.getE_dept()+"에서 근무중인 "+ sendmember.getM_id() + "님께서\n";
+		content +=  "회사의 입사 제의를 하셨습니다.\n";
+		content +=  "회사와 부서에 관심이 있다면 아래의 이메일로 연락을 주세요.\n";
+		content += "\n";
+		content += "\n";
+		content += "\n";
+		content += "\n";
+		content += sendmember.getM_email();
+		model.addAttribute("content", content);
+		model.addAttribute("url" , "/bmatch/sendemail");
+		return "redirect:/mailSending.do";
+		
+	}
 }
