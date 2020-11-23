@@ -20,7 +20,7 @@
         </div>
       </div>
     </section>
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">       
         <div class="row">
           <div class="span3">
@@ -69,7 +69,7 @@
                           </td>
                           <!-- 프로필사진 -->
                           <td rowspan="5">
-                          <img src="/resources/certifi/${profileImage}">
+                          <img src="/resources/certifi/${profileImage}" style="width: 250px;height:250px;">
                           </td>
                         </tr>
                         <tr> 

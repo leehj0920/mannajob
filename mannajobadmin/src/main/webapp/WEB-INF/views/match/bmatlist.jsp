@@ -72,7 +72,7 @@
     <!-- end header -->
 
 
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">
         <div class="row">
           <div class="span8">

@@ -61,12 +61,12 @@
     <!-- end header -->
 
 
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">
         <div class="row">
           <div class="span8">
             <article>
-              <form id="commentform" action="#" method="post" name="comment-form">
+              
 
                 <div class="row">
                   <div class="post-heading">
@@ -151,7 +151,7 @@
                     </div>
                   </div>
                 </div>               
-              </form>             
+                       
             </article>
           </div>
         </div>

@@ -25,7 +25,7 @@
     </section>
 
 
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">
         <div class="row">
           <div class="span3">
@@ -60,7 +60,7 @@
                         <div class="post-image">
                           <p class="line_9"></p>
                           <!--현직자 이미지 사진 -->
-                          <img src="/resources/certifi/${image}"  height="260" width="240px"/>
+                          <img src="/resources/certifi/${image}"  style="width:180px; height:180px;"/>
                         </div>
                     </div>
 

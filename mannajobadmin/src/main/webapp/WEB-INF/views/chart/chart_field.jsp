@@ -17,7 +17,7 @@
         </div>
       </div>
     </section>
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">       
         <div class="row">
           <div class="span3">
@@ -146,7 +146,7 @@ var myBarChart = new Chart(ctx, {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        left: 10,
+        left: -30,
         right: 25,
         top: 25,
         bottom: 0
@@ -162,7 +162,7 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         scaleLabel: {
-          display: true,
+          display: false,
           // labelString: '순위',
           // fontColor: 'red'
         },
@@ -176,7 +176,7 @@ var myBarChart = new Chart(ctx, {
           min: 0,
           max: "${maxcorp}",
           maxTicksLimit: 5,
-          padding: 10,
+          padding: 0,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
             //return '$' + number_format(value);
@@ -252,7 +252,7 @@ var myBarChart = new Chart(ctx, {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        left: 10,
+        left: -30,
         right: 25,
         top: 25,
         bottom: 0
@@ -268,7 +268,7 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         scaleLabel: {
-          display: true,
+          display: false,
           // labelString: '순위',
           // fontColor: 'red'
         },
@@ -282,7 +282,7 @@ var myBarChart = new Chart(ctx, {
           min: 0,
           max: "${maxlocation}",
           maxTicksLimit: 5,
-          padding: 10,
+          padding: 0,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
             //return '$' + number_format(value);
@@ -358,7 +358,7 @@ var myBarChart = new Chart(ctx, {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        left: 10,
+        left: -30,
         right: 25,
         top: 25,
         bottom: 0
@@ -374,7 +374,7 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         scaleLabel: {
-          display: true,
+          display: false,
           // labelString: '순위',
           // fontColor: 'red'
         },
@@ -388,7 +388,7 @@ var myBarChart = new Chart(ctx, {
           min: 0,
           max: "${maxtask}",
           maxTicksLimit: 5,
-          padding: 10,
+          padding: 0,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
             //return '$' + number_format(value);

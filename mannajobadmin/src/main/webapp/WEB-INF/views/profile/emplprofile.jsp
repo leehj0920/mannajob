@@ -21,7 +21,7 @@
     </section>
 
 
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">
         <div class="row">
           <div class="span3">
@@ -58,7 +58,7 @@
                     <div class="span4">
                       <div class="box aligncenter">
                         <div class="post-image">
-                          <img src="/resources/certifi/${imageFile}" alt="" width="240px" />
+                          <img src="/resources/certifi/${imageFile}" alt="" style="width:240px;height:240px;"/>
                         </div>
                       </div>
                     </div>

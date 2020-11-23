@@ -24,7 +24,7 @@
         </div>
       </div>
     </section>
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">       
         <div class="row">
           <div class="span3">
@@ -116,18 +116,18 @@
                   </table>
                   <div class = "span8 center">
                   <c:if test="${page.prev}">
-    				<a href="/bmatch/list?pageNum=${page.startPage-1}&amount=10">◀</a>
+    				<a href="/bmatch/list?b_category=A&pageNum=${page.startPage-1}&amount=10">◀</a>
     			  </c:if>
     			  <c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
     				<c:if test="${page.cri.pageNum == num}">
     				${num}	
     			  </c:if>
     			  <c:if test="${page.cri.pageNum != num}">
-    				<a href="/bmatch/list?pageNum=${num}&amount=10">${num}</a>
+    				<a href="/bmatch/list?b_category=A&pageNum=${num}&amount=10">${num}</a>
     			  </c:if>
     			  </c:forEach>
     			  <c:if test="${page.next}">
-    				<a href="/bmatch/list?pageNum=${page.endPage+1}&amount=10">▶</a>
+    				<a href="/bmatch/list?b_category=A&pageNum=${page.endPage+1}&amount=10">▶</a>
     			  </c:if>
     			  </div>
                   

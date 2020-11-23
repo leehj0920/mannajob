@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<h1>매칭 내역 관리</h1>
 	<input type="button" value="로그아웃" onclick="location.href='/logout'">

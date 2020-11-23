@@ -20,7 +20,7 @@
         </div>
       </div>
     </section>
-    <section id="">
+    <section id="" style="min-height:680px">
       <div class="container">       
         <div class="row">
           <div class="span3">
@@ -38,7 +38,7 @@
           </div>
           <div class="span8">
             <article>
-              <form id="commentform" action="#" method="post" name="comment-form">
+              <form id="commentform" action="/bmatch/update" method="post" name="comment-form">
              	 <input type="hidden" name="pageNum" value="${cri.pageNum}">
 				<input type="hidden" name="b_num" value="${bMatch.b_num}">
 				<input type="hidden" name="b_subject" value="${bMatch.b_subject}">
