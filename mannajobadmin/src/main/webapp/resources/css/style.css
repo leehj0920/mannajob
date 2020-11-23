@@ -43,7 +43,7 @@
 20. Spacer, margin
 21. Media queries
 ==================================== */
-/* style  ì¶”ê°€  2020.11.12 */
+/* style  Ãß°¡  2020.11.12 */
 .txt_small_black{
   font-size: 12pt;
   font-weight: bold;
@@ -86,21 +86,21 @@ body,h1,h5,h3 {
 .location{
   width: 110px;
 }
-/* aíƒœê·¸ ë²„íŠ¼í•œê°œ */
+/* aÅÂ±× ¹öÆ°ÇÑ°³ */
 .a_btn1{
   width: 160px; 
   height: 30px; 
   font-size: 16px;
   padding-top: 10px;
 }
-/*aíƒœê·¸  ë²„íŠ¼ 2~3ê°œ */
+/*aÅÂ±×  ¹öÆ° 2~3°³ */
 .a_btn2{
   width: 100px; 
   height: 25px; 
   font-size: 15px;
   padding-top: 10px;
 }
-/* aíƒœê·¸ ë²„íŠ¼ 4~5ê°œ */
+/* aÅÂ±× ¹öÆ° 4~5°³ */
 .a_btn4{
   width: 60px; 
   height: 20px; 
@@ -112,15 +112,15 @@ input:nth-of-type(n).i_btn1, input:nth-of-type(n).i_btn2, input:nth-of-type(n).i
   font-size: 15px;
   height: 40px;
 }
-/* input ë²„íŠ¼í•œê°œ */
+/* input ¹öÆ°ÇÑ°³ */
 input.i_btn1{
   width: 160px; 
 }
-/* input ë²„íŠ¼ 2~3ê°œ */
+/* input ¹öÆ° 2~3°³ */
 input.i_btn2{
   width: 100px; 
 }
-/* input ë²„íŠ¼ 4~5ê°œ */
+/* input ¹öÆ° 4~5°³ */
 input.i_btn4{
 height: 40px;
   width: 80px; 
@@ -956,7 +956,7 @@ ul.breadcrumb li a:hover {
 
 /* --- comment form ---- */
 
-form#commentform input[type="text"] {
+form#commentform input[type="text"], div#commentform input[type="text"] {
   width: 100%;
   min-height: 40px;
   padding-left: 20px;
@@ -970,7 +970,7 @@ form#commentform input[type="text"] {
   border-radius: 2px 2px 2px 2px;
 }
 
-form#commentform textarea {
+form#commentform textarea, div#commentform textarea {
   width: 100%;
   padding-left: 20px;
   padding-top: 10px;
