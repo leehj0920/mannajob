@@ -6,14 +6,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 <script>
-	function reviewUU() {
 		window.name = 'showempl';
-		var updatee = document.ReviewUU;
-		window.open('', 'Update', 'width=500, height=430');
-		updatee.action='/review/updatee';
-		updatee.target='Update';
-		updatee.submit();
-	}
 </script>
 
 <section id="inner-headline">
@@ -125,7 +118,7 @@
                             <p class="center">멘토링건수</p>                            
                           <td>
                             <!-- 멘토링건수 -->
-                            <span style="color:orangered"><strong>350</strong></span>
+                            <span style="color:orangered"><strong>${count}</strong></span>
                             <span style="color:orangered">&nbsp 건</span>
                           </td>
                           <td>
@@ -133,7 +126,7 @@
                           </td>
                           <td>
                             <!-- 추천수 -->
-                            <span style="color:orangered"><strong>300</strong></span>
+                            <span style="color:orangered"><strong>${good}</strong></span>
                             <span style="color:orangered">&nbsp 건</span>
                           </td>
                         </tr>
@@ -212,7 +205,7 @@
                           </td>
                           <td>
                             <!-- 작성자 -->
-                            <p class="center">${re.r_mat_m_id}</p>
+                            <p class="center">${re.r_w_m_id}</p>
                           </td>
                           <td>
                             <!-- 작성일 r_wdate-->
@@ -220,14 +213,13 @@
                           </td>
                           <td>
                             <!-- 수정버튼 (세션 아이디와 동일할 경우 활성화) -->
-	                        <c:if test="${userId eq re.r_mat_m_id }">
-                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
-							</form>
+	                        <c:if test="${userId eq re.r_w_m_id }">
+                            <p class="center"><a href="/review/updatee?r_num=${re.r_num}&r_contents=${re.r_contents}" class="btn btn-mini btn-theme" onClick="window.open(this.href, '리뷰 수정', 'width=500, height=400'); return false">수정</a></p>
 	                        </c:if>
                           </td>
                           <td>
                             <!-- 삭제버튼 (세션 아이디와 동일할 경우 활성화)-->
-                            <c:if test="${userId eq re.r_mat_m_id }">
+                            <c:if test="${userId eq re.r_w_m_id }">
                             <p class="center"><a href="/review/deletee?r_num=${re.r_num}" class="btn btn-mini btn-inverse">삭제</a></p>
                             </c:if>
                           </td>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.Criteria;
@@ -53,7 +54,8 @@ public class BMatchController {
 	// 댓글,대댓글 추가 필요, 현직자의 경우 현직자 정보 추가 필요.
 	// 사진 출력 추가 필요
 	@GetMapping("/view")
-	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
+	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri, HttpSession session) {
+		System.out.println("..........................................." + session.getAttribute("userId"));
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
@@ -63,6 +65,11 @@ public class BMatchController {
 			return "/bmatch/viewempl";
 		}
 		return "/bmatch/viewmember";
+	}
+	
+	@GetMapping("/viewmember")
+	public void viewmember() {
+		
 	}
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")
@@ -87,14 +94,15 @@ public class BMatchController {
 		int empltotal = bMatchService.getEmplCount(bMatchVO);
 		model.addAttribute("empllist", bMatchService.searchEmplPaging(scri, bMatchVO));
 		model.addAttribute("emplpage", new PageDTO(scri, empltotal));
-		System.out.println("list:" + model.getAttribute("list") + "\npage: " + model.getAttribute("page"));
 		System.out.println("empllist:" + model.getAttribute("empllist") + "\nemplpage: " + model.getAttribute("emplpage"));
 		return "/bmatch/searchlist";
 	}
 	
 	@GetMapping("/update")
-	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
-		
+	public String update(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri,HttpSession session) {
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/login";
+		}
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
@@ -141,6 +149,46 @@ public class BMatchController {
 			bMatchService.cancel(bMatchVO.getB_num());
 		}
 		return "redirect:/match/matlist";
+	}
+	
+	@GetMapping("/insert")
+	public String insert(@ModelAttribute("cri") Criteria cri, Model model, HttpSession session, @ModelAttribute("bmatch") BMatchVO bMatchVO,RedirectAttributes rttr) {
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/login";	
+		}
+		String m_id = session.getAttribute("userId").toString();
+		if("A".equals(bMatchVO.getB_category())) {
+			if(profileService.cheakEmpl(m_id)) {
+				model.addAttribute("m_id",m_id);
+				model.addAttribute("empl", profileService.getEmplProfile2(m_id));
+				return "bmatch/insertBmatchEmpl";
+			}else {
+				rttr.addFlashAttribute("error", 1);
+				return "redirect:/profile/empl";
+			}
+		}
+		else {
+			model.addAttribute("m_id",m_id);
+			return "bmatch/insertBmatchMember";		
+		}	
+	}
+	
+	@PostMapping("/insert")
+	public String insertOk(BMatchVO bmatch , @ModelAttribute("cri") Criteria cri, Model model, HttpSession session, locationDTO location) {
+		String lo = "";
+		if(location.getLocation1()!=null) {
+			lo+=location.getLocation1();
+		}
+		if(location.getLocation2()!=null) {
+			lo+=" "+location.getLocation2();
+		}
+		if(location.getLocation3()!=null) {
+			lo+=" "+location.getLocation3();
+		}
+		bmatch.setB_location(lo);
+		bmatch.setM_id(session.getAttribute("userId").toString());
+		bMatchService.insert(bmatch);
+		return "redirect:/bmatch/list?b_category="+bmatch.getB_category();
 	}
 	
 }

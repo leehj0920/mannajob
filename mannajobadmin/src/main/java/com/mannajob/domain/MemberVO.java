@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
+	private int rn;
 	private String m_id;
 	private String m_api;
 	private String m_passwd;
@@ -18,4 +19,5 @@ public class MemberVO {
     
     private EmplVO emplVO;
     private int e_num;
+    private ReviewVO reviewVO;
 }

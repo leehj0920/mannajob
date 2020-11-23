@@ -24,6 +24,7 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
+
 	@Setter(onMethod_ = @Autowired)
 	private ProfileMapper mapper;
 	
@@ -38,6 +39,10 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public void updateProfile(MemberVO member) {
 		mapper.updateProfile(member);
+	}
+	
+	public List<MemberVO> searchMReview(String m_id) {
+		return mapper.searchMReview(m_id);
 	}
 
 	@Override
@@ -65,7 +70,6 @@ public class ProfileServiceImpl implements ProfileService {
 		int size = list.size();
 		for(int i = 0; i < size; i ++) {
 			mapper.insertFile(list.get(i));
-			
 		}
 	}
 	
@@ -106,7 +110,15 @@ public class ProfileServiceImpl implements ProfileService {
 	public boolean cheakEmpl(String m_id) {
 		return mapper.checkEmpl(m_id)==1;
 	}
-
 	
+	@Override
+	public int countG(String m_id) {
+		return mapper.countG(m_id);
+	}
 
+	@Override
+	public int totalMat(String m_id) {
+		return mapper.totalMat(m_id);
+	}
+	
 }

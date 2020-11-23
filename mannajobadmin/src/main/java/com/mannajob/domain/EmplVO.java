@@ -21,4 +21,7 @@ public class EmplVO {
 	
 	private FileVO fileVO;
 	private MemberVO memberVO;
+	
+	private int countM;
+	private int countG;
 }

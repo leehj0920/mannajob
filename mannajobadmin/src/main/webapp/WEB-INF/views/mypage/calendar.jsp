@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -28,11 +29,11 @@
                 <h5 class="widgetheading height_40">매&nbsp&nbsp&nbsp&nbsp칭</h5>
 
                 <ul class="cat">
-                    <li><i class="icon-angle-right"></i><a href="#">매칭내역관리</a></li>
-                    <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
-                    <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
-                    <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
-                    <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
+                   <li><i class="icon-angle-right"></i><a href="/match/matlist">매칭내역관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/mypage/calendar">일정관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/main">회원정보관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/emplprofile">현직자 프로필관리</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/profile/empl">현직자 지원</a></li>
                   </ul>
               </div>
             </aside>
@@ -96,6 +97,5 @@
       </div>
     </section>
 
-<script src="/resources/js/calendar.js"></script>
 <%@ include file="../includes/footer.jsp" %>
 

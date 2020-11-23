@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
+import com.mannajob.domain.MatchVO;
 import com.mannajob.service.MatchService;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +29,24 @@ public class MatchController {
 	@Setter(onMethod_ = @Autowired)
 	private MatchService service;
 	
+	@GetMapping("/match")
+	public String insert(@ModelAttribute("b_num") int b_num, Model model, HttpSession session) {
+		if(session.getAttribute("userId")==null) {
+			model.addAttribute("error", "1");
+			return "/match/matchrequest";
+		}
+		return "/match/matchrequest";
+	}
+	@PostMapping("insert")
+	public void insert(MatchVO matchVO, HttpSession session ,Model model) {
+		matchVO.setM_id(session.getAttribute("userId").toString());
+		log.info(matchVO.toString());
+		if(service.insert(matchVO)) {
+			model.addAttribute("result", 1);
+		}else {
+			model.addAttribute("result", 2);
+		}
+	}
 	
 	@GetMapping("/matlist")
 	public String matlist(Model model, HttpServletRequest request,Criteria cri,CriteriaProfile scri) {
@@ -33,11 +54,14 @@ public class MatchController {
 		if(session.getAttribute("userId")==null) {
 			return "/main";
 		}
-		model.addAttribute("bmatlist", service.searchBMat(session.getAttribute("userId").toString()));
+		
+		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("wmatlist", service.searchWMat(session.getAttribute("userId").toString()));
 		model.addAttribute("matlist", service.searchMat(session.getAttribute("userId").toString()));
 		
-		System.out.println(model.getAttribute("bmatlist"));
-		System.out.println(model.getAttribute("matlist"));
+		System.out.println("userId" + model.getAttribute("userId"));
+		System.out.println("wmatlist" + model.getAttribute("wmatlist"));
+		System.out.println("matlist" + model.getAttribute("matlist"));
 		return "match/matlist";
 	}
 	
@@ -48,8 +72,4 @@ public class MatchController {
 		System.out.println(b_num);
 	}
 	
-	@GetMapping("/match")
-	public String match(Model model, int b_num) {
-		return"/match/matchrequest";
-	}
 }

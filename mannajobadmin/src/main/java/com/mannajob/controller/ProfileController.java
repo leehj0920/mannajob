@@ -131,9 +131,8 @@ public class ProfileController {
 		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
 		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
-		
-		log.info(".................model....................." + model.getAttribute("m_id"));
-		log.info("...................session..................." + session.getAttribute("userId"));
+		model.addAttribute("good", service.countG(emplVO.getM_id()));
+		model.addAttribute("count", service.totalMat(emplVO.getM_id()));
 		
 		return "/profile/showempl";
 	}
@@ -165,13 +164,25 @@ public class ProfileController {
 
 	}
 	
-
-
-	
 	@PostMapping("/deleteEmpl")
 	public String deleteEmpl(String m_id) {
 		service.deleteEmpl(m_id);
-		return "redirect/profile/main";
+		return "redirect:/profile/main";
 	}
-
+	
+	@GetMapping("/showmem")
+	public String showmem(Model model, String m_id, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		log.info(".............................................." + session.getAttribute("userId").toString());
+		
+		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("MReview", service.searchReview(m_id));
+		return "/profile/showmem";
+	}
+	
+	@GetMapping("/suggest")
+	public void suggest(Model model, String m_id) {
+		
+	}
 }

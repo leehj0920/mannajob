@@ -15,6 +15,8 @@ public interface ProfileService {
 	
 	public void updateProfile(MemberVO member);
 	
+	public List<MemberVO> searchMReview(String m_id);
+	
 	public void deleteMem(String m_id);
 	
 	public EmplVO getEmplProfile(String m_id);
@@ -34,5 +36,9 @@ public interface ProfileService {
 	public void updateFile(Map<String, Object> map) throws Exception;
 	
 	public void deleteEmpl(String m_id);
+	
+	public int countG(String m_id);
+	
+	public int totalMat(String m_id);
 
 }

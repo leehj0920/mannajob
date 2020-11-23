@@ -41,4 +41,8 @@ public interface BMatchMapper {
 	
 	public void cancel(int b_num);
 	
+	public int totalMat(@Param("m_id") String m_id);
+	
+	public int countG(@Param("m_id") String m_id);
+	
 }

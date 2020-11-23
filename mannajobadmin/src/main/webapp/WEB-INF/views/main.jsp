@@ -29,22 +29,23 @@
             <h4 class="heading"> <strong>BEST</strong>&nbsp&nbsp mento</h4>
             <div class="row">
               <!-- Item Project and Filter Name 1 -->
+              <c:forEach var="g" items="${good}" varStatus="status">
               <div class="span2" style="padding-left: 30px;">
                 <div class="box aligncenter">
-                  
-                   <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
+                   <a href="/profile/showempl?m_id=${g.m_id}"><img src="/resources/certifi/${g.stored_file_name}" style="width:200px; height:200px"></a>
                    <!-- <a href="#"><img src="img/works/thumbs/image-01.jpg" width="200px"></a> -->
                   <div class="text" >
-                    <p><strong>1. 홍길동님</strong></p>
-                    <p class="txt_small_black line_9">삼성전자(주)</p>
-                    <p class="line_9">제품연구개발팀</p>
-                    <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
+                    <p><strong>${status.count}. ${g.m_name}</strong></p>
+                    <p class="txt_small_black line_9">${g.e_corp}</p>
+                    <p class="line_9">${g.e_task}</p>
+                    <p class="line_9">추천&nbsp${g.countG}&nbsp|&nbsp멘토링&nbsp${g.countM}</p>
                   </div>
                 </div>
               </div>
+              </c:forEach>
               <!-- End Item Project -->
-              
-              <!-- Item Project and Filter Name 2-->     
+              <!-- 
+              Item Project and Filter Name 2     
               <div class="span2"  style="padding-left: 34px;">
                 <div class="box aligncenter">
                    <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
@@ -56,9 +57,9 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item Project -->
+              End Item Project
 
-              <!-- Item Project and Filter Name 2-->     
+              Item Project and Filter Name 2     
               <div class="span2"  style="padding-left: 34px;">
                 <div class="box aligncenter">
                    <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
@@ -70,9 +71,9 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item Project -->
+              End Item Project
 
-              <!-- Item Project and Filter Name 2-->     
+              Item Project and Filter Name 2     
               <div class="span2"  style="padding-left: 34px;">
                 <div class="box aligncenter">
                    <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
@@ -84,9 +85,9 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item Project -->
+              End Item Project
 
-              <!-- Item Project and Filter Name 2-->     
+              Item Project and Filter Name 2     
               <div class="span2" style="padding-left: 34px;">
               <div class="box aligncenter">
                   <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
@@ -97,7 +98,7 @@
                     <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- End Item Project -->
             </div>
           </div>

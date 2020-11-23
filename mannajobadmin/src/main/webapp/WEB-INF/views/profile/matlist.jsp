@@ -20,7 +20,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th>글번호</th>
 					<th>제목</th>
 					<th>진행상태</th>
 					<th>신청현황</th>
@@ -40,14 +40,14 @@
 			</c:forEach>
 		</table>
 		<c:if test="${pageMaker.prev}">
-			<a href="/profile/matlist?pageNum=${pageMaker.startPage - 1}&amount=10">[이전]</a>
+			<a href="/profile/matlist?pageNum=${pageMaker.startPage - 1}&amount=10">◀</a>
 		</c:if>
 		<c:forEach var="num" begin="${pageMaker.startPage}"
 			end="${pageMaker.endPage}">
-                	[<a href="/profile/matlist?pageNum=${num}&amount=10">${num}</a>]
+                	<a href="/profile/matlist?pageNum=${num}&amount=10">${num}</a>
                 </c:forEach>
 		<c:if test="${pageMaker.next}">
-			<a href="/profile/matlist?pageNum=${pageMaker.endPage + 1}&amount=10">[다음]</a>
+			<a href="/profile/matlist?pageNum=${pageMaker.endPage + 1}&amount=10">▶</a>
 		</c:if>
 
 	</div>
@@ -57,7 +57,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th>매칭번호</th>
 					<th>제목</th>
 					<th>진행상태</th>
 					<th>취소</th>

@@ -81,7 +81,8 @@
                   <div class="span9">                   
                     <h5>▶ 매칭 요청</h5>
                     <div class="">
-                      <form class="form-horizontal span12">
+                      <form action="/match/insert" method="post" class="form-horizontal span12">
+                      	<input type="hidden" name="b_num" value = "${b_num}">
                         <div class="control-group center">            
                           <div class="">
                               <table class="table table-bordered">
@@ -97,20 +98,20 @@
                                     </td>
                                     <td>
                                       <!-- 일자 -->
-                                      <input type="date">
+                                      <input type="date" name="mat_stdate">
                                     </td>
                                     <td>
                                       <p class="center">시작시간</p>
                                     </td>
                                     <td>
                                       <!-- 시작시간 -->
-                                      <input type="time">
+                                      <input type="time" name="mat_hour">
                                     </td>
                                   </tr>
                               </table>
                               <!-- 버튼영역 -->
                               <p class="center">
-                                <input class="btn btn-theme margintop10 i_btn4" type="button" value="매칭요청">
+                                <input class="btn btn-theme margintop10 i_btn4" type="submit" value="매칭요청">
                                 <input class="btn btn-inverse margintop10 i_btn4" type="button" value="닫기" onclick="window.close();">
                               </p>
                             </div>
@@ -150,6 +151,15 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="/resources/js/custom.js"></script>
+  <script>
+   $(document).ready(function(){
+	  let error = "${error}";
+	  if(error=="1"){
+		  alert("로그인이 필요합니다.");
+		  window.close();  
+	  }
+   });
+  </script>
 
 </body>
 

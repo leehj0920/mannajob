@@ -39,16 +39,15 @@
           </div>
           <div class="span8">
             <article>
-              <form id="commentform" action="#" method="post" name="comment-form">
+              <form id="commentform" action="/bmatch/insert" method="post" name="comment-form">
               <input type="hidden" name="pageNum" value="${cri.pageNum}">
-				<input type="hidden" name="b_num" value="${bMatch.b_num}">
-				<input type="hidden" name="b_subject" value="${bMatch.b_subject}">
-				<input type="hidden" name="b_category" value="${bMatch.b_category}">
+			
+				<input type="hidden" name="b_category" value="B">
                 <div class="row">
                   <div class="post-heading">
                     <p class="line_9"></p>
                     <p class="line_9"></p>
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong>취업준비생 </strong>매칭 상세내용 수정</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong>취업준비생 </strong>매칭 등록</h3>
                     <p class="line_9"></p>
                   </div>
 
@@ -62,10 +61,18 @@
                         </colgroup>
                         <tr>
                           <td  >
+                            <p class="center">제&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp목</p>
+                          </td>
+                          <td>
+                            <input type="text" name=b_subject >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td  >
                             <p class="center">아&nbsp&nbsp이&nbsp&nbsp디</p>
                           </td>
                           <td>
-                            <input type="text" name=m_id value="${bMatch.m_id}" readonly="readonly">
+                            <input type="text" name=m_id value="${m_id}" readonly="readonly">
                           </td>
                         </tr>
                         
@@ -92,9 +99,9 @@
                           </td>
                           <td>
                             <!-- 관심기업, 관심직무 -->
-                            <span><input type="text" name="b_corp" style="width:200px;"  value="${bMatch.b_corp}" /></span>
+                            <span><input type="text" name="b_corp" style="width:200px;" value="${bMatch.b_corp}" /></span>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           
-                            <select name="b_task"  >
+                            <select name="b_task">
 							 <option value="사업관리">사업관리</option>
 							<option value="경영·회계·사무">경영·회계·사무</option>
 							<option value="금융·보험">금융·보험</option>
@@ -174,7 +181,7 @@
                         <div class="box aligncenter">
                           <p class="center">
                              
-                            <input class="btn btn-theme margintop10 i_btn2" type="submit" value="수정하기">
+                            <input class="btn btn-theme margintop10 i_btn2" type="submit" value="작성하기">
                           <input class="btn btn-inverse margintop10 i_btn2" type="button" onclick="location.href='/bmatch/view?pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&b_num=${bMatch.b_num}&m_id=${bMatch.m_id}'"  value="취소하기">
                         </p>
                         </div>
