@@ -21,6 +21,7 @@ import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.locationDTO;
 import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
+import com.mannajob.service.CommService;
 import com.mannajob.service.MatchService;
 import com.mannajob.service.ProfileService;
 

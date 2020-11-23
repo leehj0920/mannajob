@@ -94,7 +94,7 @@ public class MatchController {
 		cri.setAmount(5);
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId")==null) {
-			return "/main";
+			return "redirect:/main";
 		}
 		String m_id = session.getAttribute("userId").toString(); 
 		int wtotal = bmatchservice.getPersonTotalCount(m_id);

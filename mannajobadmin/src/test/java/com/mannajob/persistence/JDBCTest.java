@@ -3,6 +3,8 @@ package com.mannajob.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.junit.Test;
+
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -15,7 +17,7 @@ public class JDBCTest {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void testConnection() {
 		try(Connection conn = 
 				DriverManager.getConnection(

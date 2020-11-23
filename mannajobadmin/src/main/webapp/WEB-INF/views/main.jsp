@@ -43,63 +43,6 @@
                 </div>
               </div>
               </c:forEach>
-              <!-- End Item Project -->
-              
-              <!-- Item Project and Filter Name 2-->     
-              <div class="span2"  style="padding-left: 34px;">
-                <div class="box aligncenter">
-                   <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
-                  <div class="text" >
-                    <p>2. 홍길동2님</p>
-                    <p class="txt_small_black line_9">네이버</p>
-                    <p class="line_9">IT 개발팀</p>
-                    <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Item Project -->
-
-              <!-- Item Project and Filter Name 2-->     
-              <div class="span2"  style="padding-left: 34px;">
-                <div class="box aligncenter">
-                   <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
-                  <div class="text" >
-                    <p>3 .홍길동2님</p>
-                    <p class="txt_small_black line_9">현대홈쇼핑</p>
-                    <p class="line_9">고객보호팀</p>
-                    <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Item Project -->
-
-              <!-- Item Project and Filter Name 2-->     
-              <div class="span2"  style="padding-left: 34px;">
-                <div class="box aligncenter">
-                   <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
-                  <div class="text" >
-                    <p>4. 홍길동2님</p>
-                    <p class="txt_small_black line_9">한국주택금융공사</p>
-                    <p class="line_9">디지털사업부</p>
-                    <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Item Project -->
-
-              <!-- Item Project and Filter Name 2-->     
-              <div class="span2" style="padding-left: 34px;">
-              <div class="box aligncenter">
-                  <a href="#"><img src="/resources/img/avatar.png" width="200px"></a>
-                  <div class="text" >
-                    <p>4. 홍길동2님</p>
-                    <p class="txt_small_black line_9">유한양행</p>
-                    <p class="line_9">공정관리팀</p>
-                    <p class="line_9">추천&nbsp350&nbsp|&nbsp멘토링&nbsp500</p>
-                  </div>
-                </div>
-              </div> -->
-              <!-- End Item Project -->
             </div>
           </div>
         </div>
