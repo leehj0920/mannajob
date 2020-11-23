@@ -143,70 +143,196 @@
                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
                           <a href="/bmatch/list?pagseNum=${cri.pageNum}&b_category=${bMatch.b_category}" class="btn btn-inverse margintop10 a_btn4" type="button">리스트</a>
                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-                          <a href="#" class="btn btn-theme margintop10 a_btn4" type="button" onclick="openPopup();">매칭요청</a>
+                          <a href="#" class="btn btn-theme margintop10 a_btn4" type="button" onclick="openPopup(); return false;">매칭요청</a>
                           <a href="#" onclick="window.open('/compl/insert?b_num=${bMatch.b_num}&b_category=B&m_id=${bMatch.m_id}','게시글 신고','width=500,height=700'); return false;" class="btn btn-inverse margintop10 a_btn4" type="button">신고</a>  
                         </p>
                       </div>
                     </div> 
-                          
-                    <div class="about-author">
-                      <form id="commentform" action="#" method="post" name="comment-form">
-                        <p>
-                          <span>2020-11-01</span>
-                          <span>&nbsp&nbsp &nbsp&nbsp</span> 
-                          <span>park1990</span> 
-                          <span class="align-right">
-                            <!-- 비밀글 작성시 checkbox  check/non_check  -->
-                            <input type="checkbox">
-                              비밀글
-                              &nbsp&nbsp &nbsp&nbsp
-                            <input type="button" class="btn btn-mini " value="질문등록">
-                          </span>
-                          <!-- 댓글내용 입력 -->
-                          <textarea rows="2" cols="90" placeholder="댓글을 입력하세요"></textarea>
-                        </p>
-                      </form>
-                    </div>
+                    
+                    <!-- 질문 등록 영역 -->
+                    <c:if test="${sessionScope.userId != bMatch.m_id && sessionScope.userId != null}">
+                     <div class="about-author">
+                     	<div id="commentform">
+                        <form id="insertCommMainForm" name="insertCommMainForm" method="post" action="/comm/insert">
+                          <input type="hidden" name="b_num" value="${bMatch.b_num}">
+                          <p>
+                            <!-- <span>2020-11-01</span> -->
+                            <!-- <span>&nbsp&nbsp &nbsp&nbsp</span> --> 
+                            <span><input type="hidden" name="cm_m_id" value="${sessionScope.userId}">${sessionScope.userId}</span> 
+                            <span class="align-right">
+                              <!-- 공개 여부  -->
+                              <label style="font-weight: normal; display: inline;">
+                                  <input type="radio" name="cm_secret" value="N" checked />
+                                    <span>&ensp;공개</span>
+                              </label>
+                              <label style="font-weight: normal; display: inline;">
+                                  <input type="radio" name="cm_secret" value="Y" />
+                                    <span>&ensp;비공개</span>
+                              </label>
+                              <input type="button" class="btn btn-mini" value="질문등록" onclick="javascript:insertCommMain();" />
+                            </span>
+                            <!-- 질문 입력 -->
+                            <textarea rows="2" cols="90" name="cm_contents" placeholder="질문을 입력하세요"></textarea>
+                          </p>
+                        </form>
+                       </div>
+                     </div>
+                    </c:if>
                     <div class="comment-area">
-                      <form id="commentform" action="#" method="post" name="">               
                         <div class="media">                        
                           <div class="media-body">
                             <div class="media-content">
-                              <p>
-                                <!-- 댓글 날짜 -->
-                                <span>2020-11-01</span>
-                                <span>&nbsp&nbsp &nbsp&nbsp</span>
-                                <!-- 댓글 아이디 -->
-                                <span>kim202001</span>
-                                <!-- 댓글 내용 -->
-                                <p>주말 시간은 어떠신가요?</p>
-                                  <p>
-                                    <span>&nbsp&nbsp └ </span>
-                                    <!-- 대댓글 날짜 -->
-                                    <span>2020-11-01</span>
-                                    <span>&nbsp&nbsp &nbsp&nbsp</span>
-                                    <!-- 대댓글 아이디 -->
-                                    <span>hogn901010</span>
-                                    <p>
-                                      &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
-                                      <!-- 대댓글 내용 -->
-                                      <span>일요일 오후도 가능합니다.</span>
-                                    </p>  
-
-                                    <textarea rows="2" cols="90" placeholder="└  댓글에 대한 답글을 입력하세요"></textarea>
-                                  </p>
-                                </p>
-                                
-                                <span class="align-right">
-                                  <input type="button" class="btn btn-mini " value="답글쓰기">
-                                  </button>  
-                                </span>
-                              </p>                               
+                              <!-- <p> -->
+                                <!-- 질문 출력 영역 -->
+                                <c:forEach items="${commMain}" var="cmain">
+                                	<c:if test="${cmain.cm_del == 'N'}">
+                                 	<div id="commentform">
+                                  	<!-- 질문 출력 -->
+                                  	<div id="commMainView${cmain.cm_num}">
+	                                  <hr style="height:1px;">
+	                                  <!-- 질문 날짜 -->
+	                                  <span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmain.cm_wdate}" /></span>
+	                                  <span>&nbsp&nbsp &nbsp&nbsp</span>
+	                                  <!-- 질문 아이디 -->
+	                                  <span>${cmain.cm_m_id}</span>
+	                                  <span>&nbsp&nbsp &nbsp&nbsp</span>
+	                                  <c:if test="${sessionScope.userId == cmain.cm_m_id}">
+	                                  	<span><a href="javascript:openCommMainForm(${cmain.cm_num})">수정</a> | <a href="javascript:deleteCommMain(${cmain.cm_num})">삭제</a></span>
+	                                  </c:if>
+	                                  <!-- 질문 내용 -->
+	                                  <c:if test="${cmain.cm_secret == 'N'}">
+	                                  	<p>${cmain.cm_contents}</p>
+	                                  </c:if>
+	                                  <c:if test="${cmain.cm_secret == 'Y'}">
+                                  		<c:choose>
+                                  			<c:when test="${sessionScope.userId == cmain.cm_m_id || sessionScope.userId == bMatch.m_id}">
+                                  				<p>${cmain.cm_contents}</p>
+                                  			</c:when>
+                                  			<c:otherwise>
+                                  				<p>비공개 질문입니다.</p>
+                                  			</c:otherwise>
+                                  		</c:choose>
+	                                  </c:if>
+	                                  
+	                                </div>
+                                 	
+		                                
+	                                <!-- 질문 수정 -->
+                                  	<form id="updateCommMainForm${cmain.cm_num}" name="updateCommMainForm${cmain.cm_num}" method="post" action="/comm/updateSub">
+		                                <div id="commMainUpdate${cmain.cm_num}" style="display: none">
+		                                  <hr style="height:1px;">
+		                                  <span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmain.cm_wdate}" /></span>
+		                                  <span>&nbsp&nbsp &nbsp&nbsp</span>
+		                                  <!-- 질문 아이디 -->
+		                                  <span>${cmain.cm_m_id}</span>
+		                                  <span>&nbsp&nbsp &nbsp&nbsp</span>
+		                                  <span class="align-right">
+				                              <!-- 공개 여부 -->
+				                              <label style="font-weight: normal; display: inline;">
+				                                  <input type="radio" name="cm_secret${cmain.cm_num}" value="N"
+				                                  	<c:if test="${cmain.cm_secret == 'N'}"> checked</c:if>/>
+				                                    <span>&ensp;공개</span>
+				                              </label>
+				                              <label style="font-weight: normal; display: inline;">
+				                                  <input type="radio" name="cm_secret${cmain.cm_num}" value="Y" 
+				                                  	<c:if test="${cmain.cm_secret == 'Y'}"> checked</c:if> />
+				                                    <span>&ensp;비공개</span>
+				                              </label>
+		                                  </span>
+		                                  <span><a href="javascript:updateCommMain(${cmain.cm_num})">수정</a> | <a href="javascript:closeCommMainForm(${cmain.cm_num})">취소</a></span>
+		                                  <!-- 질문 내용 -->
+		                                  <p><textarea rows="2" cols="90" name="cm_contents${cmain.cm_num}">${cmain.cm_contents}</textarea></p>
+		                                </div>
+                                	</form>
+	                                
+	                                <!-- 답변 출력 영역 -->
+	                                <c:choose>
+	                                	<c:when test="${cmain.cms_num != null && cmain.cms_num != 0 && cmain.cms_del == 'N'}">
+		                                	<!-- 답변 출력 -->
+	                                		<div id="commSubView${cmain.cms_num}">
+		                                		<span>&nbsp&nbsp └ </span>
+			                                	<!-- 답변 날짜 -->
+			                                	<span>${cmain.cms_wdate}</span>
+			                                	<span>&nbsp&nbsp &nbsp&nbsp</span>
+			                                	<!-- 답변 아이디 -->
+			                                	<span>${cmain.b_m_id}</span>
+			                                	<span>&nbsp&nbsp &nbsp&nbsp</span>
+			                                	<c:if test="${sessionScope.userId == cmain.b_m_id}">
+			                                		<span><a href="javascript:openCommSubForm(${cmain.cms_num})">수정</a> | <a href="javascript:deleteCommSub(${cmain.cms_num})">삭제</a></span>
+			                                	</c:if>
+			                                	<c:if test="${cmain.cm_secret == 'N'}">
+			                                		<p>
+				                                		&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+				                                        <!-- 답변 내용 -->
+				                                        <span>${cmain.cms_contents}</span>
+			                                        </p>
+			                                	</c:if>
+			                                	<c:if test="${cmain.cm_secret == 'Y'}">
+				                                	<c:choose>
+			                                  			<c:when test="${sessionScope.userId == cmain.cm_m_id || sessionScope.userId == bMatch.m_id}">
+			                                  				<p>
+						                                		&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+						                                        <!-- 답변 내용 -->
+						                                        <span>${cmain.cms_contents}</span>
+					                                        </p>
+			                                  			</c:when>
+		                                  				<c:otherwise>
+		                                  					<p>
+						                                		&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+						                                        <!-- 답변 내용 -->
+						                                        <span>비공개 답변입니다.</span>
+					                                        </p>
+		                                  				</c:otherwise>
+			                                  		</c:choose>
+			                                	</c:if>
+	                                        </div>
+	                                        
+	                                        <!-- 답변 수정 -->
+	                                        <div id="commSubUpdate${cmain.cms_num}" style="display: none">
+	                                        	<span>&nbsp&nbsp └ </span>
+			                                	<!-- 답변 날짜 -->
+			                                	<span>${cmain.cms_wdate}</span>
+			                                	<span>&nbsp&nbsp &nbsp&nbsp</span>
+			                                	<!-- 답변 아이디 -->
+			                                	<span>${cmain.b_m_id}</span>
+			                                	<span>&nbsp&nbsp &nbsp&nbsp</span>
+			                                	<span><a href="javascript:updateCommSub(${cmain.cms_num})">수정</a> | <a href="javascript:closeCommSubForm(${cmain.cms_num})">취소</a></span>
+			                                	<p>
+			                                		&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+			                                        <!-- 답변 내용 -->
+			                                        <textarea rows="2" cols="90" name="cms_contents${cmain.cms_num}" placeholder="답변을 입력하세요">${cmain.cms_contents}</textarea>
+		                                        </p>
+		                                        
+	                                        </div>
+	                                	</c:when>
+	                                	
+	                                	<c:otherwise>
+	                                		<!-- 답변 등록 영역 -->
+	                                		<div id="commentform">
+	                                			<c:if test="${sessionScope.userId == cmain.b_m_id}">
+			                                		<form id="insertCommSubForm${cmain.cm_num}" name="insertCommSubForm${cmain.cm_num}" method="post" action="/comm/insertSub">
+							                          <p>
+							                            <span>&nbsp&nbsp └ </span>
+							                            <span>${sessionScope.userId}</span> 
+							                            <span class="align-right">
+							                              <input type="button" class="btn btn-mini" value="답변등록" onclick="javascript:insertCommSub(${cmain.cm_num});" />
+							                            </span>
+							                            <!-- 답변 입력 -->
+							                            <textarea rows="2" cols="90" name="cms_contents${cmain.cm_num}" placeholder="답변을 입력하세요"></textarea>
+							                          </p>
+			                                		</form>
+		                                		</c:if>
+	                                		</div>
+	                                	</c:otherwise>
+	                                </c:choose>
+                                </div>
+                               </c:if>
+                                </c:forEach>
                             </div>                          
                           </div>
                         </div> 
-                      </form>    
-                    </div>                           
+                    </div>
+                          
                   </div>
                 </div>
               <!-- </form> -->
@@ -215,14 +341,166 @@
         </div>
       </div>
     </section>
+    <script type="text/javascript">
+    
+    	// 매칭요청 팝업 오픈
+    	function openPopup() {
+    		window.open("/match/match?b_num=${bMatch.b_num}","매칭요청 팝업","width=800,height=350");
+   		}
+      
+    	// 질문 등록
+      	function insertCommMain() {
+			//alert("test");
+			var param = $("form[name=insertCommMainForm]").serialize();
+			$.ajax({
+				type : "POST",
+				async : true,
+				url : "/comm/insert",
+				data : param,
+				error : function(request, status, error) {
+					alert("code : " + request.status + "\n"
+							+ "error : " + error);
+				},
+				success : function(data) {
+					alert("질문이 작성되었습니다.");
+					location.reload(true);
+				}
+			});
+		}
+    	
+     	// 답변 등록
+      	function insertCommSub(cm_num) {
+      		var param = {
+  				cm_num : cm_num,
+  				cms_contents : $("textarea[name=cms_contents"+cm_num+"]").val()
+  			};
+			$.ajax({
+				type : "POST",
+				async : true,
+				url : "/comm/insertSub",
+				data : param,
+				error : function(request, status, error) {
+					alert("code : " + request.status + "\n"
+							+ "error : " + error);
+				},
+				success : function(data) {
+					alert("답변이 작성되었습니다.");
+					location.reload(true);
+				}
+			});
+		}
+      	
+     	// 질문 수정영역 보이기
+      	function openCommMainForm(cm_num) {
+			$("#commMainView"+cm_num).hide();
+			$("#commMainUpdate"+cm_num).show();
+		}
+      	
+     	// 질문 수정영역 가리기
+      	function openCommSubForm(cms_num) {
+			$("#commSubView"+cms_num).hide();
+			$("#commSubUpdate"+cms_num).show();
+		}
+      	
+     	// 답변 수정영역 보이기
+      	function closeCommMainForm(cm_num) {
+			$("#commMainView"+cm_num).show();
+			$("#commMainUpdate"+cm_num).hide();
+		}
+      
+     	// 답변 수정영역 가리기
+		function closeCommSubForm(cms_num) {
+			$("#commSubView"+cms_num).show();
+			$("#commSubUpdate"+cms_num).hide();
+		}
+      
+		// 질문 수정
+		function updateCommMain(cm_num) {
+			//alert($("input:radio[name=cm_secret"+cm_num+"]").val());
+			//alert($("input:radio[name=cm_secret"+cm_num+"]:checked").val());
+			var param = {
+				cm_num : cm_num,
+				cm_contents : $("textarea[name=cm_contents"+cm_num+"]").val(),
+				cm_secret : $("input:radio[name=cm_secret"+cm_num+"]").val()
+			};
+			$.ajax({
+				type : "POST",
+				async : true,
+				url : "/comm/update",
+				data : param,
+				error : function(request, status, error) {
+					alert("code : " + request.status + "\n"
+							+ "error : " + error);
+				},
+				success : function(data) {
+					alert("질문이 수정되었습니다.");
+					location.reload(true);
+				}
+			});
+		}
+		
+		// 답변 수정
+    	function updateCommSub(cms_num) {
+			var param = {
+				cms_num : cms_num,
+				cms_contents : $("textarea[name=cms_contents"+cms_num+"]").val()
+			};
+			$.ajax({
+				type : "POST",
+				async : true,
+				url : "/comm/updateSub",
+				data : param,
+				error : function(request, status, error) {
+					alert("code : " + request.status + "\n"
+							+ "error : " + error);
+				},
+				success : function(data) {
+					alert("답변이 수정되었습니다.");
+					location.reload(true);
+				}
+			});
+		}		
 
-      <!-- 매칭요청 팝업 -->
-    <script language="javascript">
-      function openPopup() {
-        window.open("/match/match?b_num=${bMatch.b_num}","매칭요청 팝업","width=800,height=350");
-      }
+    	// 질문 삭제
+		function deleteCommMain(cm_num) {
+			if(confirm("질문을 삭제하시겠습니까?")) {
+				$.ajax({
+					type : "POST",
+					async : true,
+					url : "/comm/delete",
+					data : {cm_num : cm_num},
+					error : function(request, status, error) {
+						alert("code : " + request.status + "\n"
+								+ "error : " + error);
+					},
+					success : function(data) {
+						alert("질문이 삭제되었습니다.");
+						location.reload(true);
+					}
+				});
+			}
+		}
+    
+		// 답변 삭제
+    	function deleteCommSub(cms_num) {
+  	  		if(confirm("답변을 삭제하시겠습니까?")) {
+  	  			$.ajax({
+  	  				type : "POST",
+					async : true,
+					url : "/comm/deleteSub",
+					data : {cms_num : cms_num},
+					error : function(request, status, error) {
+						alert("code : " + request.status + "\n"
+								+ "error : " + error);
+					},
+					success : function(data) {
+						alert("답변이 삭제되었습니다.");
+						location.reload(true);
+					}
+				});
+  			}
+  		}
     </script>
-
 
 
 <%@ include file="../includes/footer.jsp" %>

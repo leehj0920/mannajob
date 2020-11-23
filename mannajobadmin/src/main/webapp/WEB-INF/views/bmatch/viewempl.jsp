@@ -211,14 +211,14 @@
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
                             <a href="/bmatch/list?&pageNum=${cri.pageNum}&b_category=${bMatch.b_category}&m_id=${bMatch.m_id}" class="btn btn-inverse margintop10 a_btn4" type="button">리스트</a>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-                            <a href="#" class="btn btn-theme margintop10 a_btn4" type="button" onclick="openPopup();">매칭요청</a>
+                            <a href="#" class="btn btn-theme margintop10 a_btn4" type="button" onclick="openPopup(); return false;">매칭요청</a>
                             <a href="#" onclick="window.open('/compl/insert?b_num=${bMatch.b_num}&b_category=A&m_id=${bMatch.m_id}','게시글 신고','width=500,height=700'); return false;" class="btn btn-inverse margintop10 a_btn4" type="button">신고</a>  
                           </p>
                         </div>
                       </div>
 
                       <!-- 질문 등록 영역 -->
-                      <c:if test="${sessionScope.userId != bMatch.m_id}">
+                      <c:if test="${sessionScope.userId != bMatch.m_id && sessionScope.userId != null}">
 	                      <div class="about-author">
 	                      	<div id="commentform">
 		                        <form id="insertCommMainForm" name="insertCommMainForm" method="post" action="/comm/insert">
