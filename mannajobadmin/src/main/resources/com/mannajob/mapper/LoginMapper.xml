@@ -5,7 +5,7 @@
 <mapper namespace="com.mannajob.mapper.LoginMapper">
 	<!-- API로그인 기존 회원인지 체크 -->	
 	<select id="MemCheck" resultType="int">
-		SELECT COUNT(m_id) FROM member WHERE m_id = #{m_id}
+		SELECT COUNT(m_id) FROM member WHERE m_id = #{m_id} AND m_del = 'N'
 	</select>
 	
 </mapper>

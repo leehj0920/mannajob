@@ -40,7 +40,7 @@
 	
 	<!-- 매칭글 작성 내역 조회  -->
 	<select id="searchWMat" resultMap="BMatch">
-		SELECT b.b_num, b.b_subject, b.b_state, re.m_id, re.r_num, re.r_contents, re.r_w_m_id, re.r_mat_m_id FROM b_match b left join (SELECT m.b_num, r.r_num, r.r_contents, m.m_id, r.r_w_m_id, r.r_mat_m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b_num DESC
+		SELECT b.b_num, b.b_subject, b.b_state, re.m_id, re.r_num, re.r_contents, re.r_w_m_id, re.r_mat_m_id FROM b_match b left join (SELECT m.b_num, r.r_num, r.r_contents, m.m_id, r.r_w_m_id, r.r_mat_m_id FROM match m LEFT JOIN review r ON m.mat_num = r.mat_num where r.r_w_m_id = #{m_id} and r.r_del = 'N') re on b.b_num = re.b_num where b.m_id = #{m_id} ORDER BY b.b_num DESC
 	</select>
 	
 	<!-- 매칭 신청 내역 조회-->
