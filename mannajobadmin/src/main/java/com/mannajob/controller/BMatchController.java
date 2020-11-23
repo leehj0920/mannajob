@@ -18,6 +18,7 @@ import com.mannajob.domain.PageDTO;
 import com.mannajob.domain.locationDTO;
 import com.mannajob.service.AdminService;
 import com.mannajob.service.BMatchService;
+import com.mannajob.service.CommService;
 import com.mannajob.service.ProfileService;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class BMatchController {
 	private BMatchService bMatchService;
 	private ProfileService profileService;
 	private AdminService adminService;
+	private CommService commService;
 	
 	@GetMapping("/list")
 	public String list(Model model, Criteria cri, BMatchVO bMatchVO) {
@@ -57,7 +59,8 @@ public class BMatchController {
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
 			model.addAttribute("empl", emplVO);
 			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
-			return "/bmatch/viewempl";	
+			model.addAttribute("commMain", commService.getList(bMatchVO.getB_num())); // 2020.11.21 매칭글 하위 질의응답 : 박세희
+			return "/bmatch/viewempl";
 		}
 		return "/bmatch/viewmember";
 	}
