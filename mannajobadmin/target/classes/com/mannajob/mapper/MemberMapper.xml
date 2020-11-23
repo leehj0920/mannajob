@@ -6,4 +6,8 @@
 	<select id="LoginSelect" resultType="int">
 		SELECT COUNT(m_id) FROM member WHERE m_id = #{m_id} and m_passwd = #{m_passwd} and m_del = 'N'
 	</select>
+	
+	<select id="SecretLogin" resultType="com.mannajob.domain.MemberVO">
+		SELECT m_id, m_passwd FROM member WHERE m_id = #{m_id}
+	</select>
 </mapper>

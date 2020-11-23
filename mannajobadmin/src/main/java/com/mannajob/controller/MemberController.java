@@ -25,18 +25,18 @@ public class MemberController {
 	
 	@PostMapping ("/logincheck")
 	public String login(MemberVO member, HttpServletRequest request, HttpSession session) {
-		if(service.LoginSelect(member)) {
-			log.info("로그인 성공 여부 확인");
+		if(service.SecretLogin(member)) {
+			log.info("로그인 성공!!!!");
 			session.setAttribute("userId", member.getM_id());
 			return "redirect:/main"; 
 		} else {
-			log.info("로그인");
+			log.info("로그인 실패!!!!");
 			return "redirect:/login";
 		}
 	}
 
 	
-	// �α׾ƿ�
+	//로그아웃
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpServletRequest request) throws IOException {
 		HttpSession session = request.getSession();
