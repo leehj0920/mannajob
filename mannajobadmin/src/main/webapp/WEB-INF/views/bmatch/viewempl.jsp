@@ -341,7 +341,7 @@
 					                                  				<p>
 								                                		&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
 								                                        <!-- 답변 내용 -->
-								                                        <span>${cmain.cm_contents}</span>
+								                                        <span>${cmain.cms_contents}</span>
 							                                        </p>
 					                                  			</c:when>
 				                                  				<c:otherwise>
