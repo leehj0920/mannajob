@@ -131,8 +131,8 @@ public class ProfileController {
 		model.addAttribute("empl",service.getEmplProfile2(emplVO.getM_id()));
 		model.addAttribute("image",service.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
 		model.addAttribute("review", service.searchReview(emplVO.getM_id()));
-		
-		log.info("......................................" + model.getAttribute("review"));
+		model.addAttribute("good", service.countG(emplVO.getM_id()));
+		model.addAttribute("count", service.totalMat(emplVO.getM_id()));
 		
 		return "/profile/showempl";
 	}
@@ -175,9 +175,9 @@ public class ProfileController {
 		HttpSession session = request.getSession();
 		log.info(".............................................." + session.getAttribute("userId").toString());
 		
-//		model.addAttribute("userId", session.getAttribute("userId").toString());
+		model.addAttribute("userId", session.getAttribute("userId").toString());
 		model.addAttribute("m_id", m_id);
-		model.addAttribute("MReview", service.searchMReview(m_id));
+		model.addAttribute("MReview", service.searchReview(m_id));
 		return "/profile/showmem";
 	}
 	

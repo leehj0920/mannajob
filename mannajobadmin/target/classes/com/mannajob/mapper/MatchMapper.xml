@@ -17,8 +17,10 @@
 	<resultMap type="com.mannajob.domain.ReviewVO" id="Review">
 		<result property="r_num" column="r_num"/>
 		<result property="r_contents" column="r_contents"/>
+		<result property="mat_num" column="mat_num"/>
 		<result property="r_w_m_id" column="r_w_m_id"/>
 		<result property="r_mat_m_id" column="r_mat_m_id"/>
+		<result property="r_del" column="r_del"/>
 	</resultMap>
 	
 	<resultMap type="com.mannajob.domain.BMatchVO" id="BMatch">

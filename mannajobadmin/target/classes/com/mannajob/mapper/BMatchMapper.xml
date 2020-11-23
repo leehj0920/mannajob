@@ -85,6 +85,8 @@
 		<result property="e_corp" column="e_corp"/>
 		<result property="e_career" column="e_career" />
 		<result property="e_task" column="e_task"/>
+		<result property="countM" column="countM"/>
+		<result property="countG" column="countG"/>
 		<association property="memberVO" resultMap="memVO"></association>
 		<association property="fileVO" resultMap="fileVO"></association>
 	</resultMap>
@@ -149,6 +151,18 @@
         select count(mat_num) cnt, b_task from b_match b, match m where b.b_num = m.b_num and mat_wdate >= (sysdate-15) and mat_wdate <= (sysdate+15) group by b_task order by count(mat_num) desc)
         where rownum<=5 
 		]]>
+	</select>
+	
+	<!-- 총 매칭 건수 -->
+	<select id="totalMat" resultType="int">
+		SELECT count(b.b_num) as countM
+		FROM b_match b, match m
+		WHERE b.b_num = m.b_num AND (b.m_id = #{m_id} or m.m_id = #{m_id}) AND (b.b_state = 'B' AND m.mat_state = 'C') AND b.m_id != m.m_id
+	</select>
+	
+	<!-- 좋아요 수 -->
+	<select id="countG" resultType="int">
+		SELECT count(r_good) FROM review WHERE r_mat_m_id = #{m_id} and r_good = 'G'
 	</select>
 	
 </mapper>

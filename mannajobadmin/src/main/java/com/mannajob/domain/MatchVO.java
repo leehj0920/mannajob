@@ -14,4 +14,5 @@ public class MatchVO {
 	private Date mat_wdate;
 	private Date mat_okdate;
 	private String mat_state;
+	private int countM;
 }

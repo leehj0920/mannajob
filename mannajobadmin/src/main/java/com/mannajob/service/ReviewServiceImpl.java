@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public String searchEmplId(int r_num) {
-		return mapper.searchEmplId(r_num);
+	public String searchId(int r_num) {
+		return mapper.searchId(r_num);
 	}
 }

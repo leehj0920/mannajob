@@ -106,6 +106,7 @@ public class MatchController {
 		model.addAttribute("matlist", service.searchMat(m_id,scri));
 		model.addAttribute("pageMat", new PageDTO(scri, mtotal));
 		
+		System.out.println("userId" + model.getAttribute("userId"));
 		System.out.println("wmatlist" + model.getAttribute("wmatlist"));
 		System.out.println("matlist" + model.getAttribute("matlist"));
 		return "match/matlist";

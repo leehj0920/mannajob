@@ -8,5 +8,5 @@ public interface ReviewService {
 	
 	public void deleteR(int r_num);
 	
-	public String searchEmplId(int r_num);
+	public String searchId(int r_num);
 }

@@ -24,11 +24,6 @@ public class ReviewController {
 	private ReviewService service;
 	private MatchService matchservice;
 	
-	/*
-	 * @GetMapping("/insert") public void insert() {
-	 * 
-	 * }
-	 */
 	//글 작성 내역에서 리뷰 작성
 	@GetMapping("/insertB")
 	public void insertB(Model model, HttpServletRequest request, int b_num) {
@@ -80,8 +75,23 @@ public class ReviewController {
 	@PostMapping("/updateokk")
 	public String updateokk(int r_num, String r_good, String r_contents) {
 		service.updateR(r_num, r_good, r_contents);
-		String emplId = service.searchEmplId(r_num);
+		String emplId = service.searchId(r_num);
 		return "redirect:/profile/showempl?m_id=" + emplId;
+		
+	}
+	
+	//회원 프로필에서 수정
+	@GetMapping("/updatem")
+	public void updatem(Model model, int r_num, String r_contents) {
+		model.addAttribute("r_num", r_num);
+		model.addAttribute("r_contents", r_contents);
+	}
+	
+	@PostMapping("/updatemok")
+	public String updatemok(int r_num, String r_good, String r_contents) {
+		service.updateR(r_num, r_good, r_contents);
+		String memId = service.searchId(r_num);
+		return "redirect:/profile/showmem?m_id=" + memId;
 		
 	}
 	
@@ -96,7 +106,15 @@ public class ReviewController {
 	@GetMapping("/deletee")
 	public String deletee(int r_num) {
 		service.deleteR(r_num);
-		String emplId = service.searchEmplId(r_num);
+		String emplId = service.searchId(r_num);
 		return "redirect:/profile/showempl?m_id=" + emplId;
+	}
+	
+	//회원 프로필에서 삭제
+	@GetMapping("/deletem")
+	public String deletem(int r_num) {
+		service.deleteR(r_num);
+		String memId = service.searchId(r_num);
+		return "redirect:/profile/showmem?m_id=" + memId;
 	}
 }

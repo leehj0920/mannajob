@@ -32,7 +32,7 @@
 	
 	<!-- 회원 리뷰 조회 -->
 	<select id="searchMReview" resultMap="MemVO">
-		SELECT r.r_num, r.r_good, r.r_contents, r.r_w_m_id, r.r_wdate FROM review r, member m WHERE r.r_mat_m_id = m.m_id AND m.m_id = #{m_id} 
+		SELECT r.r_num, r.r_good, r.r_contents, r.r_w_m_id, r.r_wdate FROM review r, member m WHERE r.r_mat_m_id = m.m_id AND m.m_id = #{m_id}
 	</select>
 	
 	<!-- 현직자 정보 조회 -->
@@ -133,9 +133,9 @@
 	</select>
     
 
-	<!-- 현직자 프로필에서 리뷰 확인 -->
+	<!-- 프로필에서 리뷰 확인 -->
 	<select id="searchReview" resultType="com.mannajob.domain.ReviewVO">
-		SELECT r_num, r_good, r_contents, r_w_m_id, r_wdate FROM review WHERE r_mat_m_id = #{m_id}
+		SELECT r_num, r_good, r_contents, r_w_m_id, r_wdate FROM review WHERE r_mat_m_id = #{m_id} AND r_del = 'N'
 	</select>
 	
 	<!-- 현직자 프로필 수정 -->
@@ -165,5 +165,17 @@
 		<!-- empl테이블에서 삭제 -->
 		<!-- DELETE empl WHERE m_id = #{m_id} -->
 	</delete>
+	
+	<!-- 좋아요 수 -->
+	<select id="countG" resultType="int">
+		SELECT count(r_good) FROM review WHERE r_mat_m_id = #{m_id} and r_good = 'G'
+	</select>
+	
+	<!-- 총 매칭 건수 -->
+	<select id="totalMat" resultType="int">
+		SELECT count(b.b_num) as countM
+		FROM b_match b, match m
+		WHERE b.b_num = m.b_num AND (b.m_id = #{m_id} or m.m_id = #{m_id}) AND (b.b_state = 'B' AND m.mat_state = 'C') AND b.m_id != m.m_id
+	</select>
 	
 </mapper>

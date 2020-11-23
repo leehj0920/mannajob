@@ -165,8 +165,15 @@ public class BMatchServiceImpl implements BMatchService{
 		if(bMatchVO.getB_category()==null||"".equals(bMatchVO.getB_category())){
 			bMatchVO.setB_category("A");
 		}
-		
-		return mapper.searchEmplPaging(bMatchVO,cri);
+		List<EmplVO> list = mapper.searchEmplPaging(bMatchVO, cri);
+		for(int i = 0; i < 5; i ++) {
+			String m_id = mapper.searchEmplPaging(bMatchVO, cri).get(i).getM_id();
+			int countM = mapper.totalMat(m_id);
+			int countG = mapper.countG(m_id);
+			list.get(i).setCountM(countM);
+			list.get(i).setCountG(countG);
+		}
+		return list;
 	}
 
 	@Override

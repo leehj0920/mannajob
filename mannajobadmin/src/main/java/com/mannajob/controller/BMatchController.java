@@ -36,6 +36,7 @@ public class BMatchController {
 	private ProfileService profileService;
 	private AdminService adminService;
 	private MatchService matchservice;
+	private CommService commService;
 	
 	@GetMapping("/list")
 	public String list(Model model, Criteria cri, BMatchVO bMatchVO) {
@@ -56,15 +57,22 @@ public class BMatchController {
 	// 댓글,대댓글 추가 필요, 현직자의 경우 현직자 정보 추가 필요.
 	// 사진 출력 추가 필요
 	@GetMapping("/view")
-	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri) {
+	public String view(BMatchVO bMatchVO, Model model, @ModelAttribute("cri") Criteria cri, HttpSession session) {
+		System.out.println("..........................................." + session.getAttribute("userId"));
 		model.addAttribute("bMatch", bMatchService.read(bMatchVO.getB_num()));
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
 			model.addAttribute("empl", emplVO);
 			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
-			return "/bmatch/viewempl";	
+			model.addAttribute("commMain", commService.getList(bMatchVO.getB_num())); // 2020.11.21 매칭글 하위 질의응답 : 박세희
+			return "/bmatch/viewempl";
 		}
 		return "/bmatch/viewmember";
+	}
+	
+	@GetMapping("/viewmember")
+	public void viewmember() {
+		
 	}
 	// 프로필에 대한 검색도 함께 포함되도록 추가
 	@GetMapping("/search")

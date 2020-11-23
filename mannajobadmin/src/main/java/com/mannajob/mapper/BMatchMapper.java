@@ -47,4 +47,8 @@ public interface BMatchMapper {
 	public List<BMatchVO> rankCorp();
 	public List<BMatchVO> rankLocation();
 	public List<BMatchVO> rankTask();
+	public int totalMat(@Param("m_id") String m_id);
+	
+	public int countG(@Param("m_id") String m_id);
+	
 }

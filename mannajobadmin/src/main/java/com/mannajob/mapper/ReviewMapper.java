@@ -9,5 +9,5 @@ public interface ReviewMapper {
 	
 	public void deleteR(@Param("r_num") int r_num);
 	
-	public String searchEmplId(int r_num);
+	public String searchId(int r_num);
 }

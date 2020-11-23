@@ -82,7 +82,8 @@
                           <col style="width: 20%">
                           <col style="width: 20%">
                           <col style="width: 20%">
-                          <col style="width: 20%">
+                          <col style="width: 10%">
+                          <col style="width: 10%">
                         </colgroup>
                         
                         <tr>
@@ -100,6 +101,9 @@
                           </td>
                           <td>
                             <p class="center">인증여부</p>    
+                          </td>
+                          <td>
+                            <p class="center">인증</p>    
                           </td>
                         </tr> 
                         <c:forEach items="${empllist}" var="empl">
@@ -132,6 +136,21 @@
 							<c:otherwise>미승인</c:otherwise>
 							</c:choose>
 							</p>
+                          </td>
+                          <td>
+                          	<!-- 인증 버튼 -->
+                          	<p class="cneter">
+                          	<c:choose>
+							<c:when test="${empl.e_ok eq 'Y'}">
+							</c:when>
+							<c:otherwise>
+	                          	<form method="get" action="/admin/emplOk" style="height: 10px; margin:0 auto;">
+								<input type="hidden" name="e_num" value="${empl.e_num}">
+								<p class="center"><input type="submit" value="인증" class="btn btn-mini btn-theme"></p>
+	                 			</form>
+							</c:otherwise>
+							</c:choose>
+                          	</p>
                           </td>
                         </tr>  
                         </c:forEach>
