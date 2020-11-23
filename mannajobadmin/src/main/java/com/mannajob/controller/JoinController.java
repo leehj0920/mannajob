@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mannajob.domain.MemberVO;
 import com.mannajob.service.JoinService;
@@ -40,10 +39,8 @@ public class JoinController {
 	
 		
 	@PostMapping("/member")
-	public String insert(MemberVO member, RedirectAttributes rttr) {
-		log.info("����..............................");
+	public String insert(MemberVO member) {
 		service.MemJoin(member);
-//		rttr.addFlashAttribute("result", 1);
 		
 		return "redirect:/login";
 	}
@@ -54,11 +51,10 @@ public class JoinController {
 	}
 	
 	@PostMapping("/join")
-	public String insertapi(MemberVO member, RedirectAttributes rttr, HttpSession session) {
+	public String insertapi(MemberVO member, HttpSession session) {
 		member.setM_id(session.getAttribute("sessionId").toString());
 		member.setM_api(session.getAttribute("userapi").toString());
 		service.ApiJoin(member);
-//		rttr.addFlashAttribute("result", 1);
 		session.setAttribute("userId", session.getAttribute("sessionId"));
 		return "redirect:/main";
 	}
