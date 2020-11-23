@@ -68,12 +68,10 @@
 	
 	<!-- best mento info -->
 	<select id="bestMento" resultType="com.mannajob.domain.BestVO">
-		SELECT m_id, m_name, stored_file_name, e_corp, e_task, count as countG
-		FROM (SELECT m.m_id as m_id, m.m_name as m_name, f.stored_file_name as stored_file_name, e.e_corp as e_corp, e.e_task as e_task, count(r.r_good) as count 
-			FROM member m, m_file f, empl e, review r
-			WHERE m.m_id = e.m_id AND f.e_num = e.e_num AND m.m_id = r.r_mat_m_id AND r.r_good = 'G' AND f.f_category = 'I'
-			GROUP BY m.m_id, m.m_name, f.stored_file_name, e.e_corp, e.e_task ORDER BY count(r.r_good) DESC)
-		WHERE <![CDATA[rownum <= 5]]>
+		SELECT m.m_id as m_id, m.m_name as m_name, f.stored_file_name as stored_file_name, e.e_corp as e_corp, e.e_task as e_task, count(r.r_good) as countG
+		FROM member m, m_file f, empl e, review r
+		WHERE m.m_id = e.m_id AND f.e_num = e.e_num AND m.m_id = r.r_mat_m_id AND r.r_good = 'G' AND f.f_category = 'I'
+		GROUP BY m.m_id, m.m_name, f.stored_file_name, e.e_corp, e.e_task ORDER BY countG DESC
 	</select>
 	
 </mapper>
