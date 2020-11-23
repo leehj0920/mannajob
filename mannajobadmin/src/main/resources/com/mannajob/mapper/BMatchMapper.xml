@@ -125,4 +125,30 @@
 		select count(b_num) from b_match where m_id = #{m_id} 
 	</select>
 	
+	<select id="getDailycount" resultType="int">
+		select count(b_num) from b_match where b_wdate like (sysdate + #{daygap}) and b_state!='C' and b_del='N'
+	</select>
+	
+	<select id = "rankCorp" resultType="com.mannajob.domain.BMatchVO">
+	<![CDATA[
+		select * from (
+        select count(mat_num) cnt, b_corp from b_match b, match m where b.b_num = m.b_num and mat_wdate >= (sysdate-15) and mat_wdate <= (sysdate+15) group by b_corp order by count(mat_num) desc)
+        where rownum<=5
+		]]>
+	</select>
+	<select id = "rankLocation" resultType= "com.mannajob.domain.BMatchVO">
+	<![CDATA[
+		select * from (
+        select count(mat_num) cnt, substr(b_location,0 ,instr(b_location,' ')) b_location from b_match b, match m where b.b_num = m.b_num and mat_wdate >= (sysdate-15) and mat_wdate <= (sysdate+15) group by substr(b_location,0,instr(b_location,' ')) order by count(mat_num) desc)
+        where rownum<=5 
+		]]>
+	</select>
+	<select id = "rankTask" resultType= "com.mannajob.domain.BMatchVO">
+	<![CDATA[
+		select * from (
+        select count(mat_num) cnt, b_task from b_match b, match m where b.b_num = m.b_num and mat_wdate >= (sysdate-15) and mat_wdate <= (sysdate+15) group by b_task order by count(mat_num) desc)
+        where rownum<=5 
+		]]>
+	</select>
+	
 </mapper>

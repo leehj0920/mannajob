@@ -180,6 +180,32 @@ public class BMatchServiceImpl implements BMatchService{
 		return mapper.getPersonTotalCount(m_id);
 	}
 
+	@Override
+	public int getDailycount(int daygap) {
+		
+		return mapper.getDailycount(daygap);
+	}
+
+	@Override
+	public List<BMatchVO> rankCorp() {
+
+		return mapper.rankCorp();
+	}
+
+	@Override
+	public List<BMatchVO> rankLocation() {
+
+		return mapper.rankLocation();
+	}
+
+	@Override
+	public List<BMatchVO> rankTask() {
+
+		return mapper.rankTask();
+	}
+	
+	
+
 	
 	
 	

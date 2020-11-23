@@ -152,13 +152,16 @@
     	select count(mat_num) from match where  m_id = #{m_id}
     </select>
     <select id="getListBMatch" resultType="com.mannajob.domain.MyScheduleVO">
-    	select b.b_num, m.mat_num, m.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
+    	select b.b_num, m.mat_num,b.b_category,b.m_id w_m_id, m.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
     		from b_match b, match m
     		 where b.b_num = m.b_num and b.m_id=#{m_id} and m.mat_state='C' and b.m_id != m.m_id and mat_stdate like #{yearmonth}||'%' order by mat_stdate,mat_hour
     </select>
     <select id="getListMatch" resultType="com.mannajob.domain.MyScheduleVO">
-    	select b.b_num, m.mat_num, b.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
+    	select b.b_num, m.mat_num,b.b_category,b.m_id w_m_id, b.m_id,m.mat_hour,m.mat_stdate,m.mat_state,mat_okdate
     		from b_match b, match m
     		where b.b_num = m.b_num and m.m_id=#{m_id} and m.mat_state='C' and b.m_id != m.m_id and mat_stdate like #{yearmonth}||'%' order by mat_stdate,mat_hour
     </select>
+   	<select id="getDailycount" resultType="int">
+		select count(mat_num) from match where mat_okdate like (sysdate + ${daygap}) and mat_state='C'
+	</select>
 </mapper>

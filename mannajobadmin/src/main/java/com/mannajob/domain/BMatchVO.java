@@ -21,7 +21,7 @@ public class BMatchVO {
 	private String b_subject;
 	private Date b_wdate;
 	private String b_contents;
-	
+	private int cnt;
 	private MatchVO matchVO;
 	private ReviewVO reviewVO;
 }

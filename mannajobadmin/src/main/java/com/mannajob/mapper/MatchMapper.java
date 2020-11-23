@@ -66,4 +66,6 @@ public interface MatchMapper {
 	public List<MyScheduleVO> getListBMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
 	public List<MyScheduleVO> getListMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
 	
+	
+	public int getDailycount(int daygap);
 }

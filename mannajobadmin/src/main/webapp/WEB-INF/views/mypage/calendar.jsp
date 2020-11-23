@@ -118,12 +118,12 @@ function getdate(){
 	daysch="<p style='margin-top:20px'></p>";
 	<c:forEach var = "sch" items="${list1}">
 		<c:if test="${i eq fn:substring(sch.mat_stdate,8,10)}">
-			daysch += "<p class='center'><a href='#' class='btn btn-inverse i_btn2' >" + "${sch.m_id}"+"&nbsp&nbsp"+"${sch.mat_hour}"+"</a>";
+			daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch.b_category}"+"&m_id="+"${sch.m_id}"+"&b_num="+"${sch.b_num}' class='btn btn-inverse i_btn2' >" + "${sch.m_id}"+"&nbsp&nbsp"+"${sch.mat_hour}"+"</a>";
 		</c:if>
 	</c:forEach>
 	<c:forEach var = "sch2" items="${list2}">
 	<c:if test="${i eq fn:substring(sch2.mat_stdate,8,10)}">
-		daysch += "<p class='center'><a href='#' class='btn btn-inverse i_btn2' >" + "${sch2.m_id}"+"&nbsp&nbsp"+"${sch2.mat_hour}"+"</a>";
+		daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch2.b_category}"+"&m_id="+"${sch2.m_id}"+"&b_num="+"${sch2.b_num}' class='btn btn-inverse i_btn2' >" + "${sch2.m_id}"+"&nbsp&nbsp"+"${sch2.mat_hour}"+"</a>";
 	</c:if>
 </c:forEach>
 	map.set("${i}",daysch);
@@ -135,7 +135,7 @@ function getdata2(data){
 		daysch="<p style='margin-top:20px'></p>";
 		for(var j=0; j<data.length;j++){
 			if(i == data[j].mat_stdate.substring(8,10)){
-				daysch += "<p class='center'><a href='#' class='btn btn-inverse i_btn2' >" +data[j].m_id +"&nbsp&nbsp"+data[j].mat_hour+"</a>";
+				daysch += "<p class='center'><a href='/bmatch/view?b_category="+data[j].b_category+"&m_id="+data[j].m_id+"&b_num="+data[j].b_num+"' class='btn btn-inverse i_btn2' >" +data[j].m_id +"&nbsp&nbsp"+data[j].mat_hour+"</a>";
 			}
 		}
 		map.set(String(i),daysch);
@@ -176,7 +176,7 @@ function nextCalendar() {
     this.today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
     map.clear();
     dataChange();
-    buildCalendar();
+    setTimeout(()=>buildCalendar(),2000);
 }
 
 // 다음달
@@ -184,7 +184,7 @@ function prevCalendar() {
     this.today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
     map.clear();
     dataChange();
-    buildCalendar();
+    setTimeout(()=>buildCalendar(),2000);
 }
 
 function buildCalendar() {

@@ -78,9 +78,12 @@ public class MatchMapperTest {
 	public void getListMatch() {
 		log.info(mapper.getListMatch("tiger", "2020-11"));
 	}
-	@Test
+//	@Test
 	public void getListBMatch() {
 		log.info(mapper.getListBMatch("tiger", "2020-11"));
 	}
-	
+	@Test
+	public void getDailycount() {
+		log.info(mapper.getDailycount(-2));
+	}
 }

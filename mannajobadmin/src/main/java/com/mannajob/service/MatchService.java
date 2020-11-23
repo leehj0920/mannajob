@@ -47,4 +47,6 @@ public interface MatchService {
 	
 	public List<MyScheduleVO> getListBMatch(String m_id,String yearmonth);
 	public List<MyScheduleVO> getListMatch(String m_id,String yearmonth);
+	
+	public int getDailycount(int daygap);
 }

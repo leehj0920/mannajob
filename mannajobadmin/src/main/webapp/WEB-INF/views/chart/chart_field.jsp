@@ -53,11 +53,9 @@
                         <canvas id="companyChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">선호기업 순위별 리스트
-                        <p class="left">1. 네이버
-                        <p class="left">2. 삼성전자
-                        <p class="left">3. 농협중앙회
-                        <p class="left">4. LG화학
-                        <p class="left">5. 한국전력공사
+                        <c:forEach var="item" items="${rankCorp}">
+                        <p class="left">${item.b_corp}</p>
+						</c:forEach>                        
                     </div>
                   </div>
                   <div class="span3" style="border:1px solid #656565; width: 230px;">
@@ -67,11 +65,9 @@
                         <canvas id="locationChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">희망지역 순위별 리스트
-                        <p class="left">1. 청주
-                        <p class="left">2. 서울
-                        <p class="left">3. 대전
-                        <p class="left">4. 부산
-                        <p class="left">5. 인천
+                        <c:forEach var="item" items="${rankLocation}">
+                        <p class="left">${item.b_location}</p>
+						</c:forEach>                    
                     </div>
                   </div>
                   <div class="span3" style="border:1px solid #656565; width: 230px;">
@@ -81,11 +77,9 @@
                         <canvas id="fieldChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">희망직무 순위별 리스트
-                        <p class="left">1. IT개발
-                        <p class="left">2. 마케팅
-                        <p class="left">3. 인사/총무
-                        <p class="left">4. 전략/기획
-                        <p class="left">5. 디자인/예술
+                       	<c:forEach var="item" items="${rankTask}">
+                        <p class="left">${item.b_task}</p>
+						</c:forEach>                    
                     </div>
                   </div>
               </form>
@@ -97,3 +91,352 @@
 
 
 <%@ include file="../includes/footer.jsp" %>
+<script>
+//Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+function number_format(number, decimals, dec_point, thousands_sep) {
+  // *     example: number_format(1234.56, 2, ',', ' ');
+  // *     return: '1 234,56'
+  number = (number + '').replace(',', '').replace(' ', '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + Math.round(n * k) / k;
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 기업별 분석
+var ctx = document.getElementById("companyChart");
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["1위", "2위", "3위", "4위", "5위"],
+    datasets: [{
+      label: "기업별분석",
+      backgroundColor: "#f84002",
+      hoverBackgroundColor: "#f7ba53",
+      borderColor: "#f84002",
+      data: [
+    	  <c:forEach var="item" items="${rankCorp}">
+        	  "${item.cnt}",
+          </c:forEach>
+    	  ],
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'rank'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: '순위',
+          // fontColor: 'red'
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: "${maxcorp}",
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            //return '$' + number_format(value);
+            return number_format(value) + '건';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: 'TEST',
+          // fontColor: 'red'
+        },
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          //return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + '건';
+        }
+      }
+    },
+    title: {
+      display: true,
+      text: '기업별 분석'
+    },
+  }
+});
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 지역별 분석
+var ctx = document.getElementById("locationChart");
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["1위", "2위", "3위", "4위", "5위"],
+    datasets: [{
+      label: "기업별분석",
+      backgroundColor: "#f84002",
+      hoverBackgroundColor: "#f7ba53",
+      borderColor: "#f84002",
+      data: [
+    	  <c:forEach var="item" items="${rankLocation}">
+        	  "${item.cnt}",
+        	  </c:forEach>
+    	  ],
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'rank'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: '순위',
+          // fontColor: 'red'
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: "${maxlocation}",
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            //return '$' + number_format(value);
+            return number_format(value) + '건';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: 'TEST',
+          // fontColor: 'red'
+        },
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          //return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + '건';
+        }
+      }
+    },
+    title: {
+      display: true,
+      text: '지역별 분석'
+    },
+  }
+});
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 분야별 분석
+var ctx = document.getElementById("fieldChart");
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["1위", "2위", "3위", "4위", "5위"],
+    datasets: [{
+      label: "기업별분석",
+      backgroundColor: "#f84002",
+      hoverBackgroundColor: "#f7ba53",
+      borderColor: "#f84002",
+      data: [
+    	  <c:forEach var="item" items="${rankTask}">
+    	  "${item.cnt}",
+    	  </c:forEach>
+    	  ],
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'rank'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: '순위',
+          // fontColor: 'red'
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: "${maxtask}",
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            //return '$' + number_format(value);
+            return number_format(value) + '건';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        },
+        scaleLabel: {
+          display: true,
+          // labelString: 'TEST',
+          // fontColor: 'red'
+        },
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          //return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + '건';
+        }
+      }
+    },
+    title: {
+      display: true,
+      text: '분야별 분석'
+    },
+  }
+});
+
+</script>

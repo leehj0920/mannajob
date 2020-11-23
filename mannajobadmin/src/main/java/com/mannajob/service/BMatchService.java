@@ -39,5 +39,10 @@ public interface BMatchService {
 	
 	public int getPersonTotalCount(String m_id);
 	
+	public int getDailycount(int daygap);
+	
+	public List<BMatchVO> rankCorp();
+	public List<BMatchVO> rankLocation();
+	public List<BMatchVO> rankTask();
 
 }

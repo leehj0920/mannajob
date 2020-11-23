@@ -52,12 +52,5 @@
 
   <script src="/resources/js/chart/Chart.min.js"></script>
 
-
-  <script src="/resources/js/chart/chart-bar.js"></script>
-  
-
-  <script src="/resources/js/chart/chart-bar2.js"></script>
-
-
 </body>
 </html>

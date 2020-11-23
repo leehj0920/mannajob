@@ -139,7 +139,12 @@ public class MatchServiceImpl implements MatchService {
 		
 		return mapper.getListMatch(m_id,yearmonth);
 	}
+
+	@Override
+	public int getDailycount(int daygap) {
 	
+		return mapper.getDailycount(daygap);
+	}
 	
 	
 	
