@@ -33,7 +33,7 @@ public class ComplMapperTest {
 		Criteria cri = new Criteria();
 		mapper.getListWithPaging(cri, "B").forEach(list->log.info(list));
 	}
-    @Test
+    //@Test
 	public void getItemTest() {
 		log.info(mapper.getItem("haha"));
 	}
@@ -59,4 +59,9 @@ public class ComplMapperTest {
 	public void getTotalBTest() {
 		log.info(mapper.getTotalB("B"));
 	}
+//	@Test
+//	public void getcomplTest() {
+//		mapper.getList().forEach(compl -> log.info(compl));	
+//	}
+	  
 }

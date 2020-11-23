@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mannajob.domain.ComplVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.SearchVO;
 
 public interface ComplService {
 	
@@ -18,6 +19,15 @@ public interface ComplService {
 	
 	public void StateChange(ComplVO complVO);
 	
-	public int getTotalB(String b_category);
-
+	public int getTotalB(String b_category);		
+	
+	public List<ComplVO> getComplListWithPaging(Criteria cri, SearchVO search);
+	
+	public int getTotal(Criteria cri, SearchVO search);
+	
+	public void stopdate (String m_id);
+	
+	public void changestate(int c_num, String c_state);
+	
+	 
 }

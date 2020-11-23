@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.ComplVO;
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.SearchVO;
 import com.mannajob.mapper.ComplMapper;
 
 import lombok.AllArgsConstructor;
@@ -49,6 +50,35 @@ public class ComplServiceImpl implements ComplService{
 		return 0;
 	}
 	
+
+	@Override
+	public List<ComplVO> getComplListWithPaging(Criteria cri, SearchVO search) {
+		// TODO Auto-generated method stub
+		if(search.getSearchType()==null||"".equals(search.getSearchType())){
+			search.setSearchType("All");
+			
+		}
+		if(search.getKeyword()==null||"".equals(search.getKeyword())){
+			search.setKeyword("");
+		}
+		return mapper.getComplListWithPaging(cri, search);
+	}
+	@Override
+	public int getTotal(Criteria cri, SearchVO search) {
+		return mapper.getTotalCount(cri, search);
+	}
+	
+	@Override
+	public void stopdate(String m_id) {
+		// TODO Auto-generated method stub
+		mapper.stopdate(m_id);
+	}
+	@Override
+	public void changestate(int c_num, String c_state) {
+		// TODO Auto-generated method stub
+		mapper.changestate(c_num, c_state);
+	}
+
 	
 	
 
