@@ -67,7 +67,7 @@
 			select /*+ index_desc(BMatch pk_b) */
 			rownum rn, b_num, b_category, m_id, b_corp, b_task, b_price, b_location, b_stdate, b_endate, b_period, b_del, b_state, b_subject, b_wdate, b_contents 
 			from b_match
-			where (b_location like '%'||#{bMatchVO.b_location}||'%' and b_corp like '%'||#{bMatchVO.b_corp}||'%' and b_task like'%'||#{bMatchVO.b_task}||'%'and b_category like '%'||#{bMatchVO.b_category}||'%')and rownum <= #{cri.pageNum} * #{cri.amount} and b_del = 'N')
+			where (b_location like '%'||#{bMatchVO.b_location}||'%' and b_corp like '%'||#{bMatchVO.b_corp}||'%' and b_task like'%'||#{bMatchVO.b_task}||'%'and b_category like '%'||#{bMatchVO.b_category}||'%')and rownum <= #{cri.pageNum} * #{cri.amount} and b_del = 'N' ORDER BY b_num DESC)
 		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
 		]]>
 	</select>

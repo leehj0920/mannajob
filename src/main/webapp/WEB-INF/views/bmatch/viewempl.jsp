@@ -69,7 +69,7 @@
                           </td>
                           <!-- 프로필사진 -->
                           <td rowspan="5">
-                          <img src="../resources/certifi/${profileImage}" style="width: 250px;height:250px;">
+                          <img src="/resources/certifi/${profileImage}" style="width: 250px;height:250px;">
                           </td>
                         </tr>
                         <tr> 

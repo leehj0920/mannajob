@@ -16,7 +16,7 @@ import com.mannajob.domain.EmplVO;
 
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "D:\\WebProg\\mannajobservice\\src\\main\\webapp\\resources\\certifi\\"; //서버 절대경로로 바꾸기
+	private static final String filePath = "C:\\Users\\USER\\git\\mannajobservice\\src\\main\\webapp\\resources\\certifi\\"; //서버 절대경로로 바꾸기
 	
 	public List<Map<String, Object>> parseInsertFileInfo(EmplVO empl, 
 			MultipartHttpServletRequest mpRequest) throws Exception{

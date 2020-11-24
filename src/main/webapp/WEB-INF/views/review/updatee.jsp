@@ -62,6 +62,7 @@
 			self.close();
 		}
 	}
+	</script>
   
 </head>
 

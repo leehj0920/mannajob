@@ -73,12 +73,13 @@
                     <table class="table table-hover">
                       <colgroup>
                         <col style="width:6%"/>
-                        <col style="width:30%"/>
-                        <col style="width:14%"/>
+                        <col style="width:26%"/>
+                        <col style="width:12%"/>
                         <col style="width:10%"/>
                         <col style="width:12%"/>
-                        <col style="width:14%"/>
                         <col style="width:12%"/>
+                        <col style="width:14%"/>
+                        <col style="width:8%"/>
                       </colgroup>
                       <thead>
                         <tr>
@@ -89,6 +90,7 @@
                           <th> 분 &nbsp&nbsp 야</th>
                           <th> 기 &nbsp&nbsp 업 &nbsp&nbsp 명</th>
                           <th> 지 &nbsp&nbsp 역</th>
+                          <th> 상 &nbsp&nbsp 태</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -112,6 +114,15 @@
                           <td><c:out value= "${bmatch.b_corp}"/></td>
                           <!-- 지역 -->
                           <td><c:out value= "${bmatch.b_location}"/></td>
+                          <!-- 상태 -->
+						  <c:choose>
+						  	<c:when test="${bmatch.b_state eq 'A' || bmatch.b_endate < sysdate}">
+	                          <td>구인중</td>
+						  	</c:when>
+						  	<c:otherwise>
+						  	  <td>종료</td>
+						  	</c:otherwise>
+						  </c:choose>
                         </tr>
                         </c:forEach>
                     </tbody>

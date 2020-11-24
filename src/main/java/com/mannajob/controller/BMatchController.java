@@ -66,7 +66,7 @@ public class BMatchController {
 		if(bMatchVO.getB_category().equals("A")){
 			EmplVO emplVO = profileService.getEmplProfile(bMatchVO.getM_id());
 			model.addAttribute("empl", emplVO);
-			model.addAttribute("profileImage",adminService.emplImage(emplVO.getE_num()));
+			model.addAttribute("profileImage", adminService.emplApply(emplVO.getE_num()).getStored_file_name());
 			model.addAttribute("countM", profileService.totalMat(bMatchVO.getM_id()));
 			model.addAttribute("countG", profileService.countG(bMatchVO.getM_id()));
 			return "/bmatch/viewempl";

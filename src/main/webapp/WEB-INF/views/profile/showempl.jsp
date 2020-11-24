@@ -60,7 +60,7 @@
                         <div class="post-image">
                           <p class="line_9"></p>
                           <!--현직자 이미지 사진 -->
-                          <img src="../resources/certifi/${image}"  style="width:180px; height:180px;"/>
+                          <img src="/resources/certifi/${image}"  style="width:180px; height:180px;"/>
                         </div>
                     </div>
 
