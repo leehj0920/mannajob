@@ -120,14 +120,14 @@ var myBarChart = new Chart(ctx, {
       backgroundColor: "#636161",
       hoverBackgroundColor: "#009c50",
       borderColor: "#636161",
-      data: ["${match1}", "${match2}", "${match3}", "${match4}", "${match5}", "${match6}", "${match7}"]
+      data: ["${bmatch1}", "${bmatch2}", "${bmatch3}", "${bmatch4}", "${bmatch5}", "${bmatch6}", "${bmatch7}"]
     },
     {
       label: "매칭성사건수",
       backgroundColor: "#f84002",
       hoverBackgroundColor: "#f7ba53",
       borderColor: "#f84002",
-      data: ["${bmatch1}", "${bmatch2}", "${bmatch3}", "${bmatch4}", "${bmatch5}", "${bmatch6}", "${bmatch7}"]
+      data: ["${match1}", "${match2}", "${match3}", "${match4}", "${match5}", "${match6}", "${match7}"]
     }],
   },
   options: {
