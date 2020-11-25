@@ -1,7 +1,11 @@
 package com.mannajob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.BMatchVO;
@@ -34,5 +38,19 @@ public class MainController {
 		model.addAttribute("empl_bmatch",bMatchService.getListWithPaging(cri, bMatchVO));
 		bMatchVO.setB_category("B");
 		model.addAttribute("mem_bmatch",bMatchService.getListWithPaging(cri, bMatchVO));
+	}
+	
+	@GetMapping("/showempl")
+	public String showempl(Model model, EmplVO emplVO, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		model.addAttribute("m_id",emplVO.getM_id());
+		model.addAttribute("empl",profileService.getEmplProfile2(emplVO.getM_id()));
+		model.addAttribute("image",profileService.getEmplProfile2(emplVO.getM_id()).getFileVO().getStored_file_name());
+		model.addAttribute("review", profileService.searchReview(emplVO.getM_id()));
+		model.addAttribute("good", profileService.countG(emplVO.getM_id()));
+		model.addAttribute("count", profileService.totalMat(emplVO.getM_id()));
+		
+		return "/showempl";
 	}
 }

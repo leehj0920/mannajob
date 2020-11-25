@@ -32,7 +32,7 @@
               <c:forEach var="g" items="${good}" varStatus="status">
               <div class="span2" style="padding-left: 30px;">
                 <div class="box aligncenter">
-                   <a href="/profile/showempl?m_id=${g.m_id}"><img src="../resources/certifi/${g.stored_file_name}" style="width:200px; height:200px"></a>
+                   <a href="/showempl?m_id=${g.m_id}"><img src="../resources/certifi/${g.stored_file_name}" style="width:200px; height:200px"></a>
                    <!-- <a href="#"><img src="img/works/thumbs/image-01.jpg" width="200px"></a> -->
                   <div class="text" >
                     <p><strong>${status.count}. ${g.m_name}</strong></p>
