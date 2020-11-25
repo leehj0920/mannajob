@@ -1,5 +1,6 @@
 package com.mannajob.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,8 @@ public class ChartController {
 			if(bmatch>max) {
 				max= bmatch;
 			}
+			Date date = bmatchservice.getDate(i);
+			model.addAttribute("date"+(i+4), date);
 			model.addAttribute("match"+(i+4),match);
 			model.addAttribute("bmatch"+(i+4),bmatch);
 		}
@@ -48,17 +51,22 @@ public class ChartController {
 		List<BMatchVO> corp= bmatchservice.rankCorp();
 		List<BMatchVO> location = bmatchservice.rankLocation();
 		List<BMatchVO> task = bmatchservice.rankTask();
-		for(int i=0; i<5; i++) {
+		for(int i=0; i<corp.size(); i++) {
 			 if(max_corp < corp.get(i).getCnt()) {
 				 max_corp = corp.get(i).getCnt();
 			 }
+		}
+		 for(int i=0; i<location.size(); i++) {
 			 if(max_location < location.get(i).getCnt()) {
 				 max_location = location.get(i).getCnt();
 			 }
+		 }
+		 for(int i=0; i<task.size(); i++) {
 			 if(max_task < task.get(i).getCnt()) {
 				 max_task = task.get(i).getCnt();
 			 }
-		}
+		 }
+		
 		model.addAttribute("maxcorp", max_corp);
 		model.addAttribute("maxlocation", max_location);
 		model.addAttribute("maxtask", max_task);

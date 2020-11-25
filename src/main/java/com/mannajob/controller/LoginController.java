@@ -137,4 +137,8 @@ public class LoginController {
 	    return "redirect:/main";
 	} 
 	
+	@RequestMapping("/myreset")
+	public void myreset() {
+		
+	}
 }

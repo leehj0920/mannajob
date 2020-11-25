@@ -235,7 +235,7 @@ var ctx = document.getElementById("locationChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["1위", "2위", "3위", "4위", "5위"],
+    labels: ["1위", "2위", "3위", "4위", "5위" ],
     datasets: [{
       label: "기업별분석",
       backgroundColor: "#f84002",

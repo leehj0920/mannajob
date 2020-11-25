@@ -131,6 +131,10 @@
 		select count(b_num) from b_match where b_wdate like (sysdate + #{daygap}) and b_state!='C' and b_del='N'
 	</select>
 	
+	<select id="getDate" resultType="Date">
+		SELECT sysdate + ${i} FROM dual
+	</select>
+	
 	<select id = "rankCorp" resultType="com.mannajob.domain.BMatchVO">
 	<![CDATA[
 		select * from (

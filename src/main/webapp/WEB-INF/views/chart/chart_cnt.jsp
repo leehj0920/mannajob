@@ -108,7 +108,13 @@ console.log(date.getMonth()+"."+date.getDate()+2);
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["11.1", "11.2", "11.3", "11.4", "11.5", "11.6", "11.7"],
+    labels: ["<fmt:formatDate value="${date1}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date2}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date3}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date4}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date5}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date6}" pattern="yy-MM-dd"/>", 
+    	"<fmt:formatDate value="${date7}" pattern="yy-MM-dd"/>"],
     datasets: [{
       label: "매칭신청건수",
       backgroundColor: "#636161",

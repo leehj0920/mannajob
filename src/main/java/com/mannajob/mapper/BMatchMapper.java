@@ -1,5 +1,6 @@
 package com.mannajob.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -51,4 +52,5 @@ public interface BMatchMapper {
 	
 	public int countG(@Param("m_id") String m_id);
 	
+	public Date getDate(@Param("i") int i);
 }

@@ -43,8 +43,8 @@
 				<input type="hidden" name="b_num" value="${bMatch.b_num}">
 				<input type="hidden" name="b_subject" value="${bMatch.b_subject}">
 				<input type="hidden" name="b_category" value="${bMatch.b_category}">
-				<input type="hidden" name="e_corp" value="${empl.e_corp}">
-				<input type="hidden" name="e_task" value="${empl.e_task}">
+				<input type="hidden" name="b_corp" value="${empl.e_corp}">
+				<input type="hidden" name="b_task" value="${empl.e_task}">
                 <div class="row">
                   <div class="post-heading">
                     <p class="line_9"></p>

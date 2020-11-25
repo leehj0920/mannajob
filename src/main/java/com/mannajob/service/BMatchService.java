@@ -1,5 +1,6 @@
 package com.mannajob.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.mannajob.domain.BMatchVO;
@@ -45,4 +46,5 @@ public interface BMatchService {
 	public List<BMatchVO> rankLocation();
 	public List<BMatchVO> rankTask();
 
+	public Date getDate(int i);
 }

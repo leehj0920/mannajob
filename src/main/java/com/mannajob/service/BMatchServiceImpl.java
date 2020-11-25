@@ -1,5 +1,6 @@
 package com.mannajob.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -211,10 +212,10 @@ public class BMatchServiceImpl implements BMatchService{
 		return mapper.rankTask();
 	}
 	
-	
-
-	
-	
-	
+	@Override
+	public Date getDate(int i) {
+		return mapper.getDate(i);
+	}
+		
 
 }
