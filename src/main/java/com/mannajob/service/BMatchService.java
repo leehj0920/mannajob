@@ -47,4 +47,6 @@ public interface BMatchService {
 	public List<BMatchVO> rankTask();
 
 	public Date getDate(int i);
+	
+	public int sumprice(int num);
 }

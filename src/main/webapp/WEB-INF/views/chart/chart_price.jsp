@@ -11,7 +11,7 @@
             <ul class="breadcrumb">
               <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="#">통계</a><i class="icon-angle-right"></i></li>
-              <li class="active">매칭 성사 건수 통계</li>
+              <li class="active">매칭 성사 금액 통계</li>
             </ul>
           </div>
         </div>
@@ -43,17 +43,17 @@
                   <div class="post-heading">
                     <p class="line_9">
                     <p class="line_9">
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong></strong>매칭 성사 건수 통계</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong></strong>매칭 성사 금액 통계</h3>
                     <p class="line_9">
                   </div>
 
-                  <!-- 매칭 성사 건수 통계 차트 Start -->
+                  <!-- 매칭 성사 금액 통계 차트 Start -->
                   <div class="span8">
                     <div class="chart-bar">
-                      <canvas id="myBarChart"></canvas>
+                      <canvas id="myBarChart2"></canvas>
                     </div>
                   </div>
-                  <!-- 매칭 성사 건수 통계 차트 End -->
+                  <!-- 매칭 성사 금액 통계 차트 End -->
 
               </form>
             </article>
@@ -98,7 +98,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 매칭 성사 건수 통계
-var ctx = document.getElementById("myBarChart");
+var ctx = document.getElementById("myBarChart2");
 var date = new Date();
 console.log(date.getMonth()+"."+date.getDate()-3);
 console.log(date.getMonth()+"."+date.getDate()-2);
@@ -116,19 +116,19 @@ var myBarChart = new Chart(ctx, {
     	"<fmt:formatDate value="${date5}" pattern="yy-MM-dd"/>", 
     	"<fmt:formatDate value="${date6}" pattern="yy-MM-dd"/>", 
     	"<fmt:formatDate value="${date7}" pattern="yy-MM-dd"/>"],
-    datasets: [{
+    datasets: [/* {
       label: "매칭신청건수",
       backgroundColor: "#636161",
       hoverBackgroundColor: "#009c50",
       borderColor: "#636161",
       data: ["${bmatch1}", "${bmatch2}", "${bmatch3}", "${bmatch4}", "${bmatch5}", "${bmatch6}", "${bmatch7}"]
-    },
+    }, */
     {
-      label: "매칭성사건수",
+      label: "매칭 금액",
       backgroundColor: "#f84002",
       hoverBackgroundColor: "#f7ba53",
       borderColor: "#f84002",
-      data: ["${match1}", "${match2}", "${match3}", "${match4}", "${match5}", "${match6}", "${match7}"]
+      data: ["${price1}", "${price2}", "${price3}", "${price4}", "${price5}", "${price6}", "${price7}"]
     }],
   },
   options: {
@@ -164,12 +164,13 @@ var myBarChart = new Chart(ctx, {
         ticks: {
           min: 0,
           max: "${max}",
-          maxTicksLimit: 5,
+          stepSize: 20000,
+          maxTicksLimit: 20000,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
             //return '$' + number_format(value);
-            return number_format(value) + '건';
+            return number_format(value) + '원';
           }
         },
         gridLines: {
@@ -181,7 +182,7 @@ var myBarChart = new Chart(ctx, {
         },
         scaleLabel: {
           display: true,
-          labelString: '건수',
+          labelString: '원',
           // fontColor: 'red'
         },
       }],
@@ -211,7 +212,7 @@ var myBarChart = new Chart(ctx, {
     },
     title: {
       display: true,
-      text: '매칭 성사 건수 통계'
+      text: '매칭 성사 금액 통계'
     },
   }
 });

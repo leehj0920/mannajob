@@ -62,7 +62,7 @@
 	</filter-mapping>
 	
 	<!-- Error페이지 -->	
-	<error-page>
+	<!-- <error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/Error.jsp</location>
 	</error-page>
@@ -73,5 +73,5 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/Error.jsp</location>
-	</error-page>
+	</error-page> -->
 </web-app>

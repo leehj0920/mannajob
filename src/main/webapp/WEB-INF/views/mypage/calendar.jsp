@@ -118,14 +118,14 @@ function getdate(){
 	daysch="<p style='margin-top:20px'></p>";
 	<c:forEach var = "sch" items="${list1}">
 		<c:if test="${i eq fn:substring(sch.mat_stdate,8,10)}">
-			daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch.b_category}"+"&m_id="+"${sch.m_id}"+"&b_num="+"${sch.b_num}' class='btn btn-inverse i_btn2' >" + "${sch.m_id}"+"&nbsp&nbsp"+"${sch.mat_hour}"+"</a>";
+			daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch.b_category}"+"&m_id="+"${sch.w_m_id}"+"&b_num="+"${sch.b_num}' class='btn btn-inverse i_btn2' >" + "${sch.m_id}"+"&nbsp&nbsp"+"${sch.mat_hour}"+"</a>";
 		</c:if>
 	</c:forEach>
 	<c:forEach var = "sch2" items="${list2}">
-	<c:if test="${i eq fn:substring(sch2.mat_stdate,8,10)}">
-		daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch2.b_category}"+"&m_id="+"${sch2.m_id}"+"&b_num="+"${sch2.b_num}' class='btn btn-inverse i_btn2' >" + "${sch2.m_id}"+"&nbsp&nbsp"+"${sch2.mat_hour}"+"</a>";
-	</c:if>
-</c:forEach>
+		<c:if test="${i eq fn:substring(sch2.mat_stdate,8,10)}">
+			daysch += "<p class='center'><a href='/bmatch/view?b_category="+"${sch2.b_category}"+"&m_id="+"${sch2.m_id}"+"&b_num="+"${sch2.b_num}' class='btn btn-inverse i_btn2' >" + "${sch2.m_id}"+"&nbsp&nbsp"+"${sch2.mat_hour}"+"</a>";
+		</c:if>
+	</c:forEach>
 	map.set("${i}",daysch);
 </c:forEach>
 }

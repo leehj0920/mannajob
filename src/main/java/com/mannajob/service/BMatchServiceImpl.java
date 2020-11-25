@@ -216,6 +216,12 @@ public class BMatchServiceImpl implements BMatchService{
 	public Date getDate(int i) {
 		return mapper.getDate(i);
 	}
+
+	@Override
+	public int sumprice(int num) {
+		return mapper.sumprice(num);
+	}
 		
+	
 
 }

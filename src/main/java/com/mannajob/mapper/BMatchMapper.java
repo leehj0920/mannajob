@@ -53,4 +53,6 @@ public interface BMatchMapper {
 	public int countG(@Param("m_id") String m_id);
 	
 	public Date getDate(@Param("i") int i);
+	
+	public int sumprice(@Param("num") int num);
 }

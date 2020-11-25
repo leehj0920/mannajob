@@ -157,6 +157,10 @@
 		]]>
 	</select>
 	
+	<select id="sumprice" resultType="int">
+		SELECT NVL(SUM(b.b_price), 0) FROM b_match b, match m WHERE b.b_num = m.b_num AND b.b_state = 'B' AND m.mat_state = 'C' AND TO_CHAR(m.mat_okdate, 'YY/MM/DD') = TO_CHAR(sysdate + (${num}), 'YY/MM/DD') 
+	</select>
+	
 	<!-- 총 매칭 건수 -->
 	<select id="totalMat" resultType="int">
 		SELECT count(b.b_num) as countM
