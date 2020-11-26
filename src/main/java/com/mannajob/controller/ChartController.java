@@ -43,11 +43,48 @@ public class ChartController {
 		log.info(model);
 	}
 	
+	@GetMapping("/chart_cnt2")
+	public void chart_cnt2(Model model) {
+		int max=0;
+		for(int i=-6; i<=0; i++) {
+			int match = matchservice.getDailycount2(i);
+			if(match > max) {
+				max = match;
+			}
+			int bmatch = bmatchservice.getDailycount2(i);
+			if(bmatch>max) {
+				max= bmatch;
+			}
+			Date date = bmatchservice.getDate(i);
+			model.addAttribute("date"+(i+7), date);
+			model.addAttribute("match"+(i+7),match);
+			model.addAttribute("bmatch"+(i+7),bmatch);
+		}
+		model.addAttribute("max", max);
+		log.info(model);
+	}
+	
 	@GetMapping("/chart_price")
 	public void chart_price(Model model) {
 		int max=0;
 		for(int i=-6; i<=0; i++) {
 			int price = bmatchservice.sumprice(i);
+			if(price>max) {
+				max= price;
+			}
+			Date date = bmatchservice.getDate(i);
+			model.addAttribute("date"+(i+7), date);
+			model.addAttribute("price"+(i+7), price);
+		}
+		model.addAttribute("max", max);
+		log.info(model);
+	}
+	
+	@GetMapping("/chart_price2")
+	public void chart_price2(Model model) {
+		int max=0;
+		for(int i=-6; i<=0; i++) {
+			int price = bmatchservice.sumprice2(i);
 			if(price>max) {
 				max= price;
 			}

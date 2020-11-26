@@ -166,4 +166,9 @@
    	<select id="getDailycount" resultType="int">
 		select count(mat_num) from match where mat_okdate like (sysdate + ${daygap}) and mat_state='C'
 	</select>
+   	<select id="getDailycount2" resultType="int">
+		<![CDATA[
+		select count(mat_num) from match where (TO_CHAR(mat_okdate, 'YY/MM/DD')) <= (TO_CHAR(sysdate + #{daygap}, 'YY/MM/DD')) and mat_state='C'
+		]]>
+	</select>
 </mapper>

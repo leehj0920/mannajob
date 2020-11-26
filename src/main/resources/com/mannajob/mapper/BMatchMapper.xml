@@ -130,6 +130,12 @@
 	<select id="getDailycount" resultType="int">
 		select count(b_num) from b_match where b_wdate like (sysdate + #{daygap}) and b_state!='C' and b_del='N'
 	</select>
+
+	<select id="getDailycount2" resultType="int">
+		<![CDATA[
+		select count(b_num) from b_match where (TO_CHAR(b_wdate, 'YY/MM/DD')) <= (TO_CHAR(sysdate + #{daygap}, 'YY/MM/DD')) and b_state!='C' and b_del='N'
+		]]>
+	</select>
 	
 	<select id="getDate" resultType="Date">
 		SELECT sysdate + ${i} FROM dual
@@ -159,6 +165,12 @@
 	
 	<select id="sumprice" resultType="int">
 		SELECT NVL(SUM(b.b_price), 0) FROM b_match b, match m WHERE b.b_num = m.b_num AND b.b_state = 'B' AND m.mat_state = 'C' AND TO_CHAR(m.mat_okdate, 'YY/MM/DD') = TO_CHAR(sysdate + (${num}), 'YY/MM/DD') 
+	</select>
+	
+	<select id="sumprice2" resultType="int">
+		<![CDATA[
+		SELECT NVL(SUM(b.b_price), 0) FROM b_match b, match m WHERE b.b_num = m.b_num AND b.b_state = 'B' AND m.mat_state = 'C' AND TO_CHAR(m.mat_okdate, 'YY/MM/DD') <= TO_CHAR(sysdate + (${num}), 'YY/MM/DD')
+		]]> 
 	</select>
 	
 	<!-- 총 매칭 건수 -->

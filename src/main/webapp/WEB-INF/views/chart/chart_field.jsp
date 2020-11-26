@@ -29,6 +29,7 @@
 
                 <ul class="cat">
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt">매칭 성사 건수 통계</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt2">매칭 성사 건수 통계(누적)</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_price">매칭 성사 금액 통계</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_field">분야별 매칭 분석</a></li>
                 </ul>
@@ -54,8 +55,8 @@
                         <canvas id="companyChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">선호기업 순위별 리스트
-                        <c:forEach var="item" items="${rankCorp}">
-                        <p class="left">${item.b_corp}</p>
+                        <c:forEach var="item" items="${rankCorp}" varStatus="status">
+                        <p class="left">${status.count}. ${item.b_corp}</p>
 						</c:forEach>                        
                     </div>
                   </div>
@@ -66,8 +67,8 @@
                         <canvas id="locationChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">희망지역 순위별 리스트
-                        <c:forEach var="item" items="${rankLocation}">
-                        <p class="left">${item.b_location}</p>
+                        <c:forEach var="item" items="${rankLocation}" varStatus="status">
+                        <p class="left">${status.count}. ${item.b_location}</p>
 						</c:forEach>                    
                     </div>
                   </div>
@@ -78,8 +79,8 @@
                         <canvas id="fieldChart"></canvas>
                       </div>
                         <p class="widgetheading" style="width: 200px;">희망직무 순위별 리스트
-                       	<c:forEach var="item" items="${rankTask}">
-                        <p class="left">${item.b_task}</p>
+                       	<c:forEach var="item" items="${rankTask}" varStatus="status">
+                        <p class="left">${status.count}. ${item.b_task}</p>
 						</c:forEach>                    
                     </div>
                   </div>
@@ -238,7 +239,7 @@ var myBarChart = new Chart(ctx, {
   data: {
     labels: ["1위", "2위", "3위", "4위", "5위" ],
     datasets: [{
-      label: "기업별분석",
+      label: "지역별분석",
       backgroundColor: "#f84002",
       hoverBackgroundColor: "#f7ba53",
       borderColor: "#f84002",
@@ -344,7 +345,7 @@ var myBarChart = new Chart(ctx, {
   data: {
     labels: ["1위", "2위", "3위", "4위", "5위"],
     datasets: [{
-      label: "기업별분석",
+      label: "분야별분석",
       backgroundColor: "#f84002",
       hoverBackgroundColor: "#f7ba53",
       borderColor: "#f84002",

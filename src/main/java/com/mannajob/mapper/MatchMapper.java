@@ -64,8 +64,13 @@ public interface MatchMapper {
 	
 	// 일정관리
 	public List<MyScheduleVO> getListBMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
+	
 	public List<MyScheduleVO> getListMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
+//	일정관리 끝
 	
-	
+//	통계 건수
 	public int getDailycount(int daygap);
+	
+	public int getDailycount2(int daygap);
+//	통계 건수 끝
 }

@@ -43,16 +43,27 @@ public interface BMatchMapper {
 	public void cancel(int b_num);
 	
 	public int getPersonTotalCount(String m_id);
-	
+//	통계 시작
 	public int getDailycount(int daygap);
+	
+	public int getDailycount2(int daygap);
+	
 	public List<BMatchVO> rankCorp();
+	
 	public List<BMatchVO> rankLocation();
+	
 	public List<BMatchVO> rankTask();
+
+	public Date getDate(@Param("i") int i);
+
+	public int sumprice(@Param("num") int num);
+
+	public int sumprice2(@Param("num") int num);
+//	통계 끝
+	
+//	좋아요, 총 매칭 수 구하기
 	public int totalMat(@Param("m_id") String m_id);
 	
 	public int countG(@Param("m_id") String m_id);
-	
-	public Date getDate(@Param("i") int i);
-	
-	public int sumprice(@Param("num") int num);
+//	끝
 }

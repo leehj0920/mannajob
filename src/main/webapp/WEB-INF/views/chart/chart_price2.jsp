@@ -11,7 +11,7 @@
             <ul class="breadcrumb">
               <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="#">통계</a><i class="icon-angle-right"></i></li>
-              <li class="active">매칭 성사 금액 통계</li>
+              <li class="active">매칭 성사 금액 통계(누적)</li>
             </ul>
           </div>
         </div>
@@ -31,6 +31,7 @@
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt">매칭 성사 건수 통계</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt2">매칭 성사 건수 통계(누적)</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_price">매칭 성사 금액 통계</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/chart/chart_price2">매칭 성사 금액 통계(누적)</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_field">분야별 매칭 분석</a></li>
                 </ul>
               </div>
@@ -44,7 +45,7 @@
                   <div class="post-heading">
                     <p class="line_9">
                     <p class="line_9">
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong></strong>매칭 성사 금액 통계</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp<strong></strong>매칭 성사 금액 통계(누적)</h3>
                     <p class="line_9">
                   </div>
 

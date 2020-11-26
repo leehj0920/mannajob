@@ -29,6 +29,7 @@
 
                 <ul class="cat">
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt">매칭 성사 건수 통계</a></li>
+                  <li><i class="icon-angle-right"></i><a href="/chart/chart_cnt2">매칭 성사 건수 통계(누적)</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_price">매칭 성사 금액 통계</a></li>
                   <li><i class="icon-angle-right"></i><a href="/chart/chart_field">분야별 매칭 분석</a></li>
                 </ul>
