@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.BmatchProfileVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
@@ -222,6 +223,28 @@ public class BMatchServiceImpl implements BMatchService{
 		return mapper.sumprice(num);
 	}
 		
-	
+	@Override
+	public List<BmatchProfileVO> getListProfile(BmatchProfileVO bmatchProfileVO) {
+		
+		return mapper.getListProfile(bmatchProfileVO.getB_category());
+	}
+
+
+
+	@Override
+	public List<BmatchProfileVO> getListProfileSearch(BmatchProfileVO bmatchProfileVO) {
+		if(bmatchProfileVO.getB_corp()==null||"".equals(bmatchProfileVO.getB_corp())){
+			bmatchProfileVO.setB_corp("");
+		}
+		return mapper.getListProfileSearch(bmatchProfileVO.getB_category(), bmatchProfileVO.getB_corp());
+	}
+
+
+
+	@Override
+	public List<BMatchVO> getRestBmatchList(String m_id) {
+		
+		return mapper.getRestBmatchList(m_id);
+	}
 
 }

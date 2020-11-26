@@ -5,6 +5,14 @@
 		select * from b_match where  b_category like '%'||#{b_category}||'%' and b_del = 'N' order by b_num desc
 	</select>
 	
+	<select id="getListProfile" resultType="com.mannajob.domain.BmatchProfileVO">
+		select b.* , t.profileImage from b_match b left join (select stored_file_name profileImage,m_id from empl e,m_file f where f.e_num = e.e_num and e.e_del='N' and f.f_category='I') t on b.m_id = t.m_id where  b_category like '%'||#{b_category}||'%' and b_del = 'N' order by b_num desc
+	</select>
+	
+	<select id="getListProfileSearch" resultType="com.mannajob.domain.BmatchProfileVO">
+		select b.* , t.profileImage from b_match b left join (select stored_file_name profileImage,m_id from empl e,m_file f where f.e_num = e.e_num and e.e_del='N' and f.f_category='I') t on b.m_id = t.m_id where  b_category like '%'||#{b_category}||'%' and b_corp like '%'||#{b_corp}||'%' and b_del = 'N' order by b_num desc
+	</select>
+	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.BMatchVO">
 		<![CDATA[
 		select * from (
@@ -171,6 +179,11 @@
 	<!-- 좋아요 수 -->
 	<select id="countG" resultType="int">
 		SELECT count(r_good) FROM review WHERE r_mat_m_id = #{m_id} and r_good = 'G'
+	</select>
+	
+	<select id = "getRestBmatchList" resultType="com.mannajob.domain.BMatchVO">
+		select * from b_match where m_id = #{m_id}
+	
 	</select>
 	
 </mapper>

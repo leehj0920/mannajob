@@ -6,6 +6,13 @@
 				,(select count(qs.q_num) from qna_sub qs where q.q_num = qs.q_num and qs.qs_del = 'N') as reply_chk from qna q where q_del = 'N' order by q.q_num desc
 	</select>
 	
+	<select id="getListSearch" resultType="com.mannajob.domain.QnaRestVO">
+		select q.q_num, q_category, m_id, q_contents, 
+		to_char(q_udate,'yyyy-mm-dd') q_udate, q_subject ,qs_contents,
+		to_char(qs_udate,'yyyy-mm-dd') qs_udate
+		 from qna q left join (select q_num, qs_contents, qs_udate from qna_sub qs where qs.qs_del = 'N') qs on q.q_num = qs.q_num where q_subject like '%'||#{q_subject}||'%' and  q_del = 'N' order by q.q_num desc
+	</select>
+	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.QnaVO">
 		<![CDATA[
 		select q_num, q_category, m_id, q_contents, q_wdate, q_udate, q_del, q_subject, reply_chk

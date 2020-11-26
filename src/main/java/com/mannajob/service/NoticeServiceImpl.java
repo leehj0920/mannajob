@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.NoticeRestVO;
 import com.mannajob.domain.NoticeVO;
 import com.mannajob.mapper.NoticeMapper;
 
@@ -26,6 +27,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return mapper.getList();
 	}
 
+	@Override
+	public List<NoticeRestVO> getListSearch(NoticeVO noticeVO) {
+		if(noticeVO.getN_subject()==null||"".equals(noticeVO.getN_subject())){
+			noticeVO.setN_subject("");
+		}
+		return mapper.getListSearch(noticeVO.getN_subject());
+	}
+	
 	@Override
 	public List<NoticeVO> getList(Criteria cri) {
 		log.info("getList..................");

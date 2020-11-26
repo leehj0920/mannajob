@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.ReviewVO;
@@ -46,4 +47,6 @@ public interface ProfileMapper {
 	public int countG(@Param("m_id") String m_id);
 	
 	public int totalMat(@Param("m_id") String m_id);
+	
+	public EmplFileVO getRestEmpl(String m_id);
 }

@@ -3,10 +3,13 @@ package com.mannajob.service;
 import java.util.List;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.QnaRestVO;
 import com.mannajob.domain.QnaVO;
 
 public interface QnaService {
 	public List<QnaVO> getList();
+	
+	public List<QnaRestVO> getListSearch(QnaRestVO qnaRestVO);
 	
 	public List<QnaVO> getList(Criteria cri);
 	

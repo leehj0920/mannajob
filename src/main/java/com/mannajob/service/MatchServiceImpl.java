@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mannajob.domain.BMatchReviewVO;
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.CalendarVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.MatchVO;
@@ -146,6 +147,23 @@ public class MatchServiceImpl implements MatchService {
 		return mapper.getDailycount(daygap);
 	}
 	
+	@Override
+	public List<MatchVO> getRestMatchList(String m_id) {
+		
+		return mapper.getRestMatchList(m_id);
+	}
+
+	@Override
+	public List<CalendarVO> getMonthMatch(String m_id, String yearmonth) {
+		
+		return mapper.getMonthMatch(m_id, yearmonth);
+	}
+
+	@Override
+	public List<CalendarVO> getMonthBmatch(String m_id, String yearmonth) {
+		// TODO Auto-generated method stub
+		return mapper.getMonthBmatch(m_id, yearmonth);
+	}
 	
 	
 }

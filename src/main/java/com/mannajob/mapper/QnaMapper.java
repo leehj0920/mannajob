@@ -3,10 +3,13 @@ package com.mannajob.mapper;
 import java.util.List;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.QnaRestVO;
 import com.mannajob.domain.QnaVO;
 
 public interface QnaMapper {
 	public List<QnaVO> getList();
+	
+	public List<QnaRestVO> getListSearch(String q_subject);
 	
 	public List<QnaVO> getListWithPaging(Criteria cri);
 	
