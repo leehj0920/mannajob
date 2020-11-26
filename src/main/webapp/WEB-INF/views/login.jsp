@@ -73,8 +73,10 @@
           </div>
           
             <p class="aligncenter margintop20">
-              비밀번호를 잊으셨나요? <a href="/myreset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Reset</a>
+              비밀번호를 잊으셨나요? <a href="/myreset" onClick="window.open(this.href, '비밀번호 찾기', 'width=400, height=350'); return false">Reset</a>
             </p>
+          </div>
+          </div>
           </div>
         </form>
       </div>

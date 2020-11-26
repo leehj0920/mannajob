@@ -21,6 +21,7 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class BMatchServiceImpl implements BMatchService{
+
 	@Setter(onMethod_=@Autowired)
 	private BMatchMapper mapper;
 	
@@ -222,7 +223,6 @@ public class BMatchServiceImpl implements BMatchService{
 	public int sumprice(int num) {
 		return mapper.sumprice(num);
 	}
-		
 	@Override
 	public List<BmatchProfileVO> getListProfile(BmatchProfileVO bmatchProfileVO) {
 		
@@ -246,5 +246,16 @@ public class BMatchServiceImpl implements BMatchService{
 		
 		return mapper.getRestBmatchList(m_id);
 	}
+	@Override
+	public int sumprice2(int num) {
+		return mapper.sumprice2(num);
+	}
+	
+	@Override
+	public int getDailycount2(int daygap) {
+		return mapper.getDailycount2(daygap);
+	}
+
+	
 
 }

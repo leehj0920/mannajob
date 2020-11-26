@@ -44,7 +44,9 @@ public interface BMatchService {
 	
 	public int getPersonTotalCount(String m_id);
 	
+//	통계
 	public int getDailycount(int daygap);
+	public int getDailycount2(int daygap);
 	
 	public List<BMatchVO> rankCorp();
 	public List<BMatchVO> rankLocation();
@@ -53,6 +55,9 @@ public interface BMatchService {
 	public Date getDate(int i);
 	
 	public int sumprice(int num);
+
+	public int sumprice2(int num);
+//	끝
 	
 	public List<BMatchVO> getRestBmatchList(String m_id);
 }

@@ -76,4 +76,9 @@
 		WHERE <![CDATA[rownum <= 5]]>
 	</select>
 	
+	<!-- 비밀번호 재설정 정보 확인 -->
+	<select id="passwdChk" resultType="int">
+		SELECT count(m_id) FROM member WHERE m_id = #{m_id} AND m_email = #{m_email}
+	</select>
+	
 </mapper>

@@ -146,6 +146,11 @@ public class MatchServiceImpl implements MatchService {
 	
 		return mapper.getDailycount(daygap);
 	}
+
+	@Override
+	public int getDailycount2(int daygap) {
+		return mapper.getDailycount2(daygap);
+	}
 	
 	@Override
 	public List<MatchVO> getRestMatchList(String m_id) {

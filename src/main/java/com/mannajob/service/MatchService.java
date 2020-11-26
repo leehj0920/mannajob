@@ -52,6 +52,7 @@ public interface MatchService {
 	public List<MyScheduleVO> getListMatch(String m_id,String yearmonth);
 	
 	public int getDailycount(int daygap);
+	public int getDailycount2(int daygap);
 	public List<MatchVO> getRestMatchList(String m_id);
 	
 	public List<CalendarVO> getMonthMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);

@@ -166,6 +166,11 @@
    	<select id="getDailycount" resultType="int">
 		select count(mat_num) from match where mat_okdate like (sysdate + ${daygap}) and mat_state='C'
 	</select>
+   	<select id="getDailycount2" resultType="int">
+		<![CDATA[
+		select count(mat_num) from match where (TO_CHAR(mat_okdate, 'YY/MM/DD')) <= (TO_CHAR(sysdate + #{daygap}, 'YY/MM/DD')) and mat_state='C'
+		]]>
+	</select>
 	
 	<select id="getRestMatchList" resultType="com.mannajob.domain.MatchVO">
 		select mat_num, m.b_num, mat_hour, mat_stdate, mat_wdate, mat_okdate, mat_state, b_subject
