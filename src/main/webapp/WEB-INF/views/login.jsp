@@ -6,7 +6,7 @@
 
 
     
-    <section id="" style="min-height:680px">
+    <section id="" style="min-height:770px">
       <div class="container">
         
         <!-- divider      -->
