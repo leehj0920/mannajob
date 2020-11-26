@@ -3,10 +3,13 @@ package com.mannajob.mapper;
 import java.util.List;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.NoticeRestVO;
 import com.mannajob.domain.NoticeVO;
 
 public interface NoticeMapper {
 	public List<NoticeVO> getList();
+	
+	public List<NoticeRestVO> getListSearch(String n_subject);
 	
 	public List<NoticeVO> getListWithPaging(Criteria cri);
 	

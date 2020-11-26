@@ -2,8 +2,11 @@ package com.mannajob.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mannajob.domain.BMatchReviewVO;
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.CalendarVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.MatchVO;
@@ -50,4 +53,9 @@ public interface MatchService {
 	
 	public int getDailycount(int daygap);
 	public int getDailycount2(int daygap);
+	public List<MatchVO> getRestMatchList(String m_id);
+	
+	public List<CalendarVO> getMonthMatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
+	
+	public List<CalendarVO> getMonthBmatch(@Param("m_id")String m_id,@Param("yearmonth") String yearmonth);
 }

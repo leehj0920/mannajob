@@ -171,4 +171,21 @@
 		select count(mat_num) from match where (TO_CHAR(mat_okdate, 'YY/MM/DD')) <= (TO_CHAR(sysdate + #{daygap}, 'YY/MM/DD')) and mat_state='C'
 		]]>
 	</select>
+	
+	<select id="getRestMatchList" resultType="com.mannajob.domain.MatchVO">
+		select mat_num, m.b_num, mat_hour, mat_stdate, mat_wdate, mat_okdate, mat_state, b_subject
+		from b_match b, match m
+		where b.b_num = m.b_num and m.m_id =#{m_id}	
+	</select>
+	
+	<select id = "getMonthMatch" resultType="com.mannajob.domain.CalendarVO">
+		select m.b_num, bo.m_id, m_phone, mat_stdate, mat_hour, b_location
+		 from match m , (select b_num, b.m_id, m_phone, b_location from b_match b, member me where b.m_id = me.m_id and b.b_del='N') bo
+		 where m.b_num = bo.b_num and m.m_id =#{m_id} and m.mat_stdate like #{yearmonth}||'%' and m.mat_state ='C'
+	</select>
+	<select id = "getMonthBmatch" resultType="com.mannajob.domain.CalendarVO">
+		select me.b_num, me.m_id, m_phone, mat_stdate, mat_hour, b_location
+		 from b_match b , (select b_num, mat.m_id, m_phone, mat_hour, mat_stdate from match mat, member m where mat.m_id = m.m_id and mat.mat_state='C') me
+		 where b.b_num = me.b_num and b.m_id =#{m_id} and me.mat_stdate like #{yearmonth}||'%'
+	</select>
 </mapper>

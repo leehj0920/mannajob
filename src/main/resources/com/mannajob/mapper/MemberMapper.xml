@@ -10,4 +10,8 @@
 	<select id="SecretLogin" resultType="com.mannajob.domain.MemberVO">
 		SELECT m_id, m_passwd FROM member WHERE m_id = #{m_id}
 	</select>
+	
+	<select id="memberCheck" resultType="int">
+		SELECT count(m_id) FROM member WHERE m_id = #{m_id}
+	</select>
 </mapper>

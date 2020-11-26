@@ -4,6 +4,14 @@
 	<select id="getList" resultType="com.mannajob.domain.NoticeVO">
 		select * from notice where n_del = 'N' order by n_num desc
 	</select>
+	<select id ="getListSearch" resultType="com.mannajob.domain.NoticeRestVO">
+		select 
+		n_num, n_subject, ad_id, n_contents, n_cnt,
+		to_char(n_wdate,'yyyy-MM-dd') n_wdate,
+		to_char(n_udate,'yyyy-MM-dd') n_udate,
+		n_del
+		from notice where n_subject like '%'||#{n_subject}||'%' and n_del = 'N' order by n_num desc
+	</select>
 	
 	<select id="getListWithPaging" resultType="com.mannajob.domain.NoticeVO">
 		<![CDATA[

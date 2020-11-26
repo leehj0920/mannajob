@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.ReviewVO;
@@ -58,6 +59,10 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public EmplVO getEmplProfile2(String m_id) {
 		return mapper.getEmplProfile2(m_id);
+	}
+	
+	public EmplFileVO getRestEmpl(String m_id) {
+		return mapper.getRestEmpl(m_id);
 	}
 	
 	@Transactional
