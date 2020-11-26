@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.QnaRestVO;
 import com.mannajob.domain.QnaVO;
 import com.mannajob.mapper.QnaMapper;
 
@@ -91,4 +92,14 @@ public class QnaServiceImpl implements QnaService {
 		
 		return mapper.chkQnaSub(q_num);
 	}
+
+	@Override
+	public List<QnaRestVO> getListSearch(QnaRestVO qnaRestVO) {
+		if(qnaRestVO.getQ_subject()==null||"".equals(qnaRestVO.getQ_subject())){
+			qnaRestVO.setQ_subject("");
+		}
+		return mapper.getListSearch(qnaRestVO.getQ_subject());
+	}
+	
+	
 }

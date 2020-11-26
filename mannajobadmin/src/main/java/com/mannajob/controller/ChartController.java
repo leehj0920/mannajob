@@ -48,13 +48,17 @@ public class ChartController {
 		List<BMatchVO> corp= bmatchservice.rankCorp();
 		List<BMatchVO> location = bmatchservice.rankLocation();
 		List<BMatchVO> task = bmatchservice.rankTask();
-		for(int i=0; i<5; i++) {
+		for(int i=0; i<corp.size(); i++) {
 			 if(max_corp < corp.get(i).getCnt()) {
 				 max_corp = corp.get(i).getCnt();
 			 }
+		}
+		 for(int i=0; i<location.size(); i++) {
 			 if(max_location < location.get(i).getCnt()) {
 				 max_location = location.get(i).getCnt();
 			 }
+		 }
+		 for(int i=0; i<task.size(); i++) {
 			 if(max_task < task.get(i).getCnt()) {
 				 max_task = task.get(i).getCnt();
 			 }

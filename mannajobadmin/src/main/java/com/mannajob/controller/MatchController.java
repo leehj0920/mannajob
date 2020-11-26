@@ -37,6 +37,7 @@ public class MatchController {
 	private BMatchService bmatchservice;
 	private ProfileService profileservice;
 	
+	
 	@GetMapping("/match")
 	public String insert(@ModelAttribute("b_num") int b_num, Model model, HttpSession session) {
 		if(session.getAttribute("userId")==null) {

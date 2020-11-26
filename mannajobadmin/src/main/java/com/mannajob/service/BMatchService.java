@@ -3,6 +3,7 @@ package com.mannajob.service;
 import java.util.List;
 
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.BmatchProfileVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
@@ -10,6 +11,9 @@ import com.mannajob.domain.EmplVO;
 public interface BMatchService {
 
 	public List<BMatchVO> getList(BMatchVO bMatchVO);
+	
+	public List<BmatchProfileVO> getListProfile(BmatchProfileVO bmatchProfileVO);
+	public List<BmatchProfileVO> getListProfileSearch(BmatchProfileVO bmatchProfileVO);
 	
 	public List<BMatchVO> getListWithPaging(Criteria cri,BMatchVO bMatchVO);
 	
@@ -45,4 +49,6 @@ public interface BMatchService {
 	public List<BMatchVO> rankLocation();
 	public List<BMatchVO> rankTask();
 
+	public List<BMatchVO> getRestBmatchList(String m_id);
+	
 }

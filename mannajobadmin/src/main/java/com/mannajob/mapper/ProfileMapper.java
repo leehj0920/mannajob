@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
 import com.mannajob.domain.ReviewVO;
@@ -22,6 +23,8 @@ public interface ProfileMapper {
 	public EmplVO getEmplProfile(String m_id);
 
 	public EmplVO getEmplProfile2(String m_id);
+	
+	public EmplFileVO getRestEmpl(String m_id);
 
 	public void EmplJoin(EmplVO empl);
 	

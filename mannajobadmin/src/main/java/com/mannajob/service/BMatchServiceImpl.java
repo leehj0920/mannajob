@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.BmatchProfileVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
@@ -29,6 +30,8 @@ public class BMatchServiceImpl implements BMatchService{
 		}
 		return mapper.getList(bMatchVO.getB_category());
 	}
+	
+	
 
 	@Override
 	public List<BMatchVO> getListWithPaging(Criteria cri,BMatchVO bMatchVO) {
@@ -166,7 +169,7 @@ public class BMatchServiceImpl implements BMatchService{
 			bMatchVO.setB_category("A");
 		}
 		List<EmplVO> list = mapper.searchEmplPaging(bMatchVO, cri);
-		for(int i = 0; i < 5; i ++) {
+		for(int i = 0; i < list.size(); i ++) {
 			String m_id = mapper.searchEmplPaging(bMatchVO, cri).get(i).getM_id();
 			int countM = mapper.totalMat(m_id);
 			int countG = mapper.countG(m_id);
@@ -209,6 +212,32 @@ public class BMatchServiceImpl implements BMatchService{
 	public List<BMatchVO> rankTask() {
 
 		return mapper.rankTask();
+	}
+
+
+
+	@Override
+	public List<BmatchProfileVO> getListProfile(BmatchProfileVO bmatchProfileVO) {
+		
+		return mapper.getListProfile(bmatchProfileVO.getB_category());
+	}
+
+
+
+	@Override
+	public List<BmatchProfileVO> getListProfileSearch(BmatchProfileVO bmatchProfileVO) {
+		if(bmatchProfileVO.getB_corp()==null||"".equals(bmatchProfileVO.getB_corp())){
+			bmatchProfileVO.setB_corp("");
+		}
+		return mapper.getListProfileSearch(bmatchProfileVO.getB_category(), bmatchProfileVO.getB_corp());
+	}
+
+
+
+	@Override
+	public List<BMatchVO> getRestBmatchList(String m_id) {
+		
+		return mapper.getRestBmatchList(m_id);
 	}
 	
 	

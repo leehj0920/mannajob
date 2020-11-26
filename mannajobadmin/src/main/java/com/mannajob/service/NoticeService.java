@@ -3,10 +3,13 @@ package com.mannajob.service;
 import java.util.List;
 
 import com.mannajob.domain.Criteria;
+import com.mannajob.domain.NoticeRestVO;
 import com.mannajob.domain.NoticeVO;
 
 public interface NoticeService {
 	public List<NoticeVO> getList();
+	
+	public List<NoticeRestVO> getListSearch(NoticeVO noticeVO);
 	
 	public List<NoticeVO> getList(Criteria cri);
 	

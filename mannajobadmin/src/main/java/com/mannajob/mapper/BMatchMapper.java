@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.mannajob.domain.BMatchVO;
+import com.mannajob.domain.BmatchProfileVO;
 import com.mannajob.domain.Criteria;
 import com.mannajob.domain.CriteriaProfile;
 import com.mannajob.domain.EmplVO;
@@ -12,6 +13,9 @@ import com.mannajob.domain.EmplVO;
 public interface BMatchMapper {
 //	전체검색
 	public List<BMatchVO> getList(String b_category);
+	
+	public List<BmatchProfileVO> getListProfile(String b_category);
+	public List<BmatchProfileVO> getListProfileSearch(@Param("b_category") String b_category, @Param("b_corp") String b_corp);
 	
 	public List<BMatchVO> getListWithPaging(@Param("cri") Criteria cri, @Param("b_category")String b_category);
 	
@@ -50,5 +54,7 @@ public interface BMatchMapper {
 	public int totalMat(@Param("m_id") String m_id);
 	
 	public int countG(@Param("m_id") String m_id);
+	
+	public List<BMatchVO> getRestBmatchList(String m_id);
 	
 }

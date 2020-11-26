@@ -35,4 +35,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public boolean memberCheck(String m_id) {
+
+		return mapper.memberCheck(m_id)==1;
+	}
+	
+
 }

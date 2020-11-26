@@ -63,6 +63,11 @@
 	<select id="getEmplProfile2" resultMap="EmplfileVO">
 		SELECT  e.e_num, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name FROM empl e, m_file f WHERE e.e_num = f.e_num AND m_id = #{m_id} AND f.f_category = 'I'
 	</select>
+	
+		<!-- 현직자 정보 불러오기(이미지 포함) -->
+	<select id="getRestEmpl" resultType="com.mannajob.domain.EmplFileVO">
+		SELECT  e.e_num, e.e_corp, e.e_dept, e.e_rank, e.e_task, e.e_career, e.e_intro, f.stored_file_name FROM empl e, m_file f WHERE e.e_num = f.e_num AND m_id = #{m_id} AND f.f_category = 'I'
+	</select>
 
 	<!-- 프로필 이미지 조회 -->
 	<select id="selectImage" parameterType="int" resultType="hashMap">
