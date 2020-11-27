@@ -10,7 +10,11 @@
 
 	<!-- 회원 아이디 찾기 -->
 	<select id="findId" resultType="String">
+<<<<<<< HEAD
 		SELECT m_id FROM member WHERE m_name = #{m_name} AND m_email = #{m_email} and m_api is null
+=======
+		SELECT m_id FROM member WHERE m_name = #{m_name} AND m_email = #{m_email} AND m_api = null
+>>>>>>> refs/remotes/origin/developer
 	</select>
 
 	<!-- 비밀번호 재설정 -->
