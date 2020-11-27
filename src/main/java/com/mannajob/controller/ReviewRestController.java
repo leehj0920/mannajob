@@ -50,5 +50,6 @@ public class ReviewRestController {
 		String r_mat_m_id = matchVO.getM_id();
 		service.insertR(mat_num, r_good, r_contents, r_w_m_id, r_mat_m_id);
 		return "1";
+		
 	}
 }

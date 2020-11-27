@@ -211,10 +211,10 @@ var myBarChart = new Chart(ctx, {
         }
       }
     },
-    title: {
+/*     title: {
       display: true,
       text: '매칭 성사 금액 통계'
-    },
+    }, */
   }
 });
 </script>

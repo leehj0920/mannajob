@@ -434,10 +434,10 @@ var myBarChart = new Chart(ctx, {
         }
       }
     },
-    title: {
+/*     title: {
       display: true,
       text: '분야별 분석'
-    },
+    }, */
   }
 });
 
