@@ -1,6 +1,7 @@
 package com.mannajob.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mannajob.mapper.LoginMapper;
@@ -15,6 +16,9 @@ import lombok.extern.log4j.Log4j;
 public class LoginServiceImpl implements LoginService {
 	@Setter(onMethod_ = @Autowired)
 	private LoginMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private PasswordEncoder pwencoder;
 
 	public int MemCheck(String m_id) {
 		int check = mapper.MemCheck(m_id);
@@ -32,6 +36,15 @@ public class LoginServiceImpl implements LoginService {
 			findId = "아이디를 찾을 수 없습니다.";
 		}
 		return findId;
+	}
+	
+	public boolean myreset(String m_id, String m_name, String m_email) {
+		return mapper.myreset(m_id, m_name, m_email) == 1;
+	}
+	
+	public void pwreset(String m_id, String m_passwd) {
+			m_passwd = pwencoder.encode(m_passwd);
+			mapper.pwreset(m_id, m_passwd);
 	}
 
 }

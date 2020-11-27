@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.mannajob.domain.NaverLoginBO;
@@ -138,9 +139,7 @@ public class LoginController {
 	} 
 	
 	@RequestMapping(value = "/myfind", method = RequestMethod.GET)
-	public void myfind() {
-		
-	}
+	public void myfind() {}
 
 	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
 	public String idfind(Model model, String m_name, String m_email) {
@@ -148,8 +147,30 @@ public class LoginController {
 		return "/idfind";
 	}
 	
-	@RequestMapping("/myreset")
-	public void myreset() {
+	@RequestMapping(value="/myreset", method = RequestMethod.GET)
+	public void myreset() {}
+	
+	@RequestMapping(value="/pwreset", method = RequestMethod.POST)
+	public String pwreset(Model model, String m_id, String m_name, String m_email, RedirectAttributes rttr) {
+		if(service.myreset(m_id, m_name, m_email)) {
+			model.addAttribute("m_id", m_id);
+			return "/pwreset";
+		} else {
+			rttr.addFlashAttribute("error", 1);
+			return "redirect:/myreset";
+		}
+	}
+	
+	@RequestMapping(value="/resetok", method=RequestMethod.POST)
+	public String resetok(Model model, String m_id, String m_passwd, String m_passwd2) {
+		if(m_passwd.equals(m_passwd2)) {
+			service.pwreset(m_id, m_passwd);
+			model.addAttribute("alert", 1);
+			return "/resetok";
+		} else {
+			model.addAttribute("m_id", m_id);
+			return "/pwreset";
+		}
 		
 	}
 }
