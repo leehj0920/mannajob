@@ -52,6 +52,8 @@
       padding-top: 30px;
     }
   </style>
+ 
+  
 </head>
 
 <body>
@@ -69,25 +71,14 @@
                   <div class="post-heading">
                     <p class="line_9"></p>
                     <p class="line_9"></p>
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 비밀번호 재설정</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 아이디 확인</h3>
                     <p class="line_9"></p>
                   </div>
 
                   <div class="span10">                   
-                     <form method="post" name="insertform" action="/pwreset">
-                     <div>
-                     <input type="text" name="m_id" value="" placeholder="아이디를 입력하세요">
-                     </div>
-                     <div>
-                     <input type="text" name="m_name" value="" placeholder="이름을 입력하세요">
-                     </div>
-                     <div>
-                     <input type="text" name="m_email" value="" placeholder="이메일을 입력하세요">
-                     <!-- <input class="btn btn-theme right" type="button" value="인증하기" onClick="sendmail()" style="margin-bottom: 10px;"> -->
-                     </div>
-                     <input class="btn btn-inverse i_btn4" type="submit" value="다음">
-	                 <input class="btn btn-inverse i_btn4" type="button" value="닫기" onClick="window.close()">
-                    </form>
+					<p>${findId}</p>
+					<input class="btn btn-inverse i_btn4" type="button" value="뒤로" onClick="location.href='/myfind'">
+					<input class="btn btn-inverse i_btn4" type="button" value="닫기" onClick="window.close()">
                   </div>
                 </div>               
               
@@ -124,15 +115,6 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="/resources/js/custom.js"></script>
- <script>
- window.onload=function(){
-	 var error = "${error}"
-	 if(error==1){
-		 alert("입력하신 정보가 일치하지 않습니다.");
-	 } 
- }
-</script>
- 
 </body>
 
 </html>

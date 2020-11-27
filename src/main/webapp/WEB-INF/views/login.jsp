@@ -73,7 +73,10 @@
           </div>
           
             <p class="aligncenter margintop20">
-              비밀번호를 잊으셨나요? <a href="/myreset" onClick="window.open(this.href, '비밀번호 찾기', 'width=400, height=350'); return false">Reset</a>
+              아이디를 잊으셨나요? <a href="/myfind" onClick="window.open(this.href, '아이디 찾기', 'width=400, height=350'); return false">Find</a>
+            </p>
+            <p class="aligncenter margintop20">
+             비밀번호를 잊으셨나요? <a href="/myreset" onClick="window.open(this.href, '비밀번호 찾기', 'width=400, height=350'); return false">Reset</a>
             </p>
           </div>
           </div>

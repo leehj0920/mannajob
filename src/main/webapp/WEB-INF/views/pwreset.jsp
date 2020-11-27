@@ -52,6 +52,8 @@
       padding-top: 30px;
     }
   </style>
+ 
+  
 </head>
 
 <body>
@@ -69,20 +71,18 @@
                   <div class="post-heading">
                     <p class="line_9"></p>
                     <p class="line_9"></p>
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 비밀번호 재설정</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 비밀번호 변경</h3>
                     <p class="line_9"></p>
                   </div>
 
                   <div class="span10">                   
-                     <form method="post" name="insertform" action="/pwreset">
+                     <form method="post" name="insertform" action="/resetok">
+                     <input type="hidden" name="m_id" value="${m_id}">
                      <div>
-                     <input type="text" name="m_id" value="" placeholder="아이디를 입력하세요">
+                     <input type="password" name="m_passwd" value="" placeholder="새 비밀번호를 입력해주세요">
                      </div>
                      <div>
-                     <input type="text" name="m_name" value="" placeholder="이름을 입력하세요">
-                     </div>
-                     <div>
-                     <input type="text" name="m_email" value="" placeholder="이메일을 입력하세요">
+                     <input type="password" name="m_passwd2" value="" placeholder="한 번 더 입력해주세요">
                      <!-- <input class="btn btn-theme right" type="button" value="인증하기" onClick="sendmail()" style="margin-bottom: 10px;"> -->
                      </div>
                      <input class="btn btn-inverse i_btn4" type="submit" value="다음">
@@ -128,11 +128,10 @@
  window.onload=function(){
 	 var error = "${error}"
 	 if(error==1){
-		 alert("입력하신 정보가 일치하지 않습니다.");
+		 alert("비밀번호가 일치하지 않습니다.");
 	 } 
  }
 </script>
- 
 </body>
 
 </html>

@@ -52,6 +52,8 @@
       padding-top: 30px;
     }
   </style>
+ 
+  
 </head>
 
 <body>
@@ -69,15 +71,12 @@
                   <div class="post-heading">
                     <p class="line_9"></p>
                     <p class="line_9"></p>
-                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 비밀번호 재설정</h3>
+                    <h3 style="color: #f84002;">&nbsp&nbsp&nbsp 아이디 찾기</h3>
                     <p class="line_9"></p>
                   </div>
 
                   <div class="span10">                   
-                     <form method="post" name="insertform" action="/pwreset">
-                     <div>
-                     <input type="text" name="m_id" value="" placeholder="아이디를 입력하세요">
-                     </div>
+                     <form method="post" name="insertform" action="/idfind">
                      <div>
                      <input type="text" name="m_name" value="" placeholder="이름을 입력하세요">
                      </div>
@@ -124,15 +123,6 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="/resources/js/custom.js"></script>
- <script>
- window.onload=function(){
-	 var error = "${error}"
-	 if(error==1){
-		 alert("입력하신 정보가 일치하지 않습니다.");
-	 } 
- }
-</script>
- 
 </body>
 
 </html>
