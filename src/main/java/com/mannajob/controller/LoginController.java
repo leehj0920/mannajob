@@ -162,15 +162,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/resetok", method=RequestMethod.POST)
-	public String resetok(Model model, String m_id, String m_passwd, String m_passwd2) {
-		if(m_passwd.equals(m_passwd2)) {
-			service.pwreset(m_id, m_passwd);
-			model.addAttribute("alert", 1);
-			return "/resetok";
-		} else {
-			model.addAttribute("m_id", m_id);
-			return "/pwreset";
-		}
-		
+	public String resetok(Model model, String m_id, String m_passwd) {
+		service.pwreset(m_id, m_passwd);
+		model.addAttribute("alert", 1);
+		return "/resetok";
 	}
 }

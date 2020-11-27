@@ -85,12 +85,4 @@
       </section>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/develope
 <%@ include file="../includes/footer.jsp" %>
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/develope
