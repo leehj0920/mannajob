@@ -7,5 +7,10 @@
 	<select id="MemCheck" resultType="int">
 		SELECT COUNT(m_id) FROM member WHERE m_id = #{m_id} AND m_del = 'N'
 	</select>
+
+	<!-- 회원 아이디 찾기 -->
+	<select id="findId" resultType="String">
+		SELECT m_id FROM member WHERE m_name = #{m_name} AND m_email = #{m_email}
+	</select>
 	
 </mapper>

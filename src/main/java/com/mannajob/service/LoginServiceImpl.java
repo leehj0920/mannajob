@@ -20,5 +20,18 @@ public class LoginServiceImpl implements LoginService {
 		int check = mapper.MemCheck(m_id);
 		return check;
 	}
+	
+	public String findId(String m_name, String m_email) {
+			String findId = mapper.findId(m_name, m_email);
+		if(findId != null) {
+			int idLength = findId.length();
+			idLength = idLength - 3;
+			String tmpId = findId.substring(0, idLength);
+			findId = "고객님의 아이디는" + tmpId + "*** 입니다.";
+		} else {
+			findId = "아이디를 찾을 수 없습니다.";
+		}
+		return findId;
+	}
 
 }

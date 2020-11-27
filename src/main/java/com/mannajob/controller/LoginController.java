@@ -137,6 +137,17 @@ public class LoginController {
 	    return "redirect:/main";
 	} 
 	
+	@RequestMapping(value = "/myfind", method = RequestMethod.GET)
+	public void myfind() {
+		
+	}
+
+	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
+	public String idfind(Model model, String m_name, String m_email) {
+		model.addAttribute("findId", service.findId(m_name, m_email));
+		return "/idfind";
+	}
+	
 	@RequestMapping("/myreset")
 	public void myreset() {
 		
