@@ -147,6 +147,9 @@
 	<select id="searchReview" resultType="com.mannajob.domain.ReviewVO">
 		SELECT r_num, r_good, r_contents, r_w_m_id, r_wdate FROM review WHERE r_mat_m_id = #{m_id} AND r_del = 'N'
 	</select>
+	<select id="searchRestReview" resultType="com.mannajob.domain.ReviewRestVO">
+		SELECT r_num, r_good, r_contents, r_w_m_id, (to_char(r_wdate,'YYYY-MM-DD')) r_wdate FROM review WHERE r_mat_m_id = #{m_id} AND r_del = 'N'
+	</select>
 	
 	<!-- 현직자 프로필 수정 -->
 	<select id="updateEmpl">

@@ -17,3 +17,4 @@ public class ReviewVO {
 	private int countG;
 	private int countR;
 }
+

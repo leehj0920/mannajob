@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
+import com.mannajob.domain.ReviewRestVO;
 import com.mannajob.domain.ReviewVO;
 
 public interface ProfileMapper {
@@ -35,6 +36,7 @@ public interface ProfileMapper {
 	public int okEmpl(String m_id);
 	
 	public List<ReviewVO> searchReview(String m_id);
+	public List<ReviewRestVO> searchRestReview(String m_id);
 	
 	public void updateEmpl(EmplVO empl);
 	

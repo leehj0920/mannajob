@@ -102,5 +102,10 @@ public class MemberRestController {
 		}
 		return "1";
 	}
+	@GetMapping (value = "/logout",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "1";
+	}
 
 }

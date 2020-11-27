@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.mannajob.domain.EmplFileVO;
 import com.mannajob.domain.EmplVO;
 import com.mannajob.domain.MemberVO;
+import com.mannajob.domain.ReviewRestVO;
 import com.mannajob.domain.ReviewVO;
 import com.mannajob.mapper.ProfileMapper;
 import com.mannajob.util.FileUtils;
@@ -88,6 +89,10 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public List<ReviewVO> searchReview(String m_id) {
 		return mapper.searchReview(m_id);
+	}
+	@Override
+	public List<ReviewRestVO> searchRestReview(String m_id) {
+		return mapper.searchRestReview(m_id);
 	}
 
 	@Override

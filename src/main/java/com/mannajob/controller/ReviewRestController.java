@@ -1,5 +1,7 @@
 package com.mannajob.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.MediaType;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mannajob.domain.BMatchVO;
 import com.mannajob.domain.MatchVO;
+import com.mannajob.domain.ReviewRestVO;
 import com.mannajob.service.BMatchService;
 import com.mannajob.service.MatchService;
+import com.mannajob.service.ProfileService;
 import com.mannajob.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +29,7 @@ public class ReviewRestController {
 	private ReviewService service;
 	private MatchService matchservice;
 	private BMatchService bmatchservice;
+	private ProfileService profileservice;
 	
 	@PostMapping(value = "/review/insert", produces ={ MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public String insertok(int mat_num,int b_num, String r_good, String r_contents,HttpSession session) {
@@ -50,5 +55,10 @@ public class ReviewRestController {
 		String r_mat_m_id = matchVO.getM_id();
 		service.insertR(mat_num, r_good, r_contents, r_w_m_id, r_mat_m_id);
 		return "1";
+	}
+	
+	@PostMapping(value = "/review/list", produces ={ MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public List<ReviewRestVO> reviewlist(String m_id){
+		return profileservice.searchRestReview(m_id);
 	}
 }
