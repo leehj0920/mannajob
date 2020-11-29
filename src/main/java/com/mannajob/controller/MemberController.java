@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mannajob.domain.MemberVO;
 import com.mannajob.service.MemberService;
@@ -26,7 +27,11 @@ public class MemberController {
 	private ProfileService profileService;
 	
 	@PostMapping ("/logincheck")
-	public String login(MemberVO member, HttpServletRequest request, HttpSession session) {
+	public String login(MemberVO member, HttpServletRequest request, HttpSession session,RedirectAttributes rttr) {
+		if(!service.memberCheck(member.getM_id())) {
+			rttr.addFlashAttribute("error",1);
+			return "redirect:/login";
+		}
 		if(service.SecretLogin(member)) {
 			log.info("로그인 성공!!!!");
 			session.setAttribute("userId", member.getM_id());
@@ -34,6 +39,7 @@ public class MemberController {
 			return "redirect:/main"; 
 		} else {
 			log.info("로그인 실패!!!!");
+			rttr.addFlashAttribute("error",2);
 			return "redirect:/login";
 		}
 	}

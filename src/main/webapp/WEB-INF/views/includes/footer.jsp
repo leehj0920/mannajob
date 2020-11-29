@@ -39,7 +39,8 @@
   <script src="/resources/js/jquery.ba-cond.min.js"></script>
   <script src="/resources/js/jquery.slitslider.js"></script>
   <script src="/resources/js/animate.js"></script>
-  <script src="/resources/js/registerForm.js"></script> 
+  <script src="/resources/js/registerForm.js"></script>
+  <script src="/resources/js/banner.js"></script>
  
 
 

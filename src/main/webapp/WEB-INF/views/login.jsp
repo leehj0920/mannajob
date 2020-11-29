@@ -91,4 +91,14 @@
 
 
 <%@ include file="./includes/footer.jsp" %>
+<script>
+	window.onload = function(){
+		var error = "${error}";
+		if(error ==1){
+			alert("등록된 회원이 아닙니다.");
+		}else if(error==2){
+			alert("비밀번호가 잘못되었습니다.");
+		}
+	}
+</script>
 
