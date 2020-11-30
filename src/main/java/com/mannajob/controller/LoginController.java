@@ -108,7 +108,7 @@ public class LoginController {
 			model.addAttribute("userapi", api);
 			return "/join/member_agree";
 		} else {
-			session.setAttribute("uesrId", id); //
+			session.setAttribute("userId", id); //
 			return "redirect:/main";
 		}
 	}
