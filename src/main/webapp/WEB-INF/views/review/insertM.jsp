@@ -106,7 +106,14 @@
                                   </td>
                                   <td>
                                     <!-- value -->
-                                    <p>${r_mat_m_id}</p>
+                                    <c:choose>
+	                                    <c:when test="${empl eq 'Y'}">
+	                                    	<p><a href="/profile/showempl?m_id=${r_mat_m_id}">${r_mat_m_id}</a></p>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                    	<p><a href="/profile/showmem?m_id=${r_mat_m_id}">${r_mat_m_id}</a></p>
+	                                    </c:otherwise>
+                                    </c:choose>
                                   </td>
                                 </tr>
                             </table>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mannajob.domain.MatchVO;
 import com.mannajob.service.MatchService;
+import com.mannajob.service.ProfileService;
 import com.mannajob.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	private ReviewService service;
 	private MatchService matchservice;
+	private ProfileService profileService;
 	
 	//글 작성 내역에서 리뷰 작성
 	@GetMapping("/insertB")
@@ -33,6 +35,12 @@ public class ReviewController {
 		model.addAttribute("r_w_m_id", session.getAttribute("userId"));
 		
 		model.addAttribute("r_mat_m_id",matchVO.getM_id());
+		if(profileService.cheakEmpl(matchVO.getM_id())) {
+			model.addAttribute("empl","Y");
+		}else {
+			model.addAttribute("empl","N");	
+		}
+		
 	}
 	
 	//매칭 신청 내역에서 리뷰 작성
@@ -42,6 +50,11 @@ public class ReviewController {
 		model.addAttribute("mat_num", mat_num);
 		model.addAttribute("r_w_m_id", session.getAttribute("userId"));
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
+		if(profileService.cheakEmpl(r_mat_m_id)) {
+			model.addAttribute("empl","Y");
+		}else {
+			model.addAttribute("empl","N");	
+		}
 	}
 	
 	@PostMapping("/insertok")
@@ -56,6 +69,11 @@ public class ReviewController {
 		model.addAttribute("r_num", r_num);
 		model.addAttribute("r_contents", r_contents);
 		model.addAttribute("r_mat_m_id", r_mat_m_id);
+		if(profileService.cheakEmpl(r_mat_m_id)) {
+			model.addAttribute("empl","Y");
+		}else {
+			model.addAttribute("empl","N");	
+		}
 	}
 	
 	@PostMapping("/updateok")
